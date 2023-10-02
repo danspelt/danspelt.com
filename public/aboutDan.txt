@@ -1,0 +1,5 @@
+Based in the picturesque city of Victoria, BC, Dan Spelt is a dynamic Front-End Web Developer with a keen eye for design and user experience. With a deep understanding of modern web technologies, Dan specializes in creating responsive and interactive web applications using HTML5, CSS, JavaScript, Typescript, React, and NextJs.
+
+Since May 2021, Dan has been a pivotal figure at YOUNEEQ, where he has showcased his expertise as a Full Stack Front End Developer. Among his notable achievements are the successful launch of a Google Chrome extension and significant contributions to BitBucket. His dedication to enhancing user interfaces for optimal accessibility sets him apart in the industry.
+
+Collaboration is at the heart of Dan's work ethic. He effectively liaises with team members using platforms like Wrike and Slack, ensuring seamless communication and project execution. Furthermore, Dan's commitment to excellence is evident in his iterative development approach, where he actively seeks and incorporates peer review feedback, guaranteeing that his digital creations are not only efficient but also polished to perfection.
