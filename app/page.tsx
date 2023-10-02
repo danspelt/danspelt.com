@@ -6,9 +6,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function Home() {
-  const filePath = path.join(process.cwd(), "public", "aboutDan.txt");
-  const aboutDanText = fs.readFileSync(filePath, "utf8");
-
+  
   return (
     <main className="flex flex-col items-center justify-center min-h-screen py-2 space-y-8">
       <h1 className="text-5xl font-bold">Dan Spelt</h1>
@@ -17,7 +15,7 @@ export default function Home() {
       
       <section className="space-y-4 ml-4 mr-8">
         <h2 className="text-3xl">About Me</h2>
-        <p>{aboutDanText}</p>
+        <p>I'm a fullstack front end developer with a passion for React and Typescript.</p> 
       </section>
       
       <section className="space-y-4">
