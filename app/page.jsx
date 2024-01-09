@@ -1,37 +1,16 @@
-import { Container, Typography, Box } from "@mui/material";
+import UserBox from "./components/shared/UserBox";
+import PasswordBox from "./components/login/PasswordBox";
+import MyButton from "./components/login/MyButton";
+import "./styles/Login.css";
 
-import MyTextbox from "./components/MyTextbox";
-import MyButton from "./components/MyButton";
-
-export default function Home() {
-
+export default function Login() {
   return (
-    <Box
-      sx={{
-        mt: 8,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Typography component="h1" variant="h5">
-        Sign in
-      </Typography>
-      <MyTextbox
-        variant="outlined"
-        margin="normal"
-        required
-        label="Email Address / Username"
-        type="text"      
-        />
-      <MyTextbox
-        variant="outlined"
-        margin="normal"
-        required        
-        type="password"
-        label="Password"
-        />    
-      <MyButton label="Sign In"/>        
-    </Box> 
+    <div className="flex justify-center items-center h-screen bg-gray-200">
+      <UserBox />
+      <PasswordBox />
+      <div className="flex items-center justify-between">
+        <MyButton label="Login" />
+      </div>
+    </div>
   );
 }

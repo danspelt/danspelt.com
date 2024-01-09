@@ -1,15 +1,15 @@
 "use cleint";
 
 import React from "react";
-import { Button } from "@mui/material";
 
 const MyButton = ({ label }) => {
   return (
-    <Button
-      variant="contained"  
+    <button
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      label={label}
     >
       {label}
-    </Button>
+    </button>
   );
 };
 
