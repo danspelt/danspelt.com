@@ -1,14 +1,12 @@
-import '../styles/Signup.css';
+import '@styles/Signup.css'; // styles
 
-import UserBox from '../components/shared/UserBox'; // Client component
-import EmailInput from '../components/signup/EmailInput'; // Client component
-import PasswordInput from '../components/signup/PasswordInput'; // Client component
-import ConfirmPasswordInput from '../components/signup/ConfirmPasswordInput'; // Client component
-import SubmitButton from '../components/signup/SubmitButton'; // Client component
+import UserNameInput from '@components/signup/UserNameInput'; // Client component
+import EmailInput from '@components/signup/EmailInput'; // Client component
+import PasswordInput from '@components/signup/PasswordInput'; // Client component
+import ConfirmPasswordInput from '@components/signup/ConfirmPasswordInput'; // Client component
+import SubmitButton from '@components/signup/SubmitButton'; // Client component
 
 //validations components
-import PasswordValidation from '../components/signup/validations/PasswordStrength'; // Client component
-
 
 export default function Signup() {
   return (
@@ -16,7 +14,7 @@ export default function Signup() {
       <div className="w-1/2 bg-white rounded-xl p-8">
         <h1 className="text-center text-2xl font-bold mb-4">Signup</h1>
         <form className="flex flex-col gap-4">
-          <UserBox /> 
+          <UserNameInput />
           <EmailInput />
           <PasswordInput />
           <ConfirmPasswordInput />
