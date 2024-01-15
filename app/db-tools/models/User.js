@@ -10,6 +10,6 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Check if the model exists using mongoose.models
-const User = mongoose.models.User || mongoose.model('User', userSchema);
+const User = mongoose.models || mongoose.model('User', userSchema);
 
 export default User;
