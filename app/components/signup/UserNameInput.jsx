@@ -2,7 +2,6 @@
 
 import React, { useState, useContext, useEffect } from "react";
 import { SignupContext } from "../../contexts/SignUpContext";
-import axios from "axios";
 
 
 const UserNameInput = () => {
@@ -22,15 +21,6 @@ const UserNameInput = () => {
   }
 
   const checkUsernameExists = async (username) => {
-    try {
-      const res = await axios.post(`/api/user`, { username });
-      setIsError(false);
-      setHelperText("");
-      return res;
-    } catch (err) {
-      setIsError(true);
-      setHelperText("Username already exists");
-    }
   };
 
   const startTimer = (username) => {
@@ -38,9 +28,7 @@ const UserNameInput = () => {
     clearTimeout(timer);
     // Start a new timer that runs after 2 seconds of inactivity
     timer = setTimeout(() => {
-      checkUsernameExists(username).then((res) => {
-        console.log(res.data);        
-      });
+  
     }, 500);
   };
 

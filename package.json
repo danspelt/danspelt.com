@@ -14,7 +14,8 @@
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.15.1",
     "axios": "^1.6.5",
-    "mongoose": "^8.0.3",
+    "bcryptjs": "^2.4.3",
+    "firebase": "^10.7.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"

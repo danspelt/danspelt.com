@@ -1,13 +1,9 @@
-
 import PasswordBox from "./components/login/PasswordBox";
 import MyButton from "./components/login/MyButton";
-import connectDatabase from "./db-tools/connect";
 import "./styles/Login.css";
 
 export default function Login() {
-  
-  // Connect to database
-  connectDatabase();
+  // TODO: add a login function
   return (
     <div className="flex justify-center items-center h-screen bg-gray-200">
       <PasswordBox />
