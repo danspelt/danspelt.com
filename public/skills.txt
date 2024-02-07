@@ -1,1 +1,5 @@
-React, NextJS
+Programming Languages: JavaScript - 15, TypeScript - 5
+Web Development Frameworks and Technologies: React - 8,Next.js - 5, Node.js - 8
+Databases: MongoDB - 3, Firebase - 5
+Tools & Platforms: AWS, Google Cloud, GitHub, BitBucket, Wrike, Slack
+Other Skills: UI/UX Design, Project Documentation, Team Collaboration

@@ -31,8 +31,21 @@ const Home = () => {
     return { school: parts[0], degree: parts[1], duration: parts[2] };
   });
   const skills = dataSkills.split("\n").map((line) => {
-    const parts = line.split(", ");
-    return { skill: parts[0], proficiency: parts[1] };
+    const category = line.split(": ")[0];
+    const skill = line.split(": ")[1].split(", ");
+    const hasYears = line.split(" - ").length > 1;
+    if (hasYears) {
+      const years = line.split(" - ")[1].split(", ")[0];
+      return {
+        category: category,
+        skill: skill,
+        years: years,
+      };
+    }
+  return {
+      category: category,
+      skill: skill,
+    };
   });
   const interests = dataInterests.split("\n").map((line) => {
     const parts = line.split(", ");
@@ -58,7 +71,9 @@ const Home = () => {
           {skills.map((skill, index) => {
             return (
               <li key={index} className="bg-gray-100 p-5 rounded-3xl">
-                {skill.skill} - {skill.proficiency}
+                <h3>{skill.category}</h3>
+                <p>{skill.skill}</p>
+                {skill.years ? <p>{skill.years} Years</p> : ""} 
               </li>
             );
           })}
