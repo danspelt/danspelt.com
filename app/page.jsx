@@ -57,7 +57,7 @@ const Home = () => {
         <ul>
           {skills.map((skill, index) => {
             return (
-              <li key={index}>
+              <li key={index} className="bg-gray-100 p-5 rounded-3xl">
                 {skill.skill} - {skill.proficiency}
               </li>
             );
