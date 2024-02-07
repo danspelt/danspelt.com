@@ -43,16 +43,16 @@ const Home = () => {
   });
 
   return (
-    <div className="container">
+    <div>
       <h1 className="text-4xl font-bold text-center">
         Dan Spelt - Full Stack Developer
       </h1>
-      <section className="card text-xl m-4">
+      <div className="card text-xl m-4"> 
         {bio.map((line, index) => {
           return <p key={index}>{line}</p>;
         })}
-      </section>
-      <section className="card text-xl m-4">
+      </div>
+      <div className="card text-xl m-4">
         <h1 className="text-xl text-center">Skills</h1>
         <ul>
           {skills.map((skill, index) => {
@@ -63,11 +63,9 @@ const Home = () => {
             );
           })}
         </ul>
-      </section>
-      <section className="card text-xl m-4">
-        <h1 className="text-xl text-center">
-          Experience
-        </h1>
+      </div>
+      <div className="card text-xl m-4">
+        <h1 className="text-xl text-center">Experience</h1>
         <article>
           {experiences.map((experience, index) => {
             return (
@@ -79,8 +77,8 @@ const Home = () => {
             );
           })}
         </article>
-      </section>
-      <section className="card text-xl m-4">
+      </div>
+      <div className="card text-xl m-4">
         <h2>Projects</h2>
         {/* List your projects here */}
         <article>
@@ -91,7 +89,7 @@ const Home = () => {
           </p>
         </article>
         {/* Add more projects as needed */}
-      </section>
+      </div>
       <footer className="footer footer-center p-4 bg-base-300 text-base-content">
         <div class="flex w-full justify-around">
           <Link
