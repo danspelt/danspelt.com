@@ -1,0 +1,13 @@
+Welcome! I am Dan Spelt, a seasoned Web Developer with a rich tapestry of experience spanning across various industries including e-commerce, finance, and healthcare. My journey in the tech world is marked by a relentless pursuit of excellence, a deep passion for technology, and a commitment to crafting user-centric web solutions.
+
+With over 10 years of hands-on experience, I have honed a diverse skill set that encompasses the full spectrum of web development. My expertise lies in HTML, CSS, JavaScript, along with a profound mastery of React and NextJS. This technical prowess enables me to build responsive, accessible, and high-performing websites and applications that not only meet but exceed client expectations.
+
+My career is highlighted by several key achievements. I have successfully published a Google Chrome extension, showcasing my ability to innovate and contribute valuable tools to the wider community. My proficiency in version control and documentation is evidenced by my substantial contributions to BitBucket. Moreover, my collaborative skills are well-honed, having worked seamlessly with teams using tools like Wrike and Slack, ensuring efficient and effective project management.
+
+I take pride in my ability to translate complex technical requirements into tangible, user-friendly web solutions. My approach is always guided by the latest industry best practices, ensuring scalability, maintainability, and top-notch performance. The feedback from peers is a cornerstone of my development process, allowing me to continually refine and enhance my projects.
+
+Beyond my professional endeavors, I am an avid game developer, exploring the realms of React Three Fiber, which keeps me at the forefront of the latest technological advancements. This passion for continuous learning and innovation is what drives me to excel in the ever-evolving landscape of web development.
+
+As a dedicated and forward-thinking web developer, I am always seeking new challenges and opportunities to leverage my skills for the success of forward-looking companies. If you are in search of a developer who not only brings a wealth of experience but also a genuine passion for technology and problem-solving, let's connect and explore how we can drive your next project to success.
+
+
