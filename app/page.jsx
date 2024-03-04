@@ -30,21 +30,26 @@ const Home = () => {
     const parts = line.split(", ");
     return { school: parts[0], degree: parts[1], duration: parts[2] };
   });
-  const skills = dataSkills.split("\n").map((line) => {
+  const skills = dataSkills.split("\n").map((line) => {    
     const category = line.split(": ")[0];
-    const skill = line.split(": ")[1].split(", ");
+    const languages = line.split(": ")[1].split(", ");
+    let skills = [];
+    languages.forEach((language) => {
+      skills.push(language.split(" - ")[0]);
+    });
+
     const hasYears = line.split(" - ").length > 1;
     if (hasYears) {
       const years = line.split(" - ")[1].split(", ")[0];
       return {
         category: category,
-        skill: skill,
+        skill: skills.join(", "),
         years: years,
       };
     }
   return {
       category: category,
-      skill: skill,
+      skill: skills.join(", "),
     };
   });
   const interests = dataInterests.split("\n").map((line) => {
@@ -70,7 +75,7 @@ const Home = () => {
         <ul>
           {skills.map((skill, index) => {
             return (
-              <li key={index} className="bg-gray-100 p-5 rounded-3xl">
+              <li key={index} className="card gap-2">
                 <h3>{skill.category}</h3>
                 <p>{skill.skill}</p>
                 {skill.years ? <p>{skill.years} Years</p> : ""} 
@@ -108,11 +113,11 @@ const Home = () => {
       <footer className="footer footer-center p-4 bg-base-300 text-base-content">
         <div class="flex w-full justify-around">
           <Link
-            href="mailto:danspelt24@gmail.com"
+            href="mailto:dan@danspelt"
             className="flex flex-col text-blue-500 items-center no-underline"
           >
             <AiOutlineMail size={20} className="mr-2" />
-            danspelt24@gmail.com
+            dan@danspelt.com
           </Link>
           <Link
             className="flex flex-col text-blue-500 items-center no-underline"
@@ -138,7 +143,7 @@ const Home = () => {
             rel="noopener"
           >
             <FaGithub size={20} className="mr-2" />
-            GitHub
+            GitHub 
           </Link>
         </div>
       </footer>
