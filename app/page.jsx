@@ -34,7 +34,7 @@ const Home = () => {
     const category = line.split(": ")[0];
     const languages = line.split(": ")[1].split(", ");
     let skills = [];
-    languages.forEach((language) => {
+    languages.forEach((language) => {   
       skills.push(language.split(" - ")[0]);
     });
 
@@ -59,6 +59,24 @@ const Home = () => {
   const bio = dataBio.split("\n").map((line) => {
     return line;
   });
+  // Project information (Consider fetching from an external source or config for scalability)
+  const projects = [
+    {
+      name: "TaskFlow",
+      url: "https://www.taskflow.danspelt.com/",
+      description: "A project management tool designed to streamline your workflow."
+    },
+    {
+      name: "EcoCart Boutique",
+      url: "https://www.ecocartboutique.danspelt.com/",
+      description: "An eco-friendly shopping platform offering sustainable products."
+    },
+    {
+      name: "PrimePulse",
+      url: "https://www.primepulse.danspelt.com/",
+      description: "A cutting-edge health monitoring solution for the modern age."
+    }
+  ];
 
   return (
     <div>
@@ -99,16 +117,21 @@ const Home = () => {
         </article>
       </div>
       <div className="card text-xl m-4">
+              {/* Projects Section */}
+      <section>
         <h2>Projects</h2>
-        {/* List your projects here */}
-        <article>
-          <h3>Project Name</h3>
-          <p>
-            Brief description of the project, the problem it solved, and
-            technologies used.
-          </p>
-        </article>
-        {/* Add more projects as needed */}
+        <div>
+          {projects.map((project, index) => (
+            <div key={index} className="card gap-2">
+              <h3>{project.name}</h3>
+              <p>{project.description}</p>
+              <Link href={project.url} target="_blank" rel="noopener" className="text-blue-500"> 
+              View Project
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
       </div>
       <footer className="footer footer-center p-4 bg-base-300 text-base-content">
         <div class="flex w-full justify-around">
