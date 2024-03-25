@@ -2,9 +2,7 @@ import React from 'react';
 import AvatarView from './AvatarView';
 const Home = () => {
   return ( 
-    <div>
-      <h2>Homepage</h2>
-      <p>Welcome to the homepage</p>
+    <div className='flex justify-center items-center h-screen w-screen bg-sky-400'>
       <AvatarView />
     </div>
    );

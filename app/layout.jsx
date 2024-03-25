@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({children}) {
   return (
     <html lang="en">
-      <body className="flex items-center justify-center bg-neutral-100">
+      <body className="h-screen w-screen bg-sky-400">
         <ChatProvider>
           {children}
         </ChatProvider>

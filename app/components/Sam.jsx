@@ -130,7 +130,7 @@ export function Sam(props) {
   }, [message]);
 
   const { animations } = useGLTF("/models/animations.glb");
-
+  console.log(animations);
   const group = useRef();
   const { actions, mixer } = useAnimations(animations, group);
   const [animation, setAnimation] = useState(
