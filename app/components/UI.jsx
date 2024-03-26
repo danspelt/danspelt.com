@@ -21,8 +21,8 @@ export const UI = ({ hidden, ...props }) => {
     <>
       <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
         <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg">
-          <h1 className="font-black text-xl">My Virtual GF</h1>
-          <p>I will always love you ❤️</p>
+          <h1 className="font-black text-xl">My Resume</h1>
+          
         </div>
         <div className="w-full flex flex-col items-end justify-center gap-4">
           <button
@@ -90,7 +90,7 @@ export const UI = ({ hidden, ...props }) => {
         <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
           <input
             className="w-full placeholder:text-gray-800 placeholder:italic p-4 rounded-md bg-opacity-50 bg-white backdrop-blur-md"
-            placeholder="Type a message..."
+            placeholder="Ask me anything about my resume"
             ref={input}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
