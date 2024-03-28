@@ -34,33 +34,33 @@ const lipSyncMessage = async (message) => {
   console.log(`Lip sync done in ${new Date().getTime() - time}ms`);
 };
 
-export const POST = async (req, res) => {
+export const POST = async (req) => {
   const userMessage = req.body.message;
   if (!userMessage) {
-    res.send({
+    return{
       messages: [
         {
           text:
             "Hey welcome to Dan Spelt's website! I'm Dan's virtual assistant. How can I help you today?",
-          audio: await audioFileToBase64("audios/intro_0.wav"),
-          lipsync: await readJsonTranscript("audios/intro_0.json"),
+          audio: await audioFileToBase64("public/audios/intro_0.wav"),
+          lipsync: await readJsonTranscript("public/audios/intro_0.json"),
           facialExpression: "smile",
           animation: "Talking_1",
         },
         {
           text:
             "I'm here to help you with any questions you may have about Dan's work, projects, or anything else you'd like to know. Just ask me anything!",
-          audio: await audioFileToBase64("audios/intro_1.wav"),
-          lipsync: await readJsonTranscript("audios/intro_1.json"),
+          audio: await audioFileToBase64("public/audios/intro_1.wav"),
+          lipsync: await readJsonTranscript("public/audios/intro_1.json"),
           facialExpression: "smile",
           animation: "Talking_1",
         },
       ],
-    });
-    return;
+    };
+    
   }
   if (!elevenLabsApiKey || openai.apiKey === "-") {
-    res.send({
+    return {
       messages: [
         {
           text: "Sorry, I'm not available right now. Please try again later!",
@@ -70,8 +70,7 @@ export const POST = async (req, res) => {
           animation: "Crying",
         },
       ],
-    });
-    return;
+    }
   }
   const messages = await openai.chat(userMessage);
   const messagesWithAudio = [];
@@ -84,7 +83,9 @@ export const POST = async (req, res) => {
       lipsync,
     });
   }
-  res.send({ messages: messagesWithAudio });
+  return {
+    messages: messagesWithAudio,
+  };
 };
 const readJsonTranscript = async (file) => {
   const data = await fs.readFile(file, "utf8");
