@@ -10,8 +10,8 @@ export default function AvatarView() {
     <>
       <Loader />
       <UI />
-      <Leva hidden/>
-      <Canvas shadows camera={{ position: [0, 0, 1], fov: 30 }}>
+      <Leva hidden />
+      <Canvas shadows camera={{ position: [0, 0, 1], fov: 32 }}>
         <Experience />
       </Canvas>
     </>

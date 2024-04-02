@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import { exec } from "child_process";
 import OpenAI from "openai";
-import voice from "elevenlabs-node";
+import ElevenLabs from "elevenlabs-node";
 import { NextResponse } from "next/server";
 
 const openai = new OpenAI({
@@ -10,11 +10,13 @@ const openai = new OpenAI({
 
 const elevenLabsApiKey = process.env.PUBLIC_NEXT_ELEVEN_LABS_API_KEY;
 
-const voiceID = "kgG7dCoKCfLehAPWkJOE";
+const voice = new ElevenLabs({
+  apiKey: elevenLabsApiKey,
+});
 
 const execCommand = (command) => {
   return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
+    exec(command, (error, stdout) => {
       if (error) reject(error);
       resolve(stdout);
     });
@@ -35,7 +37,6 @@ const lipSyncMessage = async (message) => {
   // -r phonetic is faster but less accurate
   console.log(`Lip sync done in ${new Date().getTime() - time}ms`);
 };
-
 export const POST = async (req) => {
   console.log("ElevenLabs API Key:", elevenLabsApiKey);
   console.log("OpenAI API Key:", process.env.PUBLIC_NEXT_OPEN_AI_API_KEY);
@@ -43,39 +44,45 @@ export const POST = async (req) => {
   const { message } = body;
   const userMessage = message;
   if (!userMessage) {
-    return NextResponse.json({
-      messages: [
-        {
-          text:
-            "Hey welcome to Dan Spelt's website! I'm Dan's virtual assistant. How can I help you today?",
-          audio: await audioFileToBase64("public/audios/intro_0.wav"),
-          lipsync: await readJsonTranscript("public/audios/intro_0.json"),
-          facialExpression: "smile",
-          animation: "Talking_1",
-        },
-        {
-          text:
-            "I'm here to help you with any questions you may have about Dan's work, projects, or anything else you'd like to know. Just ask me anything!",
-          audio: await audioFileToBase64("public/audios/intro_1.wav"),
-          lipsync: await readJsonTranscript("public/audios/intro_1.json"),
-          facialExpression: "smile",
-          animation: "Talking_1",
-        },
-      ],
-    }, { status: 200 });
+    return NextResponse.json(
+      {
+        messages: [
+          {
+            text:
+              "Hey welcome to Dan Spelt's website! I'm Dan's virtual assistant. How can I help you today?",
+            audio: await audioFileToBase64("audios/intro_0.wav"),
+            lipsync: await readJsonTranscript("audios/intro_0.json"),
+            facialExpression: "smile",
+            animation: "Talking_1",
+          },
+          {
+            text:
+              "I'm here to help you with any questions you may have about Dan's work, projects, or anything else you'd like to know. Just ask me anything!",
+            audio: await audioFileToBase64("audios/intro_1.wav"),
+            lipsync: await readJsonTranscript("audios/intro_1.json"),
+            facialExpression: "smile",
+            animation: "Talking_1",
+          },
+        ],
+      },
+      { status: 200 }
+    );
   }
   if (!elevenLabsApiKey || openai.apiKey === "-") {
-    return NextResponse.json({
-      messages: [
-        {
-          text: "Sorry, I'm not available right now. Please try again later!",
-          audio: await audioFileToBase64("audios/error_0.wav"),
-          lipsync: await readJsonTranscript("audios/error_0.json"),
-          facialExpression: "sad",
-          animation: "Crying",
-        },
-      ],
-    }, { status: 200 });
+    return NextResponse.json(
+      {
+        messages: [
+          {
+            text: "Sorry, I'm not available right now. Please try again later!",
+            audio: await audioFileToBase64("audios/error_0.wav"),
+            lipsync: await readJsonTranscript("audios/error_0.json"),
+            facialExpression: "sad",
+            animation: "Crying",
+          },
+        ],
+      },
+      { status: 200 }
+    );
   }
   const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
@@ -108,16 +115,16 @@ export const POST = async (req) => {
   for (let i = 0; i < messages.length; i++) {
     const message = messages[i];
     // generate audio file
-    const fileName = `public/audios/message_${i}.mp3`; // The name of your audio file
+    const fileName = `audios/message_${i}.mp3`; // The name of your audio file
     const textInput = message.text; // The text you wish to convert to speech
-    await voice.textToSpeech(elevenLabsApiKey, voiceID, fileName, textInput);
+    voice.textToSpeech({ textInput, fileName });
     // generate lipsync
     await lipSyncMessage(i);
-    message.audio = await audioFileToBase64(fileName);
-    message.lipsync = await readJsonTranscript(`public/audios/message_${i}.json`);
+    message.audio = await audioFileToBase64(`audios/message_${i}.wav`);
+    message.lipsync = await readJsonTranscript(`audios/message_${i}.json`);
   }
   return NextResponse.json({ message: messages }, { status: 200 });
-}
+};
 
 const readJsonTranscript = async (file) => {
   const data = await fs.readFile(file, "utf8");

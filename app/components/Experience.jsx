@@ -1,36 +1,28 @@
 'use client';
-import {
-  CameraControls,
-  ContactShadows,
-  Environment,
-  Text,
-} from "@react-three/drei";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { useChat } from "../hooks/useChat";
-import { Sam } from "./Sam";
+import React, { Suspense, useEffect, useRef, useState } from 'react';
+import { CameraControls, ContactShadows, Environment, Text } from '@react-three/drei';
+import { useChat } from '../hooks/useChat';
+import { Sam } from './Sam';
 
 const Dots = (props) => {
   const { loading } = useChat();
-  const [loadingText, setLoadingText] = useState("");
+  const [loadingText, setLoadingText] = useState('');
   useEffect(() => {
     if (loading) {
       const interval = setInterval(() => {
-        setLoadingText((loadingText) => {
-          if (loadingText.length > 2) {
-            return ".";
-          }
-          return loadingText + ".";
-        });
+        setLoadingText((loadingText) => loadingText.length > 2 ? '.' : loadingText + '.');
       }, 800);
       return () => clearInterval(interval);
     } else {
-      setLoadingText("");
+      setLoadingText('');
     }
   }, [loading]);
+  
   if (!loading) return null;
+
   return (
     <group {...props}>
-      <Text fontSize={0.14} anchorX={"left"} anchorY={"bottom"}>
+      <Text fontSize={0.14} anchorX={'left'} anchorY={'bottom'}>
         {loadingText}
         <meshBasicMaterial attach="material" color="black" />
       </Text>
@@ -43,25 +35,30 @@ export const Experience = () => {
   const { cameraZoomed } = useChat();
 
   useEffect(() => {
-    cameraControls.current.setLookAt(0, 2, 5, 0, 1.5, 0);
+    // Ensuring cameraControls.current is defined before calling setLookAt
+    if (cameraControls.current) {
+      cameraControls.current.setLookAt(0, 2, 5, 0, 1.5, 0);
+    }
   }, []);
 
   useEffect(() => {
-    if (cameraZoomed) {
-      cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, true);
-    } else {
-      cameraControls.current.setLookAt(0, 2.2, 5, 0, 1.0, 0, true);
+    // Safely accessing cameraControls.current
+    if (cameraControls.current) {
+      if (cameraZoomed) {
+        cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, true);
+      } else {
+        cameraControls.current.setLookAt(0, 2.2, 5, 0, 1.0, 0, true);
+      }
     }
   }, [cameraZoomed]);
+
   return (
     <>
       <CameraControls ref={cameraControls} />
-      <Environment preset="sunset" />
-      {/* Wrapping Dots into Suspense to prevent Blink when Troika/Font is loaded */}
-      <Suspense>
+      <Sam />
+      <Suspense fallback={null}>
         <Dots position-y={1.75} position-x={-0.02} />
       </Suspense>
-      <Sam />
       <Environment files="/hdr/office.hdr" background /> 
       <ContactShadows opacity={0.7} />
     </>
