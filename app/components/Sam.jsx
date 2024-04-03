@@ -116,7 +116,6 @@ export function Sam(props) {
   const group = useRef();
   const { animations: IdleAnimation } = useFBX("/models/animations/sam/Idle.fbx"); 
   IdleAnimation[0].name = "Idle";
-  console.log(IdleAnimation[0].name); 
   const { actions, mixer } = useAnimations(IdleAnimation, group);
  
   const [animation, setAnimation] = useState(

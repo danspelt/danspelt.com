@@ -9,6 +9,7 @@ export const UI = ({ hidden, ...props }) => {
   const sendMessage = () => {
     const text = input.current.value;
     if (!loading && !message) {
+      console.log("sending message", text);
       chat(text);
       input.current.value = "";
     }

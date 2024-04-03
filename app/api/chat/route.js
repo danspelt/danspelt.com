@@ -32,18 +32,17 @@ const lipSyncMessage = async (message) => {
   );
   console.log(`Conversion done in ${new Date().getTime() - time}ms`);
   await execCommand(
-    `./bin/rhubarb -f json -o audios/message_${message}.json audios/message_${message}.wav -r phonetic`
+    `rhubarb -f json -o audios/message_${message}.json audios/message_${message}.wav -r phonetic`
   );
+  
   // -r phonetic is faster but less accurate
   console.log(`Lip sync done in ${new Date().getTime() - time}ms`);
 };
 export const POST = async (req) => {
-  console.log("ElevenLabs API Key:", elevenLabsApiKey);
-  console.log("OpenAI API Key:", process.env.PUBLIC_NEXT_OPEN_AI_API_KEY);
   const body = await req.json();
   const { message } = body;
-  const userMessage = message;
-  if (!userMessage) {
+  const userMessage = message === "" ? null : message;
+  if (userMessage !== null) {
     return NextResponse.json(
       {
         messages: [
@@ -113,14 +112,16 @@ export const POST = async (req) => {
     messages = messages.messages; // ChatGPT is not 100% reliable, sometimes it directly returns an array and sometimes a JSON object with a messages property
   }
   for (let i = 0; i < messages.length; i++) {
+    console.log(`Processing message ${i}`);
     const message = messages[i];
     // generate audio file
     const fileName = `audios/message_${i}.mp3`; // The name of your audio file
     const textInput = message.text; // The text you wish to convert to speech
-    voice.textToSpeech({ textInput, fileName });
+  
+    await voice.textToSpeech({ textInput, fileName });
     // generate lipsync
     await lipSyncMessage(i);
-    message.audio = await audioFileToBase64(`audios/message_${i}.wav`);
+    message.audio = await audioFileToBase64(fileName);
     message.lipsync = await readJsonTranscript(`audios/message_${i}.json`);
   }
   return NextResponse.json({ message: messages }, { status: 200 });
