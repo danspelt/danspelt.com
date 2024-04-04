@@ -51,16 +51,16 @@ export const POST = async (req) => {
           {
             text:
               "Hey welcome to Dan Spelt's website! I'm Dan's virtual assistant. How can I help you today?",
-            audio: await audioFileToBase64("audios/intro_0.wav"),
-            lipsync: await readJsonTranscript("audios/intro_0.json"),
+            audio: await audioFileToBase64("audios/welcome.wav"),
+            lipsync: await readJsonTranscript("audios/welcome.json"),
             facialExpression: "smile",
             animation: "Idle",
           },
           {
             text:
               "I'm here to help you with any questions you may have about Dan's work, projects, or anything else you'd like to know. Just ask me anything!",
-            audio: await audioFileToBase64("audios/intro_1.wav"),
-            lipsync: await readJsonTranscript("audios/intro_1.json"),
+            audio: await audioFileToBase64("audios/intro.wav"),
+            lipsync: await readJsonTranscript("audios/intro.json"),
             facialExpression: "smile",
             animation: "Idle",
           },

@@ -104,30 +104,6 @@ let setupMode = false;
 
 export function Sam(props) {
 
-  const { playAudio, script } = useControls({
-    playAudio: true,
-    script: {
-      value: "Welcome",
-      options: ["welcome", "intro"],
-    },
-  });
-  const audioIntro = useMemo(() => new Audio(`/audios/welcome.mp3`), [script]);
-
-  useEffect(() => {
-    if (playAudio) {
-      audioIntro.play();
-    }
-    else {
-      audioIntro.pause();
-    }
-  }, [playAudio, audioIntro]);
-  
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      audioIntro.play();
-    }
-    window.addEventListener("keydown", handleKeyDown);
-  }, []);
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
   const { message, onMessagePlayed, chat } = useChat();
 
@@ -139,7 +115,9 @@ export function Sam(props) {
   const [audio, setAudio] = useState();
 
   const group = useRef();
-  const { animations: IdleAnimation } = useFBX("/models/animations/sam/Idle.fbx"); 
+  const { animations: IdleAnimation } = useFBX(
+    "/models/animations/sam/Idle.fbx"
+  );
   IdleAnimation[0].name = "Idle";
   const { actions, mixer } = useAnimations(IdleAnimation, group);
   console.log(actions);
@@ -158,10 +136,7 @@ export function Sam(props) {
     audio.onended = onMessagePlayed;
   }, [message]);
 
-
-  const [animation, setAnimation] = useState(
-    IdleAnimation[0].name
-  );
+  const [animation, setAnimation] = useState(IdleAnimation[0].name);
   useEffect(() => {
     actions[animation]
       .reset()
