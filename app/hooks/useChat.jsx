@@ -14,6 +14,7 @@ export const ChatProvider = ({ children }) => {
       body: JSON.stringify({ message }),
     });
     const resp = (await data.json()).messages;
+    
     setMessages((messages) => [...messages, ...resp]);
     setLoading(false);
   };
@@ -22,6 +23,7 @@ export const ChatProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [cameraZoomed, setCameraZoomed] = useState(true);
   const onMessagePlayed = () => {
+    console.log("message played");
     setMessages((messages) => messages.slice(1));
   };
 

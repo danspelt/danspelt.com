@@ -25,7 +25,7 @@ const execCommand = (command) => {
 
 const lipSyncMessage = async (message) => {
   const time = new Date().getTime();
-  console.log(`Starting conversion for message ${message}`);
+  
   await execCommand(
     `ffmpeg -y -i audios/message_${message}.mp3 audios/message_${message}.wav`
     // -y to overwrite the file
@@ -40,9 +40,11 @@ const lipSyncMessage = async (message) => {
 };
 export const POST = async (req) => {
   const body = await req.json();
-  const { message } = body;
+    const { message } = body;
+    
   const userMessage = message === "" ? null : message;
-  if (userMessage !== null) {
+    if (!userMessage) {
+    
     return NextResponse.json(
       {
         messages: [
@@ -52,7 +54,7 @@ export const POST = async (req) => {
             audio: await audioFileToBase64("audios/intro_0.wav"),
             lipsync: await readJsonTranscript("audios/intro_0.json"),
             facialExpression: "smile",
-            animation: "Talking_1",
+            animation: "Idle",
           },
           {
             text:
@@ -60,7 +62,7 @@ export const POST = async (req) => {
             audio: await audioFileToBase64("audios/intro_1.wav"),
             lipsync: await readJsonTranscript("audios/intro_1.json"),
             facialExpression: "smile",
-            animation: "Talking_1",
+            animation: "Idle",
           },
         ],
       },
@@ -98,7 +100,7 @@ export const POST = async (req) => {
         You will always reply with a JSON array of messages. With a maximum of 3 messages.
         Each message has a text, facialExpression, and animation property.
         The different facial expressions are: smile, sad, angry, surprised, funnyFace, and default.
-        The different animations are: Talking_0, Talking_1, Talking_2, Crying, Laughing, Rumba, Idle, Terrified, and Angry. 
+        The different animations are: aIdle. 
         `,
       },
       {
@@ -112,7 +114,6 @@ export const POST = async (req) => {
     messages = messages.messages; // ChatGPT is not 100% reliable, sometimes it directly returns an array and sometimes a JSON object with a messages property
   }
   for (let i = 0; i < messages.length; i++) {
-    console.log(`Processing message ${i}`);
     const message = messages[i];
     // generate audio file
     const fileName = `audios/message_${i}.mp3`; // The name of your audio file

@@ -2,7 +2,7 @@
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { button, useControls } from "leva";
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useMemo, useRef, useState } from "react";
 
 import * as THREE from "three";
 import { useChat } from "../hooks/useChat";
@@ -103,6 +103,31 @@ const corresponding = {
 let setupMode = false;
 
 export function Sam(props) {
+
+  const { playAudio, script } = useControls({
+    playAudio: true,
+    script: {
+      value: "Welcome",
+      options: ["welcome", "intro"],
+    },
+  });
+  const audioIntro = useMemo(() => new Audio(`/audios/welcome.mp3`), [script]);
+
+  useEffect(() => {
+    if (playAudio) {
+      audioIntro.play();
+    }
+    else {
+      audioIntro.pause();
+    }
+  }, [playAudio, audioIntro]);
+  
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      audioIntro.play();
+    }
+    window.addEventListener("keydown", handleKeyDown);
+  }, []);
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
   const { message, onMessagePlayed, chat } = useChat();
 
@@ -117,13 +142,32 @@ export function Sam(props) {
   const { animations: IdleAnimation } = useFBX("/models/animations/sam/Idle.fbx"); 
   IdleAnimation[0].name = "Idle";
   const { actions, mixer } = useAnimations(IdleAnimation, group);
- 
-  const [animation, setAnimation] = useState(
-    IdleAnimation.find((clip) => clip.name === "Idle") ? "Idle" : animations[0].name 
-  );
-
+  console.log(actions);
   useEffect(() => {
-    actions[animation].play();
+    console.log(message);
+    if (!message) {
+      setAnimation("Idle");
+      return;
+    }
+    setAnimation(message.animation);
+    setFacialExpression(message.facialExpression);
+    setLipsync(message.lipsync);
+    const audio = new Audio("data:audio/mp3;base64," + message.audio);
+    audio.play();
+    setAudio(audio);
+    audio.onended = onMessagePlayed;
+  }, [message]);
+
+
+  const [animation, setAnimation] = useState(
+    IdleAnimation[0].name
+  );
+  useEffect(() => {
+    actions[animation]
+      .reset()
+      .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
+      .play();
+    return () => actions[animation].fadeOut(0.5);
   }, [animation]);
   useEffect(() => {
     let blinkTimeout;
