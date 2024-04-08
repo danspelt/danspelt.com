@@ -54,12 +54,13 @@ export const Experience = () => {
 
   return (
     <>
-      <Sam />
+      <CameraControls ref={cameraControls} />      
       <Suspense fallback={null}>
         <Dots position-y={1.75} position-x={-0.02} />
       </Suspense>
-      <Environment preset="city" />
-      <ContactShadows opacity={0.7} />
+      <Sam />
+      <Environment files="/hdr/1.hdr" background />
+      
     </>
   );
 };
