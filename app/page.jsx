@@ -1,9 +1,9 @@
 import React from 'react';
-import AvatarView from './AvatarView';
+import View3D from './View3D';
 const Home = () => {
   return ( 
     <div className='flex justify-center items-center h-screen w-screen bg-sky-400'>
-      <AvatarView />
+      <View3D />
     </div>
    );
 }
