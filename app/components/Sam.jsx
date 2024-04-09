@@ -140,14 +140,17 @@ export function Sam(props) {
     "/models/animations/sam/Idle.fbx"
   );
   const acceptFBXAnimation = useFBX(
-    "/models/animations/sam/Idle.fbx"
-    );
+    "/models/animations/sam/accept.fbx"
+  );
+  
   
   // Convert FBX animations to usable format
-  const animations = [idleFBXAnimation, acceptFBXAnimation];
-    
+  const animations = [];
+  idleFBXAnimation.animations[0].name = "Idle";
+  acceptFBXAnimation.animations[0].name = "Accept";
+  animations.push(idleFBXAnimation.animations[0]);
+  animations.push(acceptFBXAnimation.animations[0]);
   const { actions, mixer } = useAnimations(animations, group);
-  console.log(actions);
 
   useEffect(() => {
     console.log(message);
@@ -166,17 +169,16 @@ export function Sam(props) {
   }, [message]);
 
   const [animation, setAnimation] = useState(
-    "Idle"
+    "Accept"
   );
-  // useEffect(() => {
-  //   if (!actions[animation]) {
-  //     console.log("No action found for", animation, actions);
-  //     return;
-  //   }
-  
-  //   return () => actions[animation].fadeOut(0.5);
-  // }, [animation, actions, mixer]);
-
+  useEffect(() => {
+    if (!actions[animation]) {
+      console.log("No action found for", animation, actions);
+      return;
+    }
+    actions['Idle'].reset()
+    .play();
+  }, [actions]);
 
   useEffect(() => {
     let blinkTimeout;
