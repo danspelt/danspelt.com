@@ -113,9 +113,9 @@ export function Sam(props) {
   const audioIntro = useMemo(() => new Audio(`/audios/welcome.mp3`), [script]);
 
   const handlePlayAudio = () => {
-      audioIntro
-        .play()
-        .catch((error) => console.error("Audio playback failed:", error));    
+    audioIntro
+      .play()
+      .catch((error) => console.error("Audio playback failed:", error));
   };
   useEffect(() => {
     if (playAudio) {
@@ -134,16 +134,21 @@ export function Sam(props) {
   const [audio, setAudio] = useState();
 
   const group = useRef();
-  const { animations: IdleAnimation } = useFBX(
+
+  // Load animations
+  const idleFBXAnimation = useFBX(
     "/models/animations/sam/Idle.fbx"
   );
-  const { animations: AcceptAnimation } = useFBX(
-    "/models/animations/sam/Accept.fbx"
-  );
-  IdleAnimation[0].name = "Idle";
-  AcceptAnimation[0].name = "Accept";
-  const { actions, mixer } = useAnimations([IdleAnimation[0], AcceptAnimation[0]], group);
+  const acceptFBXAnimation = useFBX(
+    "/models/animations/sam/Idle.fbx"
+    );
+  
+  // Convert FBX animations to usable format
+  const animations = [idleFBXAnimation, acceptFBXAnimation];
+    
+  const { actions, mixer } = useAnimations(animations, group);
   console.log(actions);
+
   useEffect(() => {
     console.log(message);
     if (!message) {
@@ -160,15 +165,19 @@ export function Sam(props) {
     audio.onended = onMessagePlayed;
   }, [message]);
 
-  console.log("actions", actions);
-  const [animation, setAnimation] = useState("Idle");
-  useEffect(() => {
-    actions[animation]
-      .reset()
-      .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
-      .play();
-    return () => actions[animation].fadeOut(0.5);
-  }, [animation]);
+  const [animation, setAnimation] = useState(
+    "Idle"
+  );
+  // useEffect(() => {
+  //   if (!actions[animation]) {
+  //     console.log("No action found for", animation, actions);
+  //     return;
+  //   }
+  
+  //   return () => actions[animation].fadeOut(0.5);
+  // }, [animation, actions, mixer]);
+
+
   useEffect(() => {
     let blinkTimeout;
     const nextBlink = () => {
@@ -326,4 +335,3 @@ export function Sam(props) {
 }
 
 useGLTF.preload("/models/sam.glb");
-useGLTF.preload("/models/animations.glb");
