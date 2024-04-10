@@ -110,6 +110,8 @@ export function Sam(props) {
       options: ["welcome", "intro"],
     },
   });
+
+  const [animation, setAnimation] = useState("Idle");
   const audioIntro = useMemo(() => new Audio(`/audios/welcome.mp3`), [script]);
 
   const handlePlayAudio = () => {
@@ -143,8 +145,7 @@ export function Sam(props) {
     "/models/animations/sam/accept.fbx"
   );
   
-  
-  // Convert FBX animations to usable format
+   // Convert FBX animations to usable format
   const animations = [];
   idleFBXAnimation.animations[0].name = "Idle";
   acceptFBXAnimation.animations[0].name = "Accept";
@@ -168,18 +169,17 @@ export function Sam(props) {
     audio.onended = onMessagePlayed;
   }, [message]);
 
-  const [animation, setAnimation] = useState(
-    "Accept"
-  );
-  useEffect(() => {
-    if (!actions[animation]) {
-      console.log("No action found for", animation, actions);
-      return;
-    }
-    actions['Idle'].reset()
-    .play();
-  }, [actions]);
 
+  useEffect(() => {
+    console.log(animation);
+    actions[animation]
+      .reset()
+      .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5) 
+      .play();
+      return () => {        
+        actions[animation].fadeOut(0.5);
+      };
+    }, [animation]);
   useEffect(() => {
     let blinkTimeout;
     const nextBlink = () => {
