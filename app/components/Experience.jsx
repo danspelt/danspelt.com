@@ -8,6 +8,7 @@ import {
 } from "@react-three/drei";
 import { useChat } from "../hooks/useChat";
 import { Sam } from "./Sam";
+import { Avatar } from "./Avatar";
 
 const Dots = (props) => {
   const { loading } = useChat();

@@ -3,7 +3,7 @@ import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { button, useControls } from "leva";
 import React, { use, useEffect, useMemo, useRef, useState } from "react";
-
+import { useAppContext } from "app/context/AppContext";
 import * as THREE from "three";
 import { useChat } from "../hooks/useChat";
 
@@ -103,31 +103,10 @@ const corresponding = {
 let setupMode = false;
 
 export function Sam(props) {
-  const { playAudio, script } = useControls({
-    playAudio: true,
-    script: {
-      value: "Welcome",
-      options: ["welcome", "intro"],
-    },
-  });
-
-  const [animation, setAnimation] = useState("Idle");
-  const audioIntro = useMemo(() => new Audio(`/audios/welcome.mp3`), [script]);
-
-  const handlePlayAudio = () => {
-    audioIntro
-      .play()
-      .catch((error) => console.error("Audio playback failed:", error));
-  };
-  useEffect(() => {
-    if (playAudio) {
-      handlePlayAudio();
-    }
-  }, [playAudio]);
 
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
   const { message, onMessagePlayed, chat } = useChat();
-
+  const { acceptingFiles } = useAppContext();
   const [lipsync, setLipsync] = useState();
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);
@@ -136,30 +115,21 @@ export function Sam(props) {
   const [audio, setAudio] = useState();
 
   const group = useRef();
-
-  // Load animations
-  const idleFBXAnimation = useFBX(
+  const { animations: IdleAnimation } = useFBX(
     "/models/animations/sam/Idle.fbx"
   );
-  const acceptFBXAnimation = useFBX(
-    "/models/animations/sam/accept.fbx"
-  );
+  const {animations: AcceptAnimation }= useFBX("/models/animations/sam/accept.fbx");
+  IdleAnimation[0].name = "Idle";
+  AcceptAnimation[0].name = "Accept"; 
   
-   // Convert FBX animations to usable format
-  const animations = [];
-  idleFBXAnimation.animations[0].name = "Idle";
-  acceptFBXAnimation.animations[0].name = "Accept";
-  animations.push(idleFBXAnimation.animations[0]);
-  animations.push(acceptFBXAnimation.animations[0]);
-  const { actions, mixer } = useAnimations(animations, group);
-
+  const { actions, mixer } = useAnimations(IdleAnimation, group);
+  const { actions: acceptActions, mixer: acceptMixer } = useAnimations(AcceptAnimation, group);
   useEffect(() => {
-    console.log(message);
     if (!message) {
       setAnimation("Idle");
-
       return;
     }
+
     setAnimation(message.animation);
     setFacialExpression(message.facialExpression);
     setLipsync(message.lipsync);
@@ -169,17 +139,14 @@ export function Sam(props) {
     audio.onended = onMessagePlayed;
   }, [message]);
 
-
+  const [animation, setAnimation] = useState(IdleAnimation[0].name);
   useEffect(() => {
-    console.log(animation);
     actions[animation]
       .reset()
-      .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5) 
+      .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
       .play();
-      return () => {        
-        actions[animation].fadeOut(0.5);
-      };
-    }, [animation]);
+    return () => actions[animation].fadeOut(0.5);
+  }, [animation]);
   useEffect(() => {
     let blinkTimeout;
     const nextBlink = () => {
@@ -194,6 +161,14 @@ export function Sam(props) {
     nextBlink();
     return () => clearTimeout(blinkTimeout);
   }, []);
+  useEffect(() => {
+    if (acceptingFiles) {
+      acceptActions[AcceptAnimation[0].name].play();
+    }
+    else {
+      acceptActions[AcceptAnimation[0].name].stop();
+    }
+  }, [acceptingFiles]);
 
   useFrame(() => {
     !setupMode &&
