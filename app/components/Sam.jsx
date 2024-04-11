@@ -103,7 +103,6 @@ const corresponding = {
 let setupMode = false;
 
 export function Sam(props) {
-
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
   const { message, onMessagePlayed, chat } = useChat();
   const { acceptingFiles } = useAppContext();
@@ -118,12 +117,17 @@ export function Sam(props) {
   const { animations: IdleAnimation } = useFBX(
     "/models/animations/sam/Idle.fbx"
   );
-  const {animations: AcceptAnimation }= useFBX("/models/animations/sam/accept.fbx");
+  const { animations: AcceptAnimation } = useFBX(
+    "/models/animations/sam/accept.fbx"
+  );
   IdleAnimation[0].name = "Idle";
-  AcceptAnimation[0].name = "Accept"; 
-  
+  AcceptAnimation[0].name = "Accept";
+
   const { actions, mixer } = useAnimations(IdleAnimation, group);
-  const { actions: acceptActions, mixer: acceptMixer } = useAnimations(AcceptAnimation, group);
+  const { actions: acceptActions, mixer: acceptMixer } = useAnimations(
+    AcceptAnimation,
+    group
+  );
   useEffect(() => {
     if (!message) {
       setAnimation("Idle");
@@ -161,11 +165,11 @@ export function Sam(props) {
     nextBlink();
     return () => clearTimeout(blinkTimeout);
   }, []);
+
   useEffect(() => {
     if (acceptingFiles) {
       acceptActions[AcceptAnimation[0].name].play();
-    }
-    else {
+    } else {
       acceptActions[AcceptAnimation[0].name].stop();
     }
   }, [acceptingFiles]);
@@ -242,6 +246,73 @@ export function Sam(props) {
     });
   };
 
+  useControls("FacialExpressions", {
+    chat: button(() => chat()),
+    winkLeft: button(() => {
+      setWinkLeft(true);
+      setTimeout(() => setWinkLeft(false), 300);
+    }),
+    winkRight: button(() => {
+      setWinkRight(true);
+      setTimeout(() => setWinkRight(false), 300);
+    }),
+    animation: {
+      value: animation,
+      options: actions['Idle'],
+      onChange: (value) => setAnimation(value),
+    },
+    facialExpression: {
+      options: Object.keys(facialExpressions),
+      onChange: (value) => setFacialExpression(value),
+    },
+    enableSetupMode: button(() => {
+      setupMode = true;
+    }),
+    disableSetupMode: button(() => {
+      setupMode = false;
+    }),
+    logMorphTargetValues: button(() => {
+      const emotionValues = {};
+      Object.keys(nodes.EyeLeft.morphTargetDictionary).forEach((key) => {
+        if (key === "eyeBlinkLeft" || key === "eyeBlinkRight") {
+          return; // eyes wink/blink are handled separately
+        }
+        const value =
+          nodes.EyeLeft.morphTargetInfluences[
+            nodes.EyeLeft.morphTargetDictionary[key]
+          ];
+        if (value > 0.01) {
+          emotionValues[key] = value;
+        }
+      });
+      console.log(JSON.stringify(emotionValues, null, 2));
+    }),
+  });
+
+  const [, set] = useControls("MorphTarget", () =>
+    Object.assign(
+      {},
+      ...Object.keys(nodes.EyeLeft.morphTargetDictionary).map((key) => {
+        return {
+          [key]: {
+            label: key,
+            value: 0,
+            min:
+              nodes.EyeLeft.morphTargetInfluences[
+                nodes.EyeLeft.morphTargetDictionary[key]
+              ],
+            max: 1,
+            onChange: (val) => {
+              if (setupMode) {
+                lerpMorphTarget(key, val, 1);
+              }
+            },
+          },
+        };
+      })
+    )
+  );
+      
   return (
     <group {...props} dispose={null} ref={group}>
       <primitive object={nodes.Hips} />

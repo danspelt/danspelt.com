@@ -267,7 +267,7 @@ export function Avatar(props) {
 
   const [, set] = useControls("MorphTarget", () =>
     Object.assign(
-      {},
+      {}, 
       ...Object.keys(nodes.EyeLeft.morphTargetDictionary).map((key) => {
         return {
           [key]: {
