@@ -12,9 +12,7 @@ export default function RootLayout({children}) {
     <html lang="en">
       <body className="h-screen w-screen bg-sky-400">
         <ChatProvider>
-          <AppContextProvider>
-            {children}
-          </AppContextProvider>
+        {children}
         </ChatProvider>
       </body>
     </html>

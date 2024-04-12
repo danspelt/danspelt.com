@@ -105,7 +105,7 @@ let setupMode = false;
 export function Sam(props) {
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
   const { message, onMessagePlayed, chat } = useChat();
-  const { acceptingFiles } = useAppContext();
+  //const { acceptingFiles } = useAppContext();
   const [lipsync, setLipsync] = useState();
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);
@@ -166,13 +166,13 @@ export function Sam(props) {
     return () => clearTimeout(blinkTimeout);
   }, []);
 
-  useEffect(() => {
-    if (acceptingFiles) {
-      acceptActions[AcceptAnimation[0].name].play();
-    } else {
-      acceptActions[AcceptAnimation[0].name].stop();
-    }
-  }, [acceptingFiles]);
+  // useEffect(() => {
+  //   if (acceptingFiles) {
+  //     acceptActions[AcceptAnimation[0].name].play();
+  //   } else {
+  //     acceptActions[AcceptAnimation[0].name].stop();
+  //   }
+  // }, [acceptingFiles]);
 
   useFrame(() => {
     !setupMode &&
