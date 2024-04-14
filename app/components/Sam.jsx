@@ -120,10 +120,24 @@ export function Sam(props) {
   const { animations: AcceptAnimation } = useFBX(
     "/models/animations/sam/accept.fbx"
   );
+  const { animations: Talking_0 } = useFBX(
+    "/models/animations/sam/Talking_0.fbx"
+  );
+  const { animations: Talking_1 } = useFBX(
+    "/models/animations/sam/Talking_1.fbx"
+  );
+  const { animations: Talking_2 } = useFBX(
+    "/models/animations/sam/Talking_2.fbx"
+  );
+
   IdleAnimation[0].name = "Idle";
   AcceptAnimation[0].name = "Accept";
+  Talking_0[0].name = "Talking_0";
+  Talking_1[0].name = "Talking_1";
+  Talking_2[0].name = "Talking_2";
 
   const { actions, mixer } = useAnimations(IdleAnimation, group);
+  
   const { actions: acceptActions, mixer: acceptMixer } = useAnimations(
     AcceptAnimation,
     group
