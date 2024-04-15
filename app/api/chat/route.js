@@ -59,16 +59,16 @@ export const POST = async (req) => {
       { status: 200 }
     );
   } else if (userMessage) {
-    const completion = await openai.chat.completions.create({
+    const assistant = await openai.beta.assistant.create({
+      name: "Dan Spelt's Virtual Assistant",
+      desrciption: "A virtual assistant for Dan Spelt's website",
       model: "gpt-3.5-turbo-1106",
-      max_tokens: 1000,
-      temperature: 0.6,
-      response_format: {
-        type: "json_object",
-      },
+      tools: [{ "type": "code_interpeter" }],
+    });
+    const threads = await openai.beta.threads.create({
       messages: [
         {
-          role: "system",
+          role: "user",
           content: `
         You are a virtual assistant for Dan Spelt's website.
         You will always reply with a JSON array of messages. With a maximum of 3 messages.
@@ -76,6 +76,7 @@ export const POST = async (req) => {
         The different facial expressions are: smile, sad, angry, surprised, funnyFace, and default.
         The different animations are: Idle, Talking, Standing_Arguing, Rapping and default.
         `,
+          file_ids: [file.id],
         },
         {
           role: "user",
@@ -86,7 +87,7 @@ export const POST = async (req) => {
     console.log(
       `user asking a question: ${userMessage} so I will respond with completion messages`
     );
-    let messages = JSON.parse(completion.choices[0].message.content);
+    let messages = JSON.parse(assistant.choices[0].message.content);
     if (messages.messages) {
       messages = messages.messages; // ChatGPT is not 100% reliable, sometimes it directly returns an array and sometimes a JSON object with a messages property
     }
