@@ -1,9 +1,14 @@
-'use client'
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
+  const [acceptingFiles, setAcceptingFiles] = useState(false);
+  const [talking, setTalking] = useState(false);
+  const [standingArguing, setStandingArguing] = useState(false);
+  const [rapping, setRapping] = useState(false);
+
   const chat = async (message) => {
     setLoading(true);
 
@@ -13,7 +18,6 @@ export const ChatProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ message }),
-      //body: message ? JSON.stringify({ message }) : JSON.stringify({ message: "" }),
     });
     const resp = (await data.json()).messages;
     console.log(resp);
@@ -45,6 +49,14 @@ export const ChatProvider = ({ children }) => {
         loading,
         cameraZoomed,
         setCameraZoomed,
+        acceptingFiles,
+        setAcceptingFiles,
+        talking,
+        setTalking,
+        standingArguing,
+        setStandingArguing,
+        rapping,
+        setRapping,     
       }}
     >
       {children}

@@ -2,10 +2,11 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-import { useAppContext } from "../context/AppContext";  
+import { useChat } from "../hooks/useChat";
 
 const Dropzone = ({ className }) => {
-  //const { setAcceptingFiles } = useAppContext();
+  const { setAcceptingFiles } = useChat();
+  
   const onDrop = useCallback((acceptedFiles) => {
     // Do something with the files
   }, []);
@@ -18,8 +19,7 @@ const Dropzone = ({ className }) => {
       })}
     >
       <input {...getInputProps()} />
-          {//setAcceptingFiles(isDragActive)
-          }
+      {setAcceptingFiles(isDragActive)}
     </div>
   );
 };

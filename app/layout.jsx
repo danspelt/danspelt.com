@@ -1,7 +1,6 @@
 import './globals.css';
 
 import { ChatProvider } from './hooks/useChat';
-import { AppContextProvider } from './context/AppContext';
 export const metadata = {
   title: 'Dan Spelt - Full Stack Developer',
   description: 'Get to know Dan Spelt, a full stack developer with a passion for learning and creating.',  

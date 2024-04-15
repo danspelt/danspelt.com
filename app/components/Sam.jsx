@@ -3,7 +3,7 @@ import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { button, useControls } from "leva";
 import React, { use, useEffect, useMemo, useRef, useState } from "react";
-import { useAppContext } from "app/context/AppContext";
+
 import * as THREE from "three";
 import { useChat } from "../hooks/useChat";
 
@@ -104,8 +104,15 @@ let setupMode = false;
 
 export function Sam(props) {
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
-  const { message, onMessagePlayed, chat } = useChat();
-  //const { acceptingFiles } = useAppContext();
+  const { 
+    message,
+    onMessagePlayed,
+    acceptingFiles,
+    talking,
+    standingArguing,
+    rapping,
+    chat,
+  } = useChat();
   const [lipsync, setLipsync] = useState();
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);
@@ -120,28 +127,76 @@ export function Sam(props) {
   const { animations: AcceptAnimation } = useFBX(
     "/models/animations/sam/accept.fbx"
   );
-  const { animations: Talking_0 } = useFBX(
-    "/models/animations/sam/Talking_0.fbx"
+  const { animations: Talking } = useFBX(
+    "/models/animations/sam/Talking.fbx"
   );
-  const { animations: Talking_1 } = useFBX(
-    "/models/animations/sam/Talking_1.fbx"
+  const { animations: Standing_Arguing } = useFBX(
+    "/models/animations/sam/Standing_Arguing.fbx"
   );
-  const { animations: Talking_2 } = useFBX(
-    "/models/animations/sam/Talking_2.fbx"
+  const { animations: Rapping } = useFBX(
+    "/models/animations/sam/Rapping.fbx"
   );
 
   IdleAnimation[0].name = "Idle";
   AcceptAnimation[0].name = "Accept";
-  Talking_0[0].name = "Talking_0";
-  Talking_1[0].name = "Talking_1";
-  Talking_2[0].name = "Talking_2";
+  Talking[0].name = "Talking";
+  Standing_Arguing[0].name = "Standing_Arguing";
+  Rapping[0].name = "Rapping";
 
   const { actions, mixer } = useAnimations(IdleAnimation, group);
-  
+
   const { actions: acceptActions, mixer: acceptMixer } = useAnimations(
     AcceptAnimation,
     group
   );
+  const { actions: talkingActions, mixer: talkingMixer } = useAnimations(
+    Talking,
+    group
+  );
+  const { actions: standingArguingActions, mixer: standingArguingMixer } = useAnimations(
+    Standing_Arguing,
+    group
+  );
+  const { actions: rappingActions, mixer: rappingMixer} = useAnimations(
+    Rapping,
+    group
+  );
+
+  // Setup animations for the different states
+  useEffect(() => {    
+    if (acceptingFiles) {
+      acceptActions[AcceptAnimation[0].name].play();
+    } else {
+      acceptActions[AcceptAnimation[0].name].stop();
+    }
+  }, [acceptingFiles]);
+
+  useEffect(() => {
+    if (talking) {
+      talkingActions[Talking[0].name].play();
+    } else {
+      talkingActions[Talking[0].name].stop();
+    }
+  }, [talking]);
+
+  useEffect(() => {
+    if (standingArguing) {
+      standingArguingActions[Standing_Arguing[0].name].play();
+    } else {
+      standingArguingActions[Standing_Arguing[0].name].stop();
+    }
+  }, [standingArguing]);
+
+  useEffect(() => {
+    if (rapping) {
+      rappingActions[Rapping[0].name].play();
+    } else {
+      rappingActions[Rapping[0].name].stop();
+    }
+  }, [rapping]);
+
+  
+
   useEffect(() => {
     if (!message) {
       setAnimation("Idle");
@@ -179,15 +234,7 @@ export function Sam(props) {
     nextBlink();
     return () => clearTimeout(blinkTimeout);
   }, []);
-
-  // useEffect(() => {
-  //   if (acceptingFiles) {
-  //     acceptActions[AcceptAnimation[0].name].play();
-  //   } else {
-  //     acceptActions[AcceptAnimation[0].name].stop();
-  //   }
-  // }, [acceptingFiles]);
-
+  
   useFrame(() => {
     !setupMode &&
       Object.keys(nodes.EyeLeft.morphTargetDictionary).forEach((key) => {
