@@ -5,7 +5,7 @@ import {
   StreamingTextResponse,
   experimental_StreamData,
   LangChainStream,
-} from "ai";
+} from "ai-stream-experimental";
 import { streamingModel, nonStreamingModel } from "./llm";
 import { STANDALONE_QUESTION_TEMPLATE, QA_TEMPLATE } from "./prompt-templates";
 

@@ -1,7 +1,11 @@
-import { PineconeClient } from "@pinecone-database/pinecone";
+import { Pinecone } from "@langchain/pinecone";
 import { env } from "./config";
 import { delay } from "./utils";
 
+const PineconeClient = new Pinecone({
+  apiKey: env.PINECONE_API_KEY,
+  environment: env.PINECONE_ENVIRONMENT,
+});
 let pineconeClientInstance: PineconeClient | null = null;
 
 // Create pineconeIndex if it doesn't exist

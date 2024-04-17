@@ -1,6 +1,6 @@
 import React from 'react';
 import View3D from './View3D';
-import Dropzone from '@components/Dropzone';
+import Dropzone from './components/Dropzone';
 
 const Home = () => {
   return ( 

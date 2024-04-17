@@ -10,8 +10,8 @@ import {
 
 import { BackSide, CubeTextureLoader } from "three";
 import * as THREE from "three";
-import { Experience } from "@components/Experience";
-import { UI } from "@components/UI";
+import { Experience } from "./components/Experience";
+import { UI } from "./components/UI";
 import { Leva } from "leva";
 
 extend({ PerspectiveCamera, OrbitControls, THREE });
