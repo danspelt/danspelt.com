@@ -1,10 +1,9 @@
 import { env } from './config';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { PineconeStore } from 'langchain/vectorstores/pinecone';
-import { PineconeClient } from '@pinecone-database/pinecone';
+import { OpenAIEmbeddings } from '@langchain/openai';
+import { QdrantVectorStore } from "@langchain/community/vectorstores/qdrant";
 
 export async function embedAndStoreDocs(
-  client: PineconeClient,
+  client: typeof QdrantVectorStore,
   // @ts-ignore docs type error
   docs: Document<Record<string, any>>[]
 ) {

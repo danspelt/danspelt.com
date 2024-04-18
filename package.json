@@ -12,11 +12,13 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@langchain/community": "^0.0.50",
     "@langchain/openai": "^0.0.28",
     "@langchain/pinecone": "^0.0.4",
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.15.1",
     "@pinecone-database/pinecone": "^2.2.0",
+    "@qdrant/qdrant-js": "^1.8.2",
     "@react-three/drei": "^9.102.6",
     "@react-three/fiber": "^8.15.19",
     "@react-three/xr": "^5.7.0",
