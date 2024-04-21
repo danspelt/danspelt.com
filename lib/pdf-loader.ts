@@ -14,7 +14,7 @@ export async function getChunkedDocsFromPDF() {
     });
 
     const chunkedDocs = await textSplitter.splitDocuments(docs);
-
+  
     return chunkedDocs;
   } catch (e) {
     console.error(e);

@@ -1,5 +1,36 @@
+import { QdrantClient } from "@qdrant/js-client-rest";
+
 import { QdrantVectorStore } from "@langchain/community/vectorstores/qdrant";
 import { OpenAIEmbeddings } from "@langchain/openai";
+
+export const client = new QdrantClient({
+  url: process.env.QDRANT_URL,
+  apiKey: process.env.QDRANT_API_KEY,
+});
+export const addVectorsToTestCollection = async () => {
+  const texts = [
+    "Hello, how are you?",
+    "What is the weather like today?",
+    "Artificial intelligence is transforming industries.",
+  ];
+
+  const vectorStore = new QdrantVectorStore(client, {
+    url: process.env.QDRANT_URL,  // URL of the Qdrant server
+    collectionName: "test",
+  });
+
+  const openAIEmbeddings = new OpenAIEmbeddings();
+
+  try {
+    await vectorStore.
+      texts: texts,
+      embeddingsModel: openAIEmbeddings
+    });
+    console.log('Vectors added successfully to the "test" collection.');
+  } catch (error) {
+    console.error("Error adding vectors to the collection:", error);
+  }
+};
 
 export const addVector = async () => {
   const vectorStore = await QdrantVectorStore.fromTexts(
