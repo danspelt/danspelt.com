@@ -1,6 +1,6 @@
 import { ConversationalRetrievalQAChain } from "langchain/chains";
-import { getVectorStore, vectorStore } from "./vector-store";
-import { getPineconeClient } from "./pinecone-client";
+import { getVectorStore } from "./vector-store";
+
 import {
   StreamingTextResponse,
   experimental_StreamData,
@@ -19,6 +19,7 @@ export async function callChain({ question, chatHistory }: callChainArgs) {
   try {
     // Open AI recommendation
     const sanitizedQuestion = question.trim().replace("\n", " ");
+    const vectorStore = await getVectorStore();
     
     const { stream, handlers } = LangChainStream({
       experimental_streamData: true,
@@ -38,7 +39,7 @@ export async function callChain({ question, chatHistory }: callChainArgs) {
       }
     );
 
-    // Question using chat-history
+    // Question using chat-history 
     // Reference https://js.langchain.com/docs/modules/chains/popular/chat_vector_db#externally-managed-memory
     chain
       .call(
@@ -47,22 +48,10 @@ export async function callChain({ question, chatHistory }: callChainArgs) {
           chat_history: chatHistory,
         },
         [handlers]
-      )
-      .then(async (res) => {
-        const sourceDocuments = res?.sourceDocuments;
-        const firstTwoDocuments = sourceDocuments.slice(0, 2);
-        const pageContents = firstTwoDocuments.map(
-          ({ pageContent }: { pageContent: string }) => pageContent
-        );
-        console.log("already appended ", data);
-        data.append({
-          sources: pageContents,
-        });
-        data.close();
-      });
-
+    );
+    
     // Return the readable stream
-    return new StreamingTextResponse(stream, {}, data);
+    return new StreamingTextResponse(stream);
   } catch (e) {
     console.error(e);
     throw new Error("Call chain method failed to execute successfully!!");

@@ -1,6 +1,5 @@
 import { getChunkedDocsFromPDF } from "../lib/pdf-loader";
 import { storeChunks } from "../lib/vector-store";
-import { addVectorsToTestCollection } from "../lib/qdrant-client";
 
 // Simulate the embedding and storing process in a Qdrant collection named "test"
 (async () => {
@@ -9,9 +8,6 @@ import { addVectorsToTestCollection } from "../lib/qdrant-client";
     const docs = await getChunkedDocsFromPDF(); // Load chunks from PDF
     console.log(`Loading ${docs.length} chunks into Qdrant`);
     await storeChunks(docs, "test");  // Store chunks in Qdrant collection
-
-    // Assuming `embedAndStoreDocs` needs a collection name and documents to process.
-    //  await storeChunks(docs, "test");  // Store chunks in Qdrant collection
     console.log("Data embedded and stored in Qdrant 'test' index");
   } catch (error) {
     console.error("Operation failed: ", error);

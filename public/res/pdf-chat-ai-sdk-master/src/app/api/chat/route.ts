@@ -35,5 +35,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json("Error: Something went wrong. Try again!", {
       status: 500,
     });
+    
   }
 }

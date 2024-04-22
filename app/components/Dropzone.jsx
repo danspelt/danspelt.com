@@ -3,10 +3,10 @@ import { useCallback, useState } from "react";
 
 import { useDropzone } from "react-dropzone";
 
-import { useChat } from "../hooks/useChat";
+import { useChatContext } from "../hooks/useChat";
 
 const Dropzone = ({ className }) => {
-  const { setAcceptingFiles } = useChat();
+  const { setAcceptingFiles } = useChatContext();
   const [files, setFiles] = useState(null);
 
   const onFileUpload = async () => {

@@ -5,8 +5,7 @@ import { button, useControls } from "leva";
 import React, { use, useEffect, useMemo, useRef, useState } from "react";
 
 import * as THREE from "three";
-import { useChat } from "../hooks/useChat";
-
+import { useChatContext } from "../hooks/useChat";
 const facialExpressions = {
   default: {},
   smile: {
@@ -105,14 +104,13 @@ let setupMode = false;
 export function Sam(props) {
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
   const { 
-    message,
+    messages,
     onMessagePlayed,
     acceptingFiles,
     talking,
     standingArguing,
     rapping,
-    chat,
-  } = useChat();
+  } = useChatContext();
   const [lipsync, setLipsync] = useState();
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);

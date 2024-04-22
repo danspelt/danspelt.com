@@ -6,15 +6,14 @@ import {
   Environment,
   Text,
 } from "@react-three/drei";
-import { useChat } from "../hooks/useChat";
+import { useChatContext } from "../hooks/useChat";
 import { Sam } from "./Sam";
-import { Avatar } from "./Avatar";
 
 const Dots = (props) => {
-  const { loading } = useChat();
+  const { isLoading } = useChatContext();
   const [loadingText, setLoadingText] = useState("");
   useEffect(() => {
-    if (loading) {
+    if (isLoading) {
       const interval = setInterval(() => {
         setLoadingText((loadingText) =>
           loadingText.length > 2 ? "." : loadingText + "."
@@ -24,9 +23,9 @@ const Dots = (props) => {
     } else {
       setLoadingText("");
     }
-  }, [loading]);
+  }, [isLoading]);
 
-  if (!loading) return null;
+  if(!isLoading) return null;
 
   return (
     <group {...props}>
@@ -40,8 +39,7 @@ const Dots = (props) => {
 
 export const Experience = () => {
   const cameraControls = useRef();
-  const { cameraZoomed } = useChat();
-
+  const [cameraZoomed, setCameraZoomed] = useState(true);
   useEffect(() => {
     // Safely accessing cameraControls.current
     if (cameraControls.current) {

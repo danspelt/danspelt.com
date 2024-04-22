@@ -1,6 +1,7 @@
 import { env } from './config';
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { QdrantVectorStore } from "@langchain/community/vectorstores/qdrant";
+import { client } from './qdrant-client';
 
 export const storeChunks = async (chunks: any, collectionName: string) => {
   const vectorStore = await QdrantVectorStore.fromDocuments(
@@ -16,21 +17,18 @@ export const storeChunks = async (chunks: any, collectionName: string) => {
   console.log(response);
   
 } 
-export const vectorStore = new QdrantVectorStore(
-  new OpenAIEmbeddings(),
-    {
-    url: env.QDRANT_API_URL,
-    collectionName: 'test',
-  }
-);
-export const performSimilaritySearch = async (collectionName: string, queryText: string, topK: number) => {
+export const getVectorStore = async () => {
   try {
-    
-    const results = await vectorStore.similaritySearch(queryText, topK); 
-    console.log(`Search results for '${queryText}' in collection '${collectionName}':`, results);
-    return results;
+    const vectorStore = await QdrantVectorStore.fromExistingCollection(
+      new OpenAIEmbeddings(),
+      {
+        url: env.QDRANT_API_URL,
+        collectionName: "test",
+      }
+    );
+    console.log("Vector store loaded successfully.");
+    return vectorStore;
   } catch (error) {
-    console.error("Failed to perform similarity search:", error);
-    return null;
+    console.error(error);
   }
 };

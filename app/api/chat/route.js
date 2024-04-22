@@ -1,43 +1,22 @@
-
-
-import OpenAI from "openai";
-import ElevenLabs from "elevenlabs-node";
 import { NextResponse, NextRequest } from "next/server";
-import { callChain } from "../../../lib/langchain";
-import { Message } from "ai";
+import { callChain } from "../../lib/langchain";
 
-const openai = new OpenAI({
-  apiKey: process.env.PUBLIC_NEXT_OPEN_AI_API_KEY || "-",
-});
-
-const elevenLabsApiKey = process.env.PUBLIC_NEXT_ELEVEN_LABS_API_KEY;
-
-const voice = new ElevenLabs({
-  apiKey: elevenLabsApiKey,
-});
+const formatMessage = (message) => {
+  return `${message.role === "user" ? "User" : "Assistant"}: ${message.content}`;
+};
 
 export const POST = async (req) => {
   const body = await req.json();
   const messages = body.messages || [];
+  console.log(`messages: ${messages}`);
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const question = messages[messages.length - 1].content;
   console.log(`chat history: ${formattedPreviousMessages.join("\n")}`);
   console.log(`user asking a question: ${question}`);
   if (!question) {
-    return NextResponse.json(
-      {
-        messages: [
-          {
-            text: "Sorry, I'm not available right now. Please try again later!",
-            audio: await audioFileToBase64("audios/error_0.wav"),
-            lipsync: await readJsonTranscript("audios/error_0.json"),
-            facialExpression: "sad",
-            animation: "Crying",
-          },
-        ],
-      },
-      { status: 200 }
-    );
+    return NextResponse.json("Error: No question in the request", {
+      status: 400,
+    }); // Bad Request
   }
   try {
     const streamingTextResponse = await callChain({
@@ -46,20 +25,9 @@ export const POST = async (req) => {
     });
     return streamingTextResponse;
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      {
-        messages: [
-          {
-            text: "Sorry, I'm not available right now. Please try again later!",
-            audio: await audioFileToBase64("audios/error_0.wav"),
-            lipsync: await readJsonTranscript("audios/error_0.json"),
-            facialExpression: "sad",
-            animation: "Crying",
-          },
-        ],
-      },
-      { status: 200 }
-    );
+    console.error("Internal server error ", error);
+    return NextResponse.json("Error: Something went wrong. Try again!", {
+      status: 500,
+    });
   }
-}
+};
