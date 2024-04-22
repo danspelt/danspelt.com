@@ -2,41 +2,35 @@ import { env } from './config';
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { QdrantVectorStore } from "@langchain/community/vectorstores/qdrant";
 
-export async function embedAndStoreDocs(
-  client: typeof QdrantVectorStore,
-  // @ts-ignore docs type error
-  docs: Document<Record<string, any>>[]
-) {
-  /*create and store the embeddings in the vectorStore*/
-  try {
-    const embeddings = new OpenAIEmbeddings();
-    const index = client.Index(env.PINECONE_INDEX_NAME);
-
-    //embed the PDF documents
-    await PineconeStore.fromDocuments(docs, embeddings, {
-      pineconeIndex: index,
-      textKey: 'text',
-    });
-  } catch (error) {
-    console.log('error ', error);
-    throw new Error('Failed to load your docs !');
+export const storeChunks = async (chunks: any, collectionName: string) => {
+  const vectorStore = await QdrantVectorStore.fromDocuments(
+    chunks,
+    new OpenAIEmbeddings(),
+    {
+      url: env.QDRANT_API_URL,
+      collectionName,
+      });
+    
+  console.log(`Vectors added successfully to the "${collectionName}" collection.`);
+  const response = await vectorStore.similaritySearch('Hello, how are you?', 1);
+  console.log(response);
+  
+} 
+export const vectorStore = new QdrantVectorStore(
+  new OpenAIEmbeddings(),
+    {
+    url: env.QDRANT_API_URL,
+    collectionName: 'test',
   }
-}
-
-// Returns vector-store handle to be used a retrievers on langchains
-export async function getVectorStore(client: PineconeClient) {
+);
+export const performSimilaritySearch = async (collectionName: string, queryText: string, topK: number) => {
   try {
-    const embeddings = new OpenAIEmbeddings();
-    const index = client.Index(env.PINECONE_INDEX_NAME);
-
-    const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
-      pineconeIndex: index,
-      textKey: 'text',
-    });
-
-    return vectorStore;
+    
+    const results = await vectorStore.similaritySearch(queryText, topK); 
+    console.log(`Search results for '${queryText}' in collection '${collectionName}':`, results);
+    return results;
   } catch (error) {
-    console.log('error ', error);
-    throw new Error('Something went wrong while getting vector store !');
+    console.error("Failed to perform similarity search:", error);
+    return null;
   }
-}
+};

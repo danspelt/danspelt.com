@@ -1,5 +1,5 @@
- import { ConversationalRetrievalQAChain } from "langchain/chains";
-import { getVectorStore } from "./vector-store";
+import { ConversationalRetrievalQAChain } from "langchain/chains";
+import { getVectorStore, vectorStore } from "./vector-store";
 import { getPineconeClient } from "./pinecone-client";
 import {
   StreamingTextResponse,
@@ -8,6 +8,7 @@ import {
 } from "ai-stream-experimental";
 import { streamingModel, nonStreamingModel } from "./llm";
 import { STANDALONE_QUESTION_TEMPLATE, QA_TEMPLATE } from "./prompt-templates";
+import { client } from "./qdrant-client";
 
 type callChainArgs = {
   question: string;
@@ -18,8 +19,7 @@ export async function callChain({ question, chatHistory }: callChainArgs) {
   try {
     // Open AI recommendation
     const sanitizedQuestion = question.trim().replace("\n", " ");
-    const pineconeClient = await getPineconeClient();
-    const vectorStore = await getVectorStore(pineconeClient);
+    
     const { stream, handlers } = LangChainStream({
       experimental_streamData: true,
     });

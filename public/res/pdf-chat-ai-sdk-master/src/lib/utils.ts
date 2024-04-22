@@ -1,3 +1,5 @@
+import fs from "fs/promises";
+import { exec } from "child_process";
 import { ChatGPTMessage } from "@/types";
 import { Message } from "ai";
 import { type ClassValue, clsx } from "clsx";
@@ -9,19 +11,6 @@ export function cn(...inputs: ClassValue[]) {
 
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export function scrollToBottom(containerRef: React.RefObject<HTMLElement>) {
-  if (containerRef.current) {
-    const lastMessage = containerRef.current.lastElementChild;
-    if (lastMessage) {
-      const scrollOptions: ScrollIntoViewOptions = {
-        behavior: "smooth",
-        block: "end",
-      };
-      lastMessage.scrollIntoView(scrollOptions);
-    }
-  }
 }
 
 // Reference:
@@ -41,16 +30,60 @@ export function formattedText(inputText: string) {
     .replace(/\s+/g, " "); // Replace multiple consecutive spaces with a single space
 }
 
-// Default UI Message
-export const initialMessages: Message[] = [
-  {
-    role: "assistant",
-    id: "0",
-    content:
-      "Hi! I am your PDF assistant. I am happy to help with your questions about your PDF about German law.",
-  },
-];
+const readJsonTranscript = async (file) => {
+  const data = await fs.readFile(file, "utf8");
+  return JSON.parse(data);
+};
 
+const audioFileToBase64 = async (file) => {
+  const data = await fs.readFile(file);
+  return data.toString("base64");
+};
+
+
+const execCommand = (command) => {
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout) => {
+      if (error) reject(error);
+      resolve(stdout);
+    });
+  });
+};
+
+const lipSyncMessage = async (message) => {
+  const time = new Date().getTime();
+  console.log(`Starting conversion for message ${message}`);
+  await execCommand(
+    `ffmpeg -y -i audios/message_${message}.mp3 audios/message_${message}.wav`
+    // -y to overwrite the file
+  );
+  console.log(`Conversion done in ${new Date().getTime() - time}ms`);
+  await execCommand(
+    `rhubarb -f json -o audios/message_${message}.json audios/message_${message}.wav -r phonetic`
+  );
+
+  // -r phonetic is faster but less accurate
+  console.log(`Lip sync done in ${new Date().getTime() - time}ms`);
+};
+// Welcome message
+export const welcomeMessage: ChatGPTMessage = {
+  role: "assistant",
+  message: "Hey welcome to Dan Spelt's website! I'm Dan's virtual assistant. How can I help you today?",
+  audio: audioFileToBase64("./audio/welcome.wav"),
+  lipsync: readJsonTranscript("./audio/welcome.json"),
+  facialExpression: "smile",
+  animation: "Idle",
+};
+
+// Introduction message
+export const introductionMessage: ChatGPTMessage = {
+  role: "assistant",
+  message: "I'm here to help you with any questions you may have about Dan's work, projects, or anything else you'd like to know. Just ask me anything!",
+  audio: audioFileToBase64("./audio/intro.wav"),
+  lipsync: readJsonTranscript("./audio/intro.json"),
+  facialExpression: "smile",
+  animation: "Idle",
+}; 
 interface Data {
   sources: string[];
 }
