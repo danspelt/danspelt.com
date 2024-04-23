@@ -1,7 +1,7 @@
 import { env } from './config';
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { QdrantVectorStore } from "@langchain/community/vectorstores/qdrant";
-import { client } from './qdrant-client';
+import { getClient } from './qdrant-client';
 
 export const storeChunks = async (chunks: any, collectionName: string) => {
   const vectorStore = await QdrantVectorStore.fromDocuments(
@@ -30,5 +30,15 @@ export const getVectorStore = async () => {
     return vectorStore;
   } catch (error) {
     console.error(error);
+  }
+};
+export const fetchDataFromCollection = async(collectionName) => {
+  try {
+    const response = await getClient().getCollection(collectionName);
+    console.log('Data fetched successfully:', response);
+    return response;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    return null;
   }
 };

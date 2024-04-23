@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { callChain } from "../../lib/langchain";
+import { fetchDataFromCollection } from "../../lib/vector-store";
 
 const formatMessage = (message) => {
   return `${message.role === "user" ? "User" : "Assistant"}: ${message.content}`;
@@ -31,3 +32,7 @@ export const POST = async (req) => {
     });
   }
 };
+export const GET = async (req) => {
+  const data = await fetchDataFromCollection("test");
+   return NextResponse.json(data, { status: 200 })
+} 
