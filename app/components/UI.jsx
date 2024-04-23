@@ -1,28 +1,29 @@
 "use client";
-import React, { useRef } from "react";
-import { useChatContext } from "../hooks/useChat";
+import React, { useEffect } from "react";
 import { useChat } from "ai/react";
-import { initialMessages } from "../lib/utils";
 
 export const UI = ({ hidden, ...props }) => {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    initialMessages,
+    
   });
 
   if (hidden) {
     return nul;
   }
+  useEffect(() => {
+    console.log(messages);
+  }, [messages]);
 
   return (
     <>
       <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
         <div className="w-full flex flex-col justify-center gap-4 bg-gray-200 ">
-          {messages.map(({ id, role, content }, index) => (
+          {messages.map(({ id, role, content, facialExpression, animation }, index) => (
             <div
               key={index}
               className={`p-4 max-w-screen-sm w-full mx-auto rounded-md bg-white bg-opacity-50 backdrop-blur-md pointer-events-auto`}
             >
-              {content}
+              {content} {facialExpression} {animation}
             </div>
           ))}
         </div>

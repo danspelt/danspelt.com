@@ -1,6 +1,6 @@
 import { Message } from "ai";
 import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { twMerge } from "tailwind-merge"; // Install the missing package 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

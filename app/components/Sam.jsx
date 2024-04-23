@@ -6,6 +6,10 @@ import React, { use, useEffect, useMemo, useRef, useState } from "react";
 
 import * as THREE from "three";
 import { useChatContext } from "../hooks/useChat";
+import { useChat } from "ai/react";
+
+
+
 const facialExpressions = {
   default: {},
   smile: {
@@ -104,13 +108,14 @@ let setupMode = false;
 export function Sam(props) {
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
   const { 
-    messages,
+    message,
     onMessagePlayed,
     acceptingFiles,
     talking,
     standingArguing,
     rapping,
   } = useChatContext();
+  const { messages } = useChat();
   const [lipsync, setLipsync] = useState();
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);
@@ -193,23 +198,21 @@ export function Sam(props) {
     }
   }, [rapping]);
 
-  
-
   useEffect(() => {
-    if (!message) {
-      setAnimation("Idle");
-      return;
-    }
+    // if (!message) {
+    //   setAnimation("Idle");
+    //   return;
+    // }
 
-    setAnimation(message.animation);
-    setFacialExpression(message.facialExpression);
-    setLipsync(message.lipsync);
-    const audio = new Audio("data:audio/mp3;base64," + message.audio);
-    audio.play();
-    setAudio(audio);
-    audio.onended = onMessagePlayed;
-  }, [message]);
-
+    // setAnimation(message.animation);
+    // setFacialExpression(message.facialExpression);
+    // setLipsync(message.lipsync);
+    // const audio = new Audio("data:audio/mp3;base64," + message.audio);
+    // audio.play();
+    // setAudio(audio);
+    // audio.onended = onMessagePlayed;
+    console.log(messages);
+  }, [messages]);
   const [animation, setAnimation] = useState(IdleAnimation[0].name);
   useEffect(() => {
     actions[animation]

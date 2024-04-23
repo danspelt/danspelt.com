@@ -32,13 +32,13 @@ export const getVectorStore = async () => {
     console.error(error);
   }
 };
-export const fetchDataFromCollection = async(collectionName) => {
+export const fetchDataFromCollection = async (collectionName) => {
   try {
     const response = await getClient().getCollection(collectionName);
     console.log('Data fetched successfully:', response);
     return response;
   } catch (error) {
-    console.error('Failed to fetch data:', error);
+    console.error('Failed to fetch data:', error.message);
     return null;
   }
 };

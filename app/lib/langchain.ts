@@ -8,7 +8,6 @@ import {
 } from "ai-stream-experimental";
 import { streamingModel, nonStreamingModel } from "./llm";
 import { STANDALONE_QUESTION_TEMPLATE, QA_TEMPLATE } from "./prompt-templates";
-import { client } from "./qdrant-client";
 
 type callChainArgs = {
   question: string;
@@ -49,6 +48,7 @@ export async function callChain({ question, chatHistory }: callChainArgs) {
         },
         [handlers]
     );
+    
     
     // Return the readable stream
     return new StreamingTextResponse(stream);

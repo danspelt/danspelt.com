@@ -23,7 +23,7 @@ export default function View3D() {
       <Leva hidden={true} />
       <UI />  
       <Canvas shadows camera={{ position: [0, 0, 1], fov: 30 }}>
-        
+        <Experience />
       </Canvas>
     </>
   );

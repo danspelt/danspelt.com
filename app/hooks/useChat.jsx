@@ -7,15 +7,20 @@ export const ChatProvider = ({ children }) => {
   const [talking, setTalking] = useState(false);
   const [standingArguing, setStandingArguing] = useState(false);
   const [rapping, setRapping] = useState(false);
-
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState(null);
    const onMessagePlayed = () => {
     setMessages((messages) => messages.slice(1));
   };
 
+
   return (
     <ChatContext.Provider
       value={{
-  
+        messages,
+        setMessages,  
+        message,
+        setMessage,
         onMessagePlayed,
         acceptingFiles,
         setAcceptingFiles,
