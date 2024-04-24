@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { callChain } from "../../lib/langchain";
 import { fetchDataFromCollection } from "../../lib/vector-store";
-import { formatMessage } from "./aiUtils";
+import { formatMessage, audioFileToBase64, readJsonTranscript } from "./aiUtils";
 
 export const POST = async (req) => {
   console.log("POST request received");

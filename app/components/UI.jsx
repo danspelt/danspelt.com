@@ -1,24 +1,25 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import { useChat } from "ai/react";
 
 export const UI = ({ hidden, ...props }) => {
   const {
     messages,
     input,
+    setInput,
     handleInputChange,
     handleSubmit,
     isLoading,
   } = useChat({});
 
   useEffect(() => {
+    setInput("Ask me anything!");
+  }, []);
+
+  useEffect(() => {
     console.log(messages);
   }, [messages]);
 
-  const handleSubmission = () => {
-    handleSubmit("welcome to the chatbot!");
-    
-  };
   if (hidden) return null;
 
   return (
@@ -37,7 +38,7 @@ export const UI = ({ hidden, ...props }) => {
           )}
         </div>
         <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
-          <form className="flex gap-2 w-full" onSubmit={handleSubmission}>
+          <form className="flex gap-2 w-full" onSubmit={handleSubmit}>
             <input
               type="text"
               value={input}
