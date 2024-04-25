@@ -7,11 +7,10 @@ export const POST = async (req) => {
   console.log("POST request received");
   const body = await req.json();
   const messages = body.messages || [];
-  console.log(`messages: ${messages}`);
+
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const question = messages[messages.length - 1].content;
-  console.log(`chat history: ${formattedPreviousMessages.join("\n")}`);
-  console.log(`user asking a question: ${question}`);
+  
   const welcomeContent = "Welcome to the chatbot!";
   const welcomeAudio = await audioFileToBase64("audios/welcome.wav");
   const welcomeLipSync = await readJsonTranscript("audios/welcome.json");

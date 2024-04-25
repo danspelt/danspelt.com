@@ -13,12 +13,14 @@ export const UI = ({ hidden, ...props }) => {
   } = useChat({});
 
   useEffect(() => {
-    setInput("Ask me anything!");
+    setInput("Default message");
   }, []);
 
   useEffect(() => {
-    console.log(messages);
-  }, [messages]);
+    if (input === "") {
+      setInput("Default message");
+    }
+  }, [input]);
 
   if (hidden) return null;
 
@@ -41,7 +43,7 @@ export const UI = ({ hidden, ...props }) => {
           <form className="flex gap-2 w-full" onSubmit={handleSubmit}>
             <input
               type="text"
-              value={input}
+              value={input === "Default message" ? "" : input}
               onChange={handleInputChange}
               className="w-full p-2 rounded-md"
               autoFocus
@@ -51,7 +53,7 @@ export const UI = ({ hidden, ...props }) => {
               className="p-2 bg-blue-500 text-white rounded-md"
             >
               Ask
-            </button> 
+            </button>
           </form>
         </div>
       </div>
