@@ -116,7 +116,7 @@ export function Sam(props) {
     rapping,
     a
   } = useChatContext();
-  const { messages } = useChat();z
+  const { messages } = useChat();
   
 
   const group = useRef();
