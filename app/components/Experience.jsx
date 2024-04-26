@@ -6,7 +6,7 @@ import {
   Environment,
   Text,
 } from "@react-three/drei";
-import { useChatContext } from "../hooks/useChat";
+import { useChatContext } from "../hooks/useChatAi";
 import { Sam } from "./Sam";
 
 const Dots = (props) => {

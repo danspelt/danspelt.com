@@ -3,8 +3,7 @@ import { useCallback, useState } from "react";
 
 import { useDropzone } from "react-dropzone";
 
-import { useChatContext } from "../hooks/useChat";
-
+import { useChatContext } from "../hooks/useChatAi";
 const Dropzone = ({ className }) => {
   const { setAcceptingFiles } = useChatContext();
   const [files, setFiles] = useState(null);

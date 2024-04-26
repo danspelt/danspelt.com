@@ -1,5 +1,6 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
+
 import { useChat } from "ai/react";
 
 export const UI = ({ hidden, ...props }) => {

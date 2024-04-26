@@ -1,7 +1,8 @@
 
 import './globals.css';
 
-import { ChatProvider } from './hooks/useChat';
+import { ChatProvider } from './hooks/useChatAi';
+
 export default function RootLayout({children}) {
   return (
     <html lang="en">

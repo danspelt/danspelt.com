@@ -2,12 +2,11 @@
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { button, useControls } from "leva";
-import React, { use, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import * as THREE from "three";
-import { useChatContext } from "../hooks/useChat";
+import { useChatContext } from "../hooks/useChatAi";
 import { useChat } from "ai/react";
-
 
 
 const facialExpressions = {
@@ -113,15 +112,12 @@ export function Sam(props) {
     acceptingFiles,
     talking,
     standingArguing,
+
     rapping,
+    a
   } = useChatContext();
-  const { messages } = useChat();
-  const [lipsync, setLipsync] = useState();
-  const [blink, setBlink] = useState(false);
-  const [winkLeft, setWinkLeft] = useState(false);
-  const [winkRight, setWinkRight] = useState(false);
-  const [facialExpression, setFacialExpression] = useState("");
-  const [audio, setAudio] = useState();
+  const { messages } = useChat();z
+  
 
   const group = useRef();
   const { animations: IdleAnimation } = useFBX(
@@ -213,7 +209,8 @@ export function Sam(props) {
     // audio.onended = onMessagePlayed;
     console.log(messages);
   }, [messages]);
-  const [animation, setAnimation] = useState(IdleAnimation[0].name);
+
+
   useEffect(() => {
     actions[animation]
       .reset()
@@ -221,6 +218,7 @@ export function Sam(props) {
       .play();
     return () => actions[animation].fadeOut(0.5);
   }, [animation]);
+  
   useEffect(() => {
     let blinkTimeout;
     const nextBlink = () => {

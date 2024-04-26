@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { callChain } from "../../lib/langchain";
 import { fetchDataFromCollection } from "../../lib/vector-store";
-import { formatMessage, audioFileToBase64, readJsonTranscript } from "./aiUtils";
+import { formatMessage, audioFileToBase64, readJsonTranscript } from "../../lib/aiUtils";
 
 export const POST = async (req) => {
   console.log("POST request received");
@@ -10,7 +10,7 @@ export const POST = async (req) => {
 
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
   const question = messages[messages.length - 1].content;
-  
+
   const welcomeContent = "Welcome to the chatbot!";
   const welcomeAudio = await audioFileToBase64("audios/welcome.wav");
   const welcomeLipSync = await readJsonTranscript("audios/welcome.json");
@@ -24,7 +24,8 @@ export const POST = async (req) => {
     facialExpression: welcomeFacialExpression,
     animation: welcomeAnimation,
   };
-  if (!question) {
+  if (question === "Default message") {
+    console.log("Default message received", welcomeMessage);
     return NextResponse.json(welcomeMessage, { status: 200 });
   }
   try {
