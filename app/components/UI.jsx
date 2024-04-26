@@ -2,8 +2,10 @@
 import React, { useEffect } from "react";
 
 import { useChat } from "ai/react";
-
+import { useChatContext } from "../hooks/useChatAi";
+// Main UI component using chat functionality
 export const UI = ({ hidden, ...props }) => {
+  // Destructuring properties from useChat hook
   const {
     messages,
     input,
@@ -13,22 +15,27 @@ export const UI = ({ hidden, ...props }) => {
     isLoading,
   } = useChat({});
 
-  useEffect(() => {
-    setInput("Default message");
-  }, []);
+  const {
+    welcomeMessage,
+  } = useChatContext();
 
-  useEffect(() => {
-    if (input === "") {
-      setInput("Default message");
+  // Modified handleSubmit to include welcomeMessage call if input is empty
+  const modifiedHandleSubmit = (event) => {
+    event.preventDefault();
+    if (!input.trim()) {
+      welcomeMessage();
     }
-  }, [input]);
+    handleSubmit(event);
+  };
 
+  // Do not render the component if it is meant to be hidden
   if (hidden) return null;
 
   return (
     <>
       <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
         <div className="w-full flex flex-col justify-center gap-4 bg-gray-200 ">
+          {/* Mapping through messages to display each message */}
           {messages.map(
             ({ id, role, content, facialExpression, animation }, index) => (
               <div
@@ -41,7 +48,8 @@ export const UI = ({ hidden, ...props }) => {
           )}
         </div>
         <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
-          <form className="flex gap-2 w-full" onSubmit={handleSubmit}>
+          <form className="flex gap-2 w-full" onSubmit={modifiedHandleSubmit}>
+            {/* Input field for user to type their message */}
             <input
               type="text"
               value={input === "Default message" ? "" : input}
@@ -49,6 +57,7 @@ export const UI = ({ hidden, ...props }) => {
               className="w-full p-2 rounded-md"
               autoFocus
             />
+            {/* Submit button */}
             <button
               type="submit"
               className="p-2 bg-blue-500 text-white rounded-md"

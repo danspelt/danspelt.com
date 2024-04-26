@@ -23,22 +23,24 @@ export const ChatProvider = ({ children }) => {
   };
 
   // welcome message on no input
-  const welcomeMessage = () => {
+  const welcomeMessage = async () => {
+    console.log("welcomeMessage");
     const welcomeContent = "Welcome to the chatbot!";
-    const welcomeAudio = audioFileToBase64("audios/welcome.wav");
-    const welcomeLipSync = readJsonTranscript("audios/welcome.json");
+    const welcomeAudio = await audioFileToBase64("audios/welcome.wav");
+    const welcomeLipSync = await readJsonTranscript("audios/welcome.json");
     const welcomeFacialExpression = "smile";
     const welcomeAnimation = "Idle";
-    const welcomeMessage = {
-      role: "assistant",
-      content: welcomeContent,
-      audio: welcomeAudio,
-      lipSync: welcomeLipSync,
-      facialExpression: welcomeFacialExpression,
-      animation: welcomeAnimation,
-    };
+    
+    const audio = new Audio("data:audio/mp3;base64," + welcomeAudio);
+    audio.play();
+    audio.onended = onMessagePlayed
+    setLipsync(welcomeLipSync);
+    setFacialExpression(welcomeFacialExpression);
+    setAnimation(welcomeAnimation);
   } 
-
+  useEffect(() => {
+    setAnimation("Idle");
+  }, []); 
   return (
     <ChatContext.Provider
       value={{
