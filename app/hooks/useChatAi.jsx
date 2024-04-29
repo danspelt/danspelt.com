@@ -5,6 +5,7 @@ import {
   formatMessage,
   audioFileToBase64,
   readJsonTranscript,
+  lipSyncMessage,
 } from "../lib/aiUtils";
 export const ChatProvider = ({ children }) => {
   //ai hooks
@@ -46,6 +47,7 @@ export const ChatProvider = ({ children }) => {
   useEffect(() => {
     setAnimation("Idle");
   }, []);
+
   return (
     <ChatContext.Provider
       value={{
@@ -76,7 +78,7 @@ export const ChatProvider = ({ children }) => {
         setAudio,
         animation,
         setAnimation,
-        welcomeMessage,
+        welcomeMessage
       }}
     >
       {children}
