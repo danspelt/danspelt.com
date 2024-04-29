@@ -1,5 +1,8 @@
 import { useFrame } from "@react-three/fiber";
 import { button, useControls } from "leva";
+import { useChatContext } from "../hooks/useChatAi";
+import * as THREE from "three";
+
 
 let setupMode = false;
 
@@ -9,10 +12,10 @@ const facialExpressions = {
         browInnerUp: 0.17,
         eyeSquintLeft: 0.4,
         eyeSquintRight: 0.44,
-        noseSneerLeft: 0.1700000727403593,
-        noseSneerRight: 0.14000002836874015,
+        noseSneerLeft: 0.17,
+        noseSneerRight: 0.14,
         mouthPressLeft: 0.61,
-        mouthPressRight: 0.41000000000000003,
+        mouthPressRight: 0.41,
     },
     funnyFace: {
         jawLeft: 0.63,
@@ -22,17 +25,17 @@ const facialExpressions = {
         mouthLeft: 1,
         eyeLookUpLeft: 1,
         eyeLookUpRight: 1,
-        cheekPuff: 0.9999924982764238,
-        mouthDimpleLeft: 0.414743888682652,
+        cheekPuff: 1,
+        mouthDimpleLeft: 0.41,
         mouthRollLower: 0.32,
-        mouthSmileLeft: 0.35499733688813034,
-        mouthSmileRight: 0.35499733688813034,
+        mouthSmileLeft: 0.35,
+        mouthSmileRight: 0.35,
     },
     sad: {
         mouthFrownLeft: 1,
         mouthFrownRight: 1,
-        mouthShrugLower: 0.78341,
-        browInnerUp: 0.452,
+        mouthShrugLower: 0.78,
+        browInnerUp: 0.45,
         eyeSquintLeft: 0.72,
         eyeSquintRight: 0.75,
         eyeLookDownLeft: 0.5,
@@ -42,7 +45,7 @@ const facialExpressions = {
     surprised: {
         eyeWideLeft: 0.5,
         eyeWideRight: 0.5,
-        jawOpen: 0.351,
+        jawOpen: 0.35,
         mouthFunnel: 1,
         browInnerUp: 1,
     },
@@ -67,20 +70,20 @@ const facialExpressions = {
     crazy: {
         browInnerUp: 0.9,
         jawForward: 1,
-        noseSneerLeft: 0.5700000000000001,
+        noseSneerLeft: 0.57,
         noseSneerRight: 0.51,
-        eyeLookDownLeft: 0.39435766259644545,
-        eyeLookUpRight: 0.4039761421719682,
-        eyeLookInLeft: 0.9618479575523053,
-        eyeLookInRight: 0.9618479575523053,
-        jawOpen: 0.9618479575523053,
-        mouthDimpleLeft: 0.9618479575523053,
-        mouthDimpleRight: 0.9618479575523053,
-        mouthStretchLeft: 0.27893590769016857,
-        mouthStretchRight: 0.2885543872656917,
-        mouthSmileLeft: 0.5578718153803371,
-        mouthSmileRight: 0.38473918302092225,
-        tongueOut: 0.9618479575523053,
+        eyeLookDownLeft: 0.39,
+        eyeLookUpRight: 0.40,
+        eyeLookInLeft: 0.96,
+        eyeLookInRight: 0.96,
+        jawOpen: 0.96,
+        mouthDimpleLeft: 0.96,
+        mouthDimpleRight: 0.96,
+        mouthStretchLeft: 0.28,
+        mouthStretchRight: 0.29,
+        mouthSmileLeft: 0.56,
+        mouthSmileRight: 0.38,
+        tongueOut: 0.96,
     },
 };
 
@@ -96,54 +99,52 @@ const corresponding = {
     X: "viseme_PP",
 };
 
-export function useCustomFrame(nodes, scene, set, audio) {
+export function useCustomFrame(nodes, scene) {
+    const { facialExpression, blink, winkLeft, winkRight, message, audio, lipsync } = useChatContext();
     useFrame(() => {
-        if (!setupMode) {
+        if (!setupMode && scene) {
             Object.keys(nodes.EyeLeft.morphTargetDictionary).forEach((key) => {
                 const mapping = facialExpressions[facialExpression];
                 if (key === "eyeBlinkLeft" || key === "eyeBlinkRight") {
                     return;
                 }
                 if (mapping && mapping[key]) {
-                    lerpMorphTarget(key, mapping[key], 0.1);
+                    lerpMorphTarget(key, mapping[key], 0.1, scene);
                 } else {
-                    lerpMorphTarget(key, 0, 0.1);
+                    lerpMorphTarget(key, 0, 0.1, scene);
                 }
             });
-
-            lerpMorphTarget("eyeBlinkLeft", blink || winkLeft ? 1 : 0, 0.5);
-            lerpMorphTarget("eyeBlinkRight", blink || winkRight ? 1 : 0, 0.5);
-
+ 
+            lerpMorphTarget("eyeBlinkLeft", blink || winkLeft ? 1 : 0, 0.5, scene);
+            lerpMorphTarget("eyeBlinkRight", blink || winkRight ? 1 : 0, 0.5, scene);
+            
             const appliedMorphTargets = [];
-            if (message && lipsync) {
+            if (lipsync && message) {
                 const currentAudioTime = audio.currentTime;
-                for (let i = 0; i < lipsync.mouthCues.length; i++) {
-                    const mouthCue = lipsync.mouthCues[i];
-                    if (
-                        currentAudioTime >= mouthCue.start &&
-                        currentAudioTime <= mouthCue.end
-                    ) {
+                lipsync.mouthCues.forEach((mouthCue) => {
+                    if (currentAudioTime >= mouthCue.start && currentAudioTime <= mouthCue.end) {
                         appliedMorphTargets.push(corresponding[mouthCue.value]);
-                        lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2);
-                        break;
+                        console.log("cue", mouthCue.value);
+                        lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2, scene);
+                        return;
                     }
-                }
+                });
             }
 
             Object.values(corresponding).forEach((value) => {
-                if (appliedMorphTargets.includes(value)) {
-                    return;
+                if (!appliedMorphTargets.includes(value)) {
+                    lerpMorphTarget(value, 0, 0.1, scene);
                 }
-                lerpMorphTarget(value, 0, 0.1);
             });
         }
     });
 }
 
 export function useCustomControls() {
+    const { setWinkLeft, setWinkRight, setAnimation, setFacialExpression } = useChatContext();
     useControls("FacialExpressions", {
         chat: button(() => chat()),
-        winkLeft: button (() => {
+        winkLeft: button(() => {
             setWinkLeft(true);
             setTimeout(() => setWinkLeft(false), 300);
         }),
@@ -152,13 +153,12 @@ export function useCustomControls() {
             setTimeout(() => setWinkRight(false), 300);
         }),
         animation: {
-            value: animation,
-            options: actions['Idle'],
-            onChange: (value) => setAnimation(value),
+            options: Object.keys(actions),
+            onChange: setAnimation,
         },
         facialExpression: {
             options: Object.keys(facialExpressions),
-            onChange: (value) => setFacialExpression(value),
+            onChange: setFacialExpression,
         },
         enableSetupMode: button(() => {
             setupMode = true;
@@ -170,12 +170,9 @@ export function useCustomControls() {
             const emotionValues = {};
             Object.keys(nodes.EyeLeft.morphTargetDictionary).forEach((key) => {
                 if (key === "eyeBlinkLeft" || key === "eyeBlinkRight") {
-                    return; // eyes wink/blink are handled separately
+                    return;
                 }
-                const value =
-                    nodes.EyeLeft.morphTargetInfluences[
-                    nodes.EyeLeft.morphTargetDictionary[key]
-                    ];
+                const value = nodes.EyeLeft.morphTargetInfluences[nodes.EyeLeft.morphTargetDictionary[key]];
                 if (value > 0.01) {
                     emotionValues[key] = value;
                 }
@@ -185,31 +182,20 @@ export function useCustomControls() {
     });
 }
 
-const lerpMorphTarget = (target, value, speed = 0.1) => {
-    scene.traverse((child) => {
-        if (child.isSkinnedMesh && child.morphTargetDictionary) {
-            const index = child.morphTargetDictionary[target];
-
-            if (
-                index === undefined ||
-                child.morphTargetInfluences[index] === undefined
-            ) {
-                return;
+const lerpMorphTarget = (target, value, speed = 0.1, scene) => {
+    if (scene && scene.traverse) {
+        scene.traverse((child) => {
+            if (child.isSkinnedMesh && child.morphTargetDictionary) {
+                const index = child.morphTargetDictionary[target];
+                if (index !== undefined && child.morphTargetInfluences[index] !== undefined) {
+                    child.morphTargetInfluences[index] = THREE.MathUtils.lerp(
+                        child.morphTargetInfluences[index],
+                        value,
+                        speed
+                    );
+                }
             }
-            child.morphTargetInfluences[index] = THREE.MathUtils.lerp(
-                child.morphTargetInfluences[index],
-                value,
-                speed
-            );
-
-            if (!setupMode) {
-                try {
-                    set({
-                        [target]: value,
-                    });
-                } catch (e) { }
-            }
-        }
-    });
+        });
+    }
 };
 

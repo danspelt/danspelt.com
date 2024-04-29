@@ -4,20 +4,23 @@ import React, { useEffect, useRef } from "react";
 
 import * as THREE from "three";
 import { useChatContext } from "../hooks/useChatAi";
-import { useChat } from "ai/react";
+import { useCustomFrame } from "../lib/aiTools";
 
 export function Sam(props) {
   const { nodes, materials, scene } = useGLTF("/models/sam.glb");
+  
   const {
     talking,
     standingArguing,
-    
+    setBlink,
     acceptingFiles,
+    audio,
     rapping,
     animation
   } = useChatContext();
-  const { messages } = useChat();
+  useCustomFrame(nodes,scene, audio);
 
+  
   const group = useRef();
   const { animations: IdleAnimation } = useFBX(
     "/models/animations/sam/Idle.fbx"
@@ -99,7 +102,7 @@ export function Sam(props) {
         .reset()
         .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
         .play();
-      return () => actions[animation].fadeOut(0.5);
+      //return () => actions[animation].fadeOut(0.5);
     }
   }, [animation]);
 
@@ -117,7 +120,6 @@ export function Sam(props) {
     nextBlink();
     return () => clearTimeout(blinkTimeout);
   }, []);
-
 
   return (
     <group {...props} dispose={null} ref={group}>

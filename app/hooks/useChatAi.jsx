@@ -1,9 +1,12 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 const ChatContext = createContext();
-import { formatMessage, audioFileToBase64, readJsonTranscript } from "../lib/aiUtils";
+import {
+  formatMessage,
+  audioFileToBase64,
+  readJsonTranscript,
+} from "../lib/aiUtils";
 export const ChatProvider = ({ children }) => {
-
   //ai hooks
   const [lipsync, setLipsync] = useState();
   const [blink, setBlink] = useState(false);
@@ -18,7 +21,7 @@ export const ChatProvider = ({ children }) => {
   const [rapping, setRapping] = useState(false);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState(null);
-   const onMessagePlayed = () => {
+  const onMessagePlayed = () => {
     setMessages((messages) => messages.slice(1));
   };
 
@@ -30,22 +33,24 @@ export const ChatProvider = ({ children }) => {
     const welcomeLipSync = await readJsonTranscript("audios/welcome.json");
     const welcomeFacialExpression = "smile";
     const welcomeAnimation = "Idle";
-    
+
     const audio = new Audio("data:audio/mp3;base64," + welcomeAudio);
     audio.play();
-    audio.onended = onMessagePlayed
+    audio.onended = onMessagePlayed;
     setLipsync(welcomeLipSync);
     setFacialExpression(welcomeFacialExpression);
     setAnimation(welcomeAnimation);
-  } 
+    setAudio(audio);
+    setMessage(welcomeContent);
+  };
   useEffect(() => {
     setAnimation("Idle");
-  }, []); 
+  }, []);
   return (
     <ChatContext.Provider
       value={{
         messages,
-        setMessages,  
+        setMessages,
         message,
         setMessage,
         onMessagePlayed,
@@ -56,7 +61,7 @@ export const ChatProvider = ({ children }) => {
         standingArguing,
         setStandingArguing,
         rapping,
-        setRapping,     
+        setRapping,
         lipsync,
         setLipsync,
         blink,
@@ -72,7 +77,6 @@ export const ChatProvider = ({ children }) => {
         animation,
         setAnimation,
         welcomeMessage,
-        
       }}
     >
       {children}
