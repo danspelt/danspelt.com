@@ -1,7 +1,10 @@
 "use server";
 import { promises as fs } from "fs";
 import { exec } from "child_process";
+import voice from "elevenlabs-node";
+import { env } from "../lib/config";
 
+const voiceId = "RPJ8nnVtuTgG8McXwW6M";
 export const formatMessage = (message) => {
   return `${message.role === "user" ? "User" : "Assistant"}: ${
     message.content
@@ -42,3 +45,7 @@ export const lipSyncMessage = async (message) => {
   // -r phonetic is faster but less accurate
   console.log(`Lip sync done in ${new Date().getTime() - time}ms`);
 };
+
+export const createMp3FromText = async(fileName, text) => {
+  await voice.textToSpeech(env.ELEVEN_LABS_API_KEY, voiceId, fileName, text);
+}

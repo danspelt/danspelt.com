@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 import { useChat } from "ai/react";
 import { useChatContext } from "../hooks/useChatAi";
-import { audioFileToBase64, readJsonTranscript } from "../lib/aiUtils";
+import { audioFileToBase64, lipSyncMessage, readJsonTranscript } from "../lib/aiUtils";
 // Main UI component using chat functionality
 export const UI = ({ hidden, ...props }) => {
   // Destructuring properties from useChat hook
@@ -39,16 +39,17 @@ export const UI = ({ hidden, ...props }) => {
         // generate lipsync
         lipSyncMessage(i).then(() => {
           audioFileToBase64(fileName).then((base64Audio) => {
-            const audio = new Audio("data:audio/mp3;base64," + base64Audio);
-            readJsonTranscript(`audios/message_${i}.json`).then((lipSync) => {
-              const facialExpression = "smile";
-              const animation = "Idle";
-              setLipsync(lipSync);
-              setFacialExpression(facialExpression);
-              setAnimation(animation);
-              audio.play();
-              audio.onended = onMessagePlayed;
-            });
+            console.log('file created', fileName)
+            // const audio = new Audio("data:audio/mp3;base64," + fileName);
+            // readJsonTranscript(`audios/message_${i}.json`).then((lipSync) => {
+            //   const facialExpression = "smile";
+            //   const animation = "Idle";
+            //   setLipsync(lipSync);
+            //   setFacialExpression(facialExpression);
+            //   setAnimation(animation);
+            //   audio.play();
+            //   audio.onended = onMessagePlayed;
+            // });
           });
         });
       }
