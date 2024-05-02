@@ -32,16 +32,16 @@ export const UI = ({ hidden, ...props }) => {
 
 
   useEffect(() => {
-    messages.forEach((message, i) => {
-      console.log(message)
+    Promise.all(messages.map((message, i) => {
       if (message.role === "user") {
         const fileName = `audios/message_${i}.mp3`;
         // generate lipsync
-        lipSyncMessage(i).then(() => {
-          audioFileToBase64(fileName).then((base64Audio) => {
-            console.log('file created', fileName)
-            // const audio = new Audio("data:audio/mp3;base64," + fileName);
-            // readJsonTranscript(`audios/message_${i}.json`).then((lipSync) => {
+        return lipSyncMessage(i).then(() => {
+          return audioFileToBase64(fileName).then((base64Audio) => {
+            console.log('file created', fileName);
+            // Uncomment and modify the following lines as needed for further processing
+            // const audio = new Audio("data:audio/mp3;base64," + base64Audio);
+            // return readJsonTranscript(`audios/message_${i}.json`).then((lipSync) => {
             //   const facialExpression = "smile";
             //   const animation = "Idle";
             //   setLipsync(lipSync);
@@ -53,6 +53,9 @@ export const UI = ({ hidden, ...props }) => {
           });
         });
       }
+      return Promise.resolve();
+    })).then(() => {
+      console.log('All messages processed');
     });
   }, [messages]);
 
