@@ -1,9 +1,12 @@
 "use server";
 import { promises as fs, createWriteStream } from "fs";
 import { exec } from "child_process";
-import { ElevenLabsClient } from "elevenlabs";
+import { ElevenLabsClient, play } from "elevenlabs";
 import { env } from "../lib/config";
-import { v4 as uuid } from "uuid";
+import ElevenLabs from "elevenlabs-node";
+const voice = new ElevenLabs({
+  apiKey: env.ELEVEN_LABS_API_KEY,
+});
 
 export const formatMessage = (message) => {
   return `${message.role === "user" ? "User" : "Assistant"}: ${
@@ -47,17 +50,14 @@ export const lipSyncMessage = async (message) => {
   return new Promise(async (resolve, reject) => {
     try {
       const time = new Date().getTime();
-      console.log(`Starting conversion for message ${message}`);
       await execCommand(
         `ffmpeg -y -i audios/message_${message}.mp3 audios/message_${message}.wav`
         // -y to overwrite the file
       );
-      console.log(`Conversion done in ${new Date().getTime() - time}ms`);
       await execCommand(
         `rhubarb -f json -o audios/message_${message}.json audios/message_${message}.wav -r phonetic`
       );
       // -r phonetic is faster but less accurate
-      console.log(`Lip sync done in ${new Date().getTime() - time}ms`);
       resolve();
     } catch (error) {
       reject(error);
@@ -66,23 +66,15 @@ export const lipSyncMessage = async (message) => {
 };
 
 export const createMp3FromText = async (text) => {
+  console.log('createMp3FromText', text)
   return new Promise(async (resolve, reject) => {
     try {
-      const client = new ElevenLabsClient({
-        apiKey: env.ELEVEN_LABS_API_KEY,
+      voice.textToSpeech({
+        textInput: text,
+        fileName: "test.mp3"
       });
-      const audio = await client.generate({
-        voice: "Rachel",
-        model_id: "eleven_turbo_v2",
-        text,
-      });
-      const fileName = `${uuid()}.mp3`;
-      const fileStream = createWriteStream(fileName);
-
-      audio.pipe(fileStream);
-      fileStream.on("finish", () => resolve(fileName)); // Resolve with the fileName
-      fileStream.on("error", reject);
     } catch (error) {
+      console.error("Error in createMp3FromText:", error);
       reject(error);
     }
   });

@@ -4,7 +4,7 @@ import { fetchDataFromCollection } from "../../lib/vector-store";
 import { formatMessage } from "../../lib/aiUtils";
 
 export const POST = async (req) => {
-  console.log("POST request received");
+  
   const body = await req.json();
   const messages = body.messages || [];
 

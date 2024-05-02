@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 import { useChat } from "ai/react";
 import { useChatContext } from "../hooks/useChatAi";
-import { audioFileToBase64, lipSyncMessage, readJsonTranscript } from "../lib/aiUtils";
+import { audioFileToBase64, lipSyncMessage, createMp3FromText } from "../lib/aiUtils";
 // Main UI component using chat functionality
 export const UI = ({ hidden, ...props }) => {
   // Destructuring properties from useChat hook
@@ -32,9 +32,11 @@ export const UI = ({ hidden, ...props }) => {
 
 
   useEffect(() => {
+
     Promise.all(messages.map((message, i) => {
       if (message.role === "user") {
         const fileName = `audios/message_${i}.mp3`;
+
         // generate lipsync
         return lipSyncMessage(i).then(() => {
           return audioFileToBase64(fileName).then((base64Audio) => {
@@ -58,6 +60,10 @@ export const UI = ({ hidden, ...props }) => {
       console.log('All messages processed');
     });
   }, [messages]);
+
+  useEffect(() => {
+    createMp3FromText('Hello');
+  }, [])
 
   // Do not render the component if it is meant to be hidden
   if (hidden) return null;
