@@ -1,14 +1,14 @@
 import { NextResponse, NextRequest } from "next/server";
 import { callChain } from "../../lib/langchain";
 import { fetchDataFromCollection } from "../../lib/vector-store";
-import { formatMessage } from "../../lib/aiUtils";
+import { getAssistantMessage } from "../../lib/aiUtils";
 
 export const POST = async (req) => {
   
   const body = await req.json();
   const messages = body.messages || [];
 
-  const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
+  const formattedPreviousMessages = messages.slice(0, -1).map(getAssistantMessage);
   const question = messages[messages.length - 1].content;
   try {
     const streamingTextResponse = await callChain({

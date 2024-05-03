@@ -8,10 +8,9 @@ const elevenLabsClient = new ElevenLabsClient({
   apiKey: env.ELEVEN_LABS_API_KEY
 });
 
-export const formatMessage = (message) => {
-  return `${message.role === "user" ? "User" : "Assistant"}: ${
-    message.content
-  }`;
+export const getAssistantMessage = (message) => {
+  return `${message.role === "user" ? null : "Assistant"}: ${message.content
+    }`;
 };
 
 export const readJsonTranscript = async (file) => {
@@ -43,19 +42,20 @@ const execCommand = (command) => {
       resolve(stdout);
     });
   });
-  
+
 };
 
-export const lipSyncMessage = async (message) => {
+export const lipSyncMessage = async (messageId) => {
+  
   return new Promise(async (resolve, reject) => {
     try {
       const time = new Date().getTime();
       await execCommand(
-        `ffmpeg -y -i audios/message_${message}.mp3 audios/message_${message}.wav`
+        `ffmpeg -y -i audios/message_${messageId}.mp3 audios/message_${messageId}.wav`
         // -y to overwrite the file
       );
       await execCommand(
-        `rhubarb -f json -o audios/message_${message}.json audios/message_${message}.wav -r phonetic`
+        `rhubarb -f json -o audios/message_${messageId}.json audios/message_${messageId}.wav -r phonetic`
       );
       // -r phonetic is faster but less accurate
       resolve();
@@ -65,17 +65,18 @@ export const lipSyncMessage = async (message) => {
   });
 };
 
-export const createMp3FromText = async (text) => {
+export const createMp3FromText = async (text, messageId) => {
   console.log('createMp3FromText', text)
   return new Promise(async (resolve, reject) => {
     try {
       const audio = await elevenLabsClient.generate({
-        text: text, 
+        voice: "James",
+        text: text,
         voiceId: env.ELEVEN_LABS_VOICE_ID
       });
-      const fileName = `audios/message_${text}.mp3`;
+      const fileName = `audios/message_${messageId}.mp3`;
       const fileStream = createWriteStream(fileName);
-      
+
       audio.pipe(fileStream);
       fileStream.on("finish", () => {
         resolve(fileName);

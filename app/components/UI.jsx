@@ -1,9 +1,15 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useChat } from "ai/react";
 import { useChatContext } from "../hooks/useChatAi";
-import { audioFileToBase64, lipSyncMessage, createMp3FromText } from "../lib/aiUtils";
+import {
+  audioFileToBase64,
+  createMp3FromText,
+  lipSyncMessage,
+  getAssistantMessage
+} from "../lib/aiUtils";
+
 // Main UI component using chat functionality
 export const UI = ({ hidden, ...props }) => {
   // Destructuring properties from useChat hook
@@ -14,7 +20,21 @@ export const UI = ({ hidden, ...props }) => {
     handleInputChange,
     handleSubmit,
     isLoading,
-  } = useChat({});
+  } = useChat({
+    onFinish: (message) => {
+      console.log("message", message);
+      //create mp3 from text
+      createMp3FromText(message.content, message.id).then(async (audio) => {
+        //generate lip sync from audio
+        await lipSyncMessage(message.id);
+        // create Wav from mp3
+        await audioFileToBase64(message.id);
+        // read json file
+        const json = await readJsonFile(message.id);
+      console.log("json", json);
+      });
+    }
+  });
 
   const {
     welcomeMessage,
@@ -26,46 +46,10 @@ export const UI = ({ hidden, ...props }) => {
     if (!input.trim()) {
       welcomeMessage();
     }
-
     handleSubmit(event);
   };
 
-
-  useEffect(() => {
-
-    Promise.all(messages.map((message, i) => {
-      if (message.role === "user") {
-        const fileName = `audios/message_${i}.mp3`;
-
-        // generate lipsync
-        return lipSyncMessage(i).then(() => {
-          return audioFileToBase64(fileName).then((base64Audio) => {
-            console.log('file created', fileName);
-            // Uncomment and modify the following lines as needed for further processing
-            // const audio = new Audio("data:audio/mp3;base64," + base64Audio);
-            // return readJsonTranscript(`audios/message_${i}.json`).then((lipSync) => {
-            //   const facialExpression = "smile";
-            //   const animation = "Idle";
-            //   setLipsync(lipSync);
-            //   setFacialExpression(facialExpression);
-            //   setAnimation(animation);
-            //   audio.play();
-            //   audio.onended = onMessagePlayed;
-            // });
-          });
-        });
-      }
-      return Promise.resolve();
-    })).then(() => {
-      console.log('All messages processed');
-    });
-  }, [messages]);
-
-  useEffect(() => {
-    createMp3FromText('Hello');
-  }, [])
-
-  // Do not render the component if it is meant to be hidden
+    // Do not render the component if it is meant to be hidden
   if (hidden) return null;
 
   return (
