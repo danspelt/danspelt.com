@@ -6,6 +6,7 @@ const envSchema = z.object({
   QDRANT_API_URL: z.string().trim().min(1),
   PDF_PATH: z.string().trim().min(1),
   ELEVEN_LABS_API_KEY: z.string().trim().min(1),
+  ELEVEN_LABS_VOICE_ID: z.string().trim().min(1),
   INDEX_INIT_TIMEOUT: z.coerce.number().min(1),
 });
 

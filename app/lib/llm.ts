@@ -5,6 +5,7 @@ export const streamingModel = new ChatOpenAI({
   streaming: true,
   verbose: true,
   temperature: 0,
+  
 });
 
 export const nonStreamingModel = new ChatOpenAI({

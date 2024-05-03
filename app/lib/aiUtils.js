@@ -3,9 +3,9 @@ import { promises as fs, createWriteStream } from "fs";
 import { exec } from "child_process";
 import { ElevenLabsClient, play } from "elevenlabs";
 import { env } from "../lib/config";
-import ElevenLabs from "elevenlabs-node";
-const voice = new ElevenLabs({
-  apiKey: env.ELEVEN_LABS_API_KEY,
+
+const elevenLabsClient = new ElevenLabsClient({
+  apiKey: env.ELEVEN_LABS_API_KEY
 });
 
 export const formatMessage = (message) => {
@@ -69,9 +69,19 @@ export const createMp3FromText = async (text) => {
   console.log('createMp3FromText', text)
   return new Promise(async (resolve, reject) => {
     try {
-      voice.textToSpeech({
-        textInput: text,
-        fileName: "test.mp3"
+      const audio = await elevenLabsClient.generate({
+        text: text, 
+        voiceId: env.ELEVEN_LABS_VOICE_ID
+      });
+      const fileName = `audios/message_${text}.mp3`;
+      const fileStream = createWriteStream(fileName);
+      
+      audio.pipe(fileStream);
+      fileStream.on("finish", () => {
+        resolve(fileName);
+      });
+      fileStream.on("error", (error) => {
+        reject(error);
       });
     } catch (error) {
       console.error("Error in createMp3FromText:", error);
