@@ -29,9 +29,10 @@ export const ChatProvider = ({ children }) => {
   // welcome message on no input
   const welcomeMessage = async () => {
     console.log("welcomeMessage");
-    const welcomeContent = "Welcome to the chatbot!";
-    const welcomeAudio = await audioFileToBase64("audios/welcome.wav");
-    const welcomeLipSync = await readJsonTranscript("audios/welcome.json");
+    const welcomeContent = "Welcome! My name is Pathfinder. Ask me anything about Dan Spelt's professional journey.";
+    const welcomeAudio = await audioFileToBase64("audios/init.wav");
+    const welcomeLipSync = await readJsonTranscript("audios/init.json");
+   
     const welcomeFacialExpression = "smile";
     const welcomeAnimation = "Idle";
 

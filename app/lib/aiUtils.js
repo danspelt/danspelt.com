@@ -46,12 +46,13 @@ const execCommand = (command) => {
 export const mp3ToWavToJson = async (messageId) => {
   return new Promise(async (resolve, reject) => {
     try {
+      const fileName = messageId === 'init' ? `${messageId}`: `ai_${messageId}`;
       await execCommand(
-        `ffmpeg -y -i ${process.cwd()}/audios/ai_${messageId}.mp3 ${process.cwd()}/audios/ai_${messageId}.wav`
+        `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
         // -y to overwrite the file
       );
       await execCommand(
-        `rhubarb -f json -o ${process.cwd()}/audios/ai_${messageId}.json ${process.cwd()}/audios/ai_${messageId}.wav -r phonetic`
+        `rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`
       );
       // -r phonetic is faster but less accurate
       resolve();
@@ -71,7 +72,7 @@ export const createMp3FromText = async (text, messageId) => {
           text: text,
           voiceId: env.ELEVEN_LABS_VOICE_ID,
         });
-        const fileName = `audios/ai_${messageId}.mp3`;
+        const fileName = messageId === 'init' ? `audios/${messageId}.mp3`: `audios/ai_${messageId}.mp3`;
         const fileStream = createWriteStream(fileName);
 
         audio.pipe(fileStream);
@@ -101,3 +102,5 @@ export const deleteAllAiFiles = async () => {
     console.error('Error deleting AI files:', error);
   }
 };
+
+

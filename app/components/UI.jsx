@@ -6,7 +6,7 @@ import { useChatContext } from "../hooks/useChatAi";
 import {
   audioFileToBase64,
   createMp3FromText,
-  lipSyncMessage,
+  mp3ToWavToJson,
   getAssistantMessage
 } from "../lib/aiUtils";
 

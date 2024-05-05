@@ -7,7 +7,7 @@ import {
   Text,
 } from "@react-three/drei";
 import { useChatContext } from "../hooks/useChatAi";
-import { Sam } from "./Sam";
+import { PathFinder } from "./PathFinder";
 
 const Dots = (props) => {
   const { isLoading } = useChatContext();
@@ -57,7 +57,7 @@ export const Experience = () => {
       <Suspense fallback={null}>
         <Dots position-y={1.75} position-x={-0.02} />
       </Suspense>
-      <Sam />
+      <PathFinder />
       <Environment files="/hdr/1.hdr" background />
       
     </>
