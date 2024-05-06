@@ -2,23 +2,31 @@
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+import { button, useControls } from "leva";
+
 import { useChatContext } from "../hooks/useChatAi";
 import { botFacialExpressions, corresponding } from "../lib/aiTools";
 import { readJsonTranscript } from "../lib/aiUtils";
 
+let setupMode = false;
 export function PathFinder(props) {
   const { nodes, materials, scene } = useGLTF("/models/pathfinder.glb");
-  
+
   const {
     lipsync,
     talking,
     standingArguing,
-    setBlink,
-    acceptingFiles,
+    message,
+    facialExpression,
     audio,
     rapping,
     animation
   } = useChatContext();
+
+  const [blink, setBlink] = useState(false);
+  const [winkLeft, setWinkLeft] = useState(false);
+  const [winkRight, setWinkRight] = useState(false);
   const group = useRef();
   const { animations: IdleAnimation } = useFBX("/models/animations/sam/Idle.fbx");
   const { animations: AcceptAnimation } = useFBX("/models/animations/sam/accept.fbx");
@@ -36,28 +44,85 @@ export function PathFinder(props) {
   const { actions: acceptActions, mixer: acceptMixer } = useAnimations(AcceptAnimation, group);
   const { actions: talkingActions, mixer: talkingMixer } = useAnimations(Talking, group);
   const { actions: standingArguingActions, mixer: standingArguingMixer } = useAnimations(Standing_Arguing, group);
-  const { actions: rappingActions, mixer: rappingMixer } = useAnimations(Rapping, group);   
+  const { actions: rappingActions, mixer: rappingMixer } = useAnimations(Rapping, group);
+
+  const lerpMorphTarget = (target, value, speed = 0.1) => {
+    scene.traverse((child) => {
+      if (child.isSkinnedMesh && child.morphTargetDictionary) {
+        const index = child.morphTargetDictionary[target];
+        if (
+          index === undefined ||
+          child.morphTargetInfluences[index] === undefined
+        ) {
+          return;
+        }
+        child.morphTargetInfluences[index] = THREE.MathUtils.lerp(
+          child.morphTargetInfluences[index],
+          value,
+          speed
+        );
+        
+        if (!setupMode) {
+          try {
+            set({
+              [target]: value,
+            });
+          } catch (e) {
+            console.error('error setting morph target', e)
+          }
+        }
+      }
+    });
+  };
 
   
-  useEffect(() => {
-    
-    if (lipsync) {
-      const updateMorphTargets = () => {
-        const currentTime = mixer.time;
-        lipsync.mouthCues.forEach(cue => {
+  useFrame(() => {
+    !setupMode &&
+      Object.keys(nodes.EyeLeft.morphTargetDictionary).forEach((key) => {
+        const mapping = botFacialExpressions[facialExpression];
+        if (key === "eyeBlinkLeft" || key === "eyeBlinkRight") {
+          return; // eyes wink/blink are handled separately
+        }
+        if (mapping && mapping[key]) {
+          lerpMorphTarget(key, mapping[key], 0.1);
+        } else {
+          lerpMorphTarget(key, 0, 0.1);
+        }
+      });
       
-          if (currentTime >= cue.start && currentTime <= cue.end) {
-            nodes.Wolf3D_Head.morphTargetInfluences[nodes.Wolf3D_Head.morphTargetDictionary[cue.value]] = 1;
-          } else {
-            nodes.Wolf3D_Head.morphTargetInfluences[nodes.Wolf3D_Head.morphTargetDictionary[cue.value]] = 0;
-          }
-        });
-      };
 
-      mixer.addEventListener('update', updateMorphTargets);
-      return () => mixer.removeEventListener('update', updateMorphTargets);
+    lerpMorphTarget("eyeBlinkLeft", blink || winkLeft ? 1 : 0, 0.5);
+    lerpMorphTarget("eyeBlinkRight", blink || winkRight ? 1 : 0, 0.5);
+
+    // LIPSYNC
+    if (setupMode) {
+      return;
     }
-  }, [lipsync, mixer, nodes]);
+
+    const appliedMorphTargets = [];
+    if (message && lipsync) {
+      const currentAudioTime = audio.currentTime;
+      for (let i = 0; i < lipsync.mouthCues.length; i++) {
+        const mouthCue = lipsync.mouthCues[i];
+        if (
+          currentAudioTime >= mouthCue.start &&
+          currentAudioTime <= mouthCue.end
+        ) {
+          appliedMorphTargets.push(corresponding[mouthCue.value]);
+          lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2);
+          break;
+        }
+      }
+    }
+
+    Object.values(corresponding).forEach((value) => {
+      if (appliedMorphTargets.includes(value)) {
+        return;
+      }
+      lerpMorphTarget(value, 0, 0.1);
+    });
+  });
+
 
   useEffect(() => {
     if (talking) {

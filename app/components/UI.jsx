@@ -7,7 +7,7 @@ import {
   audioFileToBase64,
   createMp3FromText,
   mp3ToWavToJson,
-  getAssistantMessage
+  readJsonTranscript
 } from "../lib/aiUtils";
 
 // Main UI component using chat functionality
@@ -25,13 +25,15 @@ export const UI = ({ hidden, ...props }) => {
       console.log("message", message);
       //create mp3 from text
       createMp3FromText(message.content, message.id).then(async (audio) => {
+        console.log("audio", audio);  
         //generate lip sync from audio
-        await lipSyncMessage(message.id);
+        await mp3ToWavToJson(message.id);
         // create Wav from mp3
         await audioFileToBase64(message.id);
-        // read json file
-        const json = await readJsonFile(message.id);
-      console.log("json", json);
+        
+        //read json file
+        const json = await readJsonTranscript(`audios/ai_${message.id}.json`); 
+        console.log('json', json);
       });
     }
   });
