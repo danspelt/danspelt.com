@@ -2,17 +2,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
 const ChatContext = createContext();
 import {
-  formatMessage,
   audioFileToBase64,
-  readJsonTranscript,
-  lipSyncMessage,
+  readJsonTranscript
 } from "../lib/aiUtils";
 export const ChatProvider = ({ children }) => {
   //ai hooks
-  const [lipsync, setLipsync] = useState();
+  
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);
   const [winkRight, setWinkRight] = useState(false);
+  const [lipsync, setLipsync] = useState(null);
   const [facialExpression, setFacialExpression] = useState("");
   const [audio, setAudio] = useState("");
   const [animation, setAnimation] = useState("");
@@ -21,7 +20,7 @@ export const ChatProvider = ({ children }) => {
   const [standingArguing, setStandingArguing] = useState(false);
   const [rapping, setRapping] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null); 
   const onMessagePlayed = () => {
     setMessages((messages) => messages.slice(1));
   };
@@ -32,14 +31,13 @@ export const ChatProvider = ({ children }) => {
     const welcomeContent = "Welcome! My name is Pathfinder. Ask me anything about Dan Spelt's professional journey.";
     const welcomeAudio = await audioFileToBase64("audios/init.wav");
     const welcomeLipSync = await readJsonTranscript("audios/init.json");
-   
+    setLipsync(welcomeLipSync);
     const welcomeFacialExpression = "smile";
     const welcomeAnimation = "Idle";
 
     const audio = new Audio("data:audio/mp3;base64," + welcomeAudio);
     audio.play();
     audio.onended = onMessagePlayed;
-    setLipsync(welcomeLipSync);
     setFacialExpression(welcomeFacialExpression);
     setAnimation(welcomeAnimation);
     setAudio(audio);
@@ -66,7 +64,6 @@ export const ChatProvider = ({ children }) => {
         rapping,
         setRapping,
         lipsync,
-        setLipsync,
         blink,
         setBlink,
         winkLeft,

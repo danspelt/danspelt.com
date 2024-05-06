@@ -1,15 +1,16 @@
 "use client";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
-import React, { useEffect, useRef } from "react";
-
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { useChatContext } from "../hooks/useChatAi";
-import { useCustomFrame } from "../lib/aiTools";
+import { botFacialExpressions, corresponding } from "../lib/aiTools";
+import { readJsonTranscript } from "../lib/aiUtils";
 
 export function PathFinder(props) {
   const { nodes, materials, scene } = useGLTF("/models/pathfinder.glb");
   
   const {
+    lipsync,
     talking,
     standingArguing,
     setBlink,
@@ -18,25 +19,12 @@ export function PathFinder(props) {
     rapping,
     animation
   } = useChatContext();
-  useCustomFrame(nodes,scene, audio);
-
-  
   const group = useRef();
-  const { animations: IdleAnimation } = useFBX(
-    "/models/animations/sam/Idle.fbx"
-  );
-  const { animations: AcceptAnimation } = useFBX(
-    "/models/animations/sam/accept.fbx"
-  );
-  const { animations: Talking } = useFBX(
-    "/models/animations/sam/Talking.fbx"
-  );
-  const { animations: Standing_Arguing } = useFBX(
-    "/models/animations/sam/Standing_Arguing.fbx"
-  );
-  const { animations: Rapping } = useFBX(
-    "/models/animations/sam/Rapping.fbx"
-  );
+  const { animations: IdleAnimation } = useFBX("/models/animations/sam/Idle.fbx");
+  const { animations: AcceptAnimation } = useFBX("/models/animations/sam/accept.fbx");
+  const { animations: Talking } = useFBX("/models/animations/sam/Talking.fbx");
+  const { animations: Standing_Arguing } = useFBX("/models/animations/sam/Standing_Arguing.fbx");
+  const { animations: Rapping } = useFBX("/models/animations/sam/Rapping.fbx");
 
   IdleAnimation[0].name = "Idle";
   AcceptAnimation[0].name = "Accept";
@@ -45,32 +33,31 @@ export function PathFinder(props) {
   Rapping[0].name = "Rapping";
 
   const { actions, mixer } = useAnimations(IdleAnimation, group);
+  const { actions: acceptActions, mixer: acceptMixer } = useAnimations(AcceptAnimation, group);
+  const { actions: talkingActions, mixer: talkingMixer } = useAnimations(Talking, group);
+  const { actions: standingArguingActions, mixer: standingArguingMixer } = useAnimations(Standing_Arguing, group);
+  const { actions: rappingActions, mixer: rappingMixer } = useAnimations(Rapping, group);   
 
-  const { actions: acceptActions, mixer: acceptMixer } = useAnimations(
-    AcceptAnimation,
-    group
-  );
-  const { actions: talkingActions, mixer: talkingMixer } = useAnimations(
-    Talking,
-    group
-  );
-  const { actions: standingArguingActions, mixer: standingArguingMixer } = useAnimations(
-    Standing_Arguing,
-    group
-  );
-  const { actions: rappingActions, mixer: rappingMixer } = useAnimations(
-    Rapping,
-    group
-  );
-
-  // Setup animations for the different states
+  
   useEffect(() => {
-    if (acceptingFiles) {
-      acceptActions[AcceptAnimation[0].name].play();
-    } else {
-      acceptActions[AcceptAnimation[0].name].stop();
+    
+    if (lipsync) {
+      const updateMorphTargets = () => {
+        const currentTime = mixer.time;
+        lipsync.mouthCues.forEach(cue => {
+      
+          if (currentTime >= cue.start && currentTime <= cue.end) {
+            nodes.Wolf3D_Head.morphTargetInfluences[nodes.Wolf3D_Head.morphTargetDictionary[cue.value]] = 1;
+          } else {
+            nodes.Wolf3D_Head.morphTargetInfluences[nodes.Wolf3D_Head.morphTargetDictionary[cue.value]] = 0;
+          }
+        });
+      };
+
+      mixer.addEventListener('update', updateMorphTargets);
+      return () => mixer.removeEventListener('update', updateMorphTargets);
     }
-  }, [acceptingFiles]);
+  }, [lipsync, mixer, nodes]);
 
   useEffect(() => {
     if (talking) {
@@ -102,7 +89,6 @@ export function PathFinder(props) {
         .reset()
         .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
         .play();
-      //return () => actions[animation].fadeOut(0.5);
     }
   }, [animation]);
 
@@ -153,7 +139,6 @@ export function PathFinder(props) {
         geometry={nodes.Wolf3D_Hair.geometry}
         material={materials.Wolf3D_Hair}
         skeleton={nodes.Wolf3D_Hair.skeleton}
-
       />
       <skinnedMesh
         name="EyeLeft"
