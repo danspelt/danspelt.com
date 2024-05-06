@@ -250,4 +250,5 @@ export function Avatar(props) {
   );
 }
 
-useGLTF.preload("/models/646d9dcdc8a5f5bddbfac913.glb");
+useGLTF.preload("/models/pathfinder.glb");
+
