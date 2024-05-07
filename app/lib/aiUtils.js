@@ -24,7 +24,9 @@ export const readJsonTranscript = async (file) => {
   });
 };
 
-export const audioFileToBase64 = async (file) => {
+export const audioFileToBase64 = async (messageId) => {
+  const file = `${process.cwd()}/audios/ai_${messageId}.wav`;
+  
   return new Promise(async (resolve, reject) => {
     try {
       const data = await fs.readFile(file);
@@ -47,7 +49,7 @@ const execCommand = (command) => {
 export const mp3ToWavToJson = async (messageId) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const fileName = messageId === 'init' ? `${messageId}`: `ai_${messageId}`;
+      const fileName = messageId === 'init' ? `${messageId}` : `ai_${messageId}`;
       await execCommand(
         `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
         // -y to overwrite the file
@@ -73,7 +75,7 @@ export const createMp3FromText = async (text, messageId) => {
           text: text,
           voiceId: env.ELEVEN_LABS_VOICE_ID,
         });
-        const fileName = messageId === 'init' ? `audios/${messageId}.mp3`: `audios/ai_${messageId}.mp3`;
+        const fileName = messageId === 'init' ? `audios/${messageId}.mp3` : `audios/ai_${messageId}.mp3`;
         const fileStream = createWriteStream(fileName);
 
         audio.pipe(fileStream);

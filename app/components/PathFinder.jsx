@@ -7,7 +7,6 @@ import { button, useControls } from "leva";
 
 import { useChatContext } from "../hooks/useChatAi";
 import { botFacialExpressions, corresponding } from "../lib/aiTools";
-import { readJsonTranscript } from "../lib/aiUtils";
 
 let setupMode = false;
 export function PathFinder(props) {

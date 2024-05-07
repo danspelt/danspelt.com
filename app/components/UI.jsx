@@ -12,6 +12,14 @@ import {
 
 // Main UI component using chat functionality
 export const UI = ({ hidden, ...props }) => {
+  const {
+    setLipsync,
+  
+    setAudio,  
+    welcomeMessage,
+    onMessagePlayed,
+  } = useChatContext();
+
   // Destructuring properties from useChat hook
   const {
     messages,
@@ -24,15 +32,27 @@ export const UI = ({ hidden, ...props }) => {
     onFinish: (message) => {
       console.log("message", message);
       //create mp3 from text
-      createMp3FromText(message.content, message.id).then(async (audio) => {
-        
+      createMp3FromText(message.content, message.id).then(async () => {
+        //create json from mp3
+        mp3ToWavToJson(message.id).then((jsonFile) => {
+          //read json file
+          readJsonTranscript(jsonFile).then(json => {
+            setLipsync(json);
+            audioFileToBase64(message.id).then((base64) => {
+              const audio = new Audio("data:audio/mp3;base64," + base64);
+              audio.play();
+                
+              setAudio(base64);
+              audio.onended = onMessagePlayed;
+            });
+          });
+        }).catch(err => {
+          console.log("err", err);
+        });
       });
     }
   });
 
-  const {
-    welcomeMessage,
-  } = useChatContext();
 
   // Modified handleSubmit to include welcomeMessage call if input is empty
   const modifiedHandleSubmit = (event) => {
@@ -43,7 +63,7 @@ export const UI = ({ hidden, ...props }) => {
     handleSubmit(event);
   };
 
-    // Do not render the component if it is meant to be hidden
+  // Do not render the component if it is meant to be hidden
   if (hidden) return null;
 
   return (
