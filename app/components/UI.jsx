@@ -25,16 +25,7 @@ export const UI = ({ hidden, ...props }) => {
       console.log("message", message);
       //create mp3 from text
       createMp3FromText(message.content, message.id).then(async (audio) => {
-        console.log("audio", audio);  
-        //generate lip sync from audio
-        await mp3ToWavToJson(message.id);
-        // create Wav from mp3
-        await audioFileToBase64(message.id);
         
-        //read json file
-       readJsonTranscript(`audios/ai_${message.id}.json`).then(data=>{
-        console.log("data", data);
-       })
       });
     }
   });

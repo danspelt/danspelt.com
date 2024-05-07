@@ -56,7 +56,7 @@ export const mp3ToWavToJson = async (messageId) => {
         `rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`
       );
       // -r phonetic is faster but less accurate
-      resolve();
+      resolve(`${process.cwd()}/audios/${fileName}.json`);
     } catch (error) {
       reject(error);
     }
