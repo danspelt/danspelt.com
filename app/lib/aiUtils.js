@@ -13,6 +13,7 @@ export const getAssistantMessage = (message) => {
 };
 
 export const readJsonTranscript = async (file) => {
+  console.log("readJsonTranscript", file);
   return new Promise(async (resolve, reject) => {
     try {
       const data = await fs.readFile(file, "utf8");

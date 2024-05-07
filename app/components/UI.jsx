@@ -32,8 +32,9 @@ export const UI = ({ hidden, ...props }) => {
         await audioFileToBase64(message.id);
         
         //read json file
-        const json = await readJsonTranscript(`audios/ai_${message.id}.json`); 
-        console.log('json', json);
+       readJsonTranscript(`audios/ai_${message.id}.json`).then(data=>{
+        console.log("data", data);
+       })
       });
     }
   });

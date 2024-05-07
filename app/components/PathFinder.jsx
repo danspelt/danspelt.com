@@ -68,7 +68,7 @@ export function PathFinder(props) {
               [target]: value,
             });
           } catch (e) {
-            console.error('error setting morph target', e)
+            
           }
         }
       }
