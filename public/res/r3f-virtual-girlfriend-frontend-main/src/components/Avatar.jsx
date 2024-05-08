@@ -125,7 +125,7 @@ export function Avatar(props) {
     const audio = new Audio("data:audio/mp3;base64," + message.audio);
     audio.play();
 
-    
+
     setAudio(audio);
     audio.onended = onMessagePlayed;
   }, [message]);
@@ -134,9 +134,7 @@ export function Avatar(props) {
 
   const group = useRef();
   const { actions, mixer } = useAnimations(animations, group);
-  const [animation, setAnimation] = useState(
-    animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name // Check if Idle animation exists otherwise use first animation
-  );
+  const animation = animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name // Check if Idle animation exists otherwise use first animation
   useEffect(() => {
     actions[animation]
       .reset()

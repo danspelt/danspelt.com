@@ -25,7 +25,7 @@ export const readJsonTranscript = async (file) => {
 };
 
 export const audioFileToBase64 = async (messageId) => {
-  const file = `${process.cwd()}/audios/ai_${messageId}.wav`;
+  const file = `${process.cwd()}/audios/ai_${messageId}.mp3`;
   
   return new Promise(async (resolve, reject) => {
     try {

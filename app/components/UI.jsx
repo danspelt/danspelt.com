@@ -41,8 +41,8 @@ export const UI = ({ hidden, ...props }) => {
             audioFileToBase64(message.id).then((base64) => {
               const audio = new Audio("data:audio/mp3;base64," + base64);
               audio.play();
-                
-              setAudio(base64);
+                console.log("audio", audio);
+              setAudio(audio);
               audio.onended = onMessagePlayed;
             });
           });
