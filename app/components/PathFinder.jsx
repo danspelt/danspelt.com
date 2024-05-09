@@ -22,35 +22,6 @@ export function PathFinder(props) {
     rapping,
     animation
   } = useChatContext();
-  useEffect(() => {
-    if (!lipsync) {
-      return;
-    }
-     
-    const appliedMorphTargets = [];
-    const currentAudioTime = audio.currentTime;
-    console.log("currentAudioTime", audio);
-      for (let i = 0; i < lipsync.mouthCues.length; i++) {
-        const mouthCue = lipsync.mouthCues[i];
-        if (
-          currentAudioTime >= mouthCue.start &&
-          currentAudioTime <= mouthCue.end
-        ) {
-          console.log("mouthCue", mouthCue);
-          appliedMorphTargets.push(corresponding[mouthCue.value]);
-          lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2);
-          break;
-        }
-      }
-    
-
-    Object.values(corresponding).forEach((value) => {
-      if (appliedMorphTargets.includes(value)) {
-        return;
-      }
-      lerpMorphTarget(value, 0, 0.1);
-    });
-  }, [lipsync]);
 
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);
@@ -126,7 +97,32 @@ export function PathFinder(props) {
     if (setupMode) {
       return;
     }
+      
+    const appliedMorphTargets = [];
+    if (!lipsync && !audio) {
+      return;
+    }
+    const currentAudioTime = audio.currentTime;
+     for (let i = 0; i < lipsync.mouthCues.length; i++) {
+        const mouthCue = lipsync.mouthCues[i];
+        if (
+          currentAudioTime >= mouthCue.start &&
+          currentAudioTime <= mouthCue.end
+        ) {        
+          appliedMorphTargets.push(corresponding[mouthCue.value]);
+          lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2);
+          break;
+        }
+      }
     
+
+    Object.values(corresponding).forEach((value) => {
+      if (appliedMorphTargets.includes(value)) {
+        return;
+      }
+      lerpMorphTarget(value, 0, 0.1);
+    });
+  
   });
 
 

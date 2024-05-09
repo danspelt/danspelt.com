@@ -29,8 +29,8 @@ export const ChatProvider = ({ children }) => {
   const welcomeMessage = async () => {
     console.log("welcomeMessage");
     const welcomeContent = "Welcome! My name is Pathfinder. Ask me anything about Dan Spelt's professional journey.";
-    const welcomeAudio = await audioFileToBase64("audios/init.wav");
-    const welcomeLipSync = await readJsonTranscript("audios/init.json");
+    const welcomeAudio = await audioFileToBase64("init");
+    const welcomeLipSync = await readJsonTranscript("init");
     setLipsync(welcomeLipSync);
     const welcomeFacialExpression = "smile";
     const welcomeAnimation = "Idle";

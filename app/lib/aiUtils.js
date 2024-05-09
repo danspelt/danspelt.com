@@ -12,8 +12,8 @@ export const getAssistantMessage = (message) => {
   return `${message.role === "user" ? null : "Assistant"}: ${message.content}`;
 };
 
-export const readJsonTranscript = async (file) => {
-  console.log("readJsonTranscript", file);
+export const readJsonTranscript = async (messageId) => {
+  const file = messageId === 'init' ? `${process.cwd()}/audios/${messageId}.json` : `${process.cwd()}/audios/ai_${messageId}.json`;
   return new Promise(async (resolve, reject) => {
     try {
       const data = await fs.readFile(file, "utf8");
@@ -25,7 +25,7 @@ export const readJsonTranscript = async (file) => {
 };
 
 export const audioFileToBase64 = async (messageId) => {
-  const file = `${process.cwd()}/audios/ai_${messageId}.mp3`;
+  const file = messageId === 'init' ? `${process.cwd()}/audios/${messageId}.mp3` : `${process.cwd()}/audios/ai_${messageId}.mp3`;
   
   return new Promise(async (resolve, reject) => {
     try {

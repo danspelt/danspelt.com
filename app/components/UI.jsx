@@ -60,7 +60,6 @@ export const UI = ({ hidden, ...props }) => {
     if (!input.trim()) {
       welcomeMessage();
     }
-    handleSubmit(event);
   };
 
   // Do not render the component if it is meant to be hidden
