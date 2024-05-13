@@ -1,5 +1,6 @@
 "use client";
 import { useChatContext } from "../hooks/useChatAi";
+import { useEffect } from "react";
 import { useChat } from "ai/react";
 import {
   audioFileToBase64,
@@ -14,12 +15,13 @@ export const UI = ({ hidden }) => {
 
   const [isQuestionAsked, setIsQuestionAsked] = useState(false);
 
-  const { setLipsync, setAudio, welcomeMessage, onMessagePlayed } = useChatContext();
+  const { setLipsync, setAudio, welcomeMessage, onMessagePlayed, processingMessage } = useChatContext();
 
   const {
     input,
     handleInputChange,
-    handleSubmit
+    handleSubmit,
+    isLoading
   } = useChat({
     onFinish: async (message) => {
       try {
@@ -38,12 +40,28 @@ export const UI = ({ hidden }) => {
       }
     }
   });
+  useEffect(() => {
+    let intervalId;
+    if (isLoading) {
+      const processMessage = async () => {
+        await processingMessage();
+        console.log("loading");
+      };
+      intervalId = setInterval(processMessage, 2000);
+    } else {
+      console.log("not loading");
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
+  }, [isLoading]);
 
   const modifiedHandleSubmit = (event) => {
     event.preventDefault();
     setIsQuestionAsked(true);
     if (!input.trim()) {
-      welcomeMessage();
+      welcomeMessage().then(() => {
+        setIsQuestionAsked(false);
+      });
     } else {
       handleSubmit(event);
     }

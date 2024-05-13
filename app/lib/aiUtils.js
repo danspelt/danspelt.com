@@ -13,7 +13,7 @@ export const getAssistantMessage = (message) => {
 };
 
 export const readJsonTranscript = async (messageId) => {
-  const file = messageId === 'init' ? `${process.cwd()}/audios/${messageId}.json` : `${process.cwd()}/audios/ai_${messageId}.json`;
+  const file = messageId === 'init' || messageId === 'processing' ? `${process.cwd()}/audios/${messageId}.json` : `${process.cwd()}/audios/ai_${messageId}.json`;
   return new Promise(async (resolve, reject) => {
     try {
       const data = await fs.readFile(file, "utf8");
@@ -25,7 +25,7 @@ export const readJsonTranscript = async (messageId) => {
 };
 
 export const audioFileToBase64 = async (messageId) => {
-  const file = messageId === 'init' ? `${process.cwd()}/audios/${messageId}.mp3` : `${process.cwd()}/audios/ai_${messageId}.mp3`;
+  const file = messageId === 'init' || messageId === 'processing' ? `${process.cwd()}/audios/${messageId}.mp3` : `${process.cwd()}/audios/ai_${messageId}.mp3`;
   
   return new Promise(async (resolve, reject) => {
     try {
@@ -49,7 +49,7 @@ const execCommand = (command) => {
 export const mp3ToWavToJson = async (messageId) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const fileName = messageId === 'init' ? `${messageId}` : `ai_${messageId}`;
+      const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `ai_${messageId}`;
       await execCommand(
         `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
         // -y to overwrite the file
@@ -75,7 +75,7 @@ export const createMp3FromText = async (text, messageId) => {
           text: text,
           voiceId: env.ELEVEN_LABS_VOICE_ID,
         });
-        const fileName = messageId === 'init' ? `audios/${messageId}.mp3` : `audios/ai_${messageId}.mp3`;
+        const fileName = messageId === 'init' || messageId === 'processing' ? `audios/${messageId}.mp3` : `audios/ai_${messageId}.mp3`;
         const fileStream = createWriteStream(fileName);
 
         audio.pipe(fileStream);
