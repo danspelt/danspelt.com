@@ -13,7 +13,7 @@ export const getAssistantMessage = (message) => {
 };
 
 export const readJsonTranscript = async (messageId) => {
-  const file = messageId === 'init' || messageId === 'processing' ? `${process.cwd()}/audios/${messageId}.json` : `${process.cwd()}/audios/ai_${messageId}.json`;
+  const file = messageId === 'init' || messageId === 'processing' ? `${process.cwd()}/audios/${messageId}.json` : `${process.cwd()}/audios/${messageId}/${messageId}.json`;
   return new Promise(async (resolve, reject) => {
     try {
       const data = await fs.readFile(file, "utf8");
@@ -25,7 +25,7 @@ export const readJsonTranscript = async (messageId) => {
 };
 
 export const audioFileToBase64 = async (messageId) => {
-  const file = messageId === 'init' || messageId === 'processing' ? `${process.cwd()}/audios/${messageId}.mp3` : `${process.cwd()}/audios/ai_${messageId}.mp3`;
+  const file = messageId === 'init' || messageId === 'processing' ? `${process.cwd()}/audios/${messageId}.mp3` : `${process.cwd()}/audios/${messageId}/${messageId}.mp3`;
   
   return new Promise(async (resolve, reject) => {
     try {
@@ -49,7 +49,8 @@ const execCommand = (command) => {
 export const mp3ToWavToJson = async (messageId) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `ai_${messageId}`;
+      const dir = messageId === 'init' || messageId === 'processing' ? '' : `${messageId}/`;
+      const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
       await execCommand(
         `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
         // -y to overwrite the file
@@ -70,12 +71,14 @@ export const createMp3FromText = async (text, messageId) => {
   if (text && messageId) {
     return new Promise(async (resolve, reject) => {
       try {
+        const dir = messageId === 'init' || messageId === 'processing' ? '' : `${messageId}/`;
+        await fs.mkdir(`${process.cwd()}/audios/${dir}`);
         const audio = await elevenLabsClient.generate({
           voice: "James",
           text: text,
           voiceId: env.ELEVEN_LABS_VOICE_ID,
         });
-        const fileName = messageId === 'init' || messageId === 'processing' ? `audios/${messageId}.mp3` : `audios/ai_${messageId}.mp3`;
+        const fileName = messageId === 'init' || messageId === 'processing' ? `audios/${messageId}.mp3` : `audios/${messageId}/${messageId}.mp3`;
         const fileStream = createWriteStream(fileName);
 
         audio.pipe(fileStream);
@@ -92,18 +95,23 @@ export const createMp3FromText = async (text, messageId) => {
     });
   }
 };
-
 export const deleteAllAiFiles = async () => {
   try {
-    const files = await fs.readdir(process.cwd() + '/audios');
-    const aiFiles = files.filter(file => file.startsWith('ai_'));
-    for (const file of aiFiles) {
-      await fs.unlink(process.cwd() + '/audios/' + file);
-    }
+    const deleteFilesInDirectory = async (directory) => {
+      const files = await fs.readdir(directory, { withFileTypes: true });
+      for (const file of files) {
+        const fullPath = path.join(directory, file.name);
+        if (file.isDirectory()) {
+          await deleteFilesInDirectory(fullPath);
+        } else if (file.name.startsWith('ai_')) {
+          await fs.unlink(fullPath);
+        }
+      }
+    };
+
+    await deleteFilesInDirectory(process.cwd() + '/audios');
     console.log('All AI files deleted successfully.');
   } catch (error) {
     console.error('Error deleting AI files:', error);
   }
 };
-
-
