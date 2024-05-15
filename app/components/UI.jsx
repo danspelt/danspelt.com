@@ -15,7 +15,7 @@ export const UI = ({ hidden }) => {
 
   const [isQuestionAsked, setIsQuestionAsked] = useState(false);
 
-  const { setLipsync, setAudio, welcomeMessage, onMessagePlayed, processingMessage } = useChatContext();
+  const { setLipsync, setAudio, audio, welcomeMessage, onMessagePlayed, processingMessage } = useChatContext();
 
   const {
     input,
@@ -44,8 +44,10 @@ export const UI = ({ hidden }) => {
     let intervalId;
     if (isLoading) {
       const processMessage = async () => {
-        await processingMessage();
-        console.log("loading");
+        if (!audio || audio.ended) {
+          await processingMessage();
+          console.log("loading");
+        }
       };
       intervalId = setInterval(processMessage, 2000);
     } else {
@@ -53,7 +55,7 @@ export const UI = ({ hidden }) => {
       clearInterval(intervalId);
     }
     return () => clearInterval(intervalId);
-  }, [isLoading]);
+  }, [isLoading, audio]);
 
   const modifiedHandleSubmit = (event) => {
     event.preventDefault();

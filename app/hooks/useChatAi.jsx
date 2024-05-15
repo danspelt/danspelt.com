@@ -3,7 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ChatContext = createContext();
 import {
   audioFileToBase64,
-  readJsonTranscript
+  readJsonTranscript,
+  deleteAllAiFiles
 } from "../lib/aiUtils";
 export const ChatProvider = ({ children }) => {
   //ai hooks
@@ -23,6 +24,7 @@ export const ChatProvider = ({ children }) => {
   const [message, setMessage] = useState(null); 
   const onMessagePlayed = () => {
     setMessages((messages) => messages.slice(1));
+    deleteAllAiFiles();
   };
 
   const processingMessage = () => {

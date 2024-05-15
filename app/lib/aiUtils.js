@@ -1,7 +1,8 @@
 "use server";
 import { promises as fs, createWriteStream } from "fs";
 import { exec } from "child_process";
-import { ElevenLabsClient, play } from "elevenlabs";
+import { ElevenLabsClient } from "elevenlabs";
+import path from "path";
 import { env } from "../lib/config";
 
 const elevenLabsClient = new ElevenLabsClient({
