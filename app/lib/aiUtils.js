@@ -68,7 +68,6 @@ export const mp3ToWavToJson = async (messageId) => {
 };
 
 export const createMp3FromText = async (text, messageId) => {
-  console.log("createMp3FromText", text);
   if (text && messageId) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -90,7 +89,6 @@ export const createMp3FromText = async (text, messageId) => {
           reject(error);
         });
       } catch (error) {
-        console.error("Error in createMp3FromText:", error);
         reject(error);
       }
     });
@@ -109,7 +107,6 @@ export const deleteAllSubDirectories = async () => {
     };
 
     await deleteSubDirectories(process.cwd() + '/audios');
-    console.log('All subdirectories in audios deleted successfully.');
   } catch (error) {
     console.error('Error deleting subdirectories:', error);
   }
