@@ -42,7 +42,7 @@ const execCommand = (command) => {
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout) => {
       if (error) reject(error);
-      resolve(stdout);
+      resolve(stdout7);
     });
   });
 };
