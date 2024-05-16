@@ -6,7 +6,8 @@ import {
   audioFileToBase64,
   createMp3FromText,
   mp3ToWavToJson,
-  readJsonTranscript
+  readJsonTranscript,
+  deleteAllSubDirectories
 } from "../lib/aiUtils";
 import { useState } from "react";
 
@@ -35,6 +36,7 @@ export const UI = ({ hidden }) => {
         setAudio(audio);
         audio.onended = onMessagePlayed;
         setIsQuestionAsked(false);
+        deleteAllSubDirectories();
       } catch (err) {
         console.error("Error processing message:", err);
       }

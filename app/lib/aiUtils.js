@@ -96,23 +96,21 @@ export const createMp3FromText = async (text, messageId) => {
     });
   }
 };
-export const deleteAllAiFiles = async () => {
+export const deleteAllSubDirectories = async () => {
   try {
-    const deleteFilesInDirectory = async (directory) => {
+    const deleteSubDirectories = async (directory) => {
       const files = await fs.readdir(directory, { withFileTypes: true });
       for (const file of files) {
         const fullPath = path.join(directory, file.name);
         if (file.isDirectory()) {
-          await deleteFilesInDirectory(fullPath);
-        } else if (file.name.startsWith('ai_')) {
-          await fs.unlink(fullPath);
+          await fs.rmdir(fullPath, { recursive: true });
         }
       }
     };
 
-    await deleteFilesInDirectory(process.cwd() + '/audios');
-    console.log('All AI files deleted successfully.');
+    await deleteSubDirectories(process.cwd() + '/audios');
+    console.log('All subdirectories in audios deleted successfully.');
   } catch (error) {
-    console.error('Error deleting AI files:', error);
+    console.error('Error deleting subdirectories:', error);
   }
 };
