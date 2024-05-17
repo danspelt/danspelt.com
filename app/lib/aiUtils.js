@@ -53,11 +53,11 @@ export const mp3ToWavToJson = async (messageId) => {
       const dir = messageId === 'init' || messageId === 'processing' ? '' : `${messageId}/`;
       const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
       await execCommand(
-        `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
+        `~/ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
         // -y to overwrite the file
       );
       await execCommand(
-        `rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`
+        `~/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`
       );
       // -r phonetic is faster but less accurate
       resolve(`${process.cwd()}/audios/${fileName}.json`);
