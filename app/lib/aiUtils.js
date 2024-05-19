@@ -53,10 +53,9 @@ const execCommand = (command) => {
 export const mp3ToWavToJson = async (messageId) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const dir = messageId === 'init' || messageId === 'processing' ? '' : `${messageId}/`;
       const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
-      const ffmpegCommand = `${process.cwd()}/ffmpeg -y -i ${process.cwd()}/audios/${dir}${fileName}.mp3 ${process.cwd()}/audios/${dir}${fileName}.wav`;
-      const rhubarbCommand = `${process.cwd()}/rhubarb -f json -o ${process.cwd()}/audios/${dir}${fileName}.json ${process.cwd()}/audios/${dir}${fileName}.wav -r phonetic`;
+      const ffmpegCommand = `${process.cwd()}/ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
+      const rhubarbCommand = `${process.cwd()}/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`;
 
       await execCommand(ffmpegCommand);
       await execCommand(rhubarbCommand);
