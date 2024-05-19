@@ -40,8 +40,11 @@ export const audioFileToBase64 = async (messageId) => {
 
 const execCommand = (command) => {
   return new Promise((resolve, reject) => {
-    exec(command, (error, stdout) => {
-      if (error) reject(error);
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing command: ${stderr}`);
+        reject(error);
+      }
       resolve(stdout);
     });
   });
@@ -52,7 +55,9 @@ export const mp3ToWavToJson = async (messageId) => {
     try {
       const dir = messageId === 'init' || messageId === 'processing' ? '' : `${messageId}/`;
       const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
-      const ffmpegCommand = `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
+      const ffmpegCommand = process.platform === 'win32' 
+        ? `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
+        : `/usr/bin/ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
       const rhubarbCommand = process.platform === 'win32' 
         ? `rhubarb.exe -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`
         : `~/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`;
@@ -66,12 +71,13 @@ export const mp3ToWavToJson = async (messageId) => {
     }
   });
 };
+
 export const createMp3FromText = async (text, messageId) => {
   if (text && messageId) {
     return new Promise(async (resolve, reject) => {
       try {
         const dir = messageId === 'init' || messageId === 'processing' ? '' : `${messageId}/`;
-        await fs.mkdir(`${process.cwd()}/audios/${dir}`);
+        await fs.mkdir(`${process.cwd()}/audios/${dir}`, { recursive: true });
         const audio = await elevenLabsClient.generate({
           voice: "James",
           text: text,
@@ -93,6 +99,7 @@ export const createMp3FromText = async (text, messageId) => {
     });
   }
 };
+
 export const deleteAllSubDirectories = async () => {
   try {
     const deleteSubDirectories = async (directory) => {
