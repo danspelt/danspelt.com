@@ -52,21 +52,20 @@ export const mp3ToWavToJson = async (messageId) => {
     try {
       const dir = messageId === 'init' || messageId === 'processing' ? '' : `${messageId}/`;
       const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
-      await execCommand(
-        `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`
-        // -y to overwrite the file
-      );
-      await execCommand(
-        `~/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`
-      );
-      // -r phonetic is faster but less accurate
+      const ffmpegCommand = `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
+      const rhubarbCommand = process.platform === 'win32' 
+        ? `rhubarb.exe -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`
+        : `~/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`;
+
+      await execCommand(ffmpegCommand);
+      await execCommand(rhubarbCommand);
+
       resolve(`${process.cwd()}/audios/${fileName}.json`);
     } catch (error) {
       reject(error);
     }
   });
 };
-
 export const createMp3FromText = async (text, messageId) => {
   if (text && messageId) {
     return new Promise(async (resolve, reject) => {
