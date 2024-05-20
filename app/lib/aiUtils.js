@@ -38,9 +38,9 @@ export const audioFileToBase64 = async (messageId) => {
   });
 };
 const execCommand = (command) => {
-  const libPath = '/usr/lib/x86_64-linux-gnu'; // Replace with the correct path to libavdevice.so.58
+  
   return new Promise((resolve, reject) => {
-    exec(`LD_LIBRARY_PATH=${libPath}:$LD_LIBRARY_PATH ${command}`, (error, stdout, stderr) => {
+    exec(`LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH /usr/bin/ffmpeg ${command}`, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing command: ${stderr}`);
         reject(error);
