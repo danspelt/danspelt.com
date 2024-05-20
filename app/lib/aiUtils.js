@@ -40,7 +40,7 @@ export const audioFileToBase64 = async (messageId) => {
 const execCommand = (command) => {
   
   return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
+    exec(command, { cwd: process.cwd() }, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing command: ${stderr}`);
         reject(error);
