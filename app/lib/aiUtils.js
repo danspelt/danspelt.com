@@ -40,7 +40,7 @@ export const audioFileToBase64 = async (messageId) => {
 const execCommand = (command) => {
   
   return new Promise((resolve, reject) => {
-    exec(`LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH /usr/bin/ffmpeg ${command}`, (error, stdout, stderr) => {
+    exec(`LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH ${command}`, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing command: ${stderr}`);
         reject(error);
@@ -51,12 +51,12 @@ const execCommand = (command) => {
 };
 
 export const mp3ToWavToJson = async (messageId) => {
-
+  const binPath = '/usr/bin';
   return new Promise(async (resolve, reject) => {
     try {
       const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
-      const ffmpegCommand = `${process.cwd()}/ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
-      const rhubarbCommand = `${process.cwd()}/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`;
+      const ffmpegCommand = `${binPath}/ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
+      const rhubarbCommand = `${binPath}/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`;
 
       await execCommand(ffmpegCommand);
       await execCommand(rhubarbCommand);
