@@ -4,8 +4,8 @@ import { exec } from "child_process";
 import { ElevenLabsClient } from "elevenlabs";
 import path from "path";
 import { env } from "../lib/config";
-
 const elevenLabsClient = new ElevenLabsClient({
+
   apiKey: env.ELEVEN_LABS_API_KEY,
 });
 
@@ -37,10 +37,10 @@ export const audioFileToBase64 = async (messageId) => {
     }
   });
 };
-
 const execCommand = (command) => {
+  const libPath = '/usr/lib/x86_64-linux-gnu'; // Replace with the correct path to libavdevice.so.58
   return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
+    exec(`LD_LIBRARY_PATH=${libPath}:$LD_LIBRARY_PATH ${command}`, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing command: ${stderr}`);
         reject(error);
@@ -51,6 +51,7 @@ const execCommand = (command) => {
 };
 
 export const mp3ToWavToJson = async (messageId) => {
+
   return new Promise(async (resolve, reject) => {
     try {
       const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
