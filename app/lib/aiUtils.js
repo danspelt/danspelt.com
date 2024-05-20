@@ -51,12 +51,12 @@ const execCommand = (command) => {
 };
 
 export const mp3ToWavToJson = async (messageId) => {
-  const binPath = '/usr/bin';
+  
   return new Promise(async (resolve, reject) => {
     try {
       const fileName = messageId === 'init' || messageId === 'processing' ? `${messageId}` : `${messageId}/${messageId}`;
-      const ffmpegCommand = `${binPath}/ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
-      const rhubarbCommand = `${binPath}/rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`;
+      const ffmpegCommand = `ffmpeg -y -i ${process.cwd()}/audios/${fileName}.mp3 ${process.cwd()}/audios/${fileName}.wav`;
+      const rhubarbCommand = `rhubarb -f json -o ${process.cwd()}/audios/${fileName}.json ${process.cwd()}/audios/${fileName}.wav -r phonetic`;
 
       await execCommand(ffmpegCommand);
       await execCommand(rhubarbCommand);
