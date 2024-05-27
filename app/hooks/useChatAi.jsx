@@ -4,13 +4,11 @@ const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
   //ai hooks
-
   const [blink, setBlink] = useState(false);
   const [winkLeft, setWinkLeft] = useState(false);
   const [winkRight, setWinkRight] = useState(false);
-  const [lipsync, setLipsync] = useState(null);
-  const [facialExpression, setFacialExpression] = useState("");
-  const [audio, setAudio] = useState("");
+  const [currentMessage, setCurrentMessage] = useState({});
+  const [facialExpression, setFacialExpression] = useState(null);
   const [animation, setAnimation] = useState("");
   const [acceptingFiles, setAcceptingFiles] = useState(false);
   const [talking, setTalking] = useState(false);
@@ -22,18 +20,21 @@ export const ChatProvider = ({ children }) => {
 
   const playAudio = async (message) => {
     if (!message.audioPlayer) {
+      console.log("playAudio");
       // Get TTS
       const audioRes = await fetch(`/api/tts?text=${message.content}`);
+      
       const audio = await audioRes.blob();
-      const visemes = JSON.parse(await audioRes.headers.get("visemes"));
+      const visemes = JSON.parse(audioRes.headers.get("visemes"));
       const audioUrl = URL.createObjectURL(audio);
       const audioPlayer = new Audio(audioUrl);
-
-      setLipsync(visemes);
+      
       message.audioPlayer = audioPlayer;
+      message.visemes = visemes;
+      setCurrentMessage(message);
     }
 
-    message.audioPlayer.currentTime = 0;
+    //message.audioPlayer.currentTime = 0;
     message.audioPlayer.play();
   };
 
@@ -63,6 +64,8 @@ export const ChatProvider = ({ children }) => {
         setAnimation,
         playAudio,
         stopAudio,
+        currentMessage,
+        setCurrentMessage,
       }}
     >
       {children}

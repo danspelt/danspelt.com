@@ -16,7 +16,7 @@ export function PathFinder(props) {
     lipsync,
     talking,
     standingArguing,
-    message,
+    currentMessage,
     facialExpression,
     audio,
     rapping,
@@ -87,8 +87,7 @@ export function PathFinder(props) {
         } else {
           lerpMorphTarget(key, 0, 0.1);
         }
-      });
-      
+      });      
 
     lerpMorphTarget("eyeBlinkLeft", blink || winkLeft ? 1 : 0, 0.5);
     lerpMorphTarget("eyeBlinkRight", blink || winkRight ? 1 : 0, 0.5);
@@ -97,32 +96,22 @@ export function PathFinder(props) {
     if (setupMode) {
       return;
     }
-      
-    const appliedMorphTargets = [];
-    if (!lipsync && !audio) {
-      return;
-    }
-    const currentAudioTime = audio.currentTime;
-     for (let i = 0; i < lipsync.mouthCues.length; i++) {
-        const mouthCue = lipsync.mouthCues[i];
-        if (
-          currentAudioTime >= mouthCue.start &&
-          currentAudioTime <= mouthCue.end
-        ) {        
-          appliedMorphTargets.push(corresponding[mouthCue.value]);
-          lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2);
+
+    if (
+      currentMessage &&
+      currentMessage.visemes &&
+      currentMessage.audioPlayer
+    ) {
+      for (let i = currentMessage.visemes.length - 1; i >= 0; i--) {
+        const viseme = currentMessage.visemes[i];
+        
+        if (currentMessage.audioPlayer.currentTime * 1000 >= viseme[0]) {
+          
+          lerpMorphTarget(viseme[1], 1, 0.2);
           break;
         }
       }
-    
-
-    Object.values(corresponding).forEach((value) => {
-      if (appliedMorphTargets.includes(value)) {
-        return;
-      }
-      lerpMorphTarget(value, 0, 0.1);
-    });
-  
+    }
   });
 
 

@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import * as sdk from "microsoft-cognitiveservices-speech-sdk";
 import { PassThrough } from "stream";
 import { env } from "../../lib/config";
@@ -46,13 +47,12 @@ export async function GET(req) {
       }
     );
   });
-  const response = new Response(audioStream, {
+  return NextResponse.json(audioStream, {
     headers: {
       "Content-Type": "audio/mpeg",
       "Content-Disposition": `inline; filename=tts.mp3`,
-      Visemes: JSON.stringify(visemes),
+      "Visemes": JSON.stringify(visemes),
     },
   });
-  // audioStream.pipe(response);
-  return response;
-}       
+}
+
