@@ -30,6 +30,7 @@
     "firebase": "^10.7.1",
     "langchain": "*",
     "leva": "^0.9.35",
+    "microsoft-cognitiveservices-speech-sdk": "^1.36.0",
     "next": "latest",
     "openai": "^4.29.2",
     "pdf-parse": "^1.1.1",

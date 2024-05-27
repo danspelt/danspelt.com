@@ -1,6 +1,6 @@
+import { NextResponse } from "next/server";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
 import { getVectorStore } from "./vector-store";
-
 import {
   StreamingTextResponse,
   experimental_StreamData,
@@ -11,49 +11,72 @@ import { STANDALONE_QUESTION_TEMPLATE, QA_TEMPLATE } from "./prompt-templates";
 
 type callChainArgs = {
   question: string;
-  chatHistory: string;
 };
 
-export async function callChain({ question, chatHistory }: callChainArgs) {
+export async function callChain({ question }: callChainArgs) {
   try {
-    // Open AI recommendation
-    const sanitizedQuestion = question.trim().replace("\n", " ");
-    const vectorStore = await getVectorStore();
+    // Ensure question is not null or undefined
+    if (!question) {
+      throw new Error("Question is required.");
+    }
     
+    const sanitizedQuestion = question.trim().replace("\n", " ");
+    console.log("Sanitized Question:", sanitizedQuestion);   
+    // Ensure vectorStore is correctly initialized
+    const vectorStore = await getVectorStore();
+    console.log("Vector Store:", vectorStore);
+    if (!vectorStore) {
+      throw new Error("Vector store initialization failed.");
+    }
+
     const { stream, handlers } = LangChainStream({
       experimental_streamData: true,
     });
-    const data = new experimental_StreamData();
 
+    // Check models
+    if (!streamingModel || !nonStreamingModel) {
+      throw new Error("Models are not properly initialized.");
+    }
+
+    // Check templates
+    if (!QA_TEMPLATE || !STANDALONE_QUESTION_TEMPLATE) {
+      throw new Error("Templates are not properly initialized.");
+    }
+  
+    console.log("Streaming Model:", streamingModel);
+    console.log("Non-Streaming Model:", nonStreamingModel);
+    console.log("QA Template:", QA_TEMPLATE);
+    console.log("Standalone Question Template:", STANDALONE_QUESTION_TEMPLATE);
+    
     const chain = ConversationalRetrievalQAChain.fromLLM(
       streamingModel,
       vectorStore.asRetriever(),
       {
         qaTemplate: QA_TEMPLATE,
         questionGeneratorTemplate: STANDALONE_QUESTION_TEMPLATE,
-        returnSourceDocuments: true, //default 4
+        returnSourceDocuments: true,
         questionGeneratorChainOptions: {
           llm: nonStreamingModel,
         },
       }
     );
-
-    // Question using chat-history 
-    // Reference https://js.langchain.com/docs/modules/chains/popular/chat_vector_db#externally-managed-memory
-    chain
-      .call(
-        {
-          question: sanitizedQuestion,
-          chat_history: chatHistory,
-        },
-        [handlers]
+    console.log("Chain Initialized:", chain);
+    // Execute the chain call
+    await chain.call(
+      {
+        question: sanitizedQuestion,
+        chat_history: [
+          {
+            question: "What is  the answer to life, the universe and everything?",
+            answer: "42"
+          }
+        ]
+      },
+      [handlers]
     );
-    
-    
-    // Return the readable stream
-    return new StreamingTextResponse(stream);
+
   } catch (e) {
-    console.error(e);
+    console.error("Error in callChain:", e.message);
     throw new Error("Call chain method failed to execute successfully!!");
   }
 }

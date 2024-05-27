@@ -8,7 +8,6 @@ import {
 } from "@react-three/drei";
 import { useChatContext } from "../hooks/useChatAi";
 import { PathFinder } from "./PathFinder";
-
 const Dots = (props) => {
   const { isLoading } = useChatContext();
   const [loadingText, setLoadingText] = useState("");
@@ -52,14 +51,13 @@ export const Experience = () => {
   }, [cameraZoomed]);
 
   return (
-    <>
+    <>   
       <CameraControls ref={cameraControls} />      
       <Suspense fallback={null}>
         <Dots position-y={1.75} position-x={-0.02} />
       </Suspense>
       <PathFinder />
-      <Environment files="/hdr/1.hdr" background />
-      
+      <Environment preset="sunset" />
     </>
   );
 };

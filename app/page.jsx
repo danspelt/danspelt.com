@@ -1,12 +1,17 @@
-import React from 'react';
-import View3D from './View3D';
-import Dropzone from './components/Dropzone';
+'use client';
+import { Canvas } from '@react-three/fiber';
+import { Experience } from './components/Experience';
+import { TypingBox } from './components/TypingBox';
 
 const Home = () => {
   return ( 
-    <div className='flex justify-center items-center h-screen w-screen bg-sky-400'>
-      {/* <Dropzone className='h-screen w-screen absolute bg-violet-50 z-10 opacity-0' />       */}
-      <View3D />
+    <div className='relative h-screen w-screen'>
+      <div className="absolute inset-0 flex justify-center items-center z-10">
+        <TypingBox />
+      </div>
+      <Canvas shadows camera={{ position: [0, 0, 1], fov: 30 }}>
+        <Experience />
+      </Canvas>
     </div>
    );
 }
