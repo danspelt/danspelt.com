@@ -14,7 +14,7 @@ const ANIMATION_FADE_TIME = 0.5;
 
 export function Teacher({ teacher, ...props }) {
   const group = useRef();
-  const { scene } = useGLTF(`/models/Teacher_${teacher}.glb`);
+  const { scene } = useGLTF(`/models/Teacher_Nanami.glb`);
   useEffect(() => {
     scene.traverse((child) => {
       if (child.material) {
@@ -27,7 +27,7 @@ export function Teacher({ teacher, ...props }) {
 
   const currentMessage = useAITeacher((state) => state.currentMessage);
   const loading = useAITeacher((state) => state.loading);
-  const { animations } = useGLTF(`/models/animations_${teacher}.glb`);
+  const { animations } = useGLTF(`/models/animations_Nanami.glb`);
   const { actions, mixer } = useAnimations(animations, group);
   const [animation, setAnimation] = useState("Idle");
 
@@ -61,7 +61,7 @@ export function Teacher({ teacher, ...props }) {
 
   useFrame(({ camera }) => {
     // Smile
-    lerpMorphTarget("mouthSmile", 0.2, 0.5);
+    lerpMorphTarget("mouthSmile", 0, 0.5);
     // Blinking
     lerpMorphTarget("eye_close", blink ? 1 : 0, 0.5);
 
@@ -69,7 +69,6 @@ export function Teacher({ teacher, ...props }) {
     for (let i = 0; i <= 21; i++) {
       lerpMorphTarget(i, 0, 0.1); // reset morph targets
     }
-
     if (
       currentMessage &&
       currentMessage.visemes &&

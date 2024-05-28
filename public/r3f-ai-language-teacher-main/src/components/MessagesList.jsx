@@ -4,9 +4,8 @@ import { useEffect, useRef } from "react";
 export const MessagesList = () => {
   const messages = useAITeacher((state) => state.messages);
   const playMessage = useAITeacher((state) => state.playMessage);
+  const stopMessage = useAITeacher((state) => state.stopMessage);
   const { currentMessage } = useAITeacher();
-  const english = useAITeacher((state) => state.english);
-  const furigana = useAITeacher((state) => state.furigana);
   const classroom = useAITeacher((state) => state.classroom);
 
   const container = useRef();
@@ -18,28 +17,7 @@ export const MessagesList = () => {
     });
   }, [messages.length]);
 
-  const renderEnglish = (englishText) => (
-    <>
-      {english && (
-        <p className="text-4xl inline-block px-2 rounded-sm font-bold bg-clip-text text-transparent bg-gradient-to-br from-blue-300/90 to-white/90">
-          {englishText}
-        </p>
-      )}
-    </>
-  );
-
-  const renderJapanese = (japanese) => (
-    <p className="text-white font-bold text-4xl mt-2 font-jp flex flex-wrap gap-1">
-      {japanese.map((word, i) => (
-        <span key={i} className="flex flex-col justify-end items-center">
-          {furigana && word.reading && (
-            <span className="text-2xl text-white/65">{word.reading}</span>
-          )}
-          {word.word}
-        </span>
-      ))}
-    </p>
-  );
+  
 
   return (
     <div
@@ -76,10 +54,7 @@ export const MessagesList = () => {
                 >
                   {message.speech}
                 </span>
-                {renderEnglish(message.answer.english)}
               </div>
-
-              {renderJapanese(message.answer.japanese)}
             </div>
             {currentMessage === message ? (
               <button
@@ -132,37 +107,6 @@ export const MessagesList = () => {
                 </svg>
               </button>
             )}
-          </div>
-          <div className="p-5 mt-5  bg-gradient-to-br from-pink-200/20 to-pink-500/20 rounded-xl">
-            <span className="pr-4 italic bg-clip-text text-transparent bg-gradient-to-b from-white/90 to-white/70 text-3xl font-bold uppercase inline-block">
-              Grammar Breakdown
-            </span>
-            {message.answer.grammarBreakdown.map((grammar, i) => (
-              <div key={i} className="mt-3">
-                {message.answer.grammarBreakdown.length > 1 && (
-                  <>
-                    {renderEnglish(grammar.english)}
-                    {renderJapanese(grammar.japanese)}
-                  </>
-                )}
-
-                <div className="mt-3 flex flex-wrap gap-3 items-end">
-                  {grammar.chunks.map((chunk, i) => (
-                    <div key={i} className="p-2 bg-black/30 rounded-md">
-                      <p className="text-white/90 text-4xl font-jp">
-                        {renderJapanese(chunk.japanese)}
-                      </p>
-                      <p className="text-pink-300/90 text-2xl">
-                        {chunk.meaning}
-                      </p>
-                      <p className="text-blue-400/90 text-2xl">
-                        {chunk.grammar}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       ))}

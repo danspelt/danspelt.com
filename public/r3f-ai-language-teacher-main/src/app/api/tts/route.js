@@ -11,8 +11,8 @@ export async function GET(req) {
   );
 
   // https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts
-  const teacher = req.nextUrl.searchParams.get("teacher") || "Nanami";
-  speechConfig.speechSynthesisVoiceName = `ja-JP-${teacher}Neural`;
+  const teacher = req.nextUrl.searchParams.get("teacher") || "Liam";
+  speechConfig.speechSynthesisVoiceName = `en-CA-${teacher}Neural`;
 
   const speechSynthesizer = new sdk.SpeechSynthesizer(speechConfig);
   const visemes = [];
@@ -50,7 +50,7 @@ export async function GET(req) {
     headers: {
       "Content-Type": "audio/mpeg",
       "Content-Disposition": `inline; filename=tts.mp3`,
-      Visemes: JSON.stringify(visemes),
+      visemes: visemes,
     },
   });
   // audioStream.pipe(response);
