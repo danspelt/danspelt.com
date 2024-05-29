@@ -50,7 +50,7 @@ export async function GET(req) {
     headers: {
       "Content-Type": "audio/mpeg",
       "Content-Disposition": `inline; filename=tts.mp3`,
-      visemes: visemes,
+      visemes: JSON.stringify(visemes),
     },
   });
   // audioStream.pipe(response);

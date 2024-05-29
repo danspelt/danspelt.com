@@ -13,22 +13,36 @@ type callChainArgs = {
   question: string;
 };
 
+function removeNonReadableChars(chunk) {
+  return chunk.replace(/[^ -~\n\r]/g, ""); // Remove non-readable ASCII characters
+}
+
+function createStreamCleaningTransformer() {
+  return new TransformStream({
+    start() {},
+    transform(chunk, controller) {
+      const cleanedChunk = removeNonReadableChars(chunk);
+      controller.enqueue(cleanedChunk);
+    },
+    flush(controller) {
+      controller.terminate();
+    },
+  });
+}
+
 export async function callChain({ question }: callChainArgs) {
   try {
-    // Ensure question is not null or undefined
-    if (!question) {
-      throw new Error("Question is required.");
-    }
-    
     const sanitizedQuestion = question.trim().replace("\n", " ");
-    console.log("Sanitized Question:", sanitizedQuestion);   
+    console.log("Sanitized Question:", sanitizedQuestion);
+
     // Ensure vectorStore is correctly initialized
     const vectorStore = await getVectorStore();
-    console.log("Vector Store:", vectorStore);
     if (!vectorStore) {
       throw new Error("Vector store initialization failed.");
     }
+    // console.log("Vector Store:", vectorStore);
 
+    // Initialize stream and handlers
     const { stream, handlers } = LangChainStream({
       experimental_streamData: true,
     });
@@ -42,12 +56,13 @@ export async function callChain({ question }: callChainArgs) {
     if (!QA_TEMPLATE || !STANDALONE_QUESTION_TEMPLATE) {
       throw new Error("Templates are not properly initialized.");
     }
-  
-    console.log("Streaming Model:", streamingModel);
-    console.log("Non-Streaming Model:", nonStreamingModel);
-    console.log("QA Template:", QA_TEMPLATE);
-    console.log("Standalone Question Template:", STANDALONE_QUESTION_TEMPLATE);
-    
+
+    // console.log("Streaming Model:", streamingModel);
+    // console.log("Non-Streaming Model:", nonStreamingModel);
+    // console.log("QA Template:", QA_TEMPLATE);
+    // console.log("Standalone Question Template:", STANDALONE_QUESTION_TEMPLATE);
+
+    // Initialize the chain
     const chain = ConversationalRetrievalQAChain.fromLLM(
       streamingModel,
       vectorStore.asRetriever(),
@@ -62,21 +77,23 @@ export async function callChain({ question }: callChainArgs) {
     );
     console.log("Chain Initialized:", chain);
     // Execute the chain call
-    await chain.call(
+    chain.call(
       {
         question: sanitizedQuestion,
-        chat_history: [
-          {
-            question: "What is  the answer to life, the universe and everything?",
-            answer: "42"
-          }
-        ]
+        chat_history: [],
       },
       [handlers]
     );
 
+
+    // Pipe the stream through the cleaning transformer
+    const cleanedStream = stream.pipeThrough(createStreamCleaningTransformer());
+
+
+    console.log("Cleaned Stream:", cleanedStream);
+    return new StreamingTextResponse(cleanedStream);
   } catch (e) {
     console.error("Error in callChain:", e.message);
-    throw new Error("Call chain method failed to execute successfully!!");
+    throw new Error("Call chain method failed to execute successfully!");
   }
-}
+} 

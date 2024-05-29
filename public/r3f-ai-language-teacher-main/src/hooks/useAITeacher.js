@@ -120,6 +120,9 @@ export const useAITeacher = create((set, get) => ({
 
       message.audioPlayer = audioPlayer;
       message.visemes = visemes;
+      set(() => ({
+        currentMessage: message,
+      }));
       message.audioPlayer.onended = () => {
         set(() => ({
           currentMessage: null,
