@@ -73,7 +73,7 @@ export const useAITeacher = create((set, get) => ({
         while ((match = regex.exec(chunk)) !== null) {
           result += match[1];
         }
-
+        result = result.replace(/[^a-zA-Z0-9\s]/g, ''); // Remove non-alphanumeric characters
         // Update the response incrementally
         set((state) => ({
           messages: state.messages.map((m) => {
@@ -110,11 +110,12 @@ export const useAITeacher = create((set, get) => ({
       set(() => ({
         loading: true,
       }));
+    
       // Get TTS
+      console.log("getting tts", message)
       const audioRes = await fetch(`/api/tts?teacher=${get().teacher}&text=${encodeURIComponent(message.response)}`);
       const audio = await audioRes.blob();
       const visemes = audioRes.headers.get("visemes");
-      console.log("visemes", visemes);
       const audioUrl = URL.createObjectURL(audio);
       const audioPlayer = new Audio(audioUrl);
 

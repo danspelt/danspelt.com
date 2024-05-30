@@ -7,18 +7,21 @@ export async function getChunkedDocsFromPDF() {
     const loader = new PDFLoader(env.PDF_PATH);
     const docs = await loader.load();
 
-    // From the docs https://www.pinecone.io/learn/chunking-strategies/
+    // Ensure newlines are replaced
+    for (let i = 0; i < docs.length; i++) {
+      docs[i].pageContent = docs[i].pageContent.replace(/\n/g, '');
+    }    
+  
     const textSplitter = new RecursiveCharacterTextSplitter({
       chunkSize: 1000,
       chunkOverlap: 200,
     });
-  let docsOi
-    for(let i = 0; i < docs.length - 1; i++) {
-      docs[i].pageContent = docs[i].pageContent.replace(/\n/g, ' ');
-      
-    }
+
     const chunkedDocs = await textSplitter.splitDocuments(docs);
-    
+
+    // Log the chunked docs
+    console.log("Chunked Docs:", chunkedDocs);
+
     return chunkedDocs;
   } catch (e) {
     console.error(e);
