@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
-import { getVectorStore } from "./vector-store";
+import { getVectorStore, fetchDataFromCollection } from "./vector-store";
 import {
   StreamingTextResponse,
   experimental_StreamData,
@@ -12,23 +12,6 @@ import { STANDALONE_QUESTION_TEMPLATE, QA_TEMPLATE } from "./prompt-templates";
 type callChainArgs = {
   question: string;
 };
-
-function removeNonReadableChars(chunk) {
-  return chunk.replace(/[^ -~\n\r]/g, ""); // Remove non-readable ASCII characters
-}
-
-function createStreamCleaningTransformer() {
-  return new TransformStream({
-    start() {},
-    transform(chunk, controller) {
-      const cleanedChunk = removeNonReadableChars(chunk);
-      controller.enqueue(cleanedChunk);
-    },
-    flush(controller) {
-      controller.terminate();
-    },
-  });
-}
 
 export async function callChain({ question }: callChainArgs) {
   try {
@@ -84,16 +67,10 @@ export async function callChain({ question }: callChainArgs) {
       },
       [handlers]
     );
-
-
-    // Pipe the stream through the cleaning transformer
-    const cleanedStream = stream.pipeThrough(createStreamCleaningTransformer());
-
-
-    console.log("Cleaned Stream:", cleanedStream);
-    return new StreamingTextResponse(cleanedStream);
+    console.log("Stream:", stream);
+    return new StreamingTextResponse(stream);
   } catch (e) {
     console.error("Error in callChain:", e.message);
     throw new Error("Call chain method failed to execute successfully!");
   }
-} 
+}

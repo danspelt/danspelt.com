@@ -12,9 +12,13 @@ export async function getChunkedDocsFromPDF() {
       chunkSize: 1000,
       chunkOverlap: 200,
     });
-
+  let docsOi
+    for(let i = 0; i < docs.length - 1; i++) {
+      docs[i].pageContent = docs[i].pageContent.replace(/\n/g, ' ');
+      
+    }
     const chunkedDocs = await textSplitter.splitDocuments(docs);
-  
+    
     return chunkedDocs;
   } catch (e) {
     console.error(e);
