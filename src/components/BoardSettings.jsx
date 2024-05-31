@@ -18,9 +18,10 @@ export const BoardSettings = () => {
 
   return (
     <>
-      <div className="absolute right-0 bottom-full flex flex-row gap-10 mb-20">
-        {teachers.map((sensei, idx) => (
+      {/* <div className="absolute right-0 bottom-full flex flex-row gap-10 mb-20">
+         {teachers.map((sensei, idx) => (
           <div
+
             key={idx}
             className={`p-3 transition-colors duration-500 ${
               teacher === sensei ? "bg-white/80" : "bg-white/40"
@@ -36,7 +37,7 @@ export const BoardSettings = () => {
             <h2 className="text-3xl font-bold mt-3 text-center">{sensei}</h2>
           </div>
         ))}
-      </div>
+      </div> */}
       <div className="absolute left-0 bottom-full flex flex-row gap-2 mb-20">
         <button
           className={` ${
@@ -59,50 +60,7 @@ export const BoardSettings = () => {
           Alternative classroom
         </button>
       </div>
-      <div className="absolute left-0 top-full flex flex-row gap-2 mt-20">
-        <button
-          className={` ${
-            speech === "formal"
-              ? "text-white bg-slate-900/40 "
-              : "text-white/45 bg-slate-700/20 "
-          } py-4 px-10 text-4xl rounded-full transition-colors duration-500 backdrop-blur-md`}
-          onClick={() => setSpeech("formal")}
-        >
-          Formal
-        </button>
-        <button
-          className={` ${
-            speech === "casual"
-              ? "text-white bg-slate-900/40 "
-              : "text-white/45 bg-slate-700/20 "
-          } py-4 px-10 text-4xl rounded-full transition-colors duration-500 backdrop-blur-md`}
-          onClick={() => setSpeech("casual")}
-        >
-          Casual
-        </button>
-      </div>
-      <div className="absolute right-0 top-full flex flex-row gap-2 mt-20">
-        <button
-          className={` ${
-            furigana
-              ? "text-white bg-slate-900/40 "
-              : "text-white/45 bg-slate-700/20 "
-          } py-4 px-10 text-4xl rounded-full transition-colors duration-500 backdrop-blur-md`}
-          onClick={() => setFurigana(!furigana)}
-        >
-          Furigana
-        </button>
-        <button
-          className={`${
-            english
-              ? "text-white bg-slate-900/40 "
-              : "text-white/45 bg-slate-700/20 "
-          } py-4 px-10 text-4xl rounded-full transition-colors duration-500 backdrop-blur-md`}
-          onClick={() => setEnglish(!english)}
-        >
-          English
-        </button>
-      </div>
     </>
   );
+
 };

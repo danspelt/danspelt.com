@@ -31,14 +31,17 @@ export const MessagesList = () => {
       {messages.length === 0 && (
         <div className="h-full w-full grid place-content-center text-center">
           <h2 className="text-8xl font-bold text-white/90 italic">
-            Wawa Sensei
+            Dan Spelt
             <br />
-            Japanese Language School
+            Full Stack Web Developer
+
           </h2>
-          <h2 className="text-8xl font-bold font-jp text-red-600/90 italic">
-            ワワ先生日本語学校
+          <h2 className="text-8xl font-bold text-white/90">
+                Ai Chat Bot            
           </h2>
+
         </div>
+
       )}
       {messages.map((message, i) => (
         <div key={i}>
