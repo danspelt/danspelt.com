@@ -1,15 +1,11 @@
 import { env } from "./config";
 import { OpenAIEmbeddings } from "@langchain/openai";
- import { QdrantVectorStore } from "@langchain/community/vectorstores/qdrant";
+import { QdrantVectorStore } from "@langchain/community/vectorstores/qdrant";
 import { getClient } from "./qdrant-client";
 
-const removeNewLines = (input) => {
-  return input.replace(/\r?\n|\r/g, '');
-};
-
 export const storeChunks = async (chunks, collectionName) => {
-  const sanitizedChunks = chunks.map(chunk => {
-    return { ...chunk, content: removeNewLines(chunk.content) };
+  const sanitizedChunks = chunks.map((chunk) => {
+    return { ...chunk, content: chunk.content };
   });
 
   const vectorStore = await QdrantVectorStore.fromDocuments(
@@ -49,7 +45,7 @@ export const getVectorStore = async () => {
 
       // Creating a new collection with sanitized data if needed
       const initialDocuments = []; // You can add initial documents if needed, ensure they are sanitized
-      const sanitizedInitialDocuments = initialDocuments.map(doc => {
+      const sanitizedInitialDocuments = initialDocuments.map((doc) => {
         return { ...doc, content: removeNewLines(doc.content) };
       });
 

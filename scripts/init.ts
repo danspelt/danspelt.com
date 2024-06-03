@@ -1,9 +1,8 @@
-import { getChunkedDocsFromPDF } from "../src/lib/pdf-loader";
+import { getChunkedDocsFromWeb } from "../src/lib/data-loaders";
 import {storeChunks} from "../src/lib/vector-store";
 (async () => {
   try {
-    const chunks = await getChunkedDocsFromPDF();
-    console.log("Chunks:", chunks);
+    const chunks = await getChunkedDocsFromWeb("https://www.linkedin.com/in/dan-spelt/");
     await storeChunks(chunks, "knowledge");
   }
   catch (error) {
