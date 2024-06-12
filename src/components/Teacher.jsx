@@ -153,7 +153,7 @@ export function Teacher({ teacher, ...props }) {
           </div>
         </Html>
       )}
-      <primitive object={scene} />
+      <primitive object={scene}/>
     </group>
   );
 }

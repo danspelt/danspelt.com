@@ -13,18 +13,19 @@ import { Canvas } from "@react-three/fiber";
 import { Leva, button, useControls } from "leva";
 import { Suspense, useEffect, useRef } from "react";
 import { degToRad } from "three/src/math/MathUtils";
-import { BoardSettings } from "./BoardSettings";
-import { MessagesList } from "./MessagesList";
 import { Teacher } from "./Teacher";
 import { TypingBox } from "./TypingBox";
+import { MessagesList } from "./MessagesList";
+import { QuickQuestion } from "./QuickQuestion";
 
 const itemPlacement = {
   default: {
+
     classroom: {
       position: [0.2, -1.7, -2],
     },
     teacher: {
-      position: [-1, -1.7, -3],
+      position: [-1.5, -1.7, -3],
     },
     board: {
       position: [0.45, 0.382, -6],
@@ -47,8 +48,14 @@ export const Experience = () => {
 
   return (
     <>
+      <div className="z-10 md:justify-center fixed bottom-4 top-4 flex gap-3 flex-wrap justify-stretch">
+        <QuickQuestion />
+      </div>
+
       <div className="z-10 md:justify-center fixed bottom-4 left-4 right-4 flex gap-3 flex-wrap justify-stretch">
+
         <TypingBox />
+
       </div>
       <Leva hidden />
       <Loader />
@@ -67,11 +74,12 @@ export const Experience = () => {
               distanceFactor={1}
             >
               <MessagesList />
-              <BoardSettings />
             </Html>
             <Environment preset="sunset" />
-            <ambientLight intensity={0.8} color="pink" />
 
+
+            <Environment files={["/hdr/1.hdr"]} background/>
+            <ambientLight intensity={1.8} color="white" />
             <Gltf
               src={`/models/classroom_${classroom}.glb`}
               {...itemPlacement[classroom].classroom}
@@ -95,13 +103,13 @@ const CAMERA_POSITIONS = {
   loading: [
     0.00002621880610890309, 0.00000515037441056466, 0.00009636414192870058,
   ],
-  speaking: [0, -1.6481333940859815e-7, 0.00009999846226827279],
+  speaking: [0, -3.6481333940859815e-7, 0.00009999846226827279],
 };
 
 const CAMERA_ZOOMS = {
   default: 1,
   loading: 1.3,
-  speaking: 2.1204819420055387,
+  speaking: 3.1204819420055387,
 };
 
 const CameraManager = () => {

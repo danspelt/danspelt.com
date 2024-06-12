@@ -5,8 +5,24 @@ export const teachers = ["Clara", "Liam"];
 export const useAITeacher = create((set, get) => ({
   messages: [],
   currentMessage: null,
+  boardTexts: [],
   teacher: teachers[0],
+
+  isTalking: false,
+
+  setIsTalking: (isTalking) => {
+    set(() => ({
+      isTalking,
+    }));
+  },
+  setBoardTexts: (boardTexts) => {
+    set(() => ({
+      boardTexts,
+
+    }));
+  },
   setTeacher: (teacher) => {
+
     set(() => ({
       teacher,
       messages: get().messages.map((message) => {
@@ -22,40 +38,26 @@ export const useAITeacher = create((set, get) => ({
     }));
   },
   loading: false,
-  furigana: true,
-  setFurigana: (furigana) => {
-    set(() => ({
-      furigana,
-    }));
-  },
-  english: true,
-  setEnglish: (english) => {
-    set(() => ({
-      english,
-    }));
-  },
-  speech: "formal",
-  setSpeech: (speech) => {
-    set(() => ({
-      speech,
-    }));
-  },
   askAI: async (question) => {
     if (!question) {
       return;
     }
+    set(() => ({
+      isTalking: true,
+    }));
     const message = {
+
       question,
       id: get().messages.length,
       response: '',
     };
-    
+
     set(() => ({
       loading: true,
       currentMessage: message,
       messages: [...get().messages, message],
     }));
-    
+
     // Ask AI
     try {
       const response = await fetch(`/api/ai?question=${encodeURIComponent(question)}`);
@@ -84,7 +86,7 @@ export const useAITeacher = create((set, get) => ({
           })
         }));
       }
-      
+
       console.log("askAI", result);
       const updatedMessage = { ...message, response: result };
       set((state) => ({
@@ -110,7 +112,7 @@ export const useAITeacher = create((set, get) => ({
       set(() => ({
         loading: true,
       }));
-    
+
       // Get TTS
       console.log("getting tts", message)
       const audioRes = await fetch(`/api/tts?teacher=${get().teacher}&text=${encodeURIComponent(message.response)}`);
@@ -127,8 +129,10 @@ export const useAITeacher = create((set, get) => ({
       message.audioPlayer.onended = () => {
         set(() => ({
           currentMessage: null,
+          isTalking: false,
         }));
       };
+
 
       set(() => ({
         loading: false,

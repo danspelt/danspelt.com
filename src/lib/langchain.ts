@@ -53,7 +53,7 @@ export async function callChain({ question }: callChainArgs) {
         qaTemplate: QA_TEMPLATE,
         questionGeneratorTemplate: STANDALONE_QUESTION_TEMPLATE,
         returnSourceDocuments: true,
-        questionGeneratorChainOptions: {
+        questionGeneratorChainOptions: {  
           llm: nonStreamingModel,
         },
       }
