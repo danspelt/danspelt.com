@@ -11,8 +11,8 @@ export const QuickQuestion = () => {
     "What is Dan Spelt's professional background?",
     "What projects has Dan Spelt worked on?",
     "What technologies does Dan Spelt specialize in?",
-    "Can you tell me about Dan Spelt's education?",
-    "What are Dan Spelt's career achievements?"
+ //   "Can you tell me about Dan Spelt's education?",
+   // "What are Dan Spelt's career achievements?"
   ];
 
   const ask = (question) => {
