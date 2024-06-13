@@ -20,7 +20,6 @@ import { QuickQuestion } from "./QuickQuestion";
 
 const itemPlacement = {
   default: {
-
     classroom: {
       position: [0.2, -1.7, -2],
     },
@@ -53,9 +52,7 @@ export const Experience = () => {
       </div>
 
       <div className="z-10 md:justify-center fixed bottom-4 left-4 right-4 flex gap-3 flex-wrap justify-stretch">
-
         <TypingBox />
-
       </div>
       <Leva hidden />
       <Loader />
@@ -78,7 +75,7 @@ export const Experience = () => {
             <Environment preset="sunset" />
 
 
-            <Environment files={["/hdr/1.hdr"]} background/>
+            <Environment files={["/hdr/1.hdr"]} background />
             <ambientLight intensity={1.8} color="white" />
             <Gltf
               src={`/models/classroom_${classroom}.glb`}

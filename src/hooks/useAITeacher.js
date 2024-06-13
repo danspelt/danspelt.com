@@ -7,9 +7,21 @@ export const useAITeacher = create((set, get) => ({
   currentMessage: null,
   boardTexts: [],
   teacher: teachers[0],
-
   isTalking: false,
-
+  isWelcomeMessageBoard: true,
+  wordTimings: [],
+  currentWordIndex: 0,
+  classroom: "default",
+  setClassroom: (classroom) => {
+    set(() => ({
+      classroom,
+    }));
+  },
+  setIsWelcomeMessageBoard: (isWelcomeMessageBoard) => {
+    set(() => ({
+      isWelcomeMessageBoard,
+    }));
+  },
   setIsTalking: (isTalking) => {
     set(() => ({
       isTalking,
@@ -18,11 +30,9 @@ export const useAITeacher = create((set, get) => ({
   setBoardTexts: (boardTexts) => {
     set(() => ({
       boardTexts,
-
     }));
   },
   setTeacher: (teacher) => {
-
     set(() => ({
       teacher,
       messages: get().messages.map((message) => {
@@ -31,12 +41,13 @@ export const useAITeacher = create((set, get) => ({
       }),
     }));
   },
-  classroom: "default",
   setClassroom: (classroom) => {
     set(() => ({
       classroom,
     }));
   },
+  setWordTimings: (wordTimings) => set({ wordTimings }),
+  setCurrentWordIndex: (index) => set({ currentWordIndex: index }),
   loading: false,
   askAI: async (question) => {
     if (!question) {
@@ -46,7 +57,6 @@ export const useAITeacher = create((set, get) => ({
       isTalking: true,
     }));
     const message = {
-
       question,
       id: get().messages.length,
       response: '',
@@ -85,8 +95,8 @@ export const useAITeacher = create((set, get) => ({
             return m;
           })
         }));
+        
       }
-
       console.log("askAI", result);
       const updatedMessage = { ...message, response: result };
       set((state) => ({
@@ -106,43 +116,42 @@ export const useAITeacher = create((set, get) => ({
     console.log("playMessage", message);
     set(() => ({
       currentMessage: message,
+      boardTexts: [...get().boardTexts, message.response],
+      isTalking: true,
+      isWelcomeMessageBoard: false,
     }));
-
     if (!message.audioPlayer) {
       set(() => ({
         loading: true,
       }));
 
       // Get TTS
-      console.log("getting tts", message)
       const audioRes = await fetch(`/api/tts?teacher=${get().teacher}&text=${encodeURIComponent(message.response)}`);
+      const wordTimings = JSON.parse(audioRes.headers.get("wordTimings"));
       const audio = await audioRes.blob();
-      const visemes = audioRes.headers.get("visemes");
       const audioUrl = URL.createObjectURL(audio);
       const audioPlayer = new Audio(audioUrl);
 
+      set({ wordTimings, currentWordIndex: 0 });
       message.audioPlayer = audioPlayer;
-      message.visemes = visemes;
-      set(() => ({
-        currentMessage: message,
-      }));
-      message.audioPlayer.onended = () => {
-        set(() => ({
-          currentMessage: null,
-          isTalking: false,
-        }));
+
+      // Sync with word timings
+      audioPlayer.ontimeupdate = () => {
+        const currentTime = audioPlayer.currentTime * 1000; // Convert to ms
+        const timings = get().wordTimings;
+        let currentIndex = 0;
+  
+        while (currentIndex < timings.length && currentTime >= timings[currentIndex].offset) {
+          currentIndex++;
+        }
+        set({ currentWordIndex: currentIndex - 1 });
       };
 
+      audioPlayer.onended = () => {
+        set({ currentWordIndex: 0, currentMessage: null, isTalking: false, isWelcomeMessageBoard: true });
+      };
 
-      set(() => ({
-        loading: false,
-        messages: get().messages.map((m) => {
-          if (m.id === message.id) {
-            return { ...m, audioPlayer, visemes };
-          }
-          return m;
-        }),
-      }));
+      audioPlayer.play();
     }
 
     if (message.audioPlayer) {

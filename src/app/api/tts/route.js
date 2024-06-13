@@ -16,8 +16,21 @@ export async function GET(req) {
 
   const speechSynthesizer = new sdk.SpeechSynthesizer(speechConfig);
   const visemes = [];
+  const wordTimings = [];
+  let currentOffset = 0;
+
+  // Capture word timings
+  speechSynthesizer.wordBoundary = (s, e) => {
+    wordTimings.push({
+      word: e.text,
+      offset: e.audioOffset / 10000, // ms
+      duration: e.duration / 10000, // ms
+    });
+    currentOffset = e.audioOffset / 10000;
+  };
   speechSynthesizer.visemeReceived = function (s, e) {
     // console.log(
+
     //   "(Viseme), Audio offset: " +
     //     e.audioOffset / 10000 +
     //     "ms. Viseme ID: " +
@@ -51,8 +64,9 @@ export async function GET(req) {
       "Content-Type": "audio/mpeg",
       "Content-Disposition": `inline; filename=tts.mp3`,
       visemes: JSON.stringify(visemes),
+      wordTimings: JSON.stringify(wordTimings),
     },
   });
-  // audioStream.pipe(response);
+
   return response;
 }
