@@ -17,6 +17,7 @@ import { Teacher } from "./Teacher";
 import { TypingBox } from "./TypingBox";
 import { MessagesList } from "./MessagesList";
 import { QuickQuestion } from "./QuickQuestion";
+import { BuyMeACoffee } from "./BuyMeACoffee";
 
 const itemPlacement = {
   default: {
@@ -70,6 +71,7 @@ export const Experience = () => {
               {...itemPlacement[classroom].board}
               distanceFactor={1}
             >
+              <BuyMeACoffee />
               <MessagesList />
             </Html>
             <Environment preset="sunset" />
