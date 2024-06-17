@@ -85,7 +85,7 @@ export const useAITeacher = create((set, get) => ({
         while ((match = regex.exec(chunk)) !== null) {
           result += match[1];
         }
-        result = result.replace(/[^a-zA-Z0-9\s]/g, ''); // Remove non-alphanumeric characters
+        result = result.replace(/[^a-zA-Z0-9\s]/g, ' '); // Remove non-alphanumeric characters
         // Update the response incrementally
         set((state) => ({
           messages: state.messages.map((m) => {
