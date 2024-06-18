@@ -1,6 +1,6 @@
 import { useAITeacher } from "@/hooks/useAITeacher";
 import { useState } from "react";
-
+import { CSSTransition } from "react-transition-group";
 
 export const QuickQuestion = () => {
   const askAI = useAITeacher((state) => state.askAI);
@@ -22,35 +22,40 @@ export const QuickQuestion = () => {
   };
 
   return (
-    <div className="z-10 max-w-[600px] flex space-y-6 flex-col bg-gradient-to-tr from-slate-300/30 via-gray-400/30 to-slate-600-400/30 p-4 backdrop-blur-md rounded-xl border-slate-100/30 border">
-      <div>
-    
-        <h2 className="text-white font-bold text-xl">
-          {isTalking ? "Asking AI..." : "Quick Questions about Dan Spelt"}
-        </h2>
-      </div>
-
-      {loading || isTalking ? (
-        <div className="flex justify-center items-center">
-          <span className="relative flex h-4 w-4">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-4 w-4 bg-white"></span>
-          </span>
+    <CSSTransition
+      in={!loading && !isTalking}
+      timeout={1000}
+      classNames="right-0"
+      unmountOnExit
+    >
+      <div className="z-10 max-w-[600px] flex flex-col space-y-6 bg-gradient-to-tr from-slate-300/30 via-gray-400/30 to-slate-600-400/30 p-4 backdrop-blur-md rounded-xl border border-slate-100/30 transition-all duration-1000 ease-in-out">
+        <div>
+          <h2 className="text-xl font-bold text-white">
+            {isTalking ? "Asking AI..." : "Quick Questions about Dan Spelt"}
+          </h2>
         </div>
-      ) : (
-        <div className="gap-3 flex flex-col">
-          {quickQuestions.map((question, index) => (
-            <button
-              key={index}
-                  className="bg-slate-100/20 p-2 px-6 rounded-full text-white hover:bg-slate-100/30 "
+
+        {loading || isTalking ? (
+          <div className="flex items-center justify-center">
+            <span className="relative flex h-4 w-4">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex h-4 w-4 rounded-full bg-white"></span>
+            </span>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {quickQuestions.map((question, index) => (
+              <button
+                key={index}
+                className="p-2 px-6 text-white bg-slate-100/20 rounded-full hover:bg-slate-100/30 transition-colors duration-300 ease-in-out"
                 onClick={() => ask(question)}
-            >
-
-              {question}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+              >
+                {question}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </CSSTransition>
   );
 };

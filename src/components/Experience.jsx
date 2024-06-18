@@ -74,9 +74,6 @@ export const Experience = () => {
               <BuyMeACoffee />
               <MessagesList />
             </Html>
-            <Environment preset="sunset" />
-
-
             <Environment files={["/hdr/1.hdr"]} background />
             <ambientLight intensity={1.8} color="white" />
             <Gltf
