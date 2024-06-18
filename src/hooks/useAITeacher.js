@@ -85,7 +85,26 @@ export const useAITeacher = create((set, get) => ({
         while ((match = regex.exec(chunk)) !== null) {
           result += match[1];
         }
-        result = result.replace(/[^a-zA-Z0-9\s]/g, ' '); // Remove non-alphanumeric characters
+        result = result.replace(/[^a-zA-Z0-9\s]/g, ' ')  // Remove non-alphanumeric characters except spaces
+               .replace(/\n/g, ' ')              // Replace newlines with spaces
+               .replace(/ n /g, ' ')             // Remove standalone 'n'
+               .replace(/ S /g, ' ')             // Remove standalone 'S'
+               .replace(/\s+/g, ' ')             // Replace multiple spaces with a single space
+               .replace(/(projects)(\d)/gi, '$1: $2')  // Add colon and space after 'projects' followed by a number
+               .replace(/(projects\s*)(\d)/gi, '- Project $2:') // Format project numbers
+               .replace(/(Role)\s+/gi, '\nRole: ')  // Add newline and colon after 'Role'
+               .replace(/(Responsibilities)\s+/gi, '\nResponsibilities: ')  // Add newline and colon after 'Responsibilities'
+               .replace(/ led /gi, ' Led ')   // Capitalize 'led'
+               .replace(/ managed /gi, ' Managed ')   // Capitalize 'managed'
+               .replace(/conducted /gi, 'Conducted ')   // Capitalize 'conducted'
+               .replace(/maintained /gi, 'Maintained ')   // Capitalize 'maintained'
+               .replace(/created /gi, 'Created ')   // Capitalize 'created'
+               .replace(/optimized /gi, 'Optimized ')   // Capitalize 'optimized'
+               .replace(/\.?\s*(projects)\s/gi, '. Projects: ') // Format starting point for projects
+               .replace(
+                 /\b(Expert|Skillful|Experienced|Novice)\b|\s+/g, ' ')
+                 //(JavaScript|TypeScript|Next js|Java|C|React|MongoDB|Firebase|AWS|Google Cloud|GitHub|BitBucket)|\s+/g,
+          .trim(); // Trim any leading/trailing spaces
         // Update the response incrementally
         set((state) => ({
           messages: state.messages.map((m) => {

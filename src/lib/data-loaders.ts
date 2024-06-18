@@ -77,3 +77,8 @@ export async function getChunkedDocsFromWeb(url: string) {
   });
   return getChunkedDocs(loader);
 }
+
+export async function getChunkedDocsFromText(txtPath: string) {
+  const loader = new TextLoader(txtPath);
+  return getChunkedDocs(loader);
+}

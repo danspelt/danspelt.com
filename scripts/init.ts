@@ -1,8 +1,8 @@
-import { getChunkedDocsFromWeb } from "../src/lib/data-loaders";
+import { getChunkedDocsFromText } from "../src/lib/data-loaders";
 import {storeChunks} from "../src/lib/vector-store";
 (async () => {
   try {
-    const chunks = await getChunkedDocsFromWeb("https://www.linkedin.com/in/dan-spelt/");
+    const chunks = await getChunkedDocsFromText("./docs/bio.txt");
     await storeChunks(chunks, "knowledge");
   }
   catch (error) {
