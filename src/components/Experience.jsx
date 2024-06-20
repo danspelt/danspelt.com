@@ -8,7 +8,7 @@ import {
   Html,
   Loader,
   useGLTF,
-} from "@react-three/drei";
+  } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Leva, button, useControls } from "leva";
 import { Suspense, useEffect, useRef } from "react";
@@ -56,7 +56,14 @@ export const Experience = () => {
         <TypingBox />
       </div>
       <Leva hidden />
-      <Loader />
+      <Loader
+        containerStyles={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+        innerStyles={{ width: '100%' }}
+        barStyles={{ backgroundColor: '#f0f0f0' }}
+        dataStyles={{ color: '#f0f0f0', fontSize: '1.5em' }}
+        dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`}
+        initialState={(active) => active}
+      />
       <Canvas
         camera={{
           position: [0, 0, 0.0001],
