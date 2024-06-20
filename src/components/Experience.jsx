@@ -6,13 +6,13 @@ import {
   Float,
   Gltf,
   Html,
-  Loader,
   useGLTF,
   } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Leva, button, useControls } from "leva";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { degToRad } from "three/src/math/MathUtils";
+import Loader from "./Loader";
 import { Teacher } from "./Teacher";
 import { TypingBox } from "./TypingBox";
 import { MessagesList } from "./MessagesList";
@@ -43,11 +43,13 @@ const itemPlacement = {
 };
 
 export const Experience = () => {
+  const [started, setStarted] = useState(true);
   const teacher = useAITeacher((state) => state.teacher);
   const classroom = useAITeacher((state) => state.classroom);
 
   return (
     <>
+      <Loader started={started} onStarted={() => setStarted(false)} />
       <div className="z-10 md:justify-center fixed bottom-4 top-4 flex gap-3 flex-wrap justify-stretch">
         <QuickQuestion />
       </div>
@@ -56,14 +58,6 @@ export const Experience = () => {
         <TypingBox />
       </div>
       <Leva hidden />
-      <Loader
-        containerStyles={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
-        innerStyles={{ width: '100%' }}
-        barStyles={{ backgroundColor: '#f0f0f0' }}
-        dataStyles={{ color: '#f0f0f0', fontSize: '1.5em' }}
-        dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`}
-        initialState={(active) => active}
-      />
       <Canvas
         camera={{
           position: [0, 0, 0.0001],
@@ -100,6 +94,7 @@ export const Experience = () => {
           </Float>
         </Suspense>
       </Canvas>
+       
     </>
   );
 };
