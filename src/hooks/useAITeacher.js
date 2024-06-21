@@ -100,9 +100,8 @@ export const useAITeacher = create((set, get) => ({
                .replace(/maintained /gi, 'Maintained ')   // Capitalize 'maintained'
                .replace(/created /gi, 'Created ')   // Capitalize 'created'
                .replace(/optimized /gi, 'Optimized ')   // Capitalize 'optimized'
-               .replace(/\.?\s*(projects)\s/gi, '. Projects: ') // Format starting point for projects
-          .r
-        eplace(
+          .replace(/\.?\s*(projects)\s/gi, '. Projects: ') // Format starting point for projects
+          .replace(
                  /\b(Expert|Skillful|Experienced|Novice)\b|\s+/g, ' ')
                  //(JavaScript|TypeScript|Next js|Java|C|React|MongoDB|Firebase|AWS|Google Cloud|GitHub|BitBucket)\b|\s+/g,
           .trim(); // Trim any leading/trailing spaces
@@ -147,6 +146,7 @@ export const useAITeacher = create((set, get) => ({
 
       // Get TTS
       const audioRes = await fetch(`/api/tts?teacher=${get().teacher}&text=${encodeURIComponent(message.response)}`);
+      console.log("audioRes", audioRes);
       const wordTimings = JSON.parse(audioRes.headers.get("wordTimings"));
       const audio = await audioRes.blob();
       const audioUrl = URL.createObjectURL(audio);

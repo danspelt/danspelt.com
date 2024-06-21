@@ -46,6 +46,16 @@ export const Experience = () => {
   const [started, setStarted] = useState(true);
   const teacher = useAITeacher((state) => state.teacher);
   const classroom = useAITeacher((state) => state.classroom);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      console.log(window.innerWidth);
+      setIsMobile(window.innerWidth > 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
@@ -61,40 +71,39 @@ export const Experience = () => {
       <Canvas
         camera={{
           position: [0, 0, 0.0001],
-        }}
-      >
-        <CameraManager />
+          }}
+        >
+          <CameraManager />
 
-        <Suspense>
-          <Float speed={0.5} floatIntensity={0.2} rotationIntensity={0.1}>
-            <Html
-              transform
-              {...itemPlacement[classroom].board}
-              distanceFactor={1}
-            >
-              <BuyMeACoffee />
-              <MessagesList />
-            </Html>
-            <Environment preset="sunset" />
-
-
-            <Environment files={["/hdr/1.hdr"]} background />
-            <ambientLight intensity={1.8} color="white" />
-            <Gltf
-              src={`/models/classroom_${classroom}.glb`}
+          <Suspense>
+            <Float speed={0.5} floatIntensity={0.2} rotationIntensity={0.1}>
+              <Html
+                transform
+                {...itemPlacement[classroom].board}
+                distanceFactor={1}
+              >
+                <BuyMeACoffee />
+                <MessagesList />
+              </Html>
+              <Environment preset="sunset" />
+              <Environment files={["/hdr/1.hdr"]} background />
+              <ambientLight intensity={1.8} color="white" />
+              <Gltf
+                src={`/models/classroom_${classroom}.glb`}
               {...itemPlacement[classroom].classroom}
-            />
-            <Teacher
-              teacher={teacher}
-              key={teacher}
-              {...itemPlacement[classroom].teacher}
-              scale={1.5}
-              rotation-y={degToRad(20)}
-            />
-          </Float>
-        </Suspense>
-      </Canvas>
-       
+              visible={!isMobile}
+              />
+              <Teacher
+                teacher={teacher}
+                key={teacher}
+                {...itemPlacement[classroom].teacher}
+                scale={1.5}
+                rotation-y={degToRad(20)}
+              />
+            </Float>
+          </Suspense>
+        </Canvas>
+      
     </>
   );
 };
