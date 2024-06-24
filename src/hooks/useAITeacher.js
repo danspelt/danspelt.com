@@ -90,6 +90,7 @@ export const useAITeacher = create((set, get) => ({
         result = result.replace(/[^a-zA-Z0-9\s]/g, ' ')  // Remove non-alphanumeric characters except spaces
                        .replace(/\n/g, ' ')              // Replace newlines with spaces
                        .replace(/\sn/gm, ' ')           // Replace 'n' with a space
+                       .replace(/\s+C\s+/gm, ' ')         // Replace 'C' with a space
                        .replace(/\s+/g, ' ')             // Replace multiple spaces with a single space
                        .replace(/\.?\s*(projects)\s/gi, '. Projects: ') // Format starting point for projects
                        .replace(/ led /gi, ' Led ')    // Capitalize 'led'
@@ -97,8 +98,7 @@ export const useAITeacher = create((set, get) => ({
                        .replace(/ conducted /gi, ' Conducted ') // Capitalize 'conducted'
                        .replace(/ maintained /gi, ' Maintained ') // Capitalize 'maintained'
                        .replace(/ created /gi, ' Created ') // Capitalize 'created'
-                       .replace(/ optimized /gi, ' Optimized ') // Capitalize 'optimized'
-                       .replace(/ C /gi, '') //Remove 'C'
+                       .replace(/ optimized /gi, ' Optimized ') // Capitalize 'optimized
                        .replace(/Skillful| Expert |Novice/gi, (match) => `${match},`) // Replace 'Skillful', 'Expert', and 'Novice' with the skill followed by a comma
                        .replace(/JavaScript|Python|Java|Next js|Kotlin|TypeScript|PHP|SQL|AWS|Github/gi, (match) => `${match},`) // Replace programming languages with a comma                                          .trim(); // Trim any leading/trailing spaces
         // Update the response incrementally
