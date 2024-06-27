@@ -25,13 +25,13 @@ export function Teacher({ teacher, ...props }) {
     });
   }, [scene]);
 
-  const currentMessage = useAITeacher((state) => state.currentMessage);
+const currentMessage = useAITeacher((state) => state.currentMessage);
   const loading = useAITeacher((state) => state.loading);
+  const visemes = useAITeacher((state) => state.visemes);
   const { animations } = useGLTF(`/models/animations_Nanami.glb`);
   const { actions, mixer } = useAnimations(animations, group);
   const [animation, setAnimation] = useState("Idle");
 
-  // Imported from r3f-virtual-girlfriend project
   const [blink, setBlink] = useState(false);
 
   useEffect(() => {
@@ -63,19 +63,17 @@ export function Teacher({ teacher, ...props }) {
     // Smile
     lerpMorphTarget("mouthSmile", 0, 0.5);
     // Blinking
-    lerpMorphTarget("eye_close", blink ? 1 : 0, 0.5);
+lerpMorphTarget("eye_close", blink ? 1 : 0, 0.5);
 
     // Talking
     for (let i = 0; i <= 21; i++) {
       lerpMorphTarget(i, 0, 0.1); // reset morph targets
     }
-    
+console.log(currentMessage);
     if (
-      currentMessage &&
-      currentMessage.visemes &&
-      currentMessage.audioPlayer
+      currentMessage && currentMessage.audioPlayer 
     ) {
-      const visemesArray = currentMessage.visemes.split('[[')[1].split(']]')[0].split('],[');
+      const visemesArray = visemes.split('[[')[1].split(']]')[0].split('],[');
       for (let i = visemesArray.length - 1; i >= 0; i--) {
         const viseme = visemesArray[i];
         if (currentMessage.audioPlayer.currentTime * 1000 >= viseme[0]) {
