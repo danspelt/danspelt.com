@@ -25,7 +25,7 @@ export function Teacher({ teacher, ...props }) {
     });
   }, [scene]);
 
-const currentMessage = useAITeacher((state) => state.currentMessage);
+  const currentMessage = useAITeacher((state) => state.currentMessage);
   const loading = useAITeacher((state) => state.loading);
   const visemes = useAITeacher((state) => state.visemes);
   const { animations } = useGLTF(`/models/animations_Nanami.glb`);
@@ -63,17 +63,17 @@ const currentMessage = useAITeacher((state) => state.currentMessage);
     // Smile
     lerpMorphTarget("mouthSmile", 0, 0.5);
     // Blinking
-lerpMorphTarget("eye_close", blink ? 1 : 0, 0.5);
+    lerpMorphTarget("eye_close", blink ? 1 : 0, 0.5);
 
     // Talking
     for (let i = 0; i <= 21; i++) {
       lerpMorphTarget(i, 0, 0.1); // reset morph targets
     }
-console.log(currentMessage);
-    if (
-      currentMessage && currentMessage.audioPlayer 
-    ) {
-      const visemesArray = visemes.split('[[')[1].split(']]')[0].split('],[');
+    
+    if (currentMessage && currentMessage.audioPlayer && currentMessage.visemes) {
+      const visemes = JSON.stringify(currentMessage.visemes);
+
+      const visemesArray = visemes.split("[[")[1].split("]]")[0].split("],[");
       for (let i = visemesArray.length - 1; i >= 0; i--) {
         const viseme = visemesArray[i];
         if (currentMessage.audioPlayer.currentTime * 1000 >= viseme[0]) {
@@ -89,7 +89,7 @@ console.log(currentMessage);
           animation === "Talking" ? "Talking2" : "Talking"
         ); // Could load more type of animations and randomization here
       }
-    }
+     }
   });
 
   useEffect(() => {
@@ -151,7 +151,7 @@ console.log(currentMessage);
           </div>
         </Html>
       )}
-      <primitive object={scene}/>
+      <primitive object={scene} />
     </group>
   );
 }

@@ -36,7 +36,7 @@ export const useAITeacher = create((set, get) => ({
   setBoardTexts: (boardTexts) => {
     set(() => ({
       boardTexts,
-}));
+    }));
   },
 
   setTeacher: (teacher) => {
@@ -53,12 +53,12 @@ export const useAITeacher = create((set, get) => ({
 
   setCurrentWordIndex: (index) => set({ currentWordIndex: index }),
 
-asKI: async (question) => {
+  askAI: async (question) => {
     if (!question) return;
 
     set(() => ({ isTalking: true, loading: true }));
 
-const message = {
+    const message = {
       question,
       id: get().messages.length,
       response: "",
@@ -163,7 +163,7 @@ const message = {
       set({ wordTimings, currentWordIndex: 0 });
       message.audioPlayer = audioPlayer;
       message.visemes = visemes;
-      set({ currentMessage: message }); 
+      set({ currentMessage: message });
       // Sync with word timings
       audioPlayer.ontimeupdate = () => {
         const currentTime = audioPlayer.currentTime * 1000; // Convert to ms

@@ -8,14 +8,14 @@ export const QuickQuestion = () => {
   const isTalking = useAITeacher((state) => state.isTalking);
   const [selectedQuestion, setSelectedQuestion] = useState("");
 
-  const quickQuestions = [
-    "What is Dan Spelt's professional background?",
-    "What projects has Dan Spelt worked on?",
-    "What technologies does Dan Spelt specialize in?",
- //   "Can you tell me about Dan Spelt's education?",
-   // "What are Dan Spelt's career achievements?"
-  ];
 
+  const quickQuestions = [
+    "Tell me about Dan's professional background?",
+    "What notable projects has Dan worked on?",
+    "Which technologies does Dan specialize in?",
+    "Can you provide details about Dan's education?",
+    "What are Dan's key career achievements?"
+  ];
   const ask = (question) => {
     askAI(question);
     setSelectedQuestion("");
