@@ -185,6 +185,7 @@ export const useAITeacher = create((set, get) => ({
           currentWordIndex: 0,
           currentMessage: null,
           isTalking: false,
+          boardTexts: "",
           isWelcomeMessageBoard: true,
         });
       };

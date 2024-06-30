@@ -1,4 +1,4 @@
-import { getChunkedDocsFromText } from "../src/lib/data-loaders";
+    import { getChunkedDocsFromText } from "../src/lib/data-loaders";
 import {storeChunks} from "../src/lib/vector-store";
 (async () => {
   try {

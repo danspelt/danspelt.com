@@ -1,47 +1,42 @@
-Here's a summarized overview of the Youneeq Visualization Dashboard project from your document, highlighting its features, technologies used, and future plans. This project serves as an example of how AI and advanced technologies can be utilized to create valuable tools, enhancing user experience and engagement.
+### Dan's Professional Background
 
----
+Dan Spelt is a Full Stack Developer with over 18 years of experience in web application development. He has worked with technologies such as BitBucket, Java, Next.js, Firebase, AWS, MongoDB, Slack, GitHub, and React. He is known for pioneering innovative solutions and excels at enhancing user experience and optimizing performance. Dan has strong collaborative skills, working seamlessly with cross-functional teams to deliver high-quality web applications and continuously refining front-end development processes.
 
- Youneeq Visualization Dashboard
+### Notable Projects
 
-Introduction: The Youneeq Visualization Dashboard is designed to empower websites with advanced traffic and engagement insights. It aims to provide a more intuitive and efficient way for clients to understand their website statistics.
+1. **Neil Squire Society (May 2021 - June 2024)**:
+   - Developed the Next.js app, LipSync Connect, enhancing device accessibility and user customization.
+   - Led website updates and maintenance using WordPress.
+   - Implemented SEO strategies to increase organic search visibility.
+   - Developed and maintained secure and scalable websites and web applications using the latest technologies and frameworks.
 
-Background: 
-- The new dashboard is an upgrade from the previous .NET-based dashboard created in 2014.
-- It was developed to meet the evolving needs of clients, providing a modern solution for data visualization and analysis.
+2. **Youneeq (May 2020 - December 2023)**:
+   - Developed and published a Google Chrome extension to enhance web accessibility.
+   - Managed project documentation and code updates using BitBucket.
+   - Improved UI/UX by integrating larger fonts and keyboard navigation.
+   - Implemented automated testing frameworks to ensure code stability and reliability.
 
-Technology and Features:
+3. **CanAssist - University of Victoria (Mar 2008 - Jun 2021)**:
+   - Analyzed client needs to develop technology solutions, maintaining privacy and confidentiality standards.
+   - Authored user manuals and documentation, ensuring robust app testing and support.
+   - Utilized Microsoft services and developed web services with hybrid frameworks for enhanced project functionality.
+   - Implemented geospatial tools and integrated various social media APIs to enrich user engagement.
 
-1. MERN Stack:
-   - MongoDB, Express.js, React, Node.js: This stack ensures a robust, scalable, and agile platform for the dashboard.
-2. Material-UI (MUI):
-   - Provides sleek, responsive styling, enhancing the visual appeal and user-friendliness of the interface.
-3. Chart.js Integration:
-   - Enables stunning visual representations of website statistics, making data analysis straightforward and insightful.
-4. Authentication:
-   - Supports Google Sign-In and Local Login for user convenience and security.
-5. Enhanced Signup Process:
-   - Features real-time username availability checks and visual password strength indicators.
-   - Sends an activation link via email for secure and seamless onboarding.
+### Technologies Dan Specializes In
 
-User Experience: 
-- Focuses on simplicity and clarity.
-- Aims to provide a gateway to understanding web traffic and user engagement through modern technology and design.
+- **Expert**: JavaScript, React, GitHub, Slack
+- **Skillful**: TypeScript, C++, C#, MongoDB, Firebase, Google Cloud
+- **Experienced**: Next.js, BitBucket
+- **Novice**: Java, AWS, Wrike
 
-Vision and Future Plans:
-- The current dashboard is just the beginning of a series of advancements.
-- Commitment to continuous innovation to adapt to the ever-changing digital landscape.
-- Future enhancements will further empower clients with tools to grow and succeed in the digital world.
+### Education
 
----
+Dan holds an Information and Computer Systems Diploma from Camosun College, Victoria, B.C., obtained between January 2008 and June 2017.
 
-This dashboard exemplifies how integrating modern technologies like the MERN stack, MUI, and Chart.js can create powerful tools for data visualization and user engagement. It also underscores the importance of user-centric design and the ongoing evolution of digital tools to meet user needs.
+### Key Career Achievements
 
-For inspiration, you can consider creating similar tools in different niches, such as:
-
-- E-commerce: AI-powered dashboards for sales and customer behavior analytics.
-- Healthcare: Tools for patient data visualization and health monitoring.
-- Finance: AI-driven platforms for investment analysis and portfolio management.
-- Education: Learning analytics dashboards to track student performance and engagement.
-
-By identifying specific needs within an industry and applying advanced technologies, you can create valuable AI solutions that provide significant benefits to users and generate revenue.
+- Pioneered the development of LipSync Connect, enhancing accessibility and customization for users.
+- Published a Google Chrome extension improving web accessibility.
+- Led multiple web development projects, implementing innovative solutions and optimizing performance.
+- Collaborated effectively with cross-functional teams to deliver high-quality web applications.
+- Continuously researched and implemented emerging web development technologies to keep projects competitive and up-to-date.
