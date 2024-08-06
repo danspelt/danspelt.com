@@ -5,7 +5,7 @@ import {
   Environment,
   Float,
   Gltf,
-  Html,
+  useProgress,
   useGLTF,
   } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -17,6 +17,7 @@ import { Teacher } from "./Teacher";
 import { TypingBox } from "./TypingBox";
 import { MessagesList } from "./MessagesList";
 import { QuickQuestion } from "./QuickQuestion";
+import Faqs from "./Faqs";
 import { BuyMeACoffee } from "./BuyMeACoffee";
 
 const itemPlacement = {
@@ -57,19 +58,26 @@ export const Experience = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const { progress } = useProgress();
+  const [chatBotReady, setChatBotReady] = useState(false);
+  const [isAIvisible, setIsAIvisible] = useState(false);
+  useEffect(() => {
+    if (progress === 100) {
+      setChatBotReady(true);
+      setIsAIvisible(false);
+    }
+  }, [progress]); 
   return (
-    <>
-      <Loader started={started} onStarted={() => setStarted(false)} />
+    <div className="w-full h-full">
+      <Faqs />
       <div className="z-10 md:justify-center fixed bottom-4 top-4 flex gap-3 flex-wrap justify-stretch">
-        <QuickQuestion />
-      </div>
-
-      <div className="z-10 md:justify-center fixed bottom-4 left-4 right-4 flex gap-3 flex-wrap justify-stretch">
+        <div className="z-10 md:justify-center fixed bottom-4 left-4 right-4 flex gap-3 flex-wrap justify-stretch hidden">
         <TypingBox />
       </div>
       <Leva hidden />
       <Canvas
-        camera={{
+      hidden
+      camera={{
           position: [0, 0, 0.0001],
           }}
         >
@@ -77,14 +85,7 @@ export const Experience = () => {
 
           <Suspense>
             <Float speed={0.5} floatIntensity={0.2} rotationIntensity={0.1}>
-              <Html
-                transform
-                {...itemPlacement[classroom].board}
-                distanceFactor={1}
-              >
-                <BuyMeACoffee />
-                <MessagesList />
-              </Html>
+              
               <Environment preset="sunset" />
               <Environment files={["/hdr/1.hdr"]} background />
               <ambientLight intensity={1.8} color="white" />
@@ -104,7 +105,8 @@ export const Experience = () => {
           </Suspense>
         </Canvas>
       
-    </>
+      </div>
+    </div>
   );
 };
 
@@ -117,8 +119,8 @@ const CAMERA_POSITIONS = {
 };
 
 const CAMERA_ZOOMS = {
-  default: 1,
-  loading: 1.3,
+  default: 1.6,
+  loading: 1.6,
   speaking: 3.1204819420055387,
 };
 
