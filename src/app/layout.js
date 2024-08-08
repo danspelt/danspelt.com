@@ -1,6 +1,8 @@
 import { Noto_Sans_JP, Roboto } from "next/font/google";
 import "./globals.css";
 
+import Topbar from "@/components/Topbar";
+
 const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
@@ -17,7 +19,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${roboto.variable}`}>
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <Topbar />
+        {children}
+      </body>
     </html>
   );
 
