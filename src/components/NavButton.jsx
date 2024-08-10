@@ -1,10 +1,10 @@
 'use client'
 import { useApp } from "../hooks/useApp";
 const NavButton = ({ text }) => {
-  const setCurrentPage = useApp((state) => state.setCurrentPage);
-
+  const setCurrentComponent = useApp((state) => state.setCurrentComponent);
+ 
   const handleClick = () => {
-    setCurrentPage(text);
+    setCurrentComponent(text.toLowerCase());
   };
 
   return (

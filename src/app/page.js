@@ -1,11 +1,12 @@
-import Image from 'next/image';
-import Profile from '../components/Profile';
-import WorkExperience from '@/components/WorkExperience';
-import ProjectShowcase from '@/components/ProjectShowcase';
-import Contact from '@/components/Contact';
-import Landing from '@/components/Landing';
+'use client';
+
+import { useApp } from '@/hooks/useApp';
 export default function Home() {
+  const currentComponent = useApp((state) => state.currentComponent);
   return (
-    <Landing />
+    <div 
+      className='flex flex-col items-center justify-center h-screen relative'>
+      {currentComponent}
+    </div>
   );
 }
