@@ -23,7 +23,7 @@ export const useApp = create((set, get) => ({
       component: <WorkExperience />,
     },
   ],
-  currentComponent: <WorkExperience />, 
+  currentComponent: <Landing />,
   setCurrentComponent: (name) => {
     const component = get().components.find((comp) => comp.name === name);
     if (component) {
