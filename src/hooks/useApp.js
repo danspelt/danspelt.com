@@ -7,19 +7,19 @@ import SkillsTools from "@/components/SkillsTools";
 export const useApp = create((set, get) => ({
   components: [
     {
-      name: "landing",
+      name: "Landing",
       component: <Landing />,
     },
     {
-      name: "about",
+      name: "About",
       component: <About />,
     },
     {
-      name: "skillsTools",
+      name: "Skills & Tools",
       component: <SkillsTools />,
     },
     {
-      name: "workExperience",
+      name: "Work Experience",
       component: <WorkExperience />,
     },
   ],
@@ -30,4 +30,18 @@ export const useApp = create((set, get) => ({
       set({ currentComponent: component.component });
     }
   },
+  isPlaying: false,
+  setIsPlaying: (isPlaying) => set({ isPlaying }),
+  textToSpeak: "",
+  setTextToSpeak: (textToSpeak) => set({ textToSpeak }),
+  audio: null,
+  setAudio: (audio) => set({ audio }), 
+  hoveredElement: null,
+  setHoveredElement: (hoveredElement) => set({ hoveredElement }),
+  playCurrentComponent: () => {
+    const { currentComponent, setIsPlaying, setTextToSpeak, setAudio } = get();
+    setIsPlaying(true);
+    setTextToSpeak(currentComponent.props.text);
+    setAudio(currentComponent.props.audio);
+  }, 
 }));
