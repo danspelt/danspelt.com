@@ -36,7 +36,7 @@ export async function GET(req) {
     //     "ms. Viseme ID: " +
     //     e.visemeId
     // );
-    visemes.push([e.audioOffset / 10000, e.visemeId]);
+    //visemes.push([e.audioOffset / 10000, e.visemeId]);
   };
   const audioStream = await new Promise((resolve, reject) => {
     speechSynthesizer.speakTextAsync(
@@ -49,7 +49,7 @@ export async function GET(req) {
 
         // convert arrayBuffer to stream
         const bufferStream = new PassThrough();
-        bufferStream.end(Buffer.from(audioData));
+        bufferStream.end(Buffer.from(audioData || new ArrayBuffer(0)));
         resolve(bufferStream);
       },
       (error) => {

@@ -28,7 +28,7 @@
     "leva": "^0.9.35",
     "mammoth": "^1.7.2",
     "microsoft-cognitiveservices-speech-sdk": "^1.35.0",
-    "next": "latest",
+    "next": "^14.2.4",
     "pdf-parse": "^1.1.1",
     "puppeteer": "^19.11.1",
     "react": "latest",
