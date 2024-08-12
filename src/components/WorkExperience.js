@@ -1,5 +1,4 @@
 import timelineElements from "../lib/timelineElements";
-import PlayStopButton from "./PlayStopButton";
 import { useApp } from "../hooks/useApp";
 
 const WorkExperience = () => {
@@ -73,7 +72,6 @@ const WorkExperience = () => {
               >
                 {element.buttonText}
               </a>
-              <PlayStopButton element={hoveredElement} />
             </div>
           </div>
         );
