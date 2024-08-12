@@ -16,6 +16,7 @@ const NavButton = ({ text }) => {
         width={50} 
         height={50} 
         className="rounded-full"
+        onClick={handleClick}
       />
     );
   }
