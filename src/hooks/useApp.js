@@ -11,7 +11,7 @@ export const useApp = create((set, get) => ({
       component: <Landing />,
     },
     {
-      name: "About",
+      name: "About Dan Spelt",
       component: <About />,
     },
     {
