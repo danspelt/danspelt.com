@@ -1,5 +1,3 @@
-
-import Image from "next/image";
 import NavButton from "./NavButton";
 
 const Topbar = () => {
@@ -12,6 +10,8 @@ const Topbar = () => {
                 <NavButton text="About Dan Spelt" />
                 <NavButton text="Skills & Tools" />
                 <NavButton text="Work Experience" />
+                <NavButton text="Projects" />
+                <NavButton text="Contact" />
             </div>
         </div>
     );
