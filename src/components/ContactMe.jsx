@@ -1,6 +1,7 @@
 'use client'
     
 import React, { useState } from 'react';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const ContactMe = () => {
   const [formData, setFormData] = useState({
@@ -25,12 +26,14 @@ const ContactMe = () => {
 
   return (
     <div className="p-8 bg-white text-gray-900">
-      <h2 className="text-3xl font-bold mb-4">Contact Me</h2>
-      <p className="mb-4">If you'd like to get in touch, feel free to reach out via email or phone:</p>
-      <ul className="mb-8">
-        <li><strong>Email:</strong> <a href="mailto:dan@danspelt.com" className="text-blue-500">dan@danspelt.com</a></li>
-        <li><strong>Phone:</strong> 250-208-7997</li>
-        <li><strong>Location:</strong> Victoria, Canada</li>
+      <ul className="list-none mb-4">
+        <li className="mb-2"><strong>Email:</strong> <a href="mailto:dan@danspelt.com" className="text-blue-500">dan@danspelt.com</a></li>
+        <li className="mb-2"><strong>Phone:</strong> 250-208-7997</li>
+        <li className="mb-2"><strong>Location:</strong> Victoria, Canada</li>
+        <li className="flex items-center space-x-4">
+          <a href="https://www.linkedin.com/in/danspelt" className="text-blue-500 hover:text-blue-700"><FaLinkedin size={24} /></a>
+          <a href="https://github.com/danspelt" className="text-gray-900 hover:text-gray-700"><FaGithub size={24} /></a>
+        </li>
       </ul>
       <h3 className="text-2xl font-semibold mb-4">Or send me a message directly:</h3>
       <form onSubmit={handleSubmit} className="space-y-4">

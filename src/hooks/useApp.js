@@ -4,9 +4,8 @@ import Landing from "@/components/Landing";
 import About from "@/components/About";
 import WorkExperience from "@/components/WorkExperience";
 import SkillsTools from "@/components/SkillsTools";
-import PastProjects from "@/components/PastProjects";
-import Contact from "@/components/Contact";
-
+import PreviousProjects from "@/components/PreviousProjects";
+import ContactMe from "@/components/ContactMe";
 export const useApp = create((set, get) => ({
   components: [
     {
@@ -26,15 +25,15 @@ export const useApp = create((set, get) => ({
       component: <WorkExperience />,
     },
     {
-      name: "Past Projects",
-      component: <PastProjects />,
+      name: "Previous Projects",
+      component: <PreviousProjects />,
     },
     {
-      name: "Contact",
-      component: <Contact />,
+      name: "Contact Me",
+      component: <ContactMe />,
     },
   ],
-  currentComponent: <Landing />,
+  currentComponent: <PreviousProjects />,
   setCurrentComponent: (name) => {
     const component = get().components.find((comp) => comp.name === name);
     if (component) {

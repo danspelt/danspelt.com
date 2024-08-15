@@ -10,8 +10,8 @@ const Topbar = () => {
                 <NavButton text="About Dan Spelt" />
                 <NavButton text="Skills & Tools" />
                 <NavButton text="Work Experience" />
-                <NavButton text="Projects" />
-                <NavButton text="Contact" />
+                <NavButton text="Previous Projects" />
+                <NavButton text="Contact Me" />
             </div>
         </div>
     );
