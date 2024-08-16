@@ -2,7 +2,7 @@ import "./globals.css";
 
 import Topbar from "@/components/Topbar";
 
-
+import ScreenShotSlideShow from "@/components/ScreenShotSlideShow";
 export const metadata = {
   title: "danspelt.com",
   description: "Dan Spelt visual ai resume"
@@ -15,7 +15,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Topbar />
-        {children}
+          {children}
+        <ScreenShotSlideShow />
       </body>
     </html>
   );
