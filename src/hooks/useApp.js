@@ -35,8 +35,9 @@ export const useApp = create((set, get) => ({
   ],
   currentComponent: <PreviousProjects />,
   isScreenShotSlideShowVisible: true,
-  projectImages: [],
-  setProjectImages: (projectImages) => set({ projectImages }),
+  
+  currentProjectImages: [],
+  setCurrentProjectImages: (currentProjectImages) => set({ currentProjectImages }),
   setIsScreenShotSlideShowVisible: (isScreenShotSlideShowVisible) => set({ isScreenShotSlideShowVisible }),
   setCurrentComponent: (name) => {
     const component = get().components.find((comp) => comp.name === name);
