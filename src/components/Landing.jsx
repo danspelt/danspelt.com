@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen p-8 bg-white text-gray-900">
+    <div className='flex flex-col items-center'>
       <header className="mb-12">
         <h1 className="text-5xl font-extrabold text-center">
           Dan Spelt
@@ -11,21 +11,15 @@ const Landing = () => {
           Full Stack Web Developer
         </h2>
       </header>
-      <section className="flex flex-col items-center">
-          <Image
-            src="/images/dan.jpeg"
-            alt="Dan Spelt Full Stack Web Developer"
-            width={300}
-            height={300}
-            className="rounded-full shadow-2xl mb-8"
-          />
-        <div className="w-2/3 text-center">
-          <p className="text-xl leading-relaxed">
-      Hi, my name is Dan Spelt. I’m a full stack developer, specialized in developing web applications using React, Next.js, Node.js, and more, with a passion for creating efficient and scalable solutions.
-          </p>
+      <section className="flex flex-row items-center p-12">
+        <div className="w-full">
+          <p className="text-2xl leading-relaxed">
+            Dan Spelt, a full-stack developer with cerebral palsy, demonstrates that physical limitations do not diminish his capabilities in the tech industry. Cerebral palsy may present certain challenges, but Dan has successfully navigated these by leveraging adaptive technologies and a problem-solving mindset. His expertise in web development, particularly in creating accessible and user-friendly applications, showcases his ability to excel in a field that demands precision and innovation. Dan’s commitment to accessibility is also enhanced by his personal experiences, making him a valuable asset in any development team.
+
+            Dan’s success as a developer highlights the importance of adaptability, continuous learning, and the effective use of technology to overcome challenges, proving that disabilities do not define one’s professional capabilities.          </p>
         </div>
       </section>
-        </div>
+    </div>
   );
 };
 
