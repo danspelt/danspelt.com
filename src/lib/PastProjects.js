@@ -31,9 +31,6 @@ const pastProjectsData = [
             dates: "June 2021 - March 2024",
             description: `LipSync Connect is a Next.js application designed to enhance device accessibility for individuals with disabilities. The project involved extensive UX/UI design, research, and prototyping, ensuring a user-friendly and customizable experience. The application is built with modern web technologies, including Firebase and MongoDB for data storage and management.`,
             images: [
-                "/images/lipsync/1.png",
-                "/images/lipsync/2.png",
-                "/images/lipsync/3.png",
             ],
         },
         {
@@ -43,9 +40,6 @@ const pastProjectsData = [
             dates: "March 2008 - June 2021",
             description: `The Assistive Technology Suite includes various applications designed to improve the quality of life for people with disabilities. Leveraging technologies like React, C#, and MongoDB, these applications were developed to be intuitive, user-friendly, and accessible. The suite integrates social media APIs, allowing seamless interaction with platforms like Facebook and Twitter.`,
             images: [
-                "/images/assistive/1.png",
-                "/images/assistive/2.png",
-                "/images/assistive/3.png",
             ],
         },
 ];

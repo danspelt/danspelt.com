@@ -4,13 +4,14 @@ import pastProjectsData from "@/lib/PastProjects";
 import ScreenShotSlideShow from "@/components/ScreenShotSlideShow";
 
 const PreviousProjects = () => {
-  const [currentProjectImages, setCurrentProjectImages] = useState([]);
+  const setCurrentProjectImages = useApp((state) => state.setCurrentProjectImages);
   const isScreenShotSlideShowVisible = useApp((state) => state.isScreenShotSlideShowVisible);
   const setIsScreenShotSlideShowVisible = useApp((state) => state.setIsScreenShotSlideShowVisible);
   const toggleVisibility = () => {
     setIsScreenShotSlideShowVisible(!isScreenShotSlideShowVisible);
   };
   const projectHoverHandler = (projectImages) => {
+    console.log("projectImages", projectImages);
     setCurrentProjectImages(projectImages);
   };
 
@@ -18,13 +19,12 @@ const PreviousProjects = () => {
     <div
      className="flex flex-col items-center bg-gray-100 mt-20"
      >
-      {isScreenShotSlideShowVisible && <ScreenShotSlideShow currentProjectImages={currentProjectImages} />}
+      {isScreenShotSlideShowVisible && <ScreenShotSlideShow />}
       {pastProjectsData.map((project) => (
         <div
           key={project.id}
           className="bg-white shadow-lg rounded-lg overflow-hidden mb-6"
           onMouseEnter={() => projectHoverHandler(project.images)}
-          onMouseLeave={() => projectHoverHandler([])}
         >
           <div className="p-6 flex">
             <div className="flex flex-col items-center">
@@ -32,9 +32,9 @@ const PreviousProjects = () => {
               <p className="text-gray-600 mt-2">{project.description}</p>
               <button
                 onClick={() => toggleVisibility(project.id)}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+                className={`mt-4 px-4 py-2 bg-blue-500 text-white rounded-md ${project.images.length > 0 ? "" : "hidden"} ${isScreenShotSlideShowVisible ? "hidden" : ""}`}
               >
-                {isScreenShotSlideShowVisible ? "Hide Screenshots" : "Show Screenshots"}
+                Show Screenshots
               </button>
             </div>
           </div>
