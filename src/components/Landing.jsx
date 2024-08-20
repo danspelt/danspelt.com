@@ -1,5 +1,4 @@
-import Image from 'next/image';
-
+import IntroVideo from './IntroVideo';
 const Landing = () => {
   return (
     <div className='flex flex-col items-center'>
@@ -11,6 +10,7 @@ const Landing = () => {
           Full Stack Web Developer
         </h2>
       </header>
+      <IntroVideo />
       <section className="flex flex-row items-center p-12">
         <div className="w-full">
           <p className="text-2xl leading-relaxed">
