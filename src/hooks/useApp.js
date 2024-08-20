@@ -33,7 +33,7 @@ export const useApp = create((set, get) => ({
       component: <ContactMe />,
     },
   ],
-  currentComponent: <PreviousProjects />,
+  currentComponent: < Landing />,
   isScreenShotSlideShowVisible: true,
   
   currentProjectImages: [],
