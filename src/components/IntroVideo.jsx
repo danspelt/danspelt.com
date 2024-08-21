@@ -10,7 +10,7 @@ const IntroVideo = () => {
 
   return (
     <div className="flex flex-col items-center justify-center text-white">
-      <video className="w-full max-w-4xl" autoPlay >
+      <video className="w-1/4" autoPlay >
         <source src="/videos/intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>

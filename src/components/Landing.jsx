@@ -11,14 +11,14 @@ const Landing = () => {
         </h2>
       </header>
       <IntroVideo />
-      <section className="flex flex-row items-center p-12">
+      <div className="flex flex-row items-center p-12">
         <div className="w-full">
           <p className="text-2xl leading-relaxed">
             Dan Spelt, a full-stack developer with cerebral palsy, demonstrates that physical limitations do not diminish his capabilities in the tech industry. Cerebral palsy may present certain challenges, but Dan has successfully navigated these by leveraging adaptive technologies and a problem-solving mindset. His expertise in web development, particularly in creating accessible and user-friendly applications, showcases his ability to excel in a field that demands precision and innovation. Dan’s commitment to accessibility is also enhanced by his personal experiences, making him a valuable asset in any development team.
 
             Dan’s success as a developer highlights the importance of adaptability, continuous learning, and the effective use of technology to overcome challenges, proving that disabilities do not define one’s professional capabilities.          </p>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
