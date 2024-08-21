@@ -6,6 +6,7 @@ import WorkExperience from "@/components/WorkExperience";
 import SkillsTools from "@/components/SkillsTools";
 import PreviousProjects from "@/components/PreviousProjects";
 import ContactMe from "@/components/ContactMe";
+import FAQ from "@/components/Faqs";
 export const useApp = create((set, get) => ({
   components: [
     {
@@ -31,6 +32,10 @@ export const useApp = create((set, get) => ({
     {
       name: "Contact Me",
       component: <ContactMe />,
+    },
+    {
+      name: "FAQ",
+      component: <FAQ />,
     },
   ],
   currentComponent: < Landing />,

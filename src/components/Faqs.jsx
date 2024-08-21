@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Faqs = () => {
+const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFaq = (index) => {
@@ -70,4 +70,4 @@ const Faqs = () => {
   );
 };
 
-export default Faqs;
+export default FAQ;

@@ -1,6 +1,15 @@
+import Image from "next/image";
+
 const About = () => {
     return (
         <div className="p-8 bg-white rounded-lg shadow-md flex flex-col items-center">
+            <Image
+                src="/images/dan.jpeg"
+                alt="Dan Spelt"
+                width={200}
+                height={200}
+                className="rounded-xl mb-4"
+            />
             <h2 className="text-2xl font-semibold mb-2 text-red-900">Dan Spelt: Transforming Challenges into Innovation</h2>
             <p className="mb-4 text-gray-700">
                 Greetings, I'm Dan Spelt, a seasoned full-stack web developer with over 18 years of experience in crafting robust, scalable, and user-centric applications. My extensive journey in the tech industry is a testament to my skills, determination, and ability to overcome challenges.
