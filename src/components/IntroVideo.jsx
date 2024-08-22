@@ -17,9 +17,10 @@ const IntroVideo = () => {
     setIsPlaying(!isPlaying);
   };
 
-  useEffect(() => {
-      handlePlayPause()
-  }, []);
+useEffect(() => {
+  handlePlayPause()
+}, [])
+cons
 
     const handleEnded = () => {
       setIsPlaying(false)
