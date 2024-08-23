@@ -15,6 +15,9 @@ const ScreenShotSlideShow = () => {
             else if (event.key === "ArrowRight") {
                 goToNext();
             }
+            else if (event.key === "Escape") {
+                closeSlideShow();
+            }   
         };
 
         window.addEventListener("keydown", handleKeyDown);

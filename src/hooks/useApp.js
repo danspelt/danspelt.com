@@ -39,8 +39,7 @@ export const useApp = create((set, get) => ({
     },
   ],
   currentComponent: < Landing />,
-  isScreenShotSlideShowVisible: true,
-  
+  isScreenShotSlideShowVisible: false,
   currentProjectImages: [],
   setCurrentProjectImages: (currentProjectImages) => set({ currentProjectImages }),
   setIsScreenShotSlideShowVisible: (isScreenShotSlideShowVisible) => set({ isScreenShotSlideShowVisible }),
