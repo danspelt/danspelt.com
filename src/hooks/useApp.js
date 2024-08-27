@@ -2,7 +2,7 @@ import create from "zustand";
 
 import Landing from "@/components/Landing";
 import About from "@/components/About";
-import WorkExperience from "@/components/WorkExperience";
+import TimelineView from "@/components/TimelineView";
 import SkillsTools from "@/components/SkillsTools";
 import PreviousProjects from "@/components/PreviousProjects";
 import ContactMe from "@/components/ContactMe";
@@ -22,8 +22,8 @@ export const useApp = create((set, get) => ({
       component: <SkillsTools />,
     },
     {
-      name: "Work Experience",
-      component: <WorkExperience />,
+      name: "Timeline",
+      component: <TimelineView />,
     },
     {
       name: "Previous Projects",

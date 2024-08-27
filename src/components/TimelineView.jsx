@@ -1,9 +1,6 @@
 import timelineElements from "../lib/timelineElements";
-import { useApp } from "../hooks/useApp";
 
-const WorkExperience = () => {
-  const hoveredElement = useApp((state) => state.hoveredElement);
-  const setHoveredElement = useApp((state) => state.setHoveredElement);
+const TimelineView = () => {
 
   return (
     <div className="flex flex-col absolute top-0">
@@ -16,9 +13,7 @@ const WorkExperience = () => {
           <div
             key={element.id}
             className="flex m-4"
-            onMouseEnter={() => setHoveredElement(element)}
-            onMouseLeave={() => setHoveredElement(null)}
-          >
+            >
             <div
               className={`${color} w-1 h-6 translate-x-20 translate-y-56 opacity-60 sm:hidden`}
             ></div>
@@ -26,8 +21,7 @@ const WorkExperience = () => {
               className={`${color} w-1 h-6 translate-x-80 translate-y-56 opacity-60 sm:hidden`}
             ></div>
             <div className="hidden items-start text-xl relative sm:flex">
-              <div className="w-4/5 text-gray-500">{element.date}</div>
-              <div
+              <div className="w-full text-gray-500">{element.startDate} - {element.endDate}</div>              <div
                 className={`${color} w-1 h-full translate-x-5 translate-y-10 opacity-30`}
               ></div>
               <img
@@ -67,11 +61,7 @@ const WorkExperience = () => {
                 alt="icon"
                 className={`${color} w-8 p-1 rounded-lg z-20 absolute left-4 top-4 sm:hidden`}
               />
-              <a
-                className={`${color} text-gray-950 font-medium px-4 py-1 rounded-md mx-auto cursor-pointer hover:text-white`}
-              >
-                {element.buttonText}
-              </a>
+             
             </div>
           </div>
         );
@@ -80,4 +70,4 @@ const WorkExperience = () => {
   );
 };
 
-export default WorkExperience;
+export default TimelineView;
