@@ -9,7 +9,7 @@ const Topbar = () => {
             <div className="flex flex-row items-center justify-center w-full gap-6">
                 <NavButton text="About Dan Spelt" />
                 <NavButton text="Skills & Tools" />
-                <NavButton text="Work Experience" />
+                <NavButton text="Timeline" />
                 <NavButton text="Previous Projects" />
                 <NavButton text="FAQ" />
                 <NavButton text="Contact Me" />

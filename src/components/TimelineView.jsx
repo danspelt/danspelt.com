@@ -1,9 +1,12 @@
 import timelineElements from "../lib/timelineElements";
+import { useApp } from "../hooks/useApp";
 
 const WorkExperience = () => {
+  const hoveredElement = useApp((state) => state.hoveredElement);
+  const setHoveredElement = useApp((state) => state.setHoveredElement);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col absolute top-0">
       {timelineElements.map((element) => {
         const color = `bg-${element.color}-500`;
 
@@ -12,28 +15,37 @@ const WorkExperience = () => {
         return (
           <div
             key={element.id}
-            className="flex"
+            className="flex m-4"
+            onMouseEnter={() => setHoveredElement(element)}
+            onMouseLeave={() => setHoveredElement(null)}
           >
-            <div className="flex flex-col w-full ">
-            <div className="h-full">{element.startDate} - {element.endDate}</div>
+            <div
+              className={`${color} w-1 h-6 translate-x-20 translate-y-56 opacity-60 sm:hidden`}
+            ></div>
+            <div
+              className={`${color} w-1 h-6 translate-x-80 translate-y-56 opacity-60 sm:hidden`}
+            ></div>
+            <div className="hidden items-start text-xl relative sm:flex">
+              <div className="w-4/5 text-gray-500">{element.date}</div>
               <div
-                className={`${color} w-2 h-full opacity-30`}
+                className={`${color} w-1 h-full translate-x-5 translate-y-10 opacity-30`}
               ></div>
               <img
                 src={icon}
                 alt="icon"
-                className={`${color} w-3/4 h-3/4 p-1 rounded-lg z-20`}
+                className={`${color} w-10 p-1 rounded-lg z-20`}
               />
               <div
-                className={`${color} h-2 w-8 translate-y-5 opacity-30`}
+                className={`${color} h-1 w-8 translate-y-5 opacity-30`}
               ></div>
             </div>
-            <div className="flex ">
-              <div className="text-xl font-medium">{element.company}</div>
+            <div className="border border-gray-600 rounded-lg px-8 py-4 relative">
+              <div className="text-xl font-medium">{element.title}</div>
               <div className="text-gray-400 text-md">
                 {element.location}
+                <span className="sm:hidden">| {element.date}</span>
               </div>
-              <div className="text-lg">{element.description}</div>
+              <div className="mb-4 text-left">{element.description}</div>
               <div className="flex flex-wrap mb-6 justify-center">
                 {element.tech.map((tech, index) => {
                   return (
