@@ -38,7 +38,7 @@ export const useApp = create((set, get) => ({
       component: <FAQ />,
     },
   ],
-  currentComponent: < Landing />,
+  currentComponent: <WorkExperience />,
   isScreenShotSlideShowVisible: false,
   currentProjectImages: [],
   setCurrentProjectImages: (currentProjectImages) => set({ currentProjectImages }),
