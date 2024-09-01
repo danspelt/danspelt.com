@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm run instAll && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "newdata": "tsx -r dotenv/config ./scripts/init.ts",
-    "instAll": "pnpm install"
+    "newdata": "tsx -r dotenv/config ./scripts/init.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
