@@ -1,4 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+'use client';
+
+import { useState, useRef } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 
 const IntroVideo = () => {
@@ -21,7 +23,7 @@ const IntroVideo = () => {
   };
   return (
     <div className="flex flex-col items-center justify-center text-white relative">
-      <video ref={videoRef} className="w-1/4" onEnded={handleEnded}>
+      <video ref={videoRef} className="w-1/2" onEnded={handleEnded}>
         <source src="/videos/intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>

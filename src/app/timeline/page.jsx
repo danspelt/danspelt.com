@@ -1,5 +1,6 @@
-import timelineElements from "../lib/timelineElements";
-import { useApp } from "../hooks/useApp";
+'use client';
+import timelineElements from "../../lib/timelineElements";
+import { useApp } from "../../hooks/useApp";
 
 const WorkExperience = () => {
   const hoveredElement = useApp((state) => state.hoveredElement);

@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from "react";
 import { useApp } from "@/hooks/useApp";
 import pastProjectsData from "@/lib/PastProjects";
