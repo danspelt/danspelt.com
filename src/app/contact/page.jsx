@@ -1,98 +1,102 @@
-'use client'
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
+"use client";
 
-const ContactMe = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+import { useRef, useTransition } from "react";
+import toast from "react-hot-toast";
+import { sendContactEmailAction } from "@/actions";
+import { FaUser, FaEnvelope, FaPaperPlane, FaLinkedin, FaGithub } from "react-icons/fa";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
+function ContactForm() {
+  const formRef = useRef(null);
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmitContactForm = (formData) => {
+    startTransition(async () => {
+      const { errorMessage } = await sendContactEmailAction(formData);
+      if (!errorMessage) {
+        toast.success("Message sent!");
+        formRef.current?.reset();
+      } else {
+        toast.error(errorMessage);
+      }
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
-    try {
-      const response = await fetch('/api/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        console.log('Form submitted successfully');
-      } else {
-        console.error('Form submission failed');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
-
   return (
-    <div className="p-16 bg-white text-gray-900">
-      <ul className="list-none mb-8">
-        <li className="mb-6 text-xl"><strong>Email:</strong> <a href="mailto:dan@danspelt.com" className="text-blue-500">dan@danspelt.com</a></li>
-        <li className="mb-6 text-xl"><strong>Phone:</strong> 250-208-7997</li>
-        <li className="mb-6 text-xl"><strong>Location:</strong> Victoria, Canada</li>
-        <li className="flex items-center space-x-8">
-          <Link href="https://www.linkedin.com/in/danspelt" className="text-blue-500 hover:text-blue-700"><FaLinkedin size={36} /></Link>
-          <Link href="https://github.com/danspelt" className="text-gray-900 hover:text-gray-700"><FaGithub size={36} /></Link>
-        </li>
-      </ul>
-      <h3 className="text-4xl font-semibold mb-8">Or send me a message directly:</h3>
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <div>
-          <label htmlFor="name" className="block text-2xl font-medium">Name:</label>
+    <div>
+      <div className="flex flex-col gap-4">
+          <p className="text-lg font-bold">Contact</p>
+          <p className="text-sm text-slate-700">
+            Email: dan@danspelt.com
+          </p>
+          <p className="text-sm text-slate-700">
+            Phone: +1 250-208-7997
+          </p>
+          <div className="flex gap-8 text-slate-700 text-xl">
+            <a href="https://www.linkedin.com/in/danspelt" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <FaLinkedin className="text-slate-800" />
+              LinkedIn
+            </a>
+            <a href="https://github.com/danspelt" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <FaGithub className="text-slate-800" />
+              GitHub
+            </a>
+          </div>
+      </div>
+      <form
+      ref={formRef}
+      onSubmit={(e) => {
+        
+        e.preventDefault();
+        const formData = new FormData(formRef.current);
+        handleSubmitContactForm(formData);
+      }}
+      className="rounded-lg bg-slate-200 p-6 shadow-md"
+    >
+      <div className="flex flex-col gap-6">
+        <div className="flex items-center gap-2">
+          <FaUser className="text-slate-800" />
           <input
-            type="text"
-            id="name"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="mt-3 p-4 w-full border border-gray-300 rounded-md text-xl"
+            type="text"
+            placeholder="Name"
+            className="rounded-md p-2 text-black flex-1 border-2 border-slate-800"
+            disabled={isPending}
           />
         </div>
-        <div>
-          <label htmlFor="email" className="block text-2xl font-medium">Email:</label>
+        <div className="flex items-center gap-2">
+          <FaEnvelope className="text-slate-800" />
           <input
-            type="email"
-            id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="mt-3 p-4 w-full border border-gray-300 rounded-md text-xl"
+            type="email"
+            placeholder="Email"
+            className="rounded-md p-2 text-black flex-1 border-2 border-slate-800"
+
+            disabled={isPending}
           />
         </div>
-        <div>
-          <label htmlFor="message" className="block text-2xl font-medium">Message:</label>
+        <div className="flex items-center gap-2">
+          <FaPaperPlane className="text-slate-800" />
           <textarea
-            id="message"
             name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            className="mt-3 p-4 w-full border border-gray-300 rounded-md text-xl"
+            placeholder="Message"
+            className="rounded-md p-2 min-h-40 text-black flex-1 border-2 border-slate-800"
+            disabled={isPending}
           />
         </div>
-        <button type="submit" className="px-8 py-4 bg-blue-500 text-white rounded-md text-xl">Send</button>
-      </form>
+        <button
+          type="submit"
+          className="w-48 rounded-lg bg-slate-800 py-2 ml-auto text-white"
+          disabled={isPending}
+        >
+          Send Message
+        </button>
+      </div>
+    </form>
+  
     </div>
   );
-};
+}
 
-export default ContactMe;
+
+export default ContactForm;

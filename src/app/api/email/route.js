@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server';
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export async function POST(req) {
-  const { name, email, message } = req.body;
-  
-
+    const data = await req.json();
+    const { name, email, message } = data;
+    
     const msg = {
         to: 'dan@danspelt.com',
         from: email,
