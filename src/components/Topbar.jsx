@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 const Topbar = () => {
     return (
-        <div className="flex flex-row mb-12 border-2 border-gray-200 rounded-full p-2 hover:bg-blue-50 hover:scale-110 transition-all duration-300">
+        <div className="flex flex-row mb-12 border-2 border-gray-200 rounded-full p-2 hover:bg-blue-100 ">
             <div className="border-2 border-gray-200 rounded-full p-2 hover:bg-blue-50 hover:scale-110 transition-all duration-300"> 
                 <Link href="/" className="flex flex-row items-center justify-center bg-blue-100 rounded-full p-2">
                     <Image src="/images/logo.png" alt="Dan Spelt" width={50} height={50} />
