@@ -52,10 +52,10 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="opacity-80">
+    <div className="flex flex-col items-center justify-center text-center">
       <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions Regarding Dan Spelt's Professional Capabilities and Requirements</h2>
       {faqs.map((faq, index) => (
-        <div key={index} className="bg-gray-200 p-4 rounded-lg mb-4 opacity-80 text-yellow-900">
+        <div key={index} className="bg-blue-100 p-4 rounded-lg mb-4 opacity-80 text-yellow-900 hover:bg-blue-200 hover:scale-105 transition-all duration-300 hover:shadow-lg cursor-pointer">
           <h3 
             className="text-xl font-semibold cursor-pointer"
             onClick={() => toggleFaq(index)}
