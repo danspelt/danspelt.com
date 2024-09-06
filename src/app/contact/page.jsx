@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
-import SendEmailForm from "@/components/SendEmailForm";
 
 
 function ContactForm() {
   return (
-    <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-lg h-screen">
       <div className="flex flex-col gap-6">
         <p className="text-4xl font-extrabold text-blue-900">Contact Information</p>
         <p className="text-2xl text-slate-800 flex items-center gap-4">
@@ -28,7 +27,6 @@ function ContactForm() {
           </Link>
         </div>
       </div>
-      <SendEmailForm />
     </div>
   );
 }
