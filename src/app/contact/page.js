@@ -50,14 +50,17 @@ const ContactForm = () => {
   return (
     <motion.form
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+      className="space-y-6 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg"
       initial="initial"
       animate="animate"
       variants={fadeIn}
     >
       <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-        Get in Touch
+        Send a Message
       </h2>
+      <p className="text-gray-600 dark:text-gray-300">
+        I'll get back to you as soon as possible.
+      </p>
       <div className="space-y-4">
         <div>
           <input
@@ -109,14 +112,22 @@ const ContactForm = () => {
       </button>
       
       {submitStatus === 'success' && (
-        <div className="text-green-600 text-center">
-          Message sent successfully!
-        </div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-green-600 dark:text-green-400 text-center font-medium"
+        >
+          Thanks for reaching out! I'll respond to your message soon.
+        </motion.div>
       )}
       {submitStatus === 'error' && (
-        <div className="text-red-600 text-center">
-          Failed to send message. Please try again.
-        </div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-red-600 dark:text-red-400 text-center font-medium"
+        >
+          Oops! Something went wrong. Please try again or email me directly.
+        </motion.div>
       )}
     </motion.form>
   );
@@ -127,14 +138,14 @@ const ContactCard = ({ icon: Icon, title, content, href }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center space-x-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all bg-white dark:bg-gray-800"
+    className="flex items-center space-x-4 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all bg-white dark:bg-gray-800 group"
     variants={fadeIn}
   >
-    <div className="p-3 rounded-full border border-blue-200 dark:border-blue-700 bg-transparent">
+    <div className="p-3 rounded-full border border-blue-200 dark:border-blue-700 bg-transparent group-hover:border-blue-500 dark:group-hover:border-blue-400 transition-colors">
       <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
     </div>
     <div>
-      <h3 className="font-semibold text-gray-900 dark:text-white">{title}</h3>
+      <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{title}</h3>
       <p className="text-gray-600 dark:text-gray-300">{content}</p>
     </div>
   </motion.a>
@@ -145,11 +156,11 @@ const SocialLink = ({ href, icon: Icon, label }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="p-3 border border-gray-200 dark:border-gray-700 rounded-full hover:shadow-lg transition-all bg-transparent"
+    className="p-3 border border-gray-200 dark:border-gray-700 rounded-full hover:shadow-lg transition-all bg-white dark:bg-gray-800 hover:border-blue-500 dark:hover:border-blue-400 group"
     variants={fadeIn}
     whileHover={{ scale: 1.1 }}
   >
-    <Icon className="w-6 h-6 text-gray-600 dark:text-gray-300" aria-label={label} />
+    <Icon className="w-6 h-6 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" aria-label={label} />
   </motion.a>
 );
 
@@ -164,10 +175,11 @@ export default function ContactPage() {
           variants={fadeIn}
         >
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-            Contact Me
+            Let's Connect
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
-            Let's connect and discuss how we can work together
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Whether you have a project in mind or just want to chat about technology,
+            I'm always excited to collaborate and share ideas.
           </p>
         </motion.div>
 
@@ -175,13 +187,13 @@ export default function ContactPage() {
           <div className="space-y-6">
             <ContactCard
               icon={Mail}
-              title="Email"
+              title="Email Me"
               content="dan@danspelt.com"
               href="mailto:dan@danspelt.com"
             />
             <ContactCard
               icon={MapPin}
-              title="Location"
+              title="Based in"
               content="Victoria, BC, Canada"
               href="https://www.google.com/maps/place/Victoria,+BC/@48.4262362,-123.376775,12z"
             />
@@ -190,12 +202,12 @@ export default function ContactPage() {
               variants={fadeIn}
             >
               <SocialLink
-                href="https://github.com/yourusername"
+                href="https://github.com/danspelt"
                 icon={Github}
                 label="GitHub"
               />
               <SocialLink
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/danspelt"
                 icon={Linkedin}
                 label="LinkedIn"
               />
