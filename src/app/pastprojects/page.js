@@ -3,60 +3,14 @@
 import React from 'react';
 import { Code } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getGitHubProjects } from '@/lib/github';
 import './timeline.css';
 
-const projects = [
-  {
-    title: "EcoCart Boutique",
-    year: "2024",
-    description: "A modern e-commerce platform built with TypeScript, focusing on sustainable and eco-friendly products.",
-    gradient: "from-green-500/20 via-emerald-500/20 to-teal-500/20",
-    icon: "🌱",
-    link: "https://shop-nine-psi.vercel.app",
-    github: "https://github.com/danspelt/ecocartboutique",
-    tags: ["TypeScript", "Next.js", "E-commerce", "Sustainability"],
-    features: [
-      "Modern e-commerce functionality",
-      "Sustainable product focus",
-      "Responsive design",
-      "User-friendly interface"
-    ]
-  },
-  {
-    title: "PrimePulse",
-    year: "2024",
-    description: "A news and content platform built with JavaScript, delivering real-time updates and personalized content.",
-    gradient: "from-blue-500/20 via-indigo-500/20 to-purple-500/20",
-    icon: "📰",
-    link: "https://nextnews-nine.vercel.app",
-    github: "https://github.com/danspelt/primepulse",
-    tags: ["JavaScript", "Next.js", "Content Platform", "Real-time"],
-    features: [
-      "Real-time news updates",
-      "Personalized content delivery",
-      "Modern UI/UX",
-      "Responsive design"
-    ]
-  },
-  {
-    title: "TaskFlow",
-    year: "2024",
-    description: "A TypeScript-based task management application for streamlined productivity and project organization.",
-    gradient: "from-orange-500/20 via-red-500/20 to-pink-500/20",
-    icon: "✅",
-    link: "https://taskflow-delta.vercel.app",
-    github: "https://github.com/danspelt/taskflow",
-    tags: ["TypeScript", "Task Management", "Productivity", "MIT License"],
-    features: [
-      "Task organization",
-      "Project management",
-      "Progress tracking",
-      "Team collaboration"
-    ]
-  }
-];
+export const revalidate = 3600; // Revalidate every hour
 
-const PastProjects = () => {
+async function PastProjects() {
+  const projects = await getGitHubProjects();
+
   return (
     <div className="container mx-auto py-8">
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -145,6 +99,6 @@ const PastProjects = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PastProjects;
