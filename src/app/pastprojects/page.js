@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { getGitHubProjects } from '@/lib/github';
 import './timeline.css';
 
-export const revalidate = 3600; // Revalidate every hour
+export const dynamic = 'force-dynamic';
 
 async function PastProjects() {
   const projects = await getGitHubProjects();
