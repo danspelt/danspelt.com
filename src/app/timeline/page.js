@@ -29,6 +29,6 @@ export default function TimelinePage() {
         </p>
       </div>
       <Timeline2D />
-    </div>
+o    </div>
   );
 }

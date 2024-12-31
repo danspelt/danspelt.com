@@ -21,7 +21,7 @@ const DynamicCanvas = dynamic(() => Promise.resolve(ThreeCanvas), { ssr: false }
 export default function ClientWrapper() {
   return (
     <div style={{ width: '100%', height: '800px' }}>
-{{}}      <DynamicCanvas />
+      <DynamicCanvas />
     </div>
   );
 }
