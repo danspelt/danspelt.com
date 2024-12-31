@@ -14,7 +14,7 @@ export async function getGitHubProjects() {
     const repos = await response.json();
     
     return repos
-      .filter(repo => !repo.fork) // Exclude forked repositories
+      .filter(repo => !repo.fork && repo.name !== 'danspelt.com') // Exclude forks and personal website
       .map(repo => ({
         title: formatRepoName(repo.name),
         year: new Date(repo.created_at).getFullYear().toString(),
