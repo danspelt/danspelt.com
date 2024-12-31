@@ -50,7 +50,7 @@ const ContactForm = () => {
   return (
     <motion.form
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-2xl p-8 border border-gray-200 dark:border-gray-700"
+      className="space-y-6 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
       initial="initial"
       animate="animate"
       variants={fadeIn}
@@ -65,7 +65,7 @@ const ContactForm = () => {
             placeholder="Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-transparent"
             required
           />
         </div>
@@ -75,7 +75,7 @@ const ContactForm = () => {
             placeholder="Email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-transparent"
             required
           />
         </div>
@@ -85,7 +85,7 @@ const ContactForm = () => {
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             rows="4"
-            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none bg-transparent"
             required
           />
         </div>
@@ -127,10 +127,10 @@ const ContactCard = ({ icon: Icon, title, content, href }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center space-x-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all"
+    className="flex items-center space-x-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all bg-white dark:bg-gray-800"
     variants={fadeIn}
   >
-    <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
+    <div className="p-3 rounded-full border border-blue-200 dark:border-blue-700 bg-transparent">
       <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
     </div>
     <div>
@@ -145,7 +145,7 @@ const SocialLink = ({ href, icon: Icon, label }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="p-3 border border-gray-200 dark:border-gray-700 rounded-full hover:shadow-lg transition-all"
+    className="p-3 border border-gray-200 dark:border-gray-700 rounded-full hover:shadow-lg transition-all bg-transparent"
     variants={fadeIn}
     whileHover={{ scale: 1.1 }}
   >
@@ -155,7 +155,7 @@ const SocialLink = ({ href, icon: Icon, label }) => (
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-4xl mx-auto space-y-12">
         <motion.div
           className="text-center space-y-4"
@@ -183,7 +183,7 @@ export default function ContactPage() {
               icon={MapPin}
               title="Location"
               content="Victoria, BC, Canada"
-              href="https://goo.gl/maps/xxx"
+              href="https://www.google.com/maps/place/Victoria,+BC/@48.4262362,-123.376775,12z"
             />
             <motion.div
               className="flex justify-center space-x-4"
