@@ -1,0 +1,109 @@
+/* Timeline styles */
+.timeline-container {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary) 0%, transparent 100%);
+}
+
+.timeline-item {
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateZ(20px);
+}
+
+.year-marker {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.year-marker::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  border-radius: 50%;
+  transform: translateZ(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Alternating sides animation */
+.left-timeline {
+  animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.right-timeline {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px) rotateY(20deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px) rotateY(-20deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0);
+  }
+}
+
+/* Hover effects */
+.timeline-card {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.timeline-card:hover {
+  transform: scale(1.02) translateZ(30px);
+}
+
+/* 3D elements */
+.card-content {
+  transform-style: preserve-3d;
+}
+
+.card-icon {
+  transition: transform 0.3s ease;
+}
+
+.card-icon:hover {
+  transform: translateZ(40px) scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-container {
+    perspective: none;
+  }
+  
+  .timeline-item {
+    transform: none !important;
+  }
+  
+  .left-timeline,
+  .right-timeline {
+    animation: none;
+  }
+}

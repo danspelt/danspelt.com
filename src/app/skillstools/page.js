@@ -1,96 +1,128 @@
 'use client';
 import React, { useState } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-const SkillsTools = () => {
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Code2, Database, Globe, Laptop, Server, Terminal, Wrench } from 'lucide-react';
 
-  const [tabIndex, setTabIndex] = useState(0);
+const SkillsTools = () => {
+  const skills = [
+    {
+      category: "Frontend Development",
+      icon: <Globe className="w-10 h-10 text-primary" />,
+      description: "Building modern, responsive web interfaces",
+      skills: [
+        { name: "React & Next.js", level: 90 },
+        { name: "JavaScript/ES6+", level: 95 },
+        { name: "HTML5 & CSS3", level: 90 },
+        { name: "Tailwind CSS", level: 85 },
+        { name: "TypeScript", level: 80 },
+      ]
+    },
+    {
+      category: "Backend Development",
+      icon: <Server className="w-10 h-10 text-primary" />,
+      description: "Creating robust server-side applications",
+      skills: [
+        { name: "Node.js", level: 85 },
+        { name: "Express.js", level: 85 },
+        { name: "RESTful APIs", level: 90 },
+        { name: "GraphQL", level: 75 },
+        { name: "Python", level: 70 },
+      ]
+    },
+    {
+      category: "Database & Storage",
+      icon: <Database className="w-10 h-10 text-primary" />,
+      description: "Managing data and storage solutions",
+      skills: [
+        { name: "MongoDB", level: 85 },
+        { name: "PostgreSQL", level: 80 },
+        { name: "Redis", level: 70 },
+        { name: "Firebase", level: 75 },
+        { name: "AWS S3", level: 70 },
+      ]
+    },
+    {
+      category: "DevOps & Tools",
+      icon: <Wrench className="w-10 h-10 text-primary" />,
+      description: "Development and deployment tools",
+      skills: [
+        { name: "Git & GitHub", level: 90 },
+        { name: "Docker", level: 75 },
+        { name: "CI/CD", level: 80 },
+        { name: "AWS", level: 70 },
+        { name: "Linux", level: 75 },
+      ]
+    },
+    {
+      category: "Development Tools",
+      icon: <Terminal className="w-10 h-10 text-primary" />,
+      description: "Tools and environments I work with",
+      skills: [
+        { name: "VS Code", level: 95 },
+        { name: "Git", level: 90 },
+        { name: "npm/yarn/pnpm", level: 85 },
+        { name: "Chrome DevTools", level: 90 },
+        { name: "Postman", level: 85 },
+      ]
+    },
+    {
+      category: "Additional Skills",
+      icon: <Laptop className="w-10 h-10 text-primary" />,
+      description: "Other relevant technical skills",
+      skills: [
+        { name: "UI/UX Design", level: 75 },
+        { name: "Responsive Design", level: 85 },
+        { name: "SEO Optimization", level: 70 },
+        { name: "Web Accessibility", level: 80 },
+        { name: "Performance Optimization", level: 85 },
+      ]
+    }
+  ];
 
   return (
-    <div className="h-screen w-screen bg-gray-50 p-8">
-      <div className="max-w-6xl mx-auto">
-        <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)} className="flex">
-          <div className="flex w-full">
-            <TabList className="flex flex-col mr-4 border-r-2 border-gray-300 gap-4 text-xl h-full">
-              <Tab className={`p-4 cursor-pointer ${tabIndex === 0 ? 'bg-blue-700 text-white' : 'bg-blue-500 text-white hover:bg-blue-600'}`}>Front-end</Tab>
-              <Tab className={`p-4 cursor-pointer ${tabIndex === 1 ? 'bg-red-700 text-white' : 'bg-red-500 text-white hover:bg-red-600'}`}>Back-end</Tab>
-              <Tab className={`p-4 cursor-pointer ${tabIndex === 2 ? 'bg-green-700 text-white' : 'bg-green-500 text-white hover:bg-green-600'}`}>DevOps & Tools</Tab>
-              <Tab className={`p-4 cursor-pointer ${tabIndex === 3 ? 'bg-purple-700 text-white' : 'bg-purple-500 text-white hover:bg-purple-600'}`}>Others</Tab>
-            </TabList>
+    <div className="container mx-auto py-8">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          Skills & Tools
+        </h1>
+        <p className="text-xl text-muted-foreground">
+          A comprehensive overview of my technical expertise and tools I work with
+        </p>
+      </div>
 
-            <div className="bg-white text-xl p-8 rounded-lg shadow-lg flex-grow">
-              <TabPanel>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {skills.map((category, index) => (
+          <Card key={index} className="overflow-hidden">
+            <CardHeader className="space-y-1">
+              <div className="flex items-center gap-4">
+                {category.icon}
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">JavaScript & Frameworks</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Expertise in modern JavaScript (ES6+), including async programming, closures, and modular code.</li>
-                    <li>Proficient in React.js and Next.js for building dynamic, high-performance web applications.</li>
-                    <li>Experience with state management libraries like Redux and MobX.</li>
-                    <li>Advanced skills in TypeScript for writing type-safe JavaScript.</li>
-                  </ul>
-                  <h2 className="text-2xl font-bold mt-8 mb-4">HTML & CSS</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Extensive experience with semantic HTML5 and modern CSS, including Flexbox and Grid.</li>
-                    <li>Proficient in CSS frameworks like Tailwind CSS and Bootstrap for responsive design.</li>
-                    <li>Experience with CSS-in-JS libraries such as Emotion and styled-components.</li>
-                  </ul>
+                  <CardTitle className="text-xl">{category.category}</CardTitle>
+                  <CardDescription>{category.description}</CardDescription>
                 </div>
-              </TabPanel>
-
-              <TabPanel>
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">Server-side Development</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Proficient in Node.js and Express.js for building scalable back-end services.</li>
-                    <li>Experience with RESTful API design and GraphQL for efficient data fetching.</li>
-                    <li>Skilled in database management with MongoDB, PostgreSQL, and MySQL.</li>
-                    <li>Familiar with server-side rendering (SSR) techniques using Next.js.</li>
-                  </ul>
-                  <h2 className="text-2xl font-bold mt-8 mb-4">Security & Performance</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Implemented security best practices, including JWT authentication and OAuth.</li>
-                    <li>Experience with performance optimization techniques like caching, lazy loading, and CDN usage.</li>
-                  </ul>
-                </div>
-              </TabPanel>
-
-              <TabPanel>
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">DevOps & Tooling</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Proficient with cloud platforms like AWS and Google Cloud for deploying scalable applications.</li>
-                    <li>Experience with Docker and Kubernetes for containerization and orchestration.</li>
-                    <li>Skilled in CI/CD pipelines using Jenkins, GitHub Actions, and CircleCI.</li>
-                    <li>Version control expertise with Git, GitHub, and BitBucket.</li>
-                  </ul>
-                  <h2 className="text-2xl font-bold mt-8 mb-4">Monitoring & Logging</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Experience with monitoring tools like DataDog and Prometheus for application performance.</li>
-                    <li>Logging and error tracking using tools like Sentry and ELK Stack (Elasticsearch, Logstash, Kibana).</li>
-                  </ul>
-                </div>
-              </TabPanel>
-
-              <TabPanel>
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">Other Skills & Technologies</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Proficient in building and deploying Chrome Extensions.</li>
-                    <li>Experience with headless CMS platforms like Contentful and Strapi.</li>
-                    <li>Search engine optimization (SEO) and UI/UX prototyping.</li>
-                    <li>Agile methodologies and Scrum framework for efficient project management.</li>
-                  </ul>
-                  <h2 className="text-2xl font-bold mt-8 mb-4">Soft Skills</h2>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Strong communication and collaboration skills within cross-functional teams.</li>
-                    <li>Mentorship and leadership experience, guiding junior developers.</li>
-                    <li>Continuous learning mindset, staying updated with industry trends and best practices.</li>
-                  </ul>
-                </div>
-              </TabPanel>
-            </div>
-          </div>
-        </Tabs>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <div key={skillIndex} className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium">{skill.name}</span>
+                      <span className="text-muted-foreground">{skill.level}%</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-secondary">
+                      <div
+                        className="h-full rounded-full bg-primary transition-all"
+                        style={{ width: `${skill.level}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );
