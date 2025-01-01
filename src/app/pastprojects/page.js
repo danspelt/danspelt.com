@@ -3,14 +3,9 @@
 import React from 'react';
 import { Code } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getGitHubProjects } from '@/lib/github';
 import './timeline.css';
 
-export const dynamic = 'force-dynamic';
-
-async function PastProjects() {
-  const projects = await getGitHubProjects();
-
+function ProjectsClient({ projects }) {
   return (
     <div className="container mx-auto py-8">
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -101,4 +96,4 @@ async function PastProjects() {
   );
 }
 
-export default PastProjects;
+export default ProjectsClient;
