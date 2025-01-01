@@ -7,15 +7,21 @@ const octokit = new Octokit({
 });
 
 async function getRepositories() {
-  const { data: repos } = await octokit.repos.listForUser({
-    username: 'danspelt',
-    sort: 'updated',
-    direction: 'desc'
-  });
+  try {
+    const { data: repos } = await octokit.repos.listForUser({
+      username: 'danspelt',
+      sort: 'updated',
+      direction: 'desc'
+    });
 
-  return repos
-    .filter(repo => !repo.fork && repo.name !== 'danspelt.com') // Exclude forked repositories and personal website
-    .map(repo => ({
+    console.log(`Found ${repos.length} repositories`);
+
+    const filteredRepos = repos
+      .filter(repo => !repo.fork && repo.name !== 'danspelt.com');
+
+    console.log(`Filtered to ${filteredRepos.length} repositories`);
+
+    return filteredRepos.map(repo => ({
       title: formatRepoName(repo.name),
       year: new Date(repo.created_at).getFullYear().toString(),
       description: repo.description || `A ${repo.language} project focused on ${formatRepoName(repo.name)}.`,
@@ -34,6 +40,10 @@ async function getRepositories() {
         repo.homepage ? 'Has demo' : 'No demo available'
       ]
     }));
+  } catch (error) {
+    console.error('Error fetching repositories:', error);
+    throw error;
+  }
 }
 
 function formatRepoName(name) {
@@ -73,13 +83,18 @@ function getIconForRepo(language) {
 
 function getAdditionalTags(repo) {
   const tags = [];
-  if (repo.topics) tags.push(...repo.topics);
+  if (repo.topics && repo.topics.length > 0) {
+    console.log(`Topics for ${repo.name}:`, repo.topics);
+    tags.push(...repo.topics);
+  }
   if (repo.homepage) tags.push('Live Demo');
   return tags;
 }
 
 async function updateProjectsFile(projects) {
-  const content = `'use client';
+  try {
+    console.log('Generating file content...');
+    const content = `'use client';
 
 import React from 'react';
 import { Code, Github } from "lucide-react";
@@ -180,17 +195,25 @@ function ProjectsClient() {
 
 export default ProjectsClient;`;
 
-  const filePath = path.join(process.cwd(), 'src', 'app', 'hubbies', 'page.js');
-  fs.writeFileSync(filePath, content, 'utf8');
+    console.log('Writing file...');
+    const filePath = path.join(process.cwd(), 'src', 'app', 'hubbies', 'page.js');
+    fs.writeFileSync(filePath, content, 'utf8');
+    console.log('File written successfully');
+  } catch (error) {
+    console.error('Error updating projects file:', error);
+    throw error;
+  }
 }
 
 async function main() {
   try {
+    console.log('Starting update process...');
     const projects = await getRepositories();
+    console.log(`Processing ${projects.length} projects...`);
     await updateProjectsFile(projects);
     console.log('Successfully updated projects file');
   } catch (error) {
-    console.error('Error updating projects:', error);
+    console.error('Error in main function:', error);
     process.exit(1);
   }
 }
