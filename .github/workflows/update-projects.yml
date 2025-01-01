@@ -29,5 +29,5 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add src/app/pastprojects/page.js
+          git add src/app/hubbies/page.js
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update projects from GitHub" && git push)
