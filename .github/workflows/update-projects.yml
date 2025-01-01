@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: main  # Explicitly checkout main branch
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -22,16 +23,36 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: npm install @octokit/rest axios
+        run: |
+          echo "Installing dependencies..."
+          npm install @octokit/rest axios
+          echo "Dependencies installed successfully"
         
       - name: Update Projects
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .github/scripts/update-projects.js
+        run: |
+          echo "Starting update-projects.js..."
+          node .github/scripts/update-projects.js
+          echo "update-projects.js completed"
         
+      - name: Configure Git
+        run: |
+          echo "Configuring Git..."
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          echo "Git configured successfully"
+
       - name: Commit and push if changed
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
+          echo "Checking for changes..."
           git add src/app/hubbies/page.js
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update projects from GitHub" && git push)
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            echo "Changes detected, committing..."
+            git commit -m "Update projects from GitHub"
+            echo "Pushing changes..."
+            git push
+            echo "Changes pushed successfully"
+          fi
