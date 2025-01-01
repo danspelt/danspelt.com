@@ -195,10 +195,23 @@ function ProjectsClient() {
 
 export default ProjectsClient;`;
 
-    console.log('Writing file...');
-    const filePath = path.join(process.cwd(), 'src', 'app', 'hubbies', 'page.js');
-    fs.writeFileSync(filePath, content, 'utf8');
-    console.log('File written successfully');
+    console.log('Writing files...');
+    
+    // Write to page.js
+    const pageFilePath = path.join(process.cwd(), 'src', 'app', 'hubbies', 'page.js');
+    fs.writeFileSync(pageFilePath, `
+import ProjectsClient from './ProjectsClient';
+
+export default function Page() {
+  return <ProjectsClient />;
+}
+`, 'utf8');
+    console.log('page.js written successfully');
+
+    // Write to ProjectsClient.jsx
+    const clientFilePath = path.join(process.cwd(), 'src', 'app', 'hubbies', 'ProjectsClient.jsx');
+    fs.writeFileSync(clientFilePath, content, 'utf8');
+    console.log('ProjectsClient.jsx written successfully');
   } catch (error) {
     console.error('Error updating projects file:', error);
     throw error;
