@@ -2,7 +2,8 @@ export async function getGitHubProjects() {
   try {
     const response = await fetch('https://api.github.com/users/danspelt/repos', {
       headers: {
-        'Accept': 'application/vnd.github.v3+json'
+        'Accept': 'application/vnd.github.v3+json',
+        'Cache-Control': 'public, max-age=3600, stale-while-revalidate=3600, stale-if-error=86400'
       },
       cache: 'no-store'
     });
