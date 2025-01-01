@@ -1,9 +1,9 @@
-import TimelineClient from './TimelineClient';
+'use client';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+import React from 'react';
+import Timeline2D from './Timeline2D';
 
-export default function TimelinePage() {
+export default function TimelineClient() {
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-4 bg-gradient-to-b from-background to-background/80">
       <div className="text-center mb-8">
@@ -31,7 +31,7 @@ export default function TimelinePage() {
           A timeline of my career progression and key achievements
         </p>
       </div>
-      <TimelineClient />
+      <Timeline2D />
     </div>
   );
 }

@@ -1,13 +1,11 @@
 'use client';
+
+import React from 'react';
 import IntroVideo from '@/components/IntroVideo';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import HomeClient from './HomeClient';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-
-export default function Home() {
+export default function HomeClient() {
   return (
     <div className='min-h-screen'>
       {/* Hero Section */}
@@ -47,8 +45,4 @@ export default function Home() {
       </section>
     </div>
   );
-};
-
-export default function HomeServer() {
-  return <HomeClient />;
 }
