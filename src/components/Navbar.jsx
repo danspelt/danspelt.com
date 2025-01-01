@@ -39,7 +39,7 @@ export function Navbar() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/pastprojects" legacyBehavior passHref>
+              <Link href="/hubbies" legacyBehavior passHref>
                 <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
                   Hobby Projects
                 </NavigationMenuLink>
