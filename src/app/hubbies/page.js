@@ -6,9 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import './timeline.css';
 
-function ProjectsClient() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+function ProjectsClient({ initialProjects }) {
+  const [projects, setProjects] = useState(initialProjects);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchProjects() {
@@ -43,8 +43,10 @@ function ProjectsClient() {
       }
     }
 
-    fetchProjects();
-  }, []);
+    if (!initialProjects) {
+      fetchProjects();
+    }
+  }, [initialProjects]);
 
   // Function to get a random gradient
   function getRandomGradient() {
