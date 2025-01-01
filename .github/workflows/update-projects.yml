@@ -8,9 +8,13 @@ on:
 jobs:
   update-projects:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+      
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: main  # Explicitly checkout main branch
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
