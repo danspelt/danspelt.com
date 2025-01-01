@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
 import { ModeToggle } from "./mode-toggle"
+import { ZoomToggle } from "./zoom-toggle"
 
 export function Navbar() {
   return (
@@ -60,7 +61,8 @@ export function Navbar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="ml-auto flex items-center gap-2">
+          <ZoomToggle />
           <ModeToggle />
         </div>
       </div>
