@@ -28,12 +28,27 @@ jobs:
           npm install @octokit/rest axios
           echo "Dependencies installed successfully"
         
+      - name: Debug Environment
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Directory contents:"
+          ls -la
+          echo "GitHub token exists: ${{ secrets.GITHUB_TOKEN != '' }}"
+          echo ".github/scripts contents:"
+          ls -la .github/scripts/
+          
       - name: Update Projects
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: "*"
         run: |
           echo "Starting update-projects.js..."
-          node .github/scripts/update-projects.js
+          node --trace-warnings .github/scripts/update-projects.js || {
+            echo "Error running update-projects.js"
+            echo "Node.js version: $(node -v)"
+            echo "NPM version: $(npm -v)"
+            exit 1
+          }
           echo "update-projects.js completed"
         
       - name: Configure Git
@@ -46,6 +61,11 @@ jobs:
       - name: Commit and push if changed
         run: |
           echo "Checking for changes..."
+          if [ ! -f "src/app/hubbies/page.js" ]; then
+            echo "Error: src/app/hubbies/page.js does not exist"
+            ls -la src/app/hubbies/
+            exit 1
+          fi
           git add src/app/hubbies/page.js
           if git diff --staged --quiet; then
             echo "No changes to commit"
