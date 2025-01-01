@@ -3,9 +3,10 @@ export async function getGitHubProjects() {
     const response = await fetch('https://api.github.com/users/danspelt/repos', {
       headers: {
         'Accept': 'application/vnd.github.v3+json',
-        'Cache-Control': 'public, max-age=3600, stale-while-revalidate=3600, stale-if-error=86400'
+        'Cache-Control': 'no-cache'
       },
-      cache: 'no-store'
+      cache: 'no-store',
+      next: { revalidate: 0 }
     });
 
     if (!response.ok) {
