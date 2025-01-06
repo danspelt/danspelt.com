@@ -13,9 +13,10 @@ export default function ProjectsClient({ initialProjects = [] }) {
     async function fetchProjects() {
       try {
         setLoading(true);
-        const response = await fetch('/api/projects');
+        const response = await fetch('/api/github');
         if (!response.ok) {
-          throw new Error('Failed to fetch projects');
+          const error = await response.json();
+          throw new Error(error.details || 'Failed to fetch projects');
         }
         const data = await response.json();
         setProjects(data);

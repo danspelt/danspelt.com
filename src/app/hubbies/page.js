@@ -1,41 +1,16 @@
 import ProjectsClient from './ProjectsClient';
-import { Octokit } from '@octokit/rest';
 
 async function getRepositories() {
-  const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN
-  });
-
   try {
-    const { data: repos } = await octokit.repos.listForUser({
-      username: 'danspelt',
-      sort: 'pushed',
-      direction: 'desc'
+    const response = await fetch('/api/github', {
+      next: { revalidate: 3600 } // Cache for 1 hour
     });
 
-    const filteredRepos = repos
-      .filter(repo => !repo.fork && repo.name !== 'danspelt.com')
-      .map(repo => ({
-        title: formatRepoName(repo.name),
-        year: new Date(repo.pushed_at).toLocaleDateString('en-US', { 
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        }),
-        description: repo.description || `A ${repo.language} project focused on ${formatRepoName(repo.name)}.`,
-        gradient: getRandomGradient(),
-        icon: getIconForRepo(repo.language),
-        url: repo.html_url,
-        homepage: repo.homepage,
-        tags: [
-          repo.language,
-          'Open Source',
-          ...(repo.topics || []),
-          repo.homepage ? 'Live Demo' : null
-        ].filter(Boolean),
-      }));
+    if (!response.ok) {
+      throw new Error('Failed to fetch repositories');
+    }
 
-    return filteredRepos;
+    return response.json();
   } catch (error) {
     console.error('Error fetching repositories:', error);
     return [];
