@@ -17,7 +17,11 @@ async function getRepositories() {
       .filter(repo => !repo.fork && repo.name !== 'danspelt.com')
       .map(repo => ({
         title: formatRepoName(repo.name),
-        year: new Date(repo.created_at).getFullYear().toString(),
+        year: new Date(repo.pushed_at).toLocaleDateString('en-US', { 
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        }),
         description: repo.description || `A ${repo.language} project focused on ${formatRepoName(repo.name)}.`,
         gradient: getRandomGradient(),
         icon: getIconForRepo(repo.language),

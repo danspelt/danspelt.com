@@ -55,7 +55,7 @@ export default function ProjectsClient({ initialProjects = [] }) {
       </div>
 
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div key={index} className="group relative">
               <div className="relative">
@@ -65,14 +65,13 @@ export default function ProjectsClient({ initialProjects = [] }) {
                     <div className="absolute inset-0 bg-grid-white/10" />
                   </div>
                   
-                  <div className="absolute top-4 right-4 text-2xl">
-                    {project.icon}
-                  </div>
-
                   <CardHeader>
                     <CardTitle className="text-xl text-gray-900 dark:text-white flex items-center justify-between">
                       <span>{project.title}</span>
-                      <span className="text-sm text-gray-500">{project.year}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">{project.icon}</span>
+                        <span className="text-sm text-gray-500">{project.year}</span>
+                      </div>
                     </CardTitle>
                     <CardDescription className="text-gray-600 dark:text-gray-300">
                       {project.description}
