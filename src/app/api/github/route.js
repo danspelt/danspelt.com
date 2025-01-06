@@ -39,25 +39,34 @@ function getIconForRepo(language) {
 }
 
 export async function GET() {
-  if (!process.env.GITHUB_TOKEN) {
+  const token = process.env.GITHUB_TOKEN;
+  
+  if (!token) {
     console.error('GitHub token not configured');
-    return NextResponse.json({ error: 'GitHub token not configured' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'GitHub token not configured', details: 'Please set GITHUB_TOKEN in environment variables' },
+      { status: 500 }
+    );
   }
 
   try {
     const octokit = new Octokit({
-      auth: process.env.GITHUB_TOKEN,
+      auth: token,
       request: {
         fetch: fetch.bind(global)
       }
     });
 
+    console.log('Fetching repositories for user: danspelt');
+    
     const { data: repos } = await octokit.repos.listForUser({
       username: 'danspelt',
       sort: 'pushed',
       direction: 'desc',
       per_page: 100
     });
+
+    console.log(`Found ${repos.length} repositories`);
 
     const filteredRepos = repos
       .filter(repo => !repo.fork && repo.name !== 'danspelt.com')
@@ -81,9 +90,17 @@ export async function GET() {
         ].filter(Boolean),
       }));
 
+    console.log(`Returning ${filteredRepos.length} filtered repositories`);
     return NextResponse.json(filteredRepos);
   } catch (error) {
     console.error('Error fetching repositories:', error);
-    return NextResponse.json({ error: 'Failed to fetch repositories' }, { status: 500 });
+    return NextResponse.json(
+      { 
+        error: 'Failed to fetch repositories',
+        details: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      },
+      { status: 500 }
+    );
   }
 }

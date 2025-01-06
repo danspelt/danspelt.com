@@ -2,8 +2,7 @@ import ProjectsClient from './ProjectsClient';
 
 async function getRepositories() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/github`, {
+    const response = await fetch('/api/github', {
       next: { revalidate: 3600 } // Cache for 1 hour
     });
 
