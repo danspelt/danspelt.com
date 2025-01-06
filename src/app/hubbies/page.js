@@ -9,7 +9,7 @@ async function getRepositories() {
   try {
     const { data: repos } = await octokit.repos.listForUser({
       username: 'danspelt',
-      sort: 'updated',
+      sort: 'pushed',
       direction: 'desc'
     });
 
