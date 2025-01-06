@@ -91,14 +91,6 @@ export default function ProjectsClient({ initialProjects = [] }) {
                           </span>
                         ))}
                       </div>
-                      <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                        {project.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center">
-                            <Code className="mr-2 h-4 w-4" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
                       <div className="flex gap-2 mt-4">
                         <Button
                           variant="outline"
