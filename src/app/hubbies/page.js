@@ -39,7 +39,8 @@ async function getRepositories() {
 
     console.log(`Fetched ${repos.length} repositories`);
 
-    return repos
+    // Map the data
+    const mappedRepos = repos
       .filter(repo => !repo.fork && repo.name !== 'danspelt.com')
       .map(repo => ({
         title: repo.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
@@ -49,12 +50,13 @@ async function getRepositories() {
           day: 'numeric'
         }),
         description: repo.description || `A ${repo.language} project`,
-        gradient: "from-[#93C5FD] via-[#60A5FA] to-[#3B82F6]",
         icon: repo.language === 'Python' ? '🐍' : 
               repo.language === 'JavaScript' ? '🌐' : 
               repo.language === 'TypeScript' ? '📘' : '💻',
         url: repo.html_url,
         homepage: repo.homepage,
+        defaultBranch: repo.default_branch,
+        name: repo.name,
         tags: [
           repo.language,
           'Open Source',
@@ -62,6 +64,8 @@ async function getRepositories() {
           repo.homepage ? 'Live Demo' : null
         ].filter(Boolean),
       }));
+
+    return mappedRepos;
   } catch (error) {
     console.error('Error fetching repositories:', error);
     return fallbackProjects;
