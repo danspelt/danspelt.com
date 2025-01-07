@@ -1,72 +1,51 @@
 import { Octokit } from '@octokit/rest';
 import { NextResponse } from 'next/server';
+import { formatRepoName, getRandomGradient, getIconForRepo } from '../../hubbies/utils';
 
-function formatRepoName(name) {
-  return name
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
+// Cache the response for 1 hour
+export const revalidate = 3600;
 
-function getRandomGradient() {
-  const gradients = [
-    'from-blue-500 to-purple-500',
-    'from-green-500 to-blue-500',
-    'from-red-500 to-orange-500',
-    'from-yellow-500 to-red-500',
-    'from-purple-500 to-pink-500',
-    'from-indigo-500 to-blue-500'
-  ];
-  return gradients[Math.floor(Math.random() * gradients.length)];
-}
-
-function getIconForRepo(language) {
-  const icons = {
-    JavaScript: '🟨',
-    TypeScript: '🔷',
-    Python: '🐍',
-    Java: '☕',
-    'C#': '🟩',
-    PHP: '🐘',
-    Ruby: '💎',
-    Go: '🔵',
-    Rust: '⚙️',
-    Swift: '🔶',
-    Kotlin: '🟣',
-    Dart: '🎯'
-  };
-  return icons[language] || '📦';
-}
+// Keep cache in memory
+let cachedData = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 3600000; // 1 hour in milliseconds
+const TIMEOUT = 15000; // 15 seconds
 
 export async function GET() {
-  const token = process.env.GITHUB_TOKEN;
-  
-  if (!token) {
-    console.error('GitHub token not configured');
-    return NextResponse.json(
-      { error: 'GitHub token not configured', details: 'Please set GITHUB_TOKEN in environment variables' },
-      { status: 500 }
-    );
-  }
-
   try {
+    const now = Date.now();
+    const token = process.env.GITHUB_TOKEN;
+
+    // Always return cached data in production if available
+    if (cachedData && (process.env.NODE_ENV === 'production' || (now - lastFetchTime) < CACHE_DURATION)) {
+      console.log('Returning cached repositories data');
+      return NextResponse.json(cachedData);
+    }
+
+    if (!token) {
+      throw new Error('GitHub token not configured. Please set GITHUB_TOKEN in environment variables.');
+    }
+
     const octokit = new Octokit({
       auth: token,
       request: {
-        fetch: fetch.bind(global)
+        timeout: TIMEOUT
       }
     });
 
-    console.log('Fetching repositories for user: danspelt');
+    // First check current rate limit status
+    const { data: rateData } = await octokit.rest.rateLimit.get();
     
+    if (rateData.resources.core.remaining === 0) {
+      throw new Error(`GitHub API rate limit exceeded. Resets at ${new Date(rateData.resources.core.reset * 1000).toLocaleString()}`);
+    }
+
     const { data: repos } = await octokit.repos.listForUser({
       username: 'danspelt',
       sort: 'pushed',
       direction: 'desc',
       per_page: 100
     });
-
-    console.log(`Found ${repos.length} repositories`);
 
     const filteredRepos = repos
       .filter(repo => !repo.fork && repo.name !== 'danspelt.com')
@@ -90,17 +69,24 @@ export async function GET() {
         ].filter(Boolean),
       }));
 
-    console.log(`Returning ${filteredRepos.length} filtered repositories`);
+    // Update cache
+    cachedData = filteredRepos;
+    lastFetchTime = now;
+
     return NextResponse.json(filteredRepos);
   } catch (error) {
     console.error('Error fetching repositories:', error);
-    return NextResponse.json(
-      { 
-        error: 'Failed to fetch repositories',
-        details: error.message,
-        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
-      },
-      { status: 500 }
-    );
+
+    // In production or if we have cached data, return it
+    if (cachedData && (process.env.NODE_ENV === 'production' || error.message.includes('rate limit'))) {
+      console.log('Error occurred, returning cached data');
+      return NextResponse.json(cachedData);
+    }
+
+    // Otherwise return an empty array to prevent page errors
+    return NextResponse.json([], { 
+      status: error.message.includes('rate limit exceeded') ? 429 : 
+              error.name === 'TimeoutError' ? 504 : 500 
+    });
   }
 }
