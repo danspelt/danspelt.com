@@ -38,7 +38,7 @@ const ContactForm = () => {
         setFormData({ name: '', email: '', message: '' });
       } else {
         setSubmitStatus('error');
-        console.error('Server error:', data.error);
+        console.error('Server error:', data);
       }
     } catch (error) {
       console.error('Submit error:', error);
@@ -69,6 +69,7 @@ const ContactForm = () => {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all bg-transparent"
+            minLength={2}
             required
           />
         </div>
@@ -89,6 +90,7 @@ const ContactForm = () => {
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             rows="4"
             className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none bg-transparent"
+            minLength={10}
             required
           />
         </div>
@@ -188,8 +190,8 @@ export default function ContactPage() {
             <ContactCard
               icon={Mail}
               title="Email Me"
-              content="dan@danspelt.com"
-              href="mailto:dan@danspelt.com"
+              content="danspelt24@gmail.com"
+              href="mailto:danspelt24@gmail.com"
             />
             <ContactCard
               icon={MapPin}

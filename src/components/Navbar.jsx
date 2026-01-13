@@ -25,38 +25,28 @@ export function Navbar() {
         <NavigationMenu>
           <NavigationMenuList className="text-lg">
             <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  About
-                </NavigationMenuLink>
+              <Link href="/about" className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                About
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/skillstools" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Skills & Tools
-                </NavigationMenuLink>
+              <Link href="/skillstools" className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                Skills & Tools
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/hubbies" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Hobby Projects
-                </NavigationMenuLink>
+              <Link href="/hubbies" className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                Hobby Projects
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/timeline" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Timeline
-                </NavigationMenuLink>
+              <Link href="/timeline" className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                Timeline
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Contact
-                </NavigationMenuLink>
+              <Link href="/contact" className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                Contact
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
