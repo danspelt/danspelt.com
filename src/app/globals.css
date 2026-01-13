@@ -76,3 +76,58 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .tilt-card {
+    position: relative;
+    isolation: isolate;
+    z-index: 0;
+    transform: perspective(1000px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg));
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .tilt-card:hover {
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+  }
+
+  .tilt-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+
+    background: radial-gradient(
+      280px circle at var(--tilt-x, 50%) var(--tilt-y, 50%),
+      rgba(59, 130, 246, 0.18),
+      rgba(59, 130, 246, 0.06) 35%,
+      transparent 65%
+    );
+    transition: opacity 180ms ease;
+    z-index: 0;
+  }
+
+  .tilt-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .tilt-card:hover::before {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transition: none;
+    transform: none;
+  }
+
+  .tilt-card::before {
+    transition: none;
+    opacity: 0;
+  }
+}
