@@ -22,39 +22,29 @@ export function Navbar() {
         <NavigationMenu>
           <NavigationMenuList className="text-lg">
             <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  About
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/about">About</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/skillstools" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Skills & Tools
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/skillstools">Skills & Tools</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/hubbies" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Hobby Projects
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/projects">Projects</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/timeline" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Timeline
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/timeline">Timeline</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                  Contact
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/contact">Contact</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
