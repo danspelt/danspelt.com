@@ -5,6 +5,20 @@ import { motion } from 'framer-motion';
 
 const events = [
   {
+    title: "Founder & Developer — Community Hive",
+    date: "January 2025 - Present",
+    color: "#eab308",
+    isLeft: false,
+    description: "Building a multi-tenant SaaS platform that centralizes communication for strata councils, HOA boards, and property managers — replacing fragmented email chains and paper notices with a secure, structured system.",
+    achievements: [
+      "Architected multi-tenant system with per-building unit hierarchies",
+      "Implemented role-based dashboards for managers, councils, and residents",
+      "Built structured issue tracking and automated announcement workflows",
+      "Self-hosted on Coolify with Docker for full infrastructure control"
+    ],
+    technologies: ["Next.js", "React", "Node.js", "MongoDB", "Docker", "Coolify"]
+  },
+  {
     title: "Web Developer at Neil Squire Society",
     date: "June 2021 - March 2024",
     color: "#3b82f6",

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { Play, Pause } from "lucide-react";
 
 const IntroVideo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,28 +14,38 @@ const IntroVideo = () => {
       videoRef.current.play().catch((error) => {
         console.error("Error attempting to play the video:", error);
       });
-      console.log("playing");
     }
     setIsPlaying(!isPlaying);
   };
+
   const handleEnded = () => {
     setIsPlaying(false);
   };
+
   return (
-    <div className="flex flex-col items-center justify-center text-white relative">
-      <video ref={videoRef} className="w-1/2" onEnded={handleEnded}>
+    <div className="relative rounded-2xl overflow-hidden shadow-lg border border-border bg-black">
+      <video
+        ref={videoRef}
+        className="w-full aspect-video"
+        onEnded={handleEnded}
+      >
         <source src="/videos/intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <button
         onClick={handlePlayPause}
-        className={
-          !isPlaying
-            ? "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2 z-10"
-            : "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2 z-10 opacity-20"
-        }
+        aria-label={isPlaying ? "Pause video" : "Play video"}
+        className={`absolute inset-0 flex items-center justify-center z-10 transition-opacity duration-300 ${
+          isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
+        }`}
       >
-        {isPlaying ? <FaPause size={40} /> : <FaPlay size={40} />}
+        <div className="p-4 rounded-full bg-background/80 backdrop-blur-sm border border-border shadow-lg transition-transform hover:scale-110">
+          {isPlaying ? (
+            <Pause className="w-8 h-8 text-foreground" />
+          ) : (
+            <Play className="w-8 h-8 text-foreground ml-0.5" />
+          )}
+        </div>
       </button>
     </div>
   );
