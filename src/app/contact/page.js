@@ -191,8 +191,8 @@ export default function ContactPage() {
           <ContactCard
             icon={Mail}
             title="Email Me"
-            content="dan@danspelt.com"
-            href="mailto:dan@danspelt.com"
+            content="danspelt24@gmail.com"
+            href="mailto:danspelt24@gmail.com"
           />
           <ContactCard
             icon={MapPin}
@@ -207,7 +207,7 @@ export default function ContactPage() {
               label="GitHub"
             />
             <SocialLink
-              href="https://linkedin.com/in/danspelt"
+              href="https://www.linkedin.com/in/dan-spelt/"
               icon={Linkedin}
               label="LinkedIn"
             />

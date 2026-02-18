@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
                   GitHub
                 </a>
                 <a
-                  href="https://linkedin.com/in/danspelt"
+                  href="https://www.linkedin.com/in/dan-spelt/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors"
@@ -57,10 +57,10 @@ export default function RootLayout({ children }) {
                   LinkedIn
                 </a>
                 <a
-                  href="mailto:dan@danspelt.com"
+                  href="mailto:danspelt24@gmail.com"
                   className="hover:text-foreground transition-colors"
                 >
-                  dan@danspelt.com
+                  danspelt24@gmail.com
                 </a>
               </div>
             </div>
