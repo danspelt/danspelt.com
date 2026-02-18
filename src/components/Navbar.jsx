@@ -28,7 +28,17 @@ export function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
-                <Link href="/skillstools">Skills & Tools</Link>
+                <Link href="/case-studies">Case Studies</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/accessibility">Accessibility</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/skillstools">Skills</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>

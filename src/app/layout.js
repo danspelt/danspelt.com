@@ -7,18 +7,25 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata = {
   title: {
-    default: "Dan Spelt — Full Stack Developer",
+    default: "Dan Spelt — Senior Full-Stack Engineer & Accessibility Specialist",
     template: "%s | Dan Spelt",
   },
   description:
-    "Full-stack web developer with 18+ years of experience building scalable, accessible, and user-centric applications. Based in Victoria, BC.",
+    "Senior Full-Stack Engineer with 18+ years building secure, scalable, accessibility-first web platforms. WCAG 2.0/2.1 compliance specialist. Open to remote senior roles and government contracts.",
   keywords: [
-    "Full Stack Developer",
+    "Senior Full Stack Engineer",
+    "Accessibility Engineer",
+    "WCAG Compliance",
+    "ADA Compliance",
+    "Government Contracts",
+    "Remote Senior Developer",
     "React",
     "Next.js",
     "Node.js",
     "Web Accessibility",
+    "Screen Reader Compatibility",
     "Victoria BC",
+    "Public Sector Web Development",
   ],
 };
 
