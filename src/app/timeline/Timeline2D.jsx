@@ -5,8 +5,23 @@ import { motion } from 'framer-motion';
 
 const events = [
   {
+    title: "Founder & Developer — AccessLens",
+    date: "May 2026 - Present",
+    color: "#6366f1",
+    isLeft: false,
+    description: "Building an accessibility intelligence platform for cities — crowdsourced accessibility data, interactive mapping, and community reviews to help people with disabilities navigate urban environments.",
+    achievements: [
+      "Architected multi-collection MongoDB data model with 2dsphere geospatial indexing",
+      "Built accessibility scoring system across 10 criteria with colour-coded map markers",
+      "Integrated Auth.js with Google OAuth, email magic link, and credential sign-in",
+      "Seeded 50+ real verified places in Victoria, BC for production launch",
+      "Deployed via Docker with standalone Next.js output and health monitoring"
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "MongoDB", "Auth.js", "Leaflet", "Tailwind CSS", "Docker", "Zod"]
+  },
+  {
     title: "Founder & Developer — Community Hive",
-    date: "January 2025 - Present",
+    date: "January 2025 - April 2026",
     color: "#eab308",
     isLeft: false,
     description: "Building a multi-tenant SaaS platform that centralizes communication for strata councils, HOA boards, and property managers — replacing fragmented email chains and paper notices with a secure, structured system.",

@@ -1,5 +1,13 @@
 const pastProjectsData = [
         {
+            id: 5,
+            name: "AccessLens",
+            company: "Founder & Developer",
+            dates: "May 2026 - Present",
+            description: `AccessLens is a community-driven accessibility intelligence platform built to help people with disabilities navigate cities. The platform combines crowdsourced accessibility data, interactive mapping, and community reviews to create a comprehensive resource for real-world accessibility information. Built with Next.js 16, TypeScript, MongoDB (with 2dsphere geospatial indexing), and Auth.js supporting Google OAuth, email magic link, and credential authentication. Features include an accessibility scoring system (0-100 across 10 criteria), colour-coded Leaflet/OpenStreetMap markers, place submission and moderation, photo uploads, geocoding with TTL caching, and a structured reporting workflow. Launched with 50+ verified places seeded in Victoria, BC. Deployed via Docker with multi-stage builds and WCAG 2.1 AA compliance throughout.`,
+            images: [],
+        },
+        {
             id: 1,
             name: "Visualization Dashboard",
             company: "Youneeq",
@@ -39,6 +47,15 @@ const pastProjectsData = [
             company: "CanAssist - University of Victoria",
             dates: "March 2008 - June 2021",
             description: `The Assistive Technology Suite includes various applications designed to improve the quality of life for people with disabilities. Leveraging technologies like React, C#, and MongoDB, these applications were developed to be intuitive, user-friendly, and accessible. The suite integrates social media APIs, allowing seamless interaction with platforms like Facebook and Twitter.`,
+            images: [
+            ],
+        },
+        {
+            id: 4,
+            name: "Community Hive",
+            company: "Founder & Developer",
+            dates: "June 2024 - April 2026",
+            description: `Community Hive is a multi-tenant SaaS platform built to centralize communication between property managers, strata councils, HOA boards, and residents. Designed and developed independently from concept to production, the platform replaces fragmented email chains, paper notices, and social media groups with a secure, structured communication architecture. Features include role-based dashboards, AI-assisted announcement workflows, automated weekly Building Brief digests, a full maintenance and ticketing system, secure document storage with governed access controls, and resident engagement tools including polls and quorum support. Deployed via Docker and Coolify with isolated staging and production environments.`,
             images: [
             ],
         },

@@ -7,16 +7,55 @@ import { Badge } from "@/components/ui/badge";
 import {
   ExternalLink, Shield, Users, BarChart3, Wrench,
   Building2, MessageSquare, FileText, ChevronDown, ChevronUp,
-  Layers, Database, Globe, Monitor, Container, Brain
+  Layers, Database, Globe, Monitor, Container, Brain, MapPin
 } from 'lucide-react';
 
-const techStack = {
+const accessLensTechStack = {
+  frontend: ["Next.js 16 (App Router)", "React 18", "TypeScript", "Tailwind CSS"],
+  backend: ["Next.js API Routes", "MongoDB", "Auth.js (NextAuth v5)", "Zod 4.x"],
+  infrastructure: ["Docker (Multi-stage)", "Leaflet + OpenStreetMap", "Nominatim Geocoding", "Coolify"],
+};
+
+const accessLensFeatures = [
+  {
+    icon: MapPin,
+    title: "Accessibility Scoring & Mapping",
+    description: "Each place receives a calculated score (0–100) across 10 criteria. Colour-coded map markers (green/yellow/red) rendered via Leaflet and OpenStreetMap — no paid API key required.",
+  },
+  {
+    icon: Users,
+    title: "Community Reviews & Reporting",
+    description: "Reviewers submit accessibility reports and ratings. Business accounts manage their own places. Structured issue reporting with moderation pipeline.",
+  },
+  {
+    icon: Shield,
+    title: "Multi-Provider Authentication",
+    description: "Auth.js with Google OAuth, email magic link, and credential sign-in. BCrypt password hashing, JWT session management, and route-level middleware protection.",
+  },
+  {
+    icon: Database,
+    title: "Geospatial Data Architecture",
+    description: "MongoDB 2dsphere index for proximity queries. 10 collections including geocode cache with TTL, GeoJSON location model, and compound indexes for filter performance.",
+  },
+  {
+    icon: Globe,
+    title: "City-Scale Seeded Data",
+    description: "50+ real verified places in Victoria, BC across 12 categories — restaurants, government, parks, transit, hospitals, and more — production-ready at launch.",
+  },
+  {
+    icon: FileText,
+    title: "WCAG 2.1 AA Compliance",
+    description: "Built in alignment with the Accessible Canada Act and BC Accessibility Act. Semantic HTML, ARIA labels, keyboard navigation, and screen reader compatibility throughout.",
+  },
+];
+
+const hiveTechStack = {
   frontend: ["Next.js (App Router)", "React", "TailwindCSS", "ShadCN UI", "Dark/Light Theme"],
   backend: ["Node.js API Routes", "MongoDB", "RBAC", "JWT Auth", "Email Integration"],
   infrastructure: ["Docker", "Coolify (Self-hosted PaaS)", "Reverse Proxy", "Staging + Production Envs"],
 };
 
-const coreFeatures = [
+const hiveCoreFeatures = [
   {
     icon: Users,
     title: "Role-Based Dashboards",
@@ -49,7 +88,7 @@ const coreFeatures = [
   },
 ];
 
-const engineeringChallenges = [
+const hiveEngineeringChallenges = [
   "Designing clean multi-tenant data isolation in MongoDB",
   "Building role-based dynamic dashboards with scoped permissions",
   "Creating automated digest generation using AI",
@@ -95,26 +134,120 @@ const Projects = () => {
           Projects
         </h1>
         <p className="text-lg text-muted-foreground">
-          What I&apos;m building right now
+          What I&apos;ve built
         </p>
       </div>
 
-      {/* Featured Project: Community Hive */}
+      {/* ── AccessLens ── */}
+      <div className="space-y-8 mb-20">
+        <Card className="overflow-hidden">
+          <CardHeader className="pb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge className="bg-blue-500/10 text-blue-600 border-blue-500/20 hover:bg-blue-500/10">
+                    Active
+                  </Badge>
+                  <Badge variant="outline">Accessibility</Badge>
+                  <Badge variant="outline">Civic Tech</Badge>
+                </div>
+                <CardTitle className="text-3xl mb-2">AccessLens</CardTitle>
+                <p className="text-sm text-muted-foreground font-medium">Founder &amp; Developer &mdash; May 2026 &ndash; Present</p>
+                <p className="text-muted-foreground mt-1">
+                  Accessibility Intelligence Platform for Cities
+                </p>
+              </div>
+              <a href="https://www.accesslens.ca/" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4" />
+                  Visit Live Site
+                </Button>
+              </a>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground leading-relaxed">
+              AccessLens is a community-driven platform that helps people with disabilities navigate cities
+              using crowdsourced accessibility data, interactive maps, and community reviews. Each place
+              receives a calculated accessibility score across 10 criteria, visualized with colour-coded
+              markers on an OpenStreetMap-powered map. Launched production-ready with 50+ verified places
+              in Victoria, BC.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* AccessLens Tech Stack */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Monitor className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Frontend</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {accessLensTechStack.frontend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Database className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Backend</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {accessLensTechStack.backend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Container className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Infrastructure</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {accessLensTechStack.infrastructure.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* AccessLens Features */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Core Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {accessLensFeatures.map((feature) => (
+              <FeatureCard key={feature.title} {...feature} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <hr className="border-border mb-20" />
+
+      {/* ── Community Hive ── */}
       <div className="space-y-8">
-        {/* Hero Card */}
         <Card className="overflow-hidden">
           <CardHeader className="pb-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-green-500/10 text-green-600 border-green-500/20 hover:bg-green-500/10">
-                    Active Project
+                    Shipped
                   </Badge>
                   <Badge variant="outline">SaaS</Badge>
                   <Badge variant="outline">Multi-Tenant</Badge>
                 </div>
                 <CardTitle className="text-3xl mb-2">Community Hive</CardTitle>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground font-medium">Founder &amp; Developer &mdash; Jan 2025 &ndash; Apr 2026</p>
+                <p className="text-muted-foreground mt-1">
                   Multi-Tenant Communication Platform for Strata &amp; HOA Communities
                 </p>
               </div>
@@ -171,7 +304,7 @@ const Projects = () => {
           </CardContent>
         </Card>
 
-        {/* Technology Stack */}
+        {/* Community Hive Tech Stack */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card>
             <CardHeader className="pb-3">
@@ -182,7 +315,7 @@ const Projects = () => {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {techStack.frontend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+                {hiveTechStack.frontend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
               </div>
             </CardContent>
           </Card>
@@ -195,7 +328,7 @@ const Projects = () => {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {techStack.backend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+                {hiveTechStack.backend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
               </div>
             </CardContent>
           </Card>
@@ -208,17 +341,17 @@ const Projects = () => {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {techStack.infrastructure.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+                {hiveTechStack.infrastructure.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Core Features */}
+        {/* Community Hive Core Features */}
         <div>
           <h2 className="text-2xl font-semibold mb-4">Core Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {coreFeatures.map((feature) => (
+            {hiveCoreFeatures.map((feature) => (
               <FeatureCard key={feature.title} {...feature} />
             ))}
           </div>
@@ -247,7 +380,7 @@ const Projects = () => {
           {showChallenges && (
             <CardContent>
               <ul className="space-y-3">
-                {engineeringChallenges.map((challenge) => (
+                {hiveEngineeringChallenges.map((challenge) => (
                   <li key={challenge} className="flex items-start gap-3 text-sm text-muted-foreground">
                     <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                     {challenge}

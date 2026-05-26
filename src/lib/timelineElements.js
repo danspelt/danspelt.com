@@ -96,7 +96,7 @@ const timelineElements = [
 
     One of the most rewarding aspects of freelancing is the ability to choose projects that align with my values and expertise. I have worked with clients from various industries, providing them with customized solutions that improve their online presence, enhance user engagement, and increase accessibility. My work often involves close collaboration with clients to understand their goals and challenges, allowing me to deliver solutions that are not only technically sound but also aligned with their business objectives.
 
-    Freelancing has also allowed me to continue my commitment to accessibility and inclusivity in web development. I make it a priority to ensure that every project I work on adheres to the latest accessibility standards, providing all users with a seamless and inclusive experience. Whether it’s implementing WCAG guidelines, optimizing for screen readers, or designing responsive layouts that work across all devices, accessibility remains at the forefront of my work.
+    Freelancing has also allowed me to continue my commitment to accessibility and inclusivity in web development. I make it a priority to ensure that every project I work on adheres to the latest accessibility standards, providing all users with a seamless and inclusive experience. Whether it's implementing WCAG guidelines, optimizing for screen readers, or designing responsive layouts that work across all devices, accessibility remains at the forefront of my work.
 
     In addition to my client work, I also dedicate time to staying updated with the latest trends and advancements in web development. I regularly attend webinars, participate in online courses, and contribute to open-source projects, all of which help me stay at the cutting edge of the industry.
 
@@ -107,6 +107,46 @@ const timelineElements = [
     icon: "work",
     color: "orange",
     tech: ["JavaScript", "React", "Next.js", "AWS", "Firebase", "HTML", "CSS", "Tailwind CSS"],
+  },
+  {
+    id: 7,
+    company: "AccessLens",
+    position: "Founder & Developer",
+    location: "Victoria, BC",
+    description: `AccessLens is a community-driven accessibility intelligence platform I designed and built to help people with disabilities navigate cities. The platform combines crowdsourced accessibility data, interactive mapping, and community reviews to create a comprehensive, searchable resource for real-world accessibility information.
+
+    I architected the full system independently — a Next.js 16 App Router application with TypeScript, MongoDB with 2dsphere geospatial indexing, and Auth.js providing three authentication methods: Google OAuth, email magic link, and traditional credentials. The platform calculates an accessibility score (0-100) for each place based on ten weighted criteria, with colour-coded map markers (green/yellow/red) rendered via Leaflet and OpenStreetMap — no paid API key required.
+
+    Key systems I built include the place submission and moderation pipeline, a role-based account model separating community reviewers from business accounts, a photo upload system with S3/MinIO-ready architecture, geocoding with Nominatim and TTL-cached results, and a structured reporting workflow for accessibility issues.
+
+    The platform launched production-ready with 50+ real verified places seeded across Victoria, BC, covering restaurants, government buildings, parks, transit stops, hospitals, and more. Deployed with Docker using a multi-stage build and standalone Next.js output, with a health check endpoint for container monitoring. Built in alignment with WCAG 2.1 AA, the Accessible Canada Act, and the BC Accessibility Act.`,
+    buttonText: "Details",
+    startDate: "May 2026",
+    endDate: "Present",
+    icon: "work",
+    color: "indigo",
+    tech: ["Next.js", "React", "TypeScript", "MongoDB", "Auth.js", "Leaflet", "Tailwind CSS", "Docker", "Zod"],
+  },
+  {
+    id: 6,
+    company: "Community Hive",
+    position: "Founder & Developer",
+    location: "Victoria, BC",
+    description: `Community Hive is a multi-tenant SaaS platform I designed and built from the ground up to centralize communication between property managers, strata councils, HOA boards, and residents. The project grew out of a clear gap I observed: community management was fragmented across email chains, paper notices, and social media groups, with no unified, secure, and structured solution designed specifically for the strata and HOA space.
+
+    I architected and developed the full platform independently — from the multi-tenant data model and role-based permission system to the AI-assisted communication workflows and self-hosted deployment infrastructure. The platform supports multiple buildings, unit hierarchies, and dynamic role-based dashboards, with each role — Property Manager, Council President, Council Member, and Resident — seeing scoped data and authorized actions only.
+
+    Key systems I built include a centralized announcement and messaging engine with multi-channel notifications, an automated weekly Building Brief digest using AI-assisted generation, a full maintenance and ticketing workflow with status tracking and audit history, secure document storage with governed access controls, and a resident engagement layer with polls, surveys, and quorum support tools.
+
+    On the infrastructure side, I deployed the platform using Docker and Coolify as a self-hosted PaaS, with isolated staging and production environments and a reverse proxy configuration for secure multi-tenant routing. The architecture was designed to be white-label capable and scalable to regulated community environments.
+
+    Community Hive shipped in April 2026 after approximately twenty-two months of solo development, validating the architecture across the full stack and demonstrating my ability to take a complex SaaS product from concept to production independently.`,
+    buttonText: "Details",
+    startDate: "Jun 2024",
+    endDate: "Apr 2026",
+    icon: "work",
+    color: "green",
+    tech: ["Next.js", "React", "Node.js", "MongoDB", "JWT Auth", "TailwindCSS", "ShadCN UI", "Docker", "Coolify"],
   },
 ];
 
