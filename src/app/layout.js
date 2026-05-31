@@ -34,9 +34,12 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="min-h-screen flex flex-col antialiased">
         <Providers>
-          <ClientWrapper />
-          <main className="flex-1">{children}</main>
-          <footer className="border-t py-8 mt-16">
+          <div className="bg-dots" aria-hidden="true" />
+          <div className="bg-waves" aria-hidden="true" />
+          <div className="bg-gradient-anim" aria-hidden="true" />
+          <div className="relative z-10"><ClientWrapper /></div>
+          <main className="flex-1 relative z-10">{children}</main>
+          <footer className="border-t py-8 mt-16 relative z-10">
             <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
               <p>&copy; {new Date().getFullYear()} Dan Spelt. All rights reserved.</p>
               <div className="flex items-center gap-4">
