@@ -1,13 +1,8 @@
-FROM node:22-alpine AS base
-RUN apk add --no-cache libc6-compat
+FROM node:22-slim AS base
 
 FROM base AS builder
 WORKDIR /app
 COPY package*.json ./
-# Force correct platform for native binaries (LightningCSS, etc.)
-ENV npm_config_platform=linux
-ENV npm_config_arch=x64
-ENV npm_config_libc=musl
 RUN npm install --legacy-peer-deps
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -20,8 +15,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs
+RUN useradd --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
