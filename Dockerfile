@@ -8,7 +8,8 @@ RUN npm install --legacy-peer-deps
 
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
