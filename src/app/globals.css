@@ -49,20 +49,20 @@
 
 :root {
   /* Light theme: refined slate/indigo palette */
-  --background: 0 0% 100%;
-  --foreground: 222.2 47% 10%;
+  --background: 210 40% 98%;
+  --foreground: 222 47% 12%;
 
-  --muted: 210 40% 97%;
-  --muted-foreground: 215 16% 42%;
+  --muted: 214 32% 95%;
+  --muted-foreground: 215 19% 45%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 47% 10%;
+  --popover-foreground: 222 47% 12%;
 
   --card: 0 0% 100%;
-  --card-foreground: 222.2 47% 10%;
+  --card-foreground: 222 47% 12%;
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
+  --border: 214 30% 89%;
+  --input: 214 30% 89%;
 
   --primary: 243 75% 59%; /* indigo-500 */
   --primary-foreground: 210 40% 98%;
@@ -70,7 +70,7 @@
   --secondary: 221 39% 11%;
   --secondary-foreground: 210 40% 98%;
 
-  --accent: 200 95% 45%; /* sky-500 */
+  --accent: 199 89% 48%; /* sky-500 */
   --accent-foreground: 210 40% 98%;
 
   --destructive: 0 72% 51%;
@@ -117,6 +117,13 @@
   * {
     border-color: hsl(var(--border));
   }
+  /* Softer, layered elevation for cards in light mode */
+  html:not(.dark) .shadow-sm {
+    box-shadow: 0 1px 2px hsl(222 47% 12% / 0.04), 0 4px 14px hsl(222 47% 12% / 0.05);
+  }
+  html:not(.dark) .hover\:shadow-md:hover {
+    box-shadow: 0 2px 6px hsl(222 47% 12% / 0.06), 0 10px 30px hsl(222 47% 12% / 0.08);
+  }
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
@@ -124,8 +131,8 @@
     -moz-osx-font-smoothing: grayscale;
     /* Subtle layered background pattern */
     background-image:
-      radial-gradient(1200px 600px at 100% -10%, hsl(var(--accent) / 0.07), transparent 60%),
-      radial-gradient(800px 400px at -20% 0%, hsl(var(--primary) / 0.08), transparent 55%),
+      radial-gradient(1200px 600px at 100% -10%, hsl(var(--accent) / 0.06), transparent 60%),
+      radial-gradient(800px 400px at -20% 0%, hsl(var(--primary) / 0.07), transparent 55%),
       linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)) 40%, transparent 100%);
     background-attachment: fixed;
     background-size: cover;
@@ -208,9 +215,13 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background-image: radial-gradient(hsl(var(--foreground) / 0.09) 1.2px, transparent 1.2px);
-  background-size: 32px 32px;
+  background-image: radial-gradient(hsl(var(--primary) / 0.05) 1.2px, transparent 1.2px);
+  background-size: 34px 34px;
   animation: dots-pan 20s linear infinite;
+}
+
+.dark .bg-dots {
+  background-image: radial-gradient(hsl(var(--foreground) / 0.09) 1.2px, transparent 1.2px);
 }
 
 @keyframes dots-pan {
