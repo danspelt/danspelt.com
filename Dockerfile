@@ -1,14 +1,13 @@
 FROM node:22-alpine AS base
-
-FROM base AS deps
-WORKDIR /app
 RUN apk add --no-cache libc6-compat
-COPY package*.json ./
-RUN npm install --legacy-peer-deps
 
 FROM base AS builder
 WORKDIR /app
 COPY package*.json ./
+# Force correct platform for native binaries (LightningCSS, etc.)
+ENV npm_config_platform=linux
+ENV npm_config_arch=x64
+ENV npm_config_libc=musl
 RUN npm install --legacy-peer-deps
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
