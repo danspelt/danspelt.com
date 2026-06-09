@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { ArrowRight, Code2, Accessibility, ShieldCheck, BarChart3, FileText, Users, Brain } from 'lucide-react';
+import { ArrowRight, Code2, Accessibility, ShieldCheck, BarChart3, FileText, Users, Brain, Zap } from 'lucide-react';
 
 const metrics = [
   { value: '18+', label: 'Years building real web systems professionally' },
@@ -63,6 +63,37 @@ export default function HomeClient() {
             </Button>
           </Link>
         </div>
+      </section>
+
+      {/* AI Website Audit Offer */}
+      <section className="max-w-5xl mx-auto px-4 mb-12">
+        <a
+          href="https://audit.danspelt.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-950/60 to-emerald-950/60 p-6 sm:p-8 hover:border-blue-400/60 transition-all"
+        >
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="p-3 rounded-xl bg-blue-500/10 shrink-0">
+              <Zap className="w-7 h-7 text-blue-400" />
+            </div>
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xs text-muted-foreground">AI-powered service</span>
+              </div>
+              <h2 className="text-xl font-bold mb-1">Is Your Website Losing You Customers?</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Get an AI-powered audit of your site — conversion score, priority fixes, headline rewrites, and SEO quick wins. Delivered in minutes.
+              </p>
+            </div>
+            <div className="shrink-0 mt-2 sm:mt-0">
+              <span className="inline-flex items-center gap-2 rounded-xl bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white group-hover:bg-blue-400 transition-colors">
+                Get Your Audit
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
+          </div>
+        </a>
       </section>
 
       {/* Metrics Bar */}
