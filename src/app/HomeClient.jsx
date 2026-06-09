@@ -19,7 +19,7 @@ export default function HomeClient() {
   return (
     <div className="min-h-screen">
       {/* Availability Banner */}
-      <div className="bg-primary/5 border-b border-primary/10 py-2 px-4 text-center text-sm text-muted-foreground">
+      <div className="bg-primary/10 border-b border-primary/15 py-2 px-4 text-center text-sm text-foreground/80">
         <span className="inline-flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />
           Open to remote roles &mdash; full-time, part-time, or contract
@@ -37,7 +37,7 @@ export default function HomeClient() {
         <h1 className="text-5xl sm:text-7xl font-extrabold mb-6 bg-linear-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent leading-tight">
           Dan Spelt
         </h1>
-        <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
+        <p className="text-xl sm:text-2xl text-foreground/85 max-w-2xl mx-auto mb-4 leading-relaxed">
           I build accessible web applications. I work well in teams. I use AI to move faster.
           I get the job done.
         </p>
@@ -71,18 +71,18 @@ export default function HomeClient() {
           href="https://audit.danspelt.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="group block rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-950/60 to-emerald-950/60 p-6 sm:p-8 hover:border-blue-400/60 transition-all"
+          className="group block rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-emerald-50 p-6 sm:p-8 hover:border-blue-300 transition-all dark:border-blue-500/30 dark:from-blue-950/60 dark:to-emerald-950/60 dark:hover:border-blue-400/60"
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="p-3 rounded-xl bg-blue-500/10 shrink-0">
-              <Zap className="w-7 h-7 text-blue-400" />
+              <Zap className="w-7 h-7 text-blue-600 dark:text-blue-400" />
             </div>
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xs text-muted-foreground">AI-powered service</span>
+                <span className="text-xs text-blue-700/80 dark:text-muted-foreground">AI-powered service</span>
               </div>
-              <h2 className="text-xl font-bold mb-1">Is Your Website Losing You Customers?</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <h2 className="text-xl font-bold mb-1 text-slate-900 dark:text-foreground">Is Your Website Losing You Customers?</h2>
+              <p className="text-sm text-slate-600 dark:text-muted-foreground leading-relaxed">
                 Get an AI-powered audit of your site — conversion score, priority fixes, headline rewrites, and SEO quick wins. Delivered in minutes.
               </p>
             </div>
