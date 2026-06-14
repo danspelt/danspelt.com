@@ -11,7 +11,7 @@ export const metadata = {
     template: "%s | Dan Spelt",
   },
   description:
-    "Senior Full-Stack Engineer with 18+ years building secure, scalable, accessibility-first web platforms. WCAG 2.0/2.1 compliance specialist. Open to remote senior roles and government contracts.",
+    "Senior Full-Stack Engineer based in Victoria, BC, Canada. 18+ years building secure, scalable, accessibility-first web platforms. WCAG 2.0/2.1 compliance specialist. Open to remote senior roles and government contracts worldwide.",
   keywords: [
     "Senior Full Stack Engineer",
     "Accessibility Engineer",
@@ -24,7 +24,9 @@ export const metadata = {
     "Node.js",
     "Web Accessibility",
     "Screen Reader Compatibility",
-    "Victoria BC",
+    "Victoria BC Canada",
+    "Canadian Developer",
+    "Remote Developer Canada",
     "Public Sector Web Development",
   ],
 };

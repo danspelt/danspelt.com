@@ -41,9 +41,12 @@ export default function HomeClient() {
           I build accessible web applications. I work well in teams. I use AI to move faster.
           I get the job done.
         </p>
-        <p className="text-base text-muted-foreground max-w-xl mx-auto mb-10">
+        <p className="text-base text-muted-foreground max-w-xl mx-auto mb-2">
           18+ years of real experience. I type more slowly than most — I use AI tools to stay
           competitive and deliver quality work on time.
+        </p>
+        <p className="text-sm text-muted-foreground/80 max-w-xl mx-auto mb-10">
+          Based in Victoria, BC, Canada · Open to worldwide remote work
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link href="/case-studies">
@@ -65,8 +68,8 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* AI Website Audit Offer */}
-      <section className="max-w-5xl mx-auto px-4 mb-12">
+      {/* AI Services */}
+      <section className="max-w-5xl mx-auto px-4 mb-12 space-y-4">
         <a
           href="https://audit.danspelt.com"
           target="_blank"
@@ -89,6 +92,33 @@ export default function HomeClient() {
             <div className="shrink-0 mt-2 sm:mt-0">
               <span className="inline-flex items-center gap-2 rounded-xl bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white group-hover:bg-blue-400 transition-colors">
                 Get Your Audit
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
+          </div>
+        </a>
+        <a
+          href="https://www.resume.danspelt.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block rounded-2xl border border-violet-500/30 bg-gradient-to-r from-violet-950/60 to-fuchsia-950/60 p-6 sm:p-8 hover:border-violet-400/60 transition-all"
+        >
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="p-3 rounded-xl bg-violet-500/10 shrink-0">
+              <FileText className="w-7 h-7 text-violet-400" />
+            </div>
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xs text-muted-foreground">AI-powered service</span>
+              </div>
+              <h2 className="text-xl font-bold mb-1">Land Your Dream Job with an AI-Optimized Resume</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Upload your resume and get instant AI feedback — ATS optimization, stronger bullet points, and keyword matching tailored to the job you want.
+              </p>
+            </div>
+            <div className="shrink-0 mt-2 sm:mt-0">
+              <span className="inline-flex items-center gap-2 rounded-xl bg-violet-500 px-5 py-2.5 text-sm font-semibold text-white group-hover:bg-violet-400 transition-colors">
+                Fix My Resume
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </span>
             </div>

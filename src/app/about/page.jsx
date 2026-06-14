@@ -7,7 +7,7 @@ import IntroVideo from "@/components/IntroVideo";
 export const metadata = {
   title: "About",
   description:
-    "Full-Stack Developer and Accessibility Specialist with 18+ years of experience. I work with AI tools to move fast, collaborate well in teams, and deliver results — even if it takes me a little longer.",
+    "Dan Spelt — Full-Stack Developer and Accessibility Specialist based in Victoria, BC, Canada. 18+ years of experience working remotely with teams worldwide.",
 };
 
 const highlights = [
@@ -42,7 +42,10 @@ const About = () => {
           About Dan Spelt
         </h1>
         <p className="text-lg text-muted-foreground">
-          Full-Stack Developer &middot; Accessibility Specialist &middot; Remote
+          Full-Stack Developer &middot; Accessibility Specialist &middot; Victoria, BC, Canada
+        </p>
+        <p className="text-sm text-muted-foreground/80 mt-1">
+          Open to remote roles worldwide
         </p>
       </div>
 
