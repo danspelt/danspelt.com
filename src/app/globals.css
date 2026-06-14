@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -53,7 +55,7 @@
   --foreground: 222 47% 12%;
 
   --muted: 214 32% 95%;
-  --muted-foreground: 215 19% 45%;
+  --muted-foreground: 215 25% 35%;
 
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 12%;
@@ -61,8 +63,8 @@
   --card: 0 0% 100%;
   --card-foreground: 222 47% 12%;
 
-  --border: 214 30% 89%;
-  --input: 214 30% 89%;
+  --border: 214 22% 78%;
+  --input: 214 22% 78%;
 
   --primary: 243 75% 59%; /* indigo-500 */
   --primary-foreground: 210 40% 98%;
@@ -79,6 +81,12 @@
   --ring: 243 75% 59%;
 
   --radius: 0.6rem;
+
+  --bg-dot-opacity: 0.16;
+  --bg-wave-accent-opacity: 0.18;
+  --bg-wave-primary-opacity: 0.15;
+  --bg-gradient-primary-opacity: 0.14;
+  --bg-gradient-accent-opacity: 0.16;
 }
 
 .dark {
@@ -111,6 +119,12 @@
   --destructive-foreground: 0 85% 97%;
 
   --ring: 243 85% 68%;
+
+  --bg-dot-opacity: 0.1;
+  --bg-wave-accent-opacity: 0.14;
+  --bg-wave-primary-opacity: 0.12;
+  --bg-gradient-primary-opacity: 0.1;
+  --bg-gradient-accent-opacity: 0.12;
 }
 
 @layer base {
@@ -129,13 +143,6 @@
     color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Subtle layered background pattern */
-    background-image:
-      radial-gradient(1200px 600px at 100% -10%, hsl(var(--accent) / 0.06), transparent 60%),
-      radial-gradient(800px 400px at -20% 0%, hsl(var(--primary) / 0.07), transparent 55%),
-      linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)) 40%, transparent 100%);
-    background-attachment: fixed;
-    background-size: cover;
   }
 }
 
@@ -209,40 +216,51 @@
   100% { transform: translateX(200%); }
 }
 
-/* Subtle animated background: dots + waves */
+/* Animated background: dots + waves (visible in both light and dark) */
 .bg-dots {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
-  background-image: radial-gradient(hsl(var(--primary) / 0.05) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(hsl(var(--primary) / var(--bg-dot-opacity)) 1.2px, transparent 1.2px);
   background-size: 34px 34px;
-  animation: dots-pan 20s linear infinite;
+  animation: dots-pan 24s linear infinite;
 }
 
 .dark .bg-dots {
-  background-image: radial-gradient(hsl(var(--foreground) / 0.09) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(hsl(var(--foreground) / var(--bg-dot-opacity)) 1.2px, transparent 1.2px);
 }
 
 @keyframes dots-pan {
   from { background-position: 0 0; }
-  to { background-position: 240px 240px; }
+  to { background-position: 340px 340px; }
 }
 
 .bg-waves {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
-  background: radial-gradient(60% 40% at 100% -10%, hsl(var(--accent) / 0.12), transparent 60%),
-              radial-gradient(40% 30% at -10% 10%, hsl(var(--primary) / 0.10), transparent 55%);
+  background:
+    radial-gradient(60% 40% at 100% -10%, hsl(var(--accent) / var(--bg-wave-accent-opacity)), transparent 60%),
+    radial-gradient(40% 30% at -10% 10%, hsl(var(--primary) / var(--bg-wave-primary-opacity)), transparent 55%);
   transform: translateZ(0);
-  animation: waves-float 18s ease-in-out infinite alternate;
+  animation: waves-float 20s ease-in-out infinite alternate;
 }
 
 @keyframes waves-float {
-  0% { transform: translate3d(0, 0, 0) scale(1); filter: saturate(1); }
-  100% { transform: translate3d(0, -6px, 0) scale(1.01); filter: saturate(1.05); }
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: saturate(1);
+  }
+  50% {
+    transform: translate3d(16px, -14px, 0) scale(1.03);
+    filter: saturate(1.08);
+  }
+  100% {
+    transform: translate3d(-12px, -24px, 0) scale(1.01);
+    filter: saturate(1.04);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -253,22 +271,24 @@
 .bg-gradient-anim {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
-  background-image: linear-gradient(120deg,
-    hsl(var(--primary) / 0.08),
+  background-image: linear-gradient(
+    120deg,
+    hsl(var(--primary) / var(--bg-gradient-primary-opacity)),
     transparent 35%,
-    hsl(var(--accent) / 0.10),
+    hsl(var(--accent) / var(--bg-gradient-accent-opacity)),
     transparent 70%
   );
-  background-size: 300% 300%;
-  animation: gradient-shift 45s ease-in-out infinite alternate;
+  background-size: 400% 400%;
+  animation: gradient-shift 36s ease-in-out infinite alternate;
 }
 
 @keyframes gradient-shift {
   0% { background-position: 0% 0%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 100%; }
+  33% { background-position: 100% 25%; }
+  66% { background-position: 25% 100%; }
+  100% { background-position: 100% 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
