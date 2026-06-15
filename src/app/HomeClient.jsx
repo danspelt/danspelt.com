@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { ArrowRight, Code2, Accessibility, ShieldCheck, BarChart3, FileText, Users, Brain, Zap } from 'lucide-react';
+import ProjectCards from '@/components/ProjectCards';
 
 const metrics = [
   { value: '18+', label: 'Years building real web systems professionally' },
@@ -125,6 +126,9 @@ export default function HomeClient() {
           </div>
         </a>
       </section>
+
+      {/* Money Projects */}
+      <ProjectCards />
 
       {/* Metrics Bar */}
       <section className="max-w-5xl mx-auto px-4 mb-20">
