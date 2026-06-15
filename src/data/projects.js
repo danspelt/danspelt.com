@@ -36,15 +36,6 @@ export const projects = [
     color: "amber",
   },
   {
-    name: "Business Website Audit",
-    url: "https://audit.danspelt.com",
-    status: "Live",
-    description:
-      "Fast, affordable website audit for small businesses — speed, accessibility, SEO, and conversion fixes.",
-    cta: "Request an Audit",
-    color: "sky",
-  },
-  {
     name: "AI Job Copilot",
     url: "https://jobs.danspelt.com",
     status: "MVP",
