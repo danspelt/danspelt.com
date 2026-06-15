@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { ArrowRight, Code2, Accessibility, ShieldCheck, BarChart3, FileText, Users, Brain, Zap } from 'lucide-react';
+import { ArrowRight, Code2, Accessibility, ShieldCheck, BarChart3, FileText, Users, Brain } from 'lucide-react';
 import ProjectCards from '@/components/ProjectCards';
 
 const metrics = [
@@ -67,64 +67,6 @@ export default function HomeClient() {
             </Button>
           </Link>
         </div>
-      </section>
-
-      {/* AI Services */}
-      <section className="max-w-5xl mx-auto px-4 mb-12 space-y-4">
-        <a
-          href="https://audit.danspelt.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group block rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-emerald-50 p-6 sm:p-8 hover:border-blue-300 transition-all dark:border-blue-500/30 dark:from-blue-950/60 dark:to-emerald-950/60 dark:hover:border-blue-400/60"
-        >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="p-3 rounded-xl bg-blue-500/10 shrink-0">
-              <Zap className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div className="flex-1">
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xs text-blue-700/80 dark:text-muted-foreground">AI-powered service</span>
-              </div>
-              <h2 className="text-xl font-bold mb-1 text-slate-900 dark:text-foreground">Is Your Website Losing You Customers?</h2>
-              <p className="text-sm text-slate-600 dark:text-muted-foreground leading-relaxed">
-                Get an AI-powered audit of your site — conversion score, priority fixes, headline rewrites, and SEO quick wins. Delivered in minutes.
-              </p>
-            </div>
-            <div className="shrink-0 mt-2 sm:mt-0">
-              <span className="inline-flex items-center gap-2 rounded-xl bg-blue-500 px-5 py-2.5 text-sm font-semibold text-white group-hover:bg-blue-400 transition-colors">
-                Get Your Audit
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </span>
-            </div>
-          </div>
-        </a>
-        <a
-          href="https://www.resume.danspelt.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group block rounded-2xl border border-violet-500/30 bg-gradient-to-r from-violet-950/60 to-fuchsia-950/60 p-6 sm:p-8 hover:border-violet-400/60 transition-all"
-        >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="p-3 rounded-xl bg-violet-500/10 shrink-0">
-              <FileText className="w-7 h-7 text-violet-400" />
-            </div>
-            <div className="flex-1">
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xs text-muted-foreground">AI-powered service</span>
-              </div>
-              <h2 className="text-xl font-bold mb-1">Land Your Dream Job with an AI-Optimized Resume</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Upload your resume and get instant AI feedback — ATS optimization, stronger bullet points, and keyword matching tailored to the job you want.
-              </p>
-            </div>
-            <div className="shrink-0 mt-2 sm:mt-0">
-              <span className="inline-flex items-center gap-2 rounded-xl bg-violet-500 px-5 py-2.5 text-sm font-semibold text-white group-hover:bg-violet-400 transition-colors">
-                Fix My Resume
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </span>
-            </div>
-          </div>
-        </a>
       </section>
 
       {/* Tools I Built */}

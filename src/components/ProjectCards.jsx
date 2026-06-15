@@ -22,6 +22,16 @@ const colorMap = {
     btn: "border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-600 dark:text-amber-300 dark:hover:bg-amber-900/30",
     border: "hover:border-amber-300 dark:hover:border-amber-600",
   },
+  sky: {
+    badge: "bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300",
+    btn: "border-sky-300 text-sky-700 hover:bg-sky-50 dark:border-sky-600 dark:text-sky-300 dark:hover:bg-sky-900/30",
+    border: "hover:border-sky-300 dark:hover:border-sky-600",
+  },
+  slate: {
+    badge: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
+    btn: "border-slate-300 text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800",
+    border: "hover:border-slate-400 dark:hover:border-slate-500",
+  },
 };
 
 export default function ProjectCards() {
@@ -33,7 +43,7 @@ export default function ProjectCards() {
           Websites and tools I built to solve real problems for businesses, churches, job seekers, and individuals.
         </p>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => {
           const c = colorMap[project.color] || colorMap.blue;
           return (
