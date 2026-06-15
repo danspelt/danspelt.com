@@ -127,7 +127,7 @@ export default function HomeClient() {
         </a>
       </section>
 
-      {/* Money Projects */}
+      {/* Tools I Built */}
       <ProjectCards />
 
       {/* Metrics Bar */}
