@@ -46,9 +46,6 @@ export default function ProjectCards() {
               key={project.name}
               className={`rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors ${c.border}`}
             >
-              <div className={`mb-3 inline-flex rounded-full px-3 py-1 text-xs font-medium ${c.badge}`}>
-                {project.status}
-              </div>
               <h3 className="text-lg font-semibold text-card-foreground">{project.name}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                 {project.description}
