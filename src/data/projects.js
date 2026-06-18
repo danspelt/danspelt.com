@@ -18,15 +18,6 @@ export const projects = [
     color: "violet",
   },
   {
-    name: "eBayars",
-    url: "https://ebay.danspelt.com",
-    status: "Live",
-    description:
-      "Helps people turn unused items into cash. Submit your item and Dan will write the listing and help get it sold.",
-    cta: "Submit an Item",
-    color: "emerald",
-  },
-  {
     name: "Christian Web Help",
     url: "https://churches.danspelt.com",
     status: "Live",
@@ -34,14 +25,5 @@ export const projects = [
       "Affordable website, donation, event, and app help for churches and Christian organizations.",
     cta: "Get Website Help",
     color: "amber",
-  },
-  {
-    name: "AI Job Copilot",
-    url: "https://jobs.danspelt.com",
-    status: "MVP",
-    description:
-      "A personal job search tool — cover letter drafts, application tracker, resume helper, and job log.",
-    cta: "Open Tool",
-    color: "slate",
   },
 ];

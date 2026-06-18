@@ -33,9 +33,9 @@ export default function ProjectCards() {
   return (
     <section className="max-w-5xl mx-auto px-4 mb-20">
       <div className="mb-10">
-        <h2 className="text-3xl font-bold">Tools I Built</h2>
+        <h2 className="text-3xl font-bold">AI Services</h2>
         <p className="mt-3 max-w-3xl text-base text-muted-foreground">
-          Websites and tools I built to solve real problems for businesses, churches, job seekers, and individuals.
+          AI-powered services I built to solve real problems for businesses, churches, job seekers, and individuals.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
