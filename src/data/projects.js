@@ -18,11 +18,11 @@ export const projects = [
     color: "violet",
   },
   {
-    name: "Christian Web Help",
+    name: "Faith-Based Organizations",
     url: "https://churches.danspelt.com",
     status: "Live",
     description:
-      "Affordable website, donation, event, and app help for churches and Christian organizations.",
+      "Affordable website, donation, event, and app help for churches and faith-based organizations.",
     cta: "Get Website Help",
     color: "amber",
   },
