@@ -1,4 +1,4 @@
-import sgMail, { MailDataRequired } from "@sendgrid/mail";
+import { Resend } from "resend";
 
 type Props = {
   to: string;
@@ -8,29 +8,21 @@ type Props = {
 
 export const sendEmail = async ({
   to,
-  templateName,
   dynamicTemplateData,
 }: Props) => {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const msg: MailDataRequired = {
-    to,
-    from: {
-      email: "donotreply@thisisademobroski.mom",
-      name: "This is a Demo Broski",
-    },
-    templateId: templates[templateName],
-    dynamicTemplateData,
-  };
+  const { name, email, message } = dynamicTemplateData ?? {};
 
   try {
-    await sgMail.send(msg);
+    await resend.emails.send({
+      from: "Dan Spelt <noreply@danspelt.com>",
+      to,
+      subject: `New contact form message from ${name ?? "someone"}`,
+      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong><br/>${message}</p>`,
+    });
   } catch (error) {
     console.error(error);
     throw new Error("Failed to send email");
   }
-};
-
-const templates = {
-  ContactSubmission: "d-66d3db510a7246468691d27b12e19a31",
 };
