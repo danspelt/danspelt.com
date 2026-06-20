@@ -37,6 +37,10 @@
   ],
   "exclude": [
     "node_modules",
-    "scripts"
+    "scripts",
+    "src/lib/llm.ts",
+    "src/lib/langchain.ts",
+    "src/lib/prompt-templates.ts",
+    "src/lib/aiUtils.ts"
   ]
 }
