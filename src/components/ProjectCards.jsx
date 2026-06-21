@@ -30,6 +30,8 @@ const colorMap = {
 };
 
 export default function ProjectCards() {
+  const liveProjects = projects.filter((project) => !project.comingSoon);
+
   return (
     <section className="max-w-5xl mx-auto px-4 mb-20">
       <div className="mb-10">
@@ -39,37 +41,26 @@ export default function ProjectCards() {
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => {
+        {liveProjects.map((project) => {
           const c = colorMap[project.color] || colorMap.blue;
           return (
             <article
               key={project.name}
-              className={`relative rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors ${project.comingSoon ? "opacity-70" : c.border}`}
+              className={`relative rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors ${c.border}`}
             >
-              {project.comingSoon && (
-                <span className="absolute top-4 right-4 rounded-full bg-slate-200 dark:bg-slate-700 px-2.5 py-0.5 text-xs font-medium text-slate-600 dark:text-slate-300">
-                  Coming Soon
-                </span>
-              )}
               <h3 className="text-lg font-semibold text-card-foreground">{project.name}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                 {project.description}
               </p>
-              {project.comingSoon ? (
-                <span className={`mt-5 inline-flex cursor-default items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-medium opacity-50 ${c.btn}`}>
-                  Coming Soon
-                </span>
-              ) : (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`mt-5 inline-flex items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-medium transition-colors ${c.btn}`}
-                >
-                  {project.cta}
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              )}
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-5 inline-flex items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-medium transition-colors ${c.btn}`}
+              >
+                {project.cta}
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
             </article>
           );
         })}
