@@ -51,7 +51,7 @@ export const projects = [
   },
   {
     name: "Faith-Based Web Help",
-    url: "http://faith.danspelt.ca/",
+    url: "https://faith.danspelt.com",
     status: "Live",
     description:
       "Affordable websites, donation tools, event pages, and app help for churches and faith-based organizations.",
