@@ -44,7 +44,13 @@ export default function RootLayout({ children }) {
           <footer className="border-t py-8 mt-16 relative z-10">
             <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
               <p>&copy; {new Date().getFullYear()} Dan Spelt. All rights reserved.</p>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap justify-center">
+                <a
+                  href="/custom-software"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Have a Business Challenge?
+                </a>
                 <a
                   href="https://github.com/danspelt"
                   target="_blank"
