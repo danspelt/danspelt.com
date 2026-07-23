@@ -630,6 +630,54 @@ export default function CustomSoftwareClient() {
         </div>
       </motion.section>
 
+      {/* ── Selected work ── */}
+      <motion.section aria-labelledby="proof-heading" {...fade}>
+        <h2 id="proof-heading" className="text-3xl font-bold text-center mb-4">
+          Selected Work
+        </h2>
+        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10">
+          Detailed case studies and live first-party projects I have delivered and continue to operate.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="h-full">
+            <CardContent className="pt-6 space-y-3">
+              <h3 className="font-semibold">Case Studies</h3>
+              <p className="text-sm text-muted-foreground">
+                In-depth write-ups of accessibility, full-stack, and compliance work.
+              </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/case-studies">Read case studies</Link>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="h-full">
+            <CardContent className="pt-6 space-y-3">
+              <h3 className="font-semibold">Community Hive</h3>
+              <p className="text-sm text-muted-foreground">
+                A live platform for residential community communication and management.
+              </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <a href={COMMUNITY_HIVE_URL} target="_blank" rel="noopener noreferrer">
+                  Visit Community Hive
+                  <ExternalLink className="ml-2 w-3 h-3" aria-hidden="true" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="h-full">
+            <CardContent className="pt-6 space-y-3">
+              <h3 className="font-semibold">danspelt.com Ecosystem</h3>
+              <p className="text-sm text-muted-foreground">
+                Portfolio, audit, resume, faith services, and CRM tools deployed through Coolify.
+              </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/projects">Explore projects</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </motion.section>
+
       {/* ── Final CTA + contact form ── */}
       <motion.section id="contact" aria-labelledby="contact-heading" className="scroll-mt-24" {...fade}>
         <h2 id="contact-heading" className="text-3xl font-bold text-center mb-4">
