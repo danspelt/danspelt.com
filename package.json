@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test:health": "node scripts/health-check.mjs"
   },
   "dependencies": {
     "@radix-ui/react-navigation-menu": "^1.2.3",
