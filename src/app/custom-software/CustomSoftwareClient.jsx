@@ -231,7 +231,7 @@ const InquiryForm = () => {
   const handleChange = (field) => (e) => {
     if (!startedRef.current) {
       startedRef.current = true;
-      trackEvent('contact_form_started');
+      trackEvent('inquiry_started', { form_id: 'custom_software_inquiry' });
     }
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
     setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -272,14 +272,23 @@ const InquiryForm = () => {
         setStatus('success');
         setForm(initialForm);
         startedRef.current = false;
-        trackEvent('contact_form_submitted');
+        trackEvent('inquiry_submit_success', {
+          form_id: 'custom_software_inquiry',
+          lead_source: 'custom_software_page',
+        });
       } else {
         setStatus('error');
-        trackEvent('contact_form_error');
+        trackEvent('inquiry_submit_error', {
+          form_id: 'custom_software_inquiry',
+          error_category: 'server',
+        });
       }
     } catch {
       setStatus('error');
-      trackEvent('contact_form_error');
+      trackEvent('inquiry_submit_error', {
+        form_id: 'custom_software_inquiry',
+        error_category: 'network',
+      });
     }
     statusRef.current?.focus();
   };
@@ -470,11 +479,11 @@ export default function CustomSoftwareClient() {
   const fade = useFade();
 
   useEffect(() => {
-    trackEvent('custom_software_page_view');
+    trackEvent('custom_software_view', { path: '/custom-software' });
   }, []);
 
   const scrollToContact = () => {
-    trackEvent('custom_software_primary_cta_click');
+    trackEvent('custom_software_cta_click', { cta_id: 'lets_talk', placement: 'hero' });
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     document.getElementById('cs-name')?.focus({ preventScroll: true });
   };
@@ -504,7 +513,12 @@ export default function CustomSoftwareClient() {
               href={COMMUNITY_HIVE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent('community_hive_case_study_click')}
+              onClick={() =>
+                trackEvent('custom_software_cta_click', {
+                  cta_id: 'community_hive',
+                  placement: 'hero',
+                })
+              }
             >
               See Community Hive
               <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
@@ -587,7 +601,12 @@ export default function CustomSoftwareClient() {
               href={COMMUNITY_HIVE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent('community_hive_case_study_click')}
+              onClick={() =>
+                trackEvent('custom_software_cta_click', {
+                  cta_id: 'community_hive',
+                  placement: 'case_study',
+                })
+              }
             >
               Visit Community Hive
               <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
@@ -608,6 +627,54 @@ export default function CustomSoftwareClient() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ComparisonColumn title="Off-the-Shelf Software" points={offTheShelfPoints} />
           <ComparisonColumn title="A Custom Solution" points={customPoints} positive />
+        </div>
+      </motion.section>
+
+      {/* ── Selected work ── */}
+      <motion.section aria-labelledby="proof-heading" {...fade}>
+        <h2 id="proof-heading" className="text-3xl font-bold text-center mb-4">
+          Selected Work
+        </h2>
+        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10">
+          Detailed case studies and live first-party projects I have delivered and continue to operate.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="h-full">
+            <CardContent className="pt-6 space-y-3">
+              <h3 className="font-semibold">Case Studies</h3>
+              <p className="text-sm text-muted-foreground">
+                In-depth write-ups of accessibility, full-stack, and compliance work.
+              </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/case-studies">Read case studies</Link>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="h-full">
+            <CardContent className="pt-6 space-y-3">
+              <h3 className="font-semibold">Community Hive</h3>
+              <p className="text-sm text-muted-foreground">
+                A live platform for residential community communication and management.
+              </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <a href={COMMUNITY_HIVE_URL} target="_blank" rel="noopener noreferrer">
+                  Visit Community Hive
+                  <ExternalLink className="ml-2 w-3 h-3" aria-hidden="true" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="h-full">
+            <CardContent className="pt-6 space-y-3">
+              <h3 className="font-semibold">danspelt.com Ecosystem</h3>
+              <p className="text-sm text-muted-foreground">
+                Portfolio, audit, resume, faith services, and CRM tools deployed through Coolify.
+              </p>
+              <Button variant="outline" size="sm" asChild className="w-full">
+                <Link href="/projects">Explore projects</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </motion.section>
 

@@ -13,13 +13,15 @@
     "incremental": true,
     "module": "esnext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "plugins": [
       {
@@ -36,11 +38,6 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "scripts",
-    "src/lib/llm.ts",
-    "src/lib/langchain.ts",
-    "src/lib/prompt-templates.ts",
-    "src/lib/aiUtils.ts"
+    "node_modules"
   ]
 }
