@@ -231,7 +231,7 @@ const InquiryForm = () => {
   const handleChange = (field) => (e) => {
     if (!startedRef.current) {
       startedRef.current = true;
-      trackEvent('contact_form_started');
+      trackEvent('inquiry_started', { form_id: 'custom_software_inquiry' });
     }
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
     setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -272,14 +272,23 @@ const InquiryForm = () => {
         setStatus('success');
         setForm(initialForm);
         startedRef.current = false;
-        trackEvent('contact_form_submitted');
+        trackEvent('inquiry_submit_success', {
+          form_id: 'custom_software_inquiry',
+          lead_source: 'custom_software_page',
+        });
       } else {
         setStatus('error');
-        trackEvent('contact_form_error');
+        trackEvent('inquiry_submit_error', {
+          form_id: 'custom_software_inquiry',
+          error_category: 'server',
+        });
       }
     } catch {
       setStatus('error');
-      trackEvent('contact_form_error');
+      trackEvent('inquiry_submit_error', {
+        form_id: 'custom_software_inquiry',
+        error_category: 'network',
+      });
     }
     statusRef.current?.focus();
   };
@@ -470,11 +479,11 @@ export default function CustomSoftwareClient() {
   const fade = useFade();
 
   useEffect(() => {
-    trackEvent('custom_software_page_view');
+    trackEvent('custom_software_view', { path: '/custom-software' });
   }, []);
 
   const scrollToContact = () => {
-    trackEvent('custom_software_primary_cta_click');
+    trackEvent('custom_software_cta_click', { cta_id: 'lets_talk', placement: 'hero' });
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     document.getElementById('cs-name')?.focus({ preventScroll: true });
   };
@@ -504,7 +513,12 @@ export default function CustomSoftwareClient() {
               href={COMMUNITY_HIVE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent('community_hive_case_study_click')}
+              onClick={() =>
+                trackEvent('custom_software_cta_click', {
+                  cta_id: 'community_hive',
+                  placement: 'hero',
+                })
+              }
             >
               See Community Hive
               <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
@@ -587,7 +601,12 @@ export default function CustomSoftwareClient() {
               href={COMMUNITY_HIVE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent('community_hive_case_study_click')}
+              onClick={() =>
+                trackEvent('custom_software_cta_click', {
+                  cta_id: 'community_hive',
+                  placement: 'case_study',
+                })
+              }
             >
               Visit Community Hive
               <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
