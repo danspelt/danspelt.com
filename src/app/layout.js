@@ -1,9 +1,6 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { ClientWrapper } from "@/components/client-wrapper";
 import { Providers } from "@/components/providers";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata = {
   title: {
@@ -33,7 +30,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
+    <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen flex flex-col antialiased">
         <Providers>
           <div className="bg-dots" aria-hidden="true" />

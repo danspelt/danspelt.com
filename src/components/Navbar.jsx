@@ -58,6 +58,11 @@ export function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
+                <Link href="/build-for-us">Build for Us</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-lg")}>
                 <Link href="/contact">Contact</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>

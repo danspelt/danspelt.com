@@ -61,6 +61,11 @@ export default function HomeClient() {
               About Me
             </Button>
           </Link>
+          <Link href="/build-for-us">
+            <Button variant="outline" size="lg" className="text-base px-8">
+              What Could I Build for You?
+            </Button>
+          </Link>
           <Link href="/contact">
             <Button variant="ghost" size="lg" className="text-base px-8">
               Work With Me
