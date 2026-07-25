@@ -96,6 +96,7 @@ export default function HomeClient() {
               Open to remote roles — full-time, part-time, or contract
             </p>
           </div>
+
         </div>
       </section>
 

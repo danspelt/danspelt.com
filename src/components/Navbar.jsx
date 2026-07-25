@@ -80,6 +80,7 @@ export function Navbar() {
           Dan Spelt
         </Link>
 
+
         <NavigationMenu className="hidden lg:flex ml-4" aria-label="Primary">
           <NavigationMenuList>
             {navGroups.map((group) => {
@@ -131,6 +132,7 @@ export function Navbar() {
                 </NavigationMenuItem>
               );
             })}
+
           </NavigationMenuList>
         </NavigationMenu>
 

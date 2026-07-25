@@ -16,6 +16,7 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
+
 export const metadata = {
   metadataBase: new URL("https://danspelt.com"),
   title: {
@@ -75,6 +76,7 @@ export default function RootLayout({ children }) {
       className={`${figtree.variable} ${fraunces.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased font-sans">
+
         <Providers>
           <a
             href="#main-content"
