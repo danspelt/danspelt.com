@@ -27,7 +27,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
 
-const COMMUNITY_HIVE_URL = 'http://communityhive.ca/';
+const COMMUNITY_HIVE_URL = 'https://communityhive.ca/';
 
 /* ── Content ────────────────────────────────────────────────────────── */
 
@@ -492,17 +492,19 @@ export default function CustomSoftwareClient() {
     <div className="container mx-auto max-w-5xl px-4 py-12 space-y-24">
       {/* ── Hero ── */}
       <motion.section aria-labelledby="hero-heading" className="text-center pt-8" {...fade}>
+        <p className="text-sm font-medium tracking-[0.16em] uppercase text-accent mb-4">
+          Custom software
+        </p>
         <h1
           id="hero-heading"
-          className="text-4xl md:text-5xl font-bold mb-6 bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent leading-tight"
+          className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 text-foreground leading-tight text-balance"
         >
-          Have a Business Challenge You Wish Software Could Solve?
+          Have a business challenge software could solve?
         </h1>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-          Repetitive tasks, scattered information, communication problems, or an idea you&apos;ve
-          never had a way to build — many everyday business frustrations can be solved with
-          practical, purpose-built software. You bring the challenge; I&apos;ll help you explore
-          the solution.
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
+          Repetitive admin, scattered records, missed follow-ups, or an idea you never had a way
+          to build — practical software can fix the friction. You bring the challenge; I help
+          explore the solution.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button size="lg" onClick={scrollToContact}>
