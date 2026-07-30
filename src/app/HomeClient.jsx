@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useTheme } from 'next-themes';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Code2, Accessibility, ShieldCheck, BarChart3, FileText, Users, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ProjectCards from '@/components/ProjectCards';
@@ -34,6 +36,17 @@ const strengths = [
 
 export default function HomeClient() {
   const reduce = useReducedMotion();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const heroImage =
+    mounted && resolvedTheme === 'dark'
+      ? { src: '/images/dan-night.png', width: 1086, height: 1448 }
+      : { src: '/images/dan.jpeg', width: 2048, height: 2560 };
 
   const fade = {
     initial: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
@@ -44,59 +57,78 @@ export default function HomeClient() {
 
   return (
     <div>
-      {/* Full-bleed hero */}
-      <section className="relative min-h-[min(92vh,880px)] flex items-end overflow-hidden">
-        <div className="absolute inset-0 hero-image-in">
-          <Image
-            src="/images/dan.jpeg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[center_22%]"
-          />
-          <div
-            className="absolute inset-0 bg-linear-to-t from-[hsl(200_28%_6%/0.92)] via-[hsl(200_28%_8%/0.55)] to-[hsl(174_40%_20%/0.25)]"
-            aria-hidden="true"
-          />
-        </div>
-
-        <div className="relative z-10 w-full px-4 pb-16 pt-28 sm:pb-20 sm:pt-32">
-          <div className="container mx-auto max-w-4xl">
-            <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-white/75 mb-4">
-              Victoria, BC · Remote worldwide
-            </p>
-            <h1 className="hero-rise hero-rise-delay-1 font-display text-5xl sm:text-7xl lg:text-8xl font-semibold text-white leading-[0.95] mb-5">
-              Dan Spelt
-            </h1>
-            <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-white/90 max-w-2xl leading-relaxed mb-3 text-balance">
-              Accessible web systems. Honest delivery. AI when it helps.
-            </p>
-            <p className="hero-rise hero-rise-delay-3 text-base text-white/70 max-w-xl mb-8 leading-relaxed">
-              18+ years building real platforms. Open to remote roles and practical custom software for businesses that need something that actually fits.
-            </p>
-            <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
-                <Link href="/case-studies">
-                  View case studies
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="text-base px-8 border-white/35 bg-white/10 text-white hover:bg-white/18 hover:text-white"
-              >
-                <Link href="/contact">Work with me</Link>
-              </Button>
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div>
+              <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-4">
+                Victoria, BC · Remote worldwide
+              </p>
+              <h1 className="hero-rise hero-rise-delay-1 font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[0.95] mb-5">
+                Dan Spelt
+              </h1>
+              <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-secondary-foreground/90 leading-relaxed mb-3 text-balance">
+                Accessible web systems. Honest delivery. AI when it helps.
+              </p>
+              <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/70 max-w-xl mb-8 leading-relaxed">
+                18+ years building real platforms. Open to remote roles and practical custom software for businesses that need something that actually fits.
+              </p>
+              <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
+                  <Link href="/case-studies">
+                    View case studies
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
+                >
+                  <Link href="/contact">Work with me</Link>
+                </Button>
+              </div>
+              <p className="mt-6 inline-flex items-center gap-2 text-sm text-secondary-foreground/65">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" aria-hidden="true" />
+                Open to remote roles — full-time, part-time, or contract
+              </p>
             </div>
-            <p className="mt-6 inline-flex items-center gap-2 text-sm text-white/65">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" aria-hidden="true" />
-              Open to remote roles — full-time, part-time, or contract
-            </p>
-          </div>
 
+            <motion.div
+              initial={reduce ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              whileHover={reduce ? undefined : { scale: 1.02 }}
+              className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-md"
+            >
+              <div
+                className="relative w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-secondary-foreground/10"
+                style={{ aspectRatio: `${heroImage.width} / ${heroImage.height}` }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={heroImage.src}
+                    initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={reduce ? { opacity: 1 } : { opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={heroImage.src}
+                      alt="Dan Spelt"
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 80vw, 420px"
+                      className="object-cover"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

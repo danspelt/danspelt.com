@@ -104,8 +104,8 @@ export default function ContactClient() {
           </div>
           <p className="text-sm text-muted-foreground">
             Prefer a conversation-style note?{' '}
-            <Link href="/chat" className="text-primary hover:underline underline-offset-4">
-              Use the message page
+            <Link href="/ai-chat" className="text-primary hover:underline underline-offset-4">
+              Chat with my AI assistant
             </Link>
             .
           </p>

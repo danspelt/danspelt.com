@@ -38,7 +38,7 @@ const navGroups = [
     label: "Connect",
     items: [
       { href: "/faq", label: "FAQ", description: "Common questions answered" },
-      { href: "/chat", label: "Message", description: "Send a quick note" },
+      { href: "/ai-chat", label: "AI Chat", description: "Chat with Dan's AI assistant" },
       { href: "/contact", label: "Contact", description: "Start a conversation" },
     ],
   },

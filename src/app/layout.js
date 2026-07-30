@@ -110,10 +110,10 @@ export default function RootLayout({ children }) {
                     Have a Business Challenge?
                   </Link>
                   <Link
-                    href="/chat"
+                    href="/ai-chat"
                     className="hover:text-foreground transition-colors"
                   >
-                    Message Me
+                    AI Chat
                   </Link>
                   <Link
                     href="/faq"

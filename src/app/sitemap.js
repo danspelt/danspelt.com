@@ -11,7 +11,7 @@ export default function sitemap() {
     '/custom-software',
     '/contact',
     '/faq',
-    '/chat',
+    '/ai-chat',
   ];
 
   return routes.map((route) => ({
