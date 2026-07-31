@@ -134,6 +134,7 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.2 }}
+            id="chat-widget-panel"
             role="dialog"
             aria-label="Chat with Dan's AI assistant"
             className="w-[calc(100%-2.5rem)] max-w-[26rem] rounded-3xl border border-border/60 bg-card/95 shadow-2xl shadow-black/10 backdrop-blur-xl flex flex-col overflow-hidden ring-1 ring-black/5"
@@ -219,7 +220,7 @@ export function ChatWidget() {
                         type="button"
                         onClick={() => handleQuickQuestion(q.query)}
                         disabled={isLoading}
-                        className="text-[11px] px-2.5 py-1 rounded-full bg-muted/70 hover:bg-primary hover:text-primary-foreground border border-border/40 hover:border-primary/50 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-left disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="text-[11px] px-2.5 py-1 rounded-full bg-muted/70 hover:bg-primary hover:text-primary-foreground border border-border/40 hover:border-primary/50 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none motion-reduce:transition-none transition-all duration-200 text-left focus-ring disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {q.label}
                       </button>
@@ -296,12 +297,13 @@ export function ChatWidget() {
         type="button"
         onClick={() => setIsOpen((v) => !v)}
         size="icon"
-        className="relative w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 ring-2 ring-background"
+        className="relative w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 motion-reduce:transform-none motion-reduce:transition-none transition-all duration-200 ring-2 ring-background"
         aria-label={isOpen ? 'Close chat' : "Chat with Dan's AI assistant"}
         aria-expanded={isOpen}
+        aria-controls="chat-widget-panel"
       >
         {!isOpen && (
-          <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-background animate-pulse" aria-hidden="true" />
+          <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-background animate-pulse motion-reduce:animate-none" aria-hidden="true" />
         )}
         {isOpen ? <X className="w-4 h-4" /> : <MessageCircle className="w-4 h-4" />}
       </Button>

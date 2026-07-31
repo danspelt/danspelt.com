@@ -50,8 +50,8 @@ export const metadata = {
     images: [
       {
         url: "/images/dan.jpeg",
-        width: 800,
-        height: 800,
+        width: 2048,
+        height: 2560,
         alt: "Dan Spelt",
       },
     ],
@@ -66,6 +66,13 @@ export const metadata = {
   alternates: {
     canonical: "https://danspelt.com",
   },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "hsl(186 28% 97%)" },
+    { media: "(prefers-color-scheme: dark)", color: "hsl(200 28% 6%)" },
+  ],
 };
 
 export default function RootLayout({ children }) {
@@ -105,19 +112,19 @@ export default function RootLayout({ children }) {
                 >
                   <Link
                     href="/custom-software"
-                    className="hover:text-foreground transition-colors"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
                     Have a Business Challenge?
                   </Link>
                   <Link
                     href="/ai-chat"
-                    className="hover:text-foreground transition-colors"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
                     AI Chat
                   </Link>
                   <Link
                     href="/faq"
-                    className="hover:text-foreground transition-colors"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
                     FAQ
                   </Link>
@@ -125,21 +132,23 @@ export default function RootLayout({ children }) {
                     href="https://github.com/danspelt"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-foreground transition-colors"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
                     GitHub
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                   <a
                     href="https://www.linkedin.com/in/dan-spelt/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-foreground transition-colors"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
                     LinkedIn
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                   <a
                     href="mailto:danspelt24@gmail.com"
-                    className="hover:text-foreground transition-colors"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
                     danspelt24@gmail.com
                   </a>

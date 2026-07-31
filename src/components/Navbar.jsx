@@ -74,7 +74,7 @@ export function Navbar() {
       <div className="flex h-16 items-center gap-3 px-4 container mx-auto">
         <Link
           href="/"
-          className="font-display text-2xl font-semibold tracking-tight text-foreground shrink-0"
+          className="font-display text-2xl font-semibold tracking-tight text-foreground shrink-0 rounded-md focus-ring transition-colors hover:text-primary"
           aria-label="Dan Spelt — home"
         >
           Dan Spelt
@@ -106,7 +106,7 @@ export function Navbar() {
                               href={item.href}
                               className={cn(
                                 "block select-none rounded-md px-3 py-2.5 no-underline outline-none transition-colors",
-                                "hover:bg-muted focus:bg-muted",
+                                "hover:bg-muted focus:bg-muted focus-ring",
                                 pathname === item.href && "bg-primary/10"
                               )}
                             >
@@ -141,7 +141,7 @@ export function Navbar() {
           <ModeToggle />
           <button
             type="button"
-            className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-border hover:bg-muted"
+            className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-border transition-colors hover:bg-muted focus-ring"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -172,7 +172,7 @@ export function Navbar() {
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "rounded-md px-3 py-3 text-base font-medium transition-colors",
+                        "rounded-md px-3 py-3 text-base font-medium transition-colors focus-ring",
                         pathname === item.href
                           ? "bg-primary/10 text-primary"
                           : "text-foreground hover:bg-muted"
