@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -137,100 +138,6 @@ const Projects = () => {
         </p>
       </div>
 
-      {/* ── AccessLens ── */}
-      <div className="space-y-8 mb-20">
-        <Card className="overflow-hidden">
-          <CardHeader className="pb-4">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge className="bg-blue-500/10 text-blue-600 border-blue-500/20 hover:bg-blue-500/10">
-                    Active
-                  </Badge>
-                  <Badge variant="outline">Accessibility</Badge>
-                  <Badge variant="outline">Civic Tech</Badge>
-                </div>
-                <CardTitle className="text-3xl mb-2">AccessLens</CardTitle>
-                <p className="text-sm text-muted-foreground font-medium">Founder &amp; Developer &mdash; May 2026 &ndash; Present</p>
-                <p className="text-muted-foreground mt-1">
-                  Accessibility Intelligence Platform for Cities
-                </p>
-              </div>
-              <a href="https://www.accesslens.ca/" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  Visit Live Site
-                </Button>
-              </a>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground leading-relaxed">
-              AccessLens is a community-driven platform that helps people with disabilities navigate cities
-              using crowdsourced accessibility data, interactive maps, and community reviews. Each place
-              receives a calculated accessibility score across 10 criteria, visualized with colour-coded
-              markers on an OpenStreetMap-powered map. Launched production-ready with 50+ verified places
-              in Victoria, BC.
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* AccessLens Tech Stack */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card>
-            <CardHeader className="pb-3">
-              <div className="flex items-center gap-2">
-                <Monitor className="w-4 h-4 text-primary" />
-                <CardTitle className="text-base">Frontend</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2">
-                {accessLensTechStack.frontend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <div className="flex items-center gap-2">
-                <Database className="w-4 h-4 text-primary" />
-                <CardTitle className="text-base">Backend</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2">
-                {accessLensTechStack.backend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <div className="flex items-center gap-2">
-                <Container className="w-4 h-4 text-primary" />
-                <CardTitle className="text-base">Infrastructure</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2">
-                {accessLensTechStack.infrastructure.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* AccessLens Features */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Core Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {accessLensFeatures.map((feature) => (
-              <FeatureCard key={feature.title} {...feature} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <hr className="border-border mb-20" />
-
       {/* ── Community Hive ── */}
       <div className="space-y-8">
         <Card className="overflow-hidden">
@@ -238,6 +145,9 @@ const Projects = () => {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-2">
+                  <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 hover:bg-emerald-500/10">
+                    Flagship Business Platform
+                  </Badge>
                   <Badge className="bg-green-500/10 text-green-600 border-green-500/20 hover:bg-green-500/10">
                     Shipped
                   </Badge>
@@ -250,12 +160,20 @@ const Projects = () => {
                   Multi-Tenant Communication Platform for Strata &amp; HOA Communities
                 </p>
               </div>
-              <a href="http://communityhive.ca/" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4" />
-                  Visit Live Site
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild size="lg" className="flex items-center gap-2">
+                  <Link href="/case-studies/community-hive">
+                    View Case Study
+                    <ExternalLink className="w-4 h-4" />
+                  </Link>
                 </Button>
-              </a>
+                <a href="http://communityhive.ca/" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" variant="outline" className="flex items-center gap-2 w-full sm:w-auto">
+                    <ExternalLink className="w-4 h-4" />
+                    Visit Live Site
+                  </Button>
+                </a>
+              </div>
             </div>
           </CardHeader>
           <CardContent>
@@ -418,6 +336,100 @@ const Projects = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      <hr className="border-border mb-20" />
+
+      {/* ── AccessLens ── */}
+      <div className="space-y-8 mb-20">
+        <Card className="overflow-hidden">
+          <CardHeader className="pb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge className="bg-blue-500/10 text-blue-600 border-blue-500/20 hover:bg-blue-500/10">
+                    Active
+                  </Badge>
+                  <Badge variant="outline">Accessibility</Badge>
+                  <Badge variant="outline">Civic Tech</Badge>
+                </div>
+                <CardTitle className="text-3xl mb-2">AccessLens</CardTitle>
+                <p className="text-sm text-muted-foreground font-medium">Founder &amp; Developer &mdash; May 2026 &ndash; Present</p>
+                <p className="text-muted-foreground mt-1">
+                  Accessibility Intelligence Platform for Cities
+                </p>
+              </div>
+              <a href="https://www.accesslens.ca/" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4" />
+                  Visit Live Site
+                </Button>
+              </a>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground leading-relaxed">
+              AccessLens is a community-driven platform that helps people with disabilities navigate cities
+              using crowdsourced accessibility data, interactive maps, and community reviews. Each place
+              receives a calculated accessibility score across 10 criteria, visualized with colour-coded
+              markers on an OpenStreetMap-powered map. Launched production-ready with 50+ verified places
+              in Victoria, BC.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* AccessLens Tech Stack */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Monitor className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Frontend</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {accessLensTechStack.frontend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Database className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Backend</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {accessLensTechStack.backend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Container className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Infrastructure</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {accessLensTechStack.infrastructure.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* AccessLens Features */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Core Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {accessLensFeatures.map((feature) => (
+              <FeatureCard key={feature.title} {...feature} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

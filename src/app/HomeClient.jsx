@@ -8,18 +8,14 @@ import {
   FileText,
   Users,
   Brain,
+  MessageSquare,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ProjectCards from '@/components/ProjectCards';
 import HeroImage from '@/components/HeroImage';
 import ScrollReveal from '@/components/ScrollReveal';
-
-const metrics = [
-  { value: '18+', label: 'Years building real web systems' },
-  { value: '20%', label: 'WCAG compliance lift on public platforms' },
-  { value: '30%', label: 'Bounce rate drop via accessibility work' },
-  { value: 'AI+', label: 'Daily AI tools to ship quality faster' },
-];
+import CommunityHiveFeatured from '@/components/CommunityHiveFeatured';
+import BusinessServices from '@/components/BusinessServices';
 
 const strengths = [
   {
@@ -50,19 +46,19 @@ export default function HomeClient() {
               <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-4">
                 Victoria, BC · Remote worldwide
               </p>
-              <h1 className="hero-rise hero-rise-delay-1 font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[0.95] mb-5">
-                Dan Spelt
+              <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.95] mb-5">
+                Custom Software and AI Solutions for Real Business Problems
               </h1>
-              <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-secondary-foreground/90 leading-relaxed mb-3 text-balance">
-                Accessible web systems. Honest delivery. AI when it helps.
+              <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-secondary-foreground/90 leading-relaxed mb-4 text-balance">
+                I help businesses automate time-consuming processes, improve communication, organize information, and turn new ideas into practical software.
               </p>
               <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/70 max-w-xl mb-8 leading-relaxed">
-                18+ years building real platforms. Open to remote roles and practical custom software for businesses that need something that actually fits.
+                18+ years building real platforms. From accessible public-sector systems to multi-tenant SaaS products like Community Hive.
               </p>
               <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg" className="text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link href="/case-studies">
-                    View case studies
+                  <Link href="#community-hive">
+                    View Community Hive
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </Button>
@@ -72,13 +68,12 @@ export default function HomeClient() {
                   variant="outline"
                   className="text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
                 >
-                  <Link href="/contact">Work with me</Link>
+                  <Link href="/contact">
+                    <MessageSquare className="mr-2 w-4 h-4" />
+                    Discuss Your Business Idea
+                  </Link>
                 </Button>
               </div>
-              <p className="mt-6 inline-flex items-center gap-2 text-sm text-secondary-foreground/65">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" aria-hidden="true" />
-                Open to remote roles — full-time, part-time, or contract
-              </p>
             </div>
 
             <HeroImage />
@@ -86,29 +81,18 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* Proof metrics — one job */}
-      <section className="border-b border-border/70 bg-background/80 backdrop-blur-sm">
-        <div className="container mx-auto max-w-5xl px-4 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {metrics.map((m) => (
-              <div key={m.value} className="text-center md:text-left">
-                <div className="font-display text-4xl font-semibold text-primary mb-1">
-                  {m.value}
-                </div>
-                <div className="text-sm text-muted-foreground leading-snug">
-                  {m.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CommunityHiveFeatured />
 
-      {/* What I bring */}
+      <BusinessServices />
+
+      {/* Other projects */}
+      <ProjectCards />
+
+      {/* About Dan */}
       <section className="container mx-auto max-w-5xl px-4 py-20">
         <ScrollReveal className="mb-10 max-w-2xl">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-3">
-            What I bring to a team
+            About Dan
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Rare combination: full-stack systems experience and lived accessibility understanding.
@@ -124,9 +108,6 @@ export default function HomeClient() {
           ))}
         </div>
       </section>
-
-      {/* AI Services */}
-      <ProjectCards />
 
       {/* Why hire */}
       <section className="container mx-auto max-w-4xl px-4 pb-24">

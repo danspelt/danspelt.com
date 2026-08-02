@@ -1,5 +1,23 @@
 export const projects = [
   {
+    name: "Community Hive",
+    url: "/case-studies/community-hive",
+    status: "Live",
+    label: "Flagship Business Platform",
+    description:
+      "A full-stack platform that helps property managers and community organizations centralize communication, track maintenance concerns, organize information, and improve engagement.",
+    cta: "View Case Study",
+    color: "emerald",
+    comingSoon: false,
+    flagship: true,
+    image: "/images/community-hive/community-hive-og.png",
+    benefits: [
+      "Centralized communication",
+      "Maintenance tracking",
+      "Resident engagement",
+    ],
+  },
+  {
     name: "AI Website Audit",
     url: "https://audit.danspelt.com",
     status: "Live",

@@ -80,8 +80,19 @@ export function Navbar() {
           Dan Spelt
         </Link>
 
+        <Link
+          href="/case-studies/community-hive"
+          className={cn(
+            "hidden lg:inline-flex ml-6 text-sm font-medium transition-colors rounded-md px-2 py-1",
+            pathname === "/case-studies/community-hive"
+              ? "text-primary bg-primary/10"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          Community Hive
+        </Link>
 
-        <NavigationMenu className="hidden lg:flex ml-4" aria-label="Primary">
+        <NavigationMenu className="hidden lg:flex ml-2" aria-label="Primary">
           <NavigationMenuList>
             {navGroups.map((group) => {
               const active = isGroupActive(pathname, group.items);
@@ -161,6 +172,17 @@ export function Navbar() {
             aria-label="Mobile"
             className="container mx-auto px-4 py-4 flex flex-col gap-5 max-h-[calc(100dvh-4rem)] overflow-y-auto"
           >
+            <Link
+              href="/case-studies/community-hive"
+              className={cn(
+                "rounded-md px-3 py-3 text-base font-medium transition-colors focus-ring",
+                pathname === "/case-studies/community-hive"
+                  ? "bg-primary/10 text-primary"
+                  : "text-foreground hover:bg-muted"
+              )}
+            >
+              Community Hive
+            </Link>
             {navGroups.map((group) => (
               <div key={group.label}>
                 <p className="px-3 mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
