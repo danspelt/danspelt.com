@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
+    "postbuild": "node scripts/copy-standalone-static.mjs",
     "start": "next start",
+    "start:prod": "node .next/standalone/server.js",
     "lint": "eslint src",
     "test:health": "node scripts/health-check.mjs"
   },
