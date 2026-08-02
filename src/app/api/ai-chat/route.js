@@ -65,7 +65,7 @@ export async function POST(req) {
     }
 
     const apiKey = (process.env.OPENAI_API_KEY || process.env['\uFEFFOPENAI_API_KEY'] || '').trim();
-    if (!apiKey) {
+    if (!apiKey || apiKey === 'undefined') {
       console.error('AI chat: OPENAI_API_KEY is not configured');
       return NextResponse.json(
         { error: 'AI chat is not configured. Please set OPENAI_API_KEY.' },

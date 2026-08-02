@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
-  turbopack: {
-    root: import.meta.dirname,
-  },
+  poweredByHeader: false,
 };
 
 export default nextConfig;

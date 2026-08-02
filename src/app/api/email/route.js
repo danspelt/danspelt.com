@@ -23,7 +23,7 @@ export async function POST(req) {
     const from = (process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || '').trim();
     const toEmail = (process.env.CONTACT_TO_EMAIL || 'danspelt24@gmail.com').trim();
 
-    if (!apiKey) {
+    if (!apiKey || apiKey === 'undefined') {
       throw new Error('RESEND_API_KEY is not configured');
     }
 

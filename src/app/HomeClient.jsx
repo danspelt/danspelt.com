@@ -1,13 +1,18 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Code2, Accessibility, ShieldCheck, BarChart3, FileText, Users, Brain } from 'lucide-react';
+import {
+  ArrowRight,
+  Code2,
+  Accessibility,
+  ShieldCheck,
+  BarChart3,
+  FileText,
+  Users,
+  Brain,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ProjectCards from '@/components/ProjectCards';
+import HeroImage from '@/components/HeroImage';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const metrics = [
   { value: '18+', label: 'Years building real web systems' },
@@ -35,26 +40,6 @@ const strengths = [
 ];
 
 export default function HomeClient() {
-  const reduce = useReducedMotion();
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const heroImage =
-    mounted && resolvedTheme === 'dark'
-      ? { src: '/images/dan-night.png', width: 1086, height: 1448 }
-      : { src: '/images/dan.jpeg', width: 2048, height: 2560 };
-
-  const fade = {
-    initial: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: '-60px' },
-    transition: { duration: 0.5 },
-  };
-
   return (
     <div>
       {/* Hero */}
@@ -96,38 +81,7 @@ export default function HomeClient() {
               </p>
             </div>
 
-            <motion.div
-              initial={reduce ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 24, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              whileHover={reduce ? undefined : { scale: 1.02 }}
-              className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-md"
-            >
-              <div
-                className="relative w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-secondary-foreground/10"
-                style={{ aspectRatio: `${heroImage.width} / ${heroImage.height}` }}
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={heroImage.src}
-                    initial={reduce ? { opacity: 1 } : { opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={reduce ? { opacity: 1 } : { opacity: 0, scale: 1.05 }}
-                    transition={{ duration: 0.5, ease: 'easeInOut' }}
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={heroImage.src}
-                      alt="Dan Spelt"
-                      fill
-                      priority
-                      sizes="(max-width: 1024px) 80vw, 420px"
-                      className="object-cover"
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </motion.div>
+            <HeroImage />
           </div>
         </div>
       </section>
@@ -152,21 +106,21 @@ export default function HomeClient() {
 
       {/* What I bring */}
       <section className="container mx-auto max-w-5xl px-4 py-20">
-        <motion.div {...fade} className="mb-10 max-w-2xl">
+        <ScrollReveal className="mb-10 max-w-2xl">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-3">
             What I bring to a team
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Rare combination: full-stack systems experience and lived accessibility understanding.
           </p>
-        </motion.div>
+        </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {strengths.map(({ icon: Icon, title, body }) => (
-            <motion.div key={title} {...fade}>
+            <ScrollReveal key={title}>
               <Icon className="w-6 h-6 text-primary mb-4" aria-hidden="true" />
               <h3 className="text-xl font-semibold mb-2">{title}</h3>
               <p className="text-muted-foreground leading-relaxed">{body}</p>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -176,10 +130,7 @@ export default function HomeClient() {
 
       {/* Why hire */}
       <section className="container mx-auto max-w-4xl px-4 pb-24">
-        <motion.div
-          {...fade}
-          className="rounded-2xl border border-border/80 bg-card/70 px-6 py-10 sm:px-10 sm:py-12"
-        >
+        <ScrollReveal className="rounded-2xl border border-border/80 bg-card/70 px-6 py-10 sm:px-10 sm:py-12">
           <h2 className="text-3xl font-semibold mb-4">Why I am worth hiring</h2>
           <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
             I am honest about my limitations. Cerebral palsy means I type more slowly —
@@ -216,7 +167,7 @@ export default function HomeClient() {
               <Link href="/about">More about me</Link>
             </Button>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </section>
     </div>
   );
