@@ -32,7 +32,7 @@ export default function HeroImage() {
       className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-md"
     >
       <div
-        className="relative w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-secondary-foreground/10"
+        className="float-3d relative w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-secondary-foreground/10 dark:ring-primary/20"
         style={{ aspectRatio: `${heroImage.width} / ${heroImage.height}` }}
       >
         <AnimatePresence mode="wait">

@@ -108,13 +108,13 @@ export default function BusinessChallengeFinder() {
             Business Challenge Finder
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Describe the friction in ordinary language and I will show you a conservative estimate of the
-            time involved and two practical ways it is usually solved. Everything is calculated in your
-            browser — nothing is sent unless you choose to send it.
+            Tell me the friction, and I will show you what it is costing and how I would adapt a
+            solution to your workflow. Everything is calculated in your browser — nothing is sent
+            unless you choose to send it.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border/70 bg-card/60 p-5 sm:p-7">
+        <div className="rounded-2xl border border-border/70 bg-card/60 p-5 sm:p-7 glass shadow-2xl">
           <p className="text-sm font-medium text-muted-foreground mb-2">
             Step {step} of {TOTAL_STEPS}
           </p>
@@ -136,7 +136,7 @@ export default function BusinessChallengeFinder() {
                     <label
                       key={option.id}
                       className={cn(
-                        'flex gap-3 rounded-xl border p-4 cursor-pointer transition-colors',
+                        'depth-card flex gap-3 rounded-xl border p-4 cursor-pointer glow-ring',
                         selected ? 'border-primary bg-primary/10' : 'border-border hover:bg-muted/60'
                       )}
                     >
@@ -176,7 +176,7 @@ export default function BusinessChallengeFinder() {
                   step={1}
                   value={answers.people}
                   onChange={(e) => update({ people: Number.parseInt(e.target.value, 10) })}
-                  className="w-full rounded-md border border-border bg-background px-3 py-2 focus-ring"
+                  className="w-full rounded-md border border-border bg-background px-3 py-2 focus-ring shadow-sm"
                 />
               </div>
               <div>
@@ -192,7 +192,7 @@ export default function BusinessChallengeFinder() {
                   step={0.25}
                   value={answers.hoursPerWeek}
                   onChange={(e) => update({ hoursPerWeek: Number.parseFloat(e.target.value) })}
-                  className="w-full rounded-md border border-border bg-background px-3 py-2 focus-ring"
+                  className="w-full rounded-md border border-border bg-background px-3 py-2 focus-ring shadow-sm"
                 />
               </div>
               <div>
@@ -209,7 +209,7 @@ export default function BusinessChallengeFinder() {
                   value={answers.hourlyCost}
                   onChange={(e) => update({ hourlyCost: Number.parseFloat(e.target.value) })}
                   aria-describedby="challenge-cost-help"
-                  className="w-full rounded-md border border-border bg-background px-3 py-2 focus-ring"
+                  className="w-full rounded-md border border-border bg-background px-3 py-2 focus-ring shadow-sm"
                 />
                 <p id="challenge-cost-help" className="mt-1 text-xs text-muted-foreground">
                   Fully loaded cost, not salary. Edit this to match your situation.
@@ -228,7 +228,7 @@ export default function BusinessChallengeFinder() {
                     <label
                       key={option.id}
                       className={cn(
-                        'flex items-center gap-3 rounded-xl border p-4 cursor-pointer transition-colors',
+                        'depth-card flex items-center gap-3 rounded-xl border p-4 cursor-pointer glow-ring',
                         selected ? 'border-primary bg-primary/10' : 'border-border hover:bg-muted/60'
                       )}
                     >
@@ -259,7 +259,7 @@ export default function BusinessChallengeFinder() {
           {step < TOTAL_STEPS && (
             <div className="flex flex-col sm:flex-row gap-3 mt-7">
               {step > 1 && (
-                <Button type="button" variant="outline" onClick={goBack}>
+                <Button type="button" variant="outline" onClick={goBack} className="btn-3d">
                   <ArrowLeft className="mr-2 w-4 h-4" aria-hidden="true" />
                   Back
                 </Button>
@@ -270,6 +270,7 @@ export default function BusinessChallengeFinder() {
                   markStarted();
                   goNext();
                 }}
+                className="btn-3d"
               >
                 {step === TOTAL_STEPS - 1 ? 'Show my estimate' : 'Continue'}
                 <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />

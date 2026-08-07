@@ -74,7 +74,7 @@ export default function SmartCta() {
     // aria-hidden is not used: the CTA is real content. It is placed after the
     // main landmark in the DOM and never receives focus automatically.
     <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur-md print:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/85 backdrop-blur-xl print:hidden shadow-[0_-8px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_-8px_40px_rgba(0,0,0,0.35)]"
       role="complementary"
       aria-label="Suggested next step"
     >
@@ -82,7 +82,7 @@ export default function SmartCta() {
         <p className="hidden sm:block text-sm text-muted-foreground flex-1 truncate">
           Ready when you are — no obligation.
         </p>
-        <Button asChild size="sm" className="flex-1 sm:flex-none">
+        <Button asChild size="sm" className="btn-3d flex-1 sm:flex-none bg-accent text-accent-foreground hover:bg-accent/90">
           <Link
             href={cta.href}
             onClick={() => trackEvent('contact_started', { source: 'smart_cta', path: path ?? 'none' })}

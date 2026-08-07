@@ -6,7 +6,7 @@ const services = [
   {
     icon: Cog,
     title: 'Custom Software',
-    body: 'Build a tool around your workflow instead of forcing your workflow into an off-the-shelf product.',
+    body: 'Tailor-made tools that adapt to how your team actually works — not the other way around.',
   },
   {
     icon: MessageSquare,
@@ -48,7 +48,8 @@ export default function BusinessServices() {
         {services.map(({ icon: Icon, title, body }) => (
           <div
             key={title}
-            className="flex items-start gap-4 p-5 rounded-2xl border border-border/60 bg-card/40"
+            tabIndex={0}
+            className="depth-card flex items-start gap-4 p-5 rounded-2xl border border-border/60 bg-card/50 glow-ring focus-ring"
           >
             <div className="p-2.5 rounded-lg bg-primary/10 shrink-0">
               <Icon className="w-5 h-5 text-primary" aria-hidden="true" />

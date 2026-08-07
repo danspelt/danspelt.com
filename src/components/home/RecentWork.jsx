@@ -36,7 +36,7 @@ export default function RecentWork() {
           {RECENT_WORK.map((item) => (
             <li
               key={`${item.date}-${item.project}-${item.url}`}
-              className="rounded-xl border border-border/70 bg-card p-5"
+              className="depth-card rounded-xl border border-border/70 bg-card p-5 glow-ring"
             >
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
                 <h3 className="font-semibold">{item.project}</h3>

@@ -39,6 +39,11 @@ const strengths = [
     title: 'Lived accessibility',
     body: 'Born with cerebral palsy, I understand assistive technology from the inside — not only from a checklist.',
   },
+  {
+    icon: Code2,
+    title: 'Stack-agnostic',
+    body: 'I learn the tools you already use, or I bring the right ones. Either way, the system is built around your goals.',
+  },
 ];
 
 export default function HomeClient() {
@@ -46,23 +51,23 @@ export default function HomeClient() {
     <VisitorPathProvider>
       {/* Hero */}
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
-        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-24">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-24 lg:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-4">
                 Victoria, BC · Remote worldwide
               </p>
               <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.95] mb-5">
-                I build practical web software around real workflows
+                Software that adapts to your business
               </h1>
               <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-secondary-foreground/90 leading-relaxed mb-4 text-balance">
-                18+ years of full-stack experience across SaaS, accessibility, community platforms, and operational tools.
+                Give me your workflow, your challenge, or your idea. I will shape it into a fast, accessible, maintainable system.
               </p>
               <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/70 max-w-xl mb-8 leading-relaxed">
-                See what I have built, or tell me what is slowing your organization down. Available for full-time, contract, and project work.
+                I am a full-stack engineer who can fit into almost any stack, process, or timeline — from early experiments to production platforms.
               </p>
               <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
-                <Button asChild size="lg" className="text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
+                <Button asChild size="lg" className="btn-3d text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
                   <Link href="#community-hive">
                     Explore Community Hive
                     <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
@@ -72,15 +77,15 @@ export default function HomeClient() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
+                  className="btn-3d text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
                 >
                   <Link href="#challenge-finder">
                     <MessageSquare className="mr-2 w-4 h-4" aria-hidden="true" />
-                    Tell me your business challenge
+                    Tell me your challenge
                   </Link>
                 </Button>
               </div>
-              <p className="hero-rise hero-rise-delay-4 mt-4">
+              <p className="hero-rise hero-rise-delay-4 mt-5">
                 <Link
                   href="#proof"
                   className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
@@ -119,12 +124,14 @@ export default function HomeClient() {
             Rare combination: full-stack systems experience and lived accessibility understanding.
           </p>
         </ScrollReveal>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {strengths.map(({ icon: Icon, title, body }) => (
             <ScrollReveal key={title}>
-              <Icon className="w-6 h-6 text-primary mb-4" aria-hidden="true" />
-              <h3 className="text-xl font-semibold mb-2">{title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{body}</p>
+              <div className="depth-card h-full p-5 rounded-2xl bg-card/60 border border-border/60">
+                <Icon className="w-6 h-6 text-primary mb-4" aria-hidden="true" />
+                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                <p className="text-muted-foreground leading-relaxed text-sm">{body}</p>
+              </div>
             </ScrollReveal>
           ))}
         </div>
@@ -132,13 +139,13 @@ export default function HomeClient() {
 
       {/* Why hire */}
       <section className="container mx-auto max-w-4xl px-4 pb-24">
-        <ScrollReveal className="rounded-2xl border border-border/80 bg-card/70 px-6 py-10 sm:px-10 sm:py-12">
-          <h2 className="text-3xl font-semibold mb-4">Why I am worth hiring</h2>
+        <ScrollReveal className="rounded-2xl border border-border/80 glass px-6 py-10 sm:px-10 sm:py-12">
+          <h2 className="text-3xl font-semibold mb-4">Give me a chance to prove it</h2>
           <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
-            I am honest about my limitations. Cerebral palsy means I type more slowly —
-            and I use AI tools to compensate. I have deep experience, I care about quality,
-            and I understand both accessibility and full-stack systems. That combination is rare,
-            especially in public-sector, education, and healthcare work.
+            I do not just build what is on the spec sheet. I listen, adapt, and turn your
+            business problem into software your team can actually use. Send me your messiest
+            workflow, your most awkward integration, or your half-formed idea — I will meet you
+            there and make it better.
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             {[

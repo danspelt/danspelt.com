@@ -70,12 +70,14 @@ export default function CommunityHiveSpotlight() {
           <h2 id="community-hive-heading" className="text-3xl sm:text-4xl font-semibold mb-3">
             Community Hive
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">{project.tagline}. {project.approach}</p>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            One example of how I adapt software to a real business. Built for property managers, shaped by residents and councils.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Product screen. Dimensions are reserved to avoid layout shift. */}
-          <div className="rounded-xl overflow-hidden ring-1 ring-border/60 bg-card">
+          <div className="float-3d rounded-xl overflow-hidden ring-1 ring-border/60 bg-card glass shadow-2xl">
             <div
               className="flex items-center gap-1.5 px-3 py-2 border-b border-border/60 bg-muted/50"
               aria-hidden="true"
@@ -117,9 +119,9 @@ export default function CommunityHiveSpotlight() {
                     tabIndex={selected ? 0 : -1}
                     onClick={() => activate(index)}
                     className={cn(
-                      'rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-ring',
+                      'btn-3d rounded-full border px-4 py-2 text-sm font-medium focus-ring',
                       selected
-                        ? 'border-primary bg-primary text-primary-foreground'
+                        ? 'border-primary bg-primary text-primary-foreground shadow-md'
                         : 'border-border bg-card text-muted-foreground hover:bg-muted'
                     )}
                   >
@@ -134,7 +136,7 @@ export default function CommunityHiveSpotlight() {
               id={`${baseId}-panel-${active.id}`}
               aria-labelledby={`${baseId}-tab-${active.id}`}
               tabIndex={0}
-              className="space-y-5 rounded-xl border border-border/70 bg-card/60 p-5 focus-ring"
+              className="space-y-5 rounded-xl border border-border/70 bg-card/60 p-5 glass focus-ring"
             >
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-1">
@@ -157,7 +159,7 @@ export default function CommunityHiveSpotlight() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
-              <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+              <Button asChild size="lg" className="btn-3d bg-accent text-accent-foreground hover:bg-accent/90">
                 <a
                   href={COMMUNITY_HIVE_DEMO_URL}
                   target="_blank"
@@ -174,13 +176,13 @@ export default function CommunityHiveSpotlight() {
                   <span className="sr-only">(opens communityhive.ca in a new tab)</span>
                 </a>
               </Button>
-              <Button asChild size="lg" variant="outline">
+              <Button asChild size="lg" variant="outline" className="btn-3d">
                 <Link href={project.caseStudyUrl}>
                   Read the case study
                   <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="ghost">
+              <Button asChild size="lg" variant="ghost" className="btn-3d">
                 <Link
                   href="/contact?intent=community-hive"
                   onClick={() =>

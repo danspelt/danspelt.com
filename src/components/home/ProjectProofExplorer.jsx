@@ -81,8 +81,8 @@ export default function ProjectProofExplorer() {
             Engineering proof
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Pick a project, then look at the part you care about — the problem, the approach, the
-            decisions and their tradeoffs, the outcomes, or the stack.
+            Every project started as someone else's messy problem. Pick one and see how I shape
+            ideas into working systems — across any stack, market, or workflow.
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export default function ProjectProofExplorer() {
                 aria-pressed={selected}
                 onClick={() => selectProject(item.slug)}
                 className={cn(
-                  'text-left rounded-xl border p-4 transition-colors focus-ring',
+                  'depth-card text-left rounded-xl border p-4 focus-ring glow-ring',
                   selected ? 'border-primary bg-primary/10' : 'border-border bg-card hover:bg-muted/60'
                 )}
               >
@@ -116,7 +116,7 @@ export default function ProjectProofExplorer() {
           })}
         </div>
 
-        <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-7">
+        <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-7 glass shadow-xl">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-5">
             <h3 className="text-2xl font-semibold">{project.title}</h3>
             <p className="text-sm text-muted-foreground">{project.role}</p>
@@ -144,7 +144,7 @@ export default function ProjectProofExplorer() {
                   tabIndex={selected ? 0 : -1}
                   onClick={() => selectTab(tab.id)}
                   className={cn(
-                    'rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus-ring',
+                    'btn-3d rounded-full border px-4 py-1.5 text-sm font-medium focus-ring',
                     selected
                       ? 'border-primary bg-primary text-primary-foreground'
                       : 'border-border text-muted-foreground hover:bg-muted'

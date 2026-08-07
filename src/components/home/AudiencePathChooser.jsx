@@ -36,10 +36,10 @@ export default function AudiencePathChooser() {
   return (
     <section
       aria-labelledby="audience-chooser-heading"
-      className="border-b border-border/60 bg-muted/30"
+      className="border-b border-border/60 bg-muted/30 relative"
     >
       <div className="container mx-auto max-w-6xl px-4 py-10 sm:py-12">
-        <h2 id="audience-chooser-heading" className="text-lg font-semibold mb-1">
+        <h2 id="audience-chooser-heading" className="text-2xl sm:text-3xl font-semibold mb-1">
           What brings you here?
         </h2>
         <p className="text-sm text-muted-foreground mb-6">
@@ -56,9 +56,9 @@ export default function AudiencePathChooser() {
                   aria-pressed={selected}
                   onClick={() => handleSelect(option)}
                   className={cn(
-                    'group w-full h-full text-left rounded-xl border p-5 transition-colors focus-ring',
+                    'depth-card group w-full h-full text-left rounded-xl border p-5 focus-ring',
                     selected
-                      ? 'border-primary bg-primary/10'
+                      ? 'border-primary bg-primary/10 shadow-md'
                       : 'border-border bg-card hover:bg-muted/60'
                   )}
                 >
