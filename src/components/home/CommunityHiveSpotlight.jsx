@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useId, useRef, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -12,9 +11,11 @@ import {
   COMMUNITY_HIVE_DEMO_URL,
   COMMUNITY_HIVE_FALLBACK_IMAGE,
   COMMUNITY_HIVE_ROLES,
+  COMMUNITY_HIVE_SCREENSHOTS,
   PROJECT_STATUS,
   getProjectProof,
 } from '@/data/project-proof';
+import CommunityHiveSlideshow from '@/components/community-hive/CommunityHiveSlideshow';
 
 const project = getProjectProof('community-hive');
 const status = PROJECT_STATUS[project.status];
@@ -77,24 +78,7 @@ export default function CommunityHiveSpotlight() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           {/* Product screen. Dimensions are reserved to avoid layout shift. */}
-          <div className="float-3d rounded-xl overflow-hidden ring-1 ring-border/60 bg-card glass shadow-2xl">
-            <div
-              className="flex items-center gap-1.5 px-3 py-2 border-b border-border/60 bg-muted/50"
-              aria-hidden="true"
-            >
-              <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
-              <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
-              <span className="w-2.5 h-2.5 rounded-full bg-muted-foreground/30" />
-            </div>
-            <Image
-              src={image}
-              alt={imageAlt}
-              width={1200}
-              height={630}
-              sizes="(min-width: 1024px) 560px, 100vw"
-              className="w-full h-auto"
-            />
-          </div>
+          <CommunityHiveSlideshow screenshots={COMMUNITY_HIVE_SCREENSHOTS} />
 
           <div>
             <div

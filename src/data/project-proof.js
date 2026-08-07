@@ -18,6 +18,28 @@ export const PROJECT_STATUS = {
 /** Shared fallback until role-specific screenshots are supplied. */
 export const COMMUNITY_HIVE_FALLBACK_IMAGE = '/images/community-hive/community-hive-og.png';
 
+/** New screenshot set for the Community Hive slideshow. */
+export const COMMUNITY_HIVE_SCREENSHOTS = [
+  {
+    id: 'pm',
+    src: '/images/community-hive/screenshots/pm-dashboard.png',
+    alt: 'Property manager dashboard with building overview, properties, announcements, and open tickets',
+    caption: 'Property manager view',
+  },
+  {
+    id: 'council',
+    src: '/images/community-hive/screenshots/resident-council-dashboard.png',
+    alt: 'Resident with council management access viewing quick actions and dashboard metrics',
+    caption: 'Resident with council access',
+  },
+  {
+    id: 'resident',
+    src: '/images/community-hive/screenshots/resident-member-dashboard.png',
+    alt: 'Resident dashboard showing announcements, requests, events, and quick actions',
+    caption: 'Resident member view',
+  },
+];
+
 export const COMMUNITY_HIVE_DEMO_URL = 'https://communityhive.ca';
 
 /**

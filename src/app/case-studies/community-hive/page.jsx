@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,9 +13,10 @@ import {
   Briefcase,
   TrendingUp,
   Users,
-  CheckCircle2,
-  ExternalLink,
 } from 'lucide-react';
+import { CheckCircle2, ExternalLink } from 'lucide-react';
+import { COMMUNITY_HIVE_SCREENSHOTS } from '@/data/project-proof';
+import CommunityHiveSlideshow from '@/components/community-hive/CommunityHiveSlideshow';
 
 export const metadata = {
   title: 'Community Hive Case Study | Custom Business Software by Dan Spelt',
@@ -200,16 +200,10 @@ export default function CommunityHiveCaseStudy() {
         </p>
       </div>
 
-      <div className="rounded-2xl overflow-hidden ring-1 ring-border/60 bg-card/40 mb-16">
-        <Image
-          src="/images/community-hive/community-hive-og.png"
-          alt="Community Hive property management dashboard showing announcements, maintenance requests and community activity"
-          width={1200}
-          height={630}
-          className="w-full h-auto object-cover"
-          priority
-        />
-      </div>
+      <CommunityHiveSlideshow
+        screenshots={COMMUNITY_HIVE_SCREENSHOTS}
+        className="mb-16 max-w-4xl mx-auto"
+      />
 
       <section className="mb-16 max-w-3xl">
         <h2 className="text-3xl font-semibold mb-4">Project Summary</h2>
