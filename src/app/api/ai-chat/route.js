@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { OpenAI } from 'openai';
-import { buildSystemPrompt } from '@/data/professional-profile';
+import { buildSystemPrompt, selectSources } from '@/data/professional-profile';
+import { consumeRateLimit, getClientKey } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
+
+/** Give up rather than leave the visitor waiting indefinitely. */
+const REQUEST_TIMEOUT_MS = 30_000;
 
 const requestSchema = z.object({
   messages: z.array(
@@ -17,25 +21,6 @@ const requestSchema = z.object({
 
 const MAX_REQUESTS_PER_WINDOW = 10;
 const WINDOW_MS = 60 * 60 * 1000; // 1 hour
-
-const rateLimitMap = new Map();
-
-function getClientIp(req) {
-  const forwarded = req.headers.get('x-forwarded-for');
-  if (forwarded) return forwarded.split(',')[0].trim();
-  return req.headers.get('x-real-ip') || 'unknown';
-}
-
-function isRateLimited(ip) {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-  if (!record || now - record.start > WINDOW_MS) {
-    rateLimitMap.set(ip, { start: now, count: 1 });
-    return false;
-  }
-  record.count += 1;
-  return record.count > MAX_REQUESTS_PER_WINDOW;
-}
 
 export async function POST(req) {
   try {
@@ -56,11 +41,14 @@ export async function POST(req) {
       return NextResponse.json({ reply: 'Thanks for your message.' }, { status: 200 });
     }
 
-    const ip = getClientIp(req);
-    if (isRateLimited(ip)) {
+    const { limited, retryAfterSeconds } = consumeRateLimit(`ai-chat:${getClientKey(req)}`, {
+      max: MAX_REQUESTS_PER_WINDOW,
+      windowMs: WINDOW_MS,
+    });
+    if (limited) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
-        { status: 429 }
+        { status: 429, headers: { 'Retry-After': String(retryAfterSeconds) } }
       );
     }
 
@@ -78,12 +66,15 @@ export async function POST(req) {
     const systemMessage = { role: 'system', content: buildSystemPrompt() };
     const chatMessages = [systemMessage, ...messages];
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: chatMessages,
-      temperature: 0.7,
-      max_tokens: 800,
-    });
+    const completion = await openai.chat.completions.create(
+      {
+        model: 'gpt-4o-mini',
+        messages: chatMessages,
+        temperature: 0.7,
+        max_tokens: 800,
+      },
+      { timeout: REQUEST_TIMEOUT_MS }
+    );
 
     const reply = completion.choices?.[0]?.message?.content?.trim();
     if (!reply) {
@@ -93,7 +84,12 @@ export async function POST(req) {
       );
     }
 
-    return NextResponse.json({ reply }, { status: 200 });
+    // Sources are chosen deterministically from an approved catalog so the
+    // assistant can never fabricate a link.
+    const lastUserMessage = [...messages].reverse().find((m) => m.role === 'user')?.content ?? '';
+    const sources = selectSources(`${lastUserMessage}\n${reply}`);
+
+    return NextResponse.json({ reply, sources }, { status: 200 });
   } catch (err) {
     console.error('AI chat: unexpected error', {
       message: err instanceof Error ? err.message : 'Unknown error',

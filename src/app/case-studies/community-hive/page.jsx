@@ -161,12 +161,13 @@ const technologies = [
   'React',
   'JavaScript',
   'Tailwind CSS',
-  'Firebase',
-  'Authentication',
-  'Database design',
+  'shadcn/ui',
+  'Node.js API routes',
+  'MongoDB',
+  'Role-based access control',
+  'JWT authentication',
   'Responsive dashboards',
   'AI-assisted workflows',
-  'Cloud deployment',
   'Git and GitHub',
   'Coolify and Docker',
 ];
@@ -187,7 +188,7 @@ export default function CommunityHiveCaseStudy() {
       <div className="mb-10 max-w-3xl">
         <div className="flex flex-wrap gap-2 mb-4">
           <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 hover:bg-emerald-500/10">
-            Flagship Business Platform
+            Pilot
           </Badge>
           <Badge variant="outline">SaaS</Badge>
           <Badge variant="outline">Multi-Tenant</Badge>

@@ -2,8 +2,8 @@ export const projects = [
   {
     name: "Community Hive",
     url: "/case-studies/community-hive",
-    status: "Live",
-    label: "Flagship Business Platform",
+    status: "Pilot",
+    label: "Flagship business platform",
     description:
       "A full-stack platform that helps property managers and community organizations centralize communication, track maintenance concerns, organize information, and improve engagement.",
     cta: "View Case Study",

@@ -11,11 +11,17 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import ProjectCards from '@/components/ProjectCards';
 import HeroImage from '@/components/HeroImage';
 import ScrollReveal from '@/components/ScrollReveal';
-import CommunityHiveFeatured from '@/components/CommunityHiveFeatured';
 import BusinessServices from '@/components/BusinessServices';
+import { VisitorPathProvider } from '@/components/home/VisitorPathProvider';
+import AudiencePathChooser from '@/components/home/AudiencePathChooser';
+import CommunityHiveSpotlight from '@/components/home/CommunityHiveSpotlight';
+import ProjectProofExplorer from '@/components/home/ProjectProofExplorer';
+import BusinessChallengeFinder from '@/components/home/BusinessChallengeFinder';
+import IntroVideo from '@/components/home/IntroVideo';
+import RecentWork from '@/components/home/RecentWork';
+import SmartCta from '@/components/home/SmartCta';
 
 const strengths = [
   {
@@ -37,7 +43,7 @@ const strengths = [
 
 export default function HomeClient() {
   return (
-    <div>
+    <VisitorPathProvider>
       {/* Hero */}
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
         <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-24">
@@ -47,19 +53,19 @@ export default function HomeClient() {
                 Victoria, BC · Remote worldwide
               </p>
               <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.95] mb-5">
-                Custom Software and AI Solutions for Real Business Problems
+                I build practical web software around real workflows
               </h1>
               <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-secondary-foreground/90 leading-relaxed mb-4 text-balance">
-                I help businesses automate time-consuming processes, improve communication, organize information, and turn new ideas into practical software.
+                18+ years of full-stack experience across SaaS, accessibility, community platforms, and operational tools.
               </p>
               <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/70 max-w-xl mb-8 leading-relaxed">
-                18+ years building real platforms. From accessible public-sector systems to multi-tenant SaaS products like Community Hive.
+                See what I have built, or tell me what is slowing your organization down. Available for full-time, contract, and project work.
               </p>
               <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg" className="text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
                   <Link href="#community-hive">
-                    View Community Hive
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    Explore Community Hive
+                    <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                   </Link>
                 </Button>
                 <Button
@@ -68,12 +74,20 @@ export default function HomeClient() {
                   variant="outline"
                   className="text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
                 >
-                  <Link href="/contact">
-                    <MessageSquare className="mr-2 w-4 h-4" />
-                    Discuss Your Business Idea
+                  <Link href="#challenge-finder">
+                    <MessageSquare className="mr-2 w-4 h-4" aria-hidden="true" />
+                    Tell me your business challenge
                   </Link>
                 </Button>
               </div>
+              <p className="hero-rise hero-rise-delay-4 mt-4">
+                <Link
+                  href="#proof"
+                  className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
+                >
+                  See engineering proof
+                </Link>
+              </p>
             </div>
 
             <HeroImage />
@@ -81,12 +95,19 @@ export default function HomeClient() {
         </div>
       </section>
 
-      <CommunityHiveFeatured />
+      <AudiencePathChooser />
+
+      <CommunityHiveSpotlight />
+
+      <ProjectProofExplorer />
+
+      <BusinessChallengeFinder />
 
       <BusinessServices />
 
-      {/* Other projects */}
-      <ProjectCards />
+      <IntroVideo />
+
+      <RecentWork />
 
       {/* About Dan */}
       <section className="container mx-auto max-w-5xl px-4 py-20">
@@ -150,6 +171,8 @@ export default function HomeClient() {
           </div>
         </ScrollReveal>
       </section>
-    </div>
+
+      <SmartCta />
+    </VisitorPathProvider>
   );
 }

@@ -2,11 +2,22 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import { Send, User, Bot, Loader2, Mail, CheckCircle, AlertCircle, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FormattedMessage } from '@/components/FormattedMessage';
+import { QUICK_PROMPTS } from '@/data/professional-profile';
+import { trackEvent } from '@/lib/analytics';
 
 const MAX_INPUT_LENGTH = 4000;
+
+/** Shown when the AI route is unavailable so the visitor is never stuck. */
+const FALLBACK_LINKS = [
+  { title: 'Projects', url: '/projects' },
+  { title: 'Case studies', url: '/case-studies' },
+  { title: 'Custom software services', url: '/custom-software' },
+  { title: 'Contact Dan', url: '/contact' },
+];
 
 function formatTime(date) {
   return new Intl.DateTimeFormat(undefined, {
@@ -59,52 +70,75 @@ export default function AIChatClient() {
       .join('\n\n');
   }, [messages]);
 
-  const handleSend = useCallback(async () => {
-    const text = input.trim();
-    if (!text || text.length > MAX_INPUT_LENGTH) return;
+  const [showFallback, setShowFallback] = useState(false);
 
-    const userMessage = { role: 'user', content: text, createdAt: Date.now() };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setStatus(null);
-    setEmailStatus(null);
-    setIsLoading(true);
+  const sendText = useCallback(
+    async (rawText) => {
+      const text = rawText.trim();
+      if (!text || text.length > MAX_INPUT_LENGTH) return;
 
-    try {
-      const response = await fetch('/api/ai-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
-        }),
-      });
-      const data = await response.json();
+      const userMessage = { role: 'user', content: text, createdAt: Date.now() };
+      setMessages((prev) => [...prev, userMessage]);
+      setInput('');
+      setStatus(null);
+      setEmailStatus(null);
+      setIsLoading(true);
 
-      if (response.ok) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: 'assistant',
-            content: data.reply,
-            createdAt: Date.now(),
-          },
-        ]);
-      } else {
-        setStatus({
-          type: 'error',
-          text: data.error || 'The AI assistant is unavailable. Please try again.',
+      try {
+        const response = await fetch('/api/ai-chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: [...messages, userMessage].map((m) => ({
+              role: m.role,
+              content: m.content,
+            })),
+          }),
         });
+        const data = await response.json();
+
+        if (response.ok) {
+          const sources = Array.isArray(data.sources) ? data.sources : [];
+          setShowFallback(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: 'assistant',
+              content: data.reply,
+              sources,
+              createdAt: Date.now(),
+            },
+          ]);
+          if (sources.length > 0) {
+            trackEvent('ask_dan_sources_shown', { source_count: sources.length });
+          }
+        } else {
+          setShowFallback(true);
+          setStatus({
+            type: 'error',
+            text: data.error || 'The AI assistant is unavailable. Please try again.',
+          });
+        }
+      } catch {
+        setShowFallback(true);
+        setStatus({ type: 'error', text: 'Network error. Please try again.' });
+      } finally {
+        setIsLoading(false);
+        setTimeout(() => textareaRef.current?.focus(), 50);
       }
-    } catch {
-      setStatus({ type: 'error', text: 'Network error. Please try again.' });
-    } finally {
-      setIsLoading(false);
-      setTimeout(() => textareaRef.current?.focus(), 50);
-    }
-  }, [input, messages]);
+    },
+    [messages]
+  );
+
+  const handleSend = useCallback(() => sendText(input), [sendText, input]);
+
+  const handleQuickPrompt = useCallback(
+    (prompt) => {
+      trackEvent('ask_dan_quick_prompt', { prompt_id: prompt.id });
+      sendText(prompt.text);
+    },
+    [sendText]
+  );
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -218,6 +252,23 @@ export default function AIChatClient() {
                         message.content
                       )}
                     </div>
+                    {isAssistant && message.sources?.length > 0 && (
+                      <div className="mt-2">
+                        <p className="text-xs font-medium text-muted-foreground mb-1">Sources used</p>
+                        <ul className="flex flex-wrap gap-2">
+                          {message.sources.map((source) => (
+                            <li key={source.url}>
+                              <Link
+                                href={source.url}
+                                className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-primary hover:bg-primary/20 focus-ring"
+                              >
+                                {source.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                     <span className="text-xs text-muted-foreground mt-1">
                       {message.createdAt ? formatTime(new Date(message.createdAt)) : ''}
                     </span>
@@ -243,6 +294,26 @@ export default function AIChatClient() {
           )}
           <div ref={scrollRef} />
         </div>
+
+        {messages.length <= 2 && (
+          <div className="mb-3">
+            <p className="text-xs font-medium text-muted-foreground mb-2">Try one of these</p>
+            <ul className="flex flex-wrap gap-2">
+              {QUICK_PROMPTS.map((prompt) => (
+                <li key={prompt.id}>
+                  <button
+                    type="button"
+                    onClick={() => handleQuickPrompt(prompt)}
+                    disabled={isLoading}
+                    className="text-xs font-medium px-3 py-1.5 rounded-full border border-border bg-card hover:bg-muted disabled:opacity-50 focus-ring"
+                  >
+                    {prompt.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div className="flex gap-2 items-end">
           <div className="flex-1 relative">
@@ -315,6 +386,24 @@ export default function AIChatClient() {
             )}
           </AnimatePresence>
         </div>
+
+        {showFallback && (
+          <div className="mt-3 rounded-lg border border-border bg-card p-4">
+            <p className="text-sm font-medium mb-2">You can still find what you need</p>
+            <ul className="flex flex-wrap gap-2">
+              {FALLBACK_LINKS.map((link) => (
+                <li key={link.url}>
+                  <Link
+                    href={link.url}
+                    className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary hover:bg-primary/20 focus-ring"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {!showEmailForm ? (
           <Button

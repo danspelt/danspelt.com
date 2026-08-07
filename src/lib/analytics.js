@@ -14,6 +14,23 @@ const EVENT_CONTRACT = {
   inquiry_started: ["form_id"],
   inquiry_submit_success: ["form_id", "lead_source"],
   inquiry_submit_error: ["form_id", "error_category"],
+
+  // Homepage guided-proof funnel
+  path_selected: ["path", "page"],
+  community_hive_role_viewed: ["role"],
+  project_proof_viewed: ["project", "tab"],
+  challenge_started: ["entry_point"],
+  challenge_completed: ["category"],
+  contact_started: ["source", "path"],
+  contact_submitted: ["source", "path"],
+  outbound_project_visit: ["project", "destination_type"],
+  intro_video_played: ["placement"],
+  intro_transcript_opened: ["placement"],
+  recent_work_opened: ["project"],
+  smart_cta_shown: ["path"],
+  smart_cta_dismissed: ["path"],
+  ask_dan_quick_prompt: ["prompt_id"],
+  ask_dan_sources_shown: ["source_count"],
 };
 
 export function trackEvent(eventName, metadata = {}) {
