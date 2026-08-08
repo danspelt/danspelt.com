@@ -202,7 +202,7 @@ export default function CommunityHiveCaseStudy() {
 
       <CommunityHiveSlideshow
         screenshots={COMMUNITY_HIVE_SCREENSHOTS}
-        className="mb-16 max-w-4xl mx-auto"
+        className="mb-16"
       />
 
       <section className="mb-16 max-w-3xl">
