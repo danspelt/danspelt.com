@@ -38,6 +38,24 @@ export const COMMUNITY_HIVE_SCREENSHOTS = [
     alt: 'Resident dashboard showing announcements, requests, events, and quick actions',
     caption: 'Resident member view',
   },
+  {
+    id: 'messages',
+    src: '/images/community-hive/screenshots/resident-messages.png',
+    alt: 'Resident messaging interface with property manager, front desk, and council contacts',
+    caption: 'Resident messaging',
+  },
+  {
+    id: 'security-cameras',
+    src: '/images/community-hive/screenshots/security-cameras.png',
+    alt: 'Security camera feeds with live monitoring for entrance, pool, parking, and playground',
+    caption: 'Live security cameras',
+  },
+  {
+    id: 'business-promotions',
+    src: '/images/community-hive/screenshots/business-promotions.png',
+    alt: 'Business promotions page with local offers and resident discounts',
+    caption: 'Local business promotions',
+  },
 ];
 
 export const COMMUNITY_HIVE_DEMO_URL = 'https://communityhive.ca';
