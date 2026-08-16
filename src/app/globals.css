@@ -241,6 +241,54 @@
       0 30px 60px rgba(0, 0, 0, 0.1);
   }
 
+  .interactive-card {
+    transition:
+      transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .interactive-card:hover,
+  .interactive-card:focus-within {
+    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.55);
+    box-shadow: 0 12px 32px hsl(var(--foreground) / 0.08);
+  }
+
+  .evidence-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .evidence-disclosure[open] > :not(summary) {
+    animation: disclosure-in 180ms ease-out both;
+  }
+
+  .proof-panel {
+    animation: proof-panel-in 180ms ease-out both;
+  }
+
+  @keyframes disclosure-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes proof-panel-in {
+    from {
+      opacity: 0.55;
+      transform: translateY(3px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .dark .depth-card:hover {
     box-shadow:
       0 2px 4px rgba(0, 0, 0, 0.2),
@@ -448,10 +496,23 @@ html {
   }
 
   .depth-card,
+  .interactive-card,
   .float-3d,
   .btn-3d {
     transition: none;
     transform: none;
+  }
+
+  .evidence-disclosure[open] > :not(summary) {
+    animation: none;
+  }
+
+  .proof-panel {
+    animation: none;
+  }
+
+  .group-open\:rotate-180 {
+    transition: none;
   }
 
   .glow-ring::before {

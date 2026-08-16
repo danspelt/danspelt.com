@@ -1,6 +1,40 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Cog, MessageSquare, FileSearch, Bot, ShieldCheck, BarChart3 } from 'lucide-react';
+import {
+  ArrowRight,
+  BarChart3,
+  Bot,
+  Check,
+  ChevronDown,
+  Cog,
+  FileSearch,
+  LifeBuoy,
+  MessageSquare,
+  RefreshCw,
+  ShieldCheck,
+  Wrench,
+} from 'lucide-react';
+
+const websiteOffer = [
+  {
+    icon: Wrench,
+    title: 'Build the right foundation',
+    summary: 'A new website shaped around the people who need to use it and the action they need to take.',
+    points: ['Responsive implementation', 'Clear content structure and navigation', 'Accessible interaction patterns'],
+  },
+  {
+    icon: RefreshCw,
+    title: 'Refresh what already exists',
+    summary: 'Improve an existing site without replacing useful content or working systems unnecessarily.',
+    points: ['Accessibility-minded UX review', 'Focused interface and content improvements', 'Performance and maintainability cleanup'],
+  },
+  {
+    icon: LifeBuoy,
+    title: 'Keep it useful',
+    summary: 'Ongoing maintenance and support for teams that need a reliable technical partner after launch.',
+    points: ['Content and feature updates', 'Issue investigation and practical fixes', 'Documentation for future changes'],
+  },
+];
 
 const services = [
   {
@@ -38,6 +72,63 @@ const services = [
 export default function BusinessServices() {
   return (
     <section className="container mx-auto max-w-5xl px-4 py-20 border-t border-border/60">
+      <div className="interactive-card mb-14 overflow-hidden rounded-3xl border border-primary/30 bg-card shadow-sm">
+        <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
+              Accessible Web Launch
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
+              A clearer website that works for more people
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Build a new website or improve the one you have with accessibility-minded UX,
+              maintainable implementation, and support that can continue after launch.
+            </p>
+            <Button asChild size="lg" className="btn-3d bg-accent text-accent-foreground hover:bg-accent/90">
+              <Link href="/contact">
+                Discuss your website
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Button>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Start with your current site, goals, and biggest usability concern.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {websiteOffer.map(({ icon: Icon, title, summary, points }, index) => (
+              <details
+                key={title}
+                open={index === 0}
+                className="evidence-disclosure group rounded-xl border border-border/70 bg-background/70"
+              >
+                <summary className="focus-ring flex cursor-pointer list-none items-start gap-3 rounded-xl p-4 hover:bg-muted/60">
+                  <span className="rounded-lg bg-primary/10 p-2 text-primary">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold">{title}</span>
+                    <span className="mt-1 block text-sm font-normal text-muted-foreground leading-relaxed">
+                      {summary}
+                    </span>
+                  </span>
+                  <ChevronDown className="mt-2 h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <ul className="space-y-2 border-t border-border/70 px-4 py-4 sm:pl-16">
+                  {points.map((point) => (
+                    <li key={point} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="mb-10 max-w-2xl">
         <h2 className="text-3xl sm:text-4xl font-semibold">Business Services</h2>
         <p className="mt-3 text-lg text-muted-foreground leading-relaxed">
@@ -48,8 +139,7 @@ export default function BusinessServices() {
         {services.map(({ icon: Icon, title, body }) => (
           <div
             key={title}
-            tabIndex={0}
-            className="depth-card flex items-start gap-4 p-5 rounded-2xl border border-border/60 bg-card/50 glow-ring focus-ring"
+            className="interactive-card flex items-start gap-4 p-5 rounded-2xl border border-border/60 bg-card/50 glow-ring"
           >
             <div className="p-2.5 rounded-lg bg-primary/10 shrink-0">
               <Icon className="w-5 h-5 text-primary" aria-hidden="true" />

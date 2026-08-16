@@ -10,8 +10,8 @@
 
 /** One approved status vocabulary, used everywhere on the site. */
 export const PROJECT_STATUS = {
-  pilot: { label: 'Pilot', description: 'Running with early users while the product is refined.' },
-  active: { label: 'Active', description: 'Live and in ongoing development.' },
+  pilot: { label: 'Pilot', description: 'A working product being refined for broader use.' },
+  active: { label: 'Active', description: 'A working product in ongoing development.' },
   shipped: { label: 'Shipped', description: 'Delivered and in use.' },
 };
 
@@ -131,6 +131,28 @@ export const PROJECT_PROOF = [
         label: 'Designed to produce a documented record of notices, requests, and decisions',
       },
     ],
+    proof: [
+      {
+        label: 'Security and authorization',
+        detail:
+          'Session-based admin protection, route middleware, centralized council-role guards, tenant-scoped access, environment validation, and audit helpers are documented in the project production-readiness report.',
+      },
+      {
+        label: 'Testing',
+        detail:
+          'The repository includes Jest unit and integration coverage, a separate E2E configuration, smoke tests, and documented daily and release verification workflows.',
+      },
+      {
+        label: 'Operational evidence',
+        detail:
+          'Docker configurations cover development and production, while migration, billing, legal-review, QA, and production-environment checklists document the path from development to operation.',
+      },
+      {
+        label: 'Product evidence',
+        detail:
+          'The case study includes captured property-manager, council, resident, messaging, security-camera, and business-promotion screens from the product.',
+      },
+    ],
     decisions: [
       {
         choice: 'Tenant-scoped queries with role-based permission middleware',
@@ -187,14 +209,37 @@ export const PROJECT_PROOF = [
     outcomes: [
       {
         label: 'Each place receives a calculated accessibility score across 10 criteria',
-        evidence: 'Verifiable in the live product at accesslens.ca',
+        evidence: 'Implemented in the Place scoring model with unit coverage.',
       },
       {
-        label: '50+ real verified places seeded across 12 categories in Victoria, BC at launch',
-        evidence: 'Verifiable in the live product at accesslens.ca',
+        label: 'Seed data covers roughly 50 Victoria places and roughly 15 high-confidence Vancouver civic and transit locations',
+        evidence: 'Documented in the repository README and seed scripts.',
       },
       {
-        label: 'Built in alignment with WCAG 2.1 AA, the Accessible Canada Act, and the BC Accessibility Act',
+        label: 'Place pages combine scores with checklist details, photo evidence, reviews, and current issue reports',
+        evidence: 'Documented in the README and represented by dedicated models and routes.',
+      },
+    ],
+    proof: [
+      {
+        label: 'Accessibility evidence',
+        detail:
+          'Accessibility is the product data model, not a decorative claim: places record entrance, door, elevator, washroom, parking, signage, transit, aisle, and service-animal information alongside photos and issue reports.',
+      },
+      {
+        label: 'Security and validation',
+        detail:
+          'Auth.js supports Google, magic-link, and credential sign-in. Reviewer and business capabilities are enforced in API routes and UI, with Zod schemas covering runtime input validation.',
+      },
+      {
+        label: 'Testing',
+        detail:
+          'Vitest covers accessibility scoring, validation, and badge thresholds; Playwright provides an end-to-end smoke suite. A Docker test workflow is also documented.',
+      },
+      {
+        label: 'Known constraint',
+        detail:
+          'Photo uploads currently use local filesystem storage, and business subscriptions use a pending placeholder state until billing is connected. Both limitations are called out in the README.',
       },
     ],
     decisions: [
@@ -227,49 +272,79 @@ export const PROJECT_PROOF = [
       'Coolify',
     ],
     liveUrl: 'https://www.accesslens.ca/',
-    caseStudyUrl: '/projects',
+    caseStudyUrl: '/case-studies/accesslens',
     image: null,
     imageAlt: 'AccessLens map showing colour-coded accessibility scores for places in Victoria, BC',
   },
   {
-    slug: 'lipsync-connect',
-    title: 'LipSync Connect',
-    tagline: 'Browser-based configuration for an assistive input device',
-    status: 'shipped',
+    slug: 'windows-helper-suite',
+    title: 'WindowsHelperSuite',
+    tagline: 'Modular Windows writing, hotkey, speech, and device-assistance tools',
+    status: 'active',
     audience: ['hire'],
-    role: 'Lead developer at Neil Squire / Makers Making Change',
+    role: 'Creator and developer',
     problem:
-      'People who rely on the LipSync assistive device needed a way to check its status, adjust its settings, and calibrate it without installing desktop software or asking someone else to do it for them.',
+      'Writing assistance, global hotkeys, speech input, and device controls often live in separate utilities. Switching between them adds friction and can make the tools interfere with one another.',
     approach:
-      'A Next.js application that talks to the physical device from the browser using the Web Serial API, with a guided calibration flow designed for users with limited motor control.',
+      'A modular .NET solution with explicit Writer and Hotkey modes. A mode manager coordinates keyboard hooks, overlays, prediction, speech, and settings so only the intended subsystem is active.',
     outcomes: [
       {
-        label: 'Device status, settings, and guided calibration are available directly in the browser',
+        label: 'Writer mode enables input hooks, overlays, suggestions, and writer hotkeys while disabling volume hotkeys',
+        evidence: 'Documented in the mode-system contributor guide.',
       },
       {
-        label: 'Feature and usability decisions were refined through coordinated beta testing with real users',
+        label: 'Hotkey mode turns writer assistance off and enables system and volume shortcuts',
+        evidence: 'Documented in the mode-system contributor guide and enforced through mode guards.',
       },
       {
-        label: 'Shipped with technical documentation and end-user instructions',
+        label: 'Prediction is separated into providers, ranking, caching, context, and local language-model storage',
+        evidence: 'Represented by dedicated Writer services, providers, ranking, models, and storage modules.',
+      },
+    ],
+    proof: [
+      {
+        label: 'Architecture evidence',
+        detail:
+          'The solution separates Core contracts, App orchestration and UI, Infrastructure, Hotkeys, Input, Overlay, Prediction, Settings, Speech, Writer, VoiceBridge, and test projects.',
+      },
+      {
+        label: 'Testing',
+        detail:
+          'The test project includes focused coverage for typing-model behavior, prediction ranking, sentence context, title hints, and word-buffer policy.',
+      },
+      {
+        label: 'Accessibility and control',
+        detail:
+          'The mode menu is available through a global keyboard gesture, mode changes can be shown or spoken, and the hook can consume the gesture so it does not leak into the focused application.',
+      },
+      {
+        label: 'Known constraint',
+        detail:
+          'This is a Windows-native suite with low-level input and desktop integration. That enables system-wide behavior but increases platform-specific testing and installation work.',
       },
     ],
     decisions: [
       {
-        choice: 'Web Serial API in the browser instead of a native installer',
-        reason: 'Removes installation as a barrier for the people least able to work around it.',
-        tradeoff: 'Limited to browsers that implement Web Serial, so capability is detected and explained.',
+        choice: 'Explicit Writer and Hotkey modes',
+        reason: 'Only the input behavior needed for the current task should be active.',
+        tradeoff: 'Every subsystem has to respond consistently when the application mode changes.',
       },
       {
-        choice: 'Guided step-by-step calibration rather than a settings panel',
-        reason: 'Calibration is a sequence, and a sequence is easier than interpreting raw values.',
-        tradeoff: 'Slower for expert users, so individual settings remain reachable.',
+        choice: 'Provider-and-ranker prediction pipeline',
+        reason: 'Prefix, phrase-memory, next-word, correction, recency, and local-model candidates can evolve independently.',
+        tradeoff: 'Candidate ranking and context become their own systems that require focused tests.',
+      },
+      {
+        choice: 'Persist mode and typing settings as JSON',
+        reason: 'Desktop behavior can survive restarts without requiring a service or database.',
+        tradeoff: 'Settings schema compatibility has to be maintained as modes and options evolve.',
       },
     ],
-    stack: ['Next.js', 'React', 'Web Serial API', 'State management', 'Responsive design'],
+    stack: ['C#', '.NET', 'WPF', 'Low-level keyboard hooks', 'JSON settings', 'xUnit'],
     liveUrl: null,
-    caseStudyUrl: '/projects',
+    caseStudyUrl: '/case-studies/windows-helper-suite',
     image: null,
-    imageAlt: 'LipSync Connect calibration screen',
+    imageAlt: 'WindowsHelperSuite mode and writing-assistance interface',
   },
 ];
 
@@ -278,6 +353,7 @@ export const PROJECT_PROOF_TABS = [
   { id: 'approach', label: 'Approach' },
   { id: 'decisions', label: 'Decisions' },
   { id: 'outcomes', label: 'Outcomes' },
+  { id: 'proof', label: 'Evidence' },
   { id: 'stack', label: 'Stack' },
 ];
 

@@ -116,6 +116,11 @@ export default function ProjectProofExplorer() {
           })}
         </div>
 
+        <p className="mb-3 text-sm text-muted-foreground" aria-live="polite" aria-atomic="true">
+          Exploring {project.title}. Choose a section below; use Left and Right Arrow keys to move
+          between section tabs.
+        </p>
+
         <div className="rounded-2xl border border-border/70 bg-card p-5 sm:p-7 glass shadow-xl">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-5">
             <h3 className="text-2xl font-semibold">{project.title}</h3>
@@ -157,11 +162,12 @@ export default function ProjectProofExplorer() {
           </div>
 
           <div
+            key={`${project.slug}-${activeTab}`}
             role="tabpanel"
             id={`${baseId}-panel-${activeTab}`}
             aria-labelledby={`${baseId}-tab-${activeTab}`}
             tabIndex={0}
-            className="focus-ring rounded-lg"
+            className="proof-panel focus-ring rounded-lg"
           >
             {activeTab === 'problem' && (
               <p className="leading-relaxed text-muted-foreground">{project.problem}</p>
@@ -199,6 +205,17 @@ export default function ProjectProofExplorer() {
                         Evidence: {outcome.evidence}
                       </span>
                     )}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {activeTab === 'proof' && (
+              <ul className="space-y-4">
+                {project.proof.map((item) => (
+                  <li key={item.label} className="rounded-lg border border-border/70 bg-muted/30 p-4">
+                    <p className="font-medium mb-1">{item.label}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.detail}</p>
                   </li>
                 ))}
               </ul>
