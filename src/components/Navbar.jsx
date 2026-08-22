@@ -31,6 +31,7 @@ const navGroups = [
     items: [
       { href: "/case-studies", label: "Case Studies", description: "Problem, approach, and outcomes" },
       { href: "/projects", label: "Projects", description: "Shipped products and builds" },
+      { href: "https://audit.danspelt.com", label: "Clarity Audit", description: "Run a website accessibility scan" },
       { href: "/custom-software", label: "Custom Software", description: "Services for business teams" },
     ],
   },
