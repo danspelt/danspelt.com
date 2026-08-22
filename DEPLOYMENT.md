@@ -23,7 +23,7 @@ In Vercel Project Settings → Environment Variables, add:
 
 #### Required Variables
 ```
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+GITHUB_TOKEN=your_github_token_here
 SMTP_PASS=your_gmail_app_password_here
 ```
 
