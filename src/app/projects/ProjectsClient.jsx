@@ -10,6 +10,7 @@ import {
   Building2, MessageSquare, FileText, ChevronDown, ChevronUp,
   Layers, Database, Globe, Monitor, Container, Brain, MapPin
 } from 'lucide-react';
+import LiveApps from '@/components/projects/LiveApps';
 
 const accessLensTechStack = {
   frontend: ["Next.js 16 (App Router)", "React 18", "TypeScript", "Tailwind CSS"],
@@ -134,9 +135,12 @@ const Projects = () => {
           Projects
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Deep dives into shipped products — accessibility mapping and multi-tenant community communication.
+          Every app I run, plus deep dives into the two largest products — accessibility mapping and
+          multi-tenant community communication.
         </p>
       </div>
+
+      <LiveApps />
 
       {/* ── Community Hive ── */}
       <div className="space-y-8">

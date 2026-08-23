@@ -31,8 +31,20 @@ const navGroups = [
     items: [
       { href: "/case-studies", label: "Case Studies", description: "Problem, approach, and outcomes" },
       { href: "/projects", label: "Projects", description: "Shipped products and builds" },
-      { href: "https://audit.danspelt.com", label: "Clarity Audit", description: "Run a website accessibility scan" },
       { href: "/custom-software", label: "Custom Software", description: "Services for business teams" },
+    ],
+  },
+  {
+    // Live products, each on its own domain. Kept in sync with LIVE_APPS in data/projects.js.
+    label: "Apps",
+    items: [
+      { href: "https://communityhive.ca", label: "Community Hive", description: "Strata and HOA communication platform" },
+      { href: "https://accesslens.ca", label: "AccessLens", description: "Accessibility scores for places in a city" },
+      { href: "https://audit.danspelt.com", label: "Clarity Audit", description: "Run a website accessibility scan" },
+      { href: "https://auditspark.danspelt.com", label: "AuditSpark", description: "AI website audit for conversion" },
+      { href: "https://receptionist.danspelt.com", label: "AI Receptionist", description: "Answers questions and captures leads 24/7" },
+      { href: "https://resume.danspelt.com", label: "AI ResumeFixer", description: "Optimise a resume for ATS screening" },
+      { href: "https://faith.danspelt.com", label: "Christian Web Help", description: "Website help for churches and ministries" },
     ],
   },
   {
