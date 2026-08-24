@@ -12,6 +12,10 @@ export default function sitemap() {
     '/contact',
     '/faq',
     '/ai-chat',
+    '/build-for-us',
+    '/case-studies/community-hive',
+    '/case-studies/accesslens',
+    '/case-studies/windows-helper-suite',
   ];
 
   return routes.map((route) => ({

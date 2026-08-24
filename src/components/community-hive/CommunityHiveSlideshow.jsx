@@ -47,6 +47,7 @@ export default function CommunityHiveSlideshow({ screenshots, className }) {
   const [hovered, setHovered] = useState(false);
   const baseId = useId();
   const containerRef = useRef(null);
+  const tabRefs = useRef([]);
   const { open, openLightbox, closeLightbox } = useLightbox();
 
   const last = screenshots.length - 1;
@@ -73,6 +74,18 @@ export default function CommunityHiveSlideshow({ screenshots, className }) {
     else if (e.key === 'Home') go(0);
     else if (e.key === 'End') go(last);
   }, [go, last, next, prev]);
+
+  const handleTabKeyDown = useCallback((event) => {
+    let target = null;
+    if (event.key === 'ArrowRight') target = active === last ? 0 : active + 1;
+    else if (event.key === 'ArrowLeft') target = active === 0 ? last : active - 1;
+    else if (event.key === 'Home') target = 0;
+    else if (event.key === 'End') target = last;
+    if (target === null) return;
+    event.preventDefault();
+    go(target);
+    tabRefs.current[target]?.focus();
+  }, [active, go, last]);
 
   const SlideTrack = ({ size = 'normal' }) => (
     <div className={cn('relative overflow-hidden bg-secondary', 'aspect-[16/9]')}>
@@ -188,13 +201,15 @@ export default function CommunityHiveSlideshow({ screenshots, className }) {
           </div>
 
           {screenshots.length > 1 && (
-            <div className="flex gap-1.5" role="tablist" aria-label="Screenshot pages">
+            <div className="flex gap-1.5" role="tablist" aria-label="Screenshot pages" onKeyDown={handleTabKeyDown}>
               {screenshots.map((shot, index) => (
                 <button
                   key={shot.id}
+                  ref={(node) => { tabRefs.current[index] = node; }}
                   type="button"
                   role="tab"
                   aria-selected={index === active}
+                  tabIndex={index === active ? 0 : -1}
                   aria-controls={`${baseId}-slide-${shot.id}`}
                   id={`${baseId}-tab-${shot.id}`}
                   onClick={() => go(index)}

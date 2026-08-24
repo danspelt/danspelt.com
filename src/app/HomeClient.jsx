@@ -4,24 +4,14 @@ import {
   Code2,
   Accessibility,
   ShieldCheck,
-  BarChart3,
-  FileText,
   Users,
   Brain,
-  MessageSquare,
+  BriefcaseBusiness,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import HeroImage from '@/components/HeroImage';
-import ScrollReveal from '@/components/ScrollReveal';
-import BusinessServices from '@/components/BusinessServices';
-import { VisitorPathProvider } from '@/components/home/VisitorPathProvider';
-import AudiencePathChooser from '@/components/home/AudiencePathChooser';
-import CommunityHiveSpotlight from '@/components/home/CommunityHiveSpotlight';
 import ProjectProofExplorer from '@/components/home/ProjectProofExplorer';
-import BusinessChallengeFinder from '@/components/home/BusinessChallengeFinder';
-import IntroVideo from '@/components/home/IntroVideo';
-import RecentWork from '@/components/home/RecentWork';
-import SmartCta from '@/components/home/SmartCta';
+import { PROFESSIONAL_PROFILE } from '@/data/professional-profile';
 
 const strengths = [
   {
@@ -48,28 +38,28 @@ const strengths = [
 
 export default function HomeClient() {
   return (
-    <VisitorPathProvider>
+    <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
-        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-24 lg:py-28">
+        <div className="container mx-auto max-w-6xl px-4 py-14 sm:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-4">
-                Victoria, BC · Remote worldwide
+                Senior full-stack engineer · Victoria, BC
               </p>
-              <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.95] mb-5">
-                Software that adapts to your business
+              <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl font-semibold leading-[0.98] mb-5">
+                I build dependable software for complex, human problems
               </h1>
               <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-secondary-foreground/90 leading-relaxed mb-4 text-balance">
-                Give me your workflow, your challenge, or your idea. I will shape it into a fast, accessible, maintainable system.
+                Eighteen-plus years delivering full-stack applications, accessible technology, analytics tools, and production web platforms.
               </p>
               <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/70 max-w-xl mb-8 leading-relaxed">
-                I am a full-stack engineer who can fit into almost any stack, process, or timeline — from early experiments to production platforms.
+                I bring senior engineering judgment, clear collaboration, and lived accessibility expertise to teams using React, Next.js, Node.js, and modern web platforms.
               </p>
               <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg" className="btn-3d text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link href="#community-hive">
-                    Explore Community Hive
+                  <Link href="/contact?intent=hire">
+                    Discuss a role with me
                     <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                   </Link>
                 </Button>
@@ -79,18 +69,21 @@ export default function HomeClient() {
                   variant="outline"
                   className="btn-3d text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
                 >
-                  <Link href="#challenge-finder">
-                    <MessageSquare className="mr-2 w-4 h-4" aria-hidden="true" />
-                    Tell me your challenge
+                  <Link href="#proof">
+                    <BriefcaseBusiness className="mr-2 w-4 h-4" aria-hidden="true" />
+                    Review engineering proof
                   </Link>
                 </Button>
               </div>
-              <p className="hero-rise hero-rise-delay-4 mt-5">
+              <p className="hero-rise hero-rise-delay-4 mt-5 text-sm text-secondary-foreground/75">
+                Open to full-time roles · Remote, hybrid, or Greater Victoria
+              </p>
+              <p className="hero-rise hero-rise-delay-4 mt-2">
                 <Link
-                  href="#proof"
+                  href="/skillstools"
                   className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
                 >
-                  See engineering proof
+                  See skills and technical experience
                 </Link>
               </p>
             </div>
@@ -100,61 +93,81 @@ export default function HomeClient() {
         </div>
       </section>
 
-      <AudiencePathChooser />
-
-      <CommunityHiveSpotlight />
+      <section aria-labelledby="career-proof-heading" className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-6xl px-4 py-12 sm:py-16">
+          <div className="max-w-3xl mb-8">
+            <h2 id="career-proof-heading" className="text-3xl sm:text-4xl font-semibold mb-3">
+              Experience grounded in shipped work
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              I have worked across assistive technology, analytics, community platforms, and public-facing websites—turning user needs into maintainable systems with documentation and testing.
+            </p>
+          </div>
+          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+            <div className="rounded-xl border border-border bg-card p-5">
+              <dt className="text-sm text-muted-foreground">Professional experience</dt>
+              <dd className="mt-1 text-3xl font-display font-semibold">18+ years</dd>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-5">
+              <dt className="text-sm text-muted-foreground">Longest engineering tenure</dt>
+              <dd className="mt-1 text-lg font-semibold">CanAssist, University of Victoria</dd>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-5">
+              <dt className="text-sm text-muted-foreground">Work arrangements</dt>
+              <dd className="mt-1 text-lg font-semibold">Remote, hybrid, or Greater Victoria</dd>
+            </div>
+          </dl>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {PROFESSIONAL_PROFILE.experience.slice(0, 3).map((job) => (
+              <article key={`${job.company}-${job.role}`} className="rounded-xl border border-border/70 bg-card p-5">
+                <p className="text-sm text-primary font-medium mb-1">{job.dates}</p>
+                <h3 className="text-xl font-semibold">{job.role}</h3>
+                <p className="text-sm text-muted-foreground mt-1 mb-4">{job.company}</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">{job.highlights[1]}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <ProjectProofExplorer />
 
-      <BusinessChallengeFinder />
-
-      <BusinessServices />
-
-      <IntroVideo />
-
-      <RecentWork />
-
       {/* About Dan */}
       <section className="container mx-auto max-w-5xl px-4 py-20">
-        <ScrollReveal className="mb-10 max-w-2xl">
+        <div className="mb-10 max-w-2xl">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-3">
             About Dan
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Rare combination: full-stack systems experience and lived accessibility understanding.
+            A senior engineer who communicates clearly, works across disciplines, and understands accessibility from the inside.
           </p>
-        </ScrollReveal>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {strengths.map(({ icon: Icon, title, body }) => (
-            <ScrollReveal key={title}>
+            <div key={title}>
               <div className="depth-card h-full p-5 rounded-2xl bg-card/60 border border-border/60">
                 <Icon className="w-6 h-6 text-primary mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-semibold mb-2">{title}</h3>
                 <p className="text-muted-foreground leading-relaxed text-sm">{body}</p>
               </div>
-            </ScrollReveal>
+            </div>
           ))}
         </div>
       </section>
 
       {/* Why hire */}
       <section className="container mx-auto max-w-4xl px-4 pb-24">
-        <ScrollReveal className="rounded-2xl border border-border/80 glass px-6 py-10 sm:px-10 sm:py-12">
-          <h2 className="text-3xl font-semibold mb-4">Give me a chance to prove it</h2>
+        <div className="rounded-2xl border border-border/80 glass px-6 py-10 sm:px-10 sm:py-12">
+          <h2 className="text-3xl font-semibold mb-4">Looking for a senior engineer?</h2>
           <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
-            I do not just build what is on the spec sheet. I listen, adapt, and turn your
-            business problem into software your team can actually use. Send me your messiest
-            workflow, your most awkward integration, or your half-formed idea — I will meet you
-            there and make it better.
+            I can join an established team, learn its systems, and contribute across product discovery, implementation, accessibility, testing, and technical documentation. If that matches the role you are hiring for, I would like to hear about it.
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             {[
-              { icon: ShieldCheck, label: 'Security & privacy standards' },
-              { icon: FileText, label: 'Documentation & audit trails' },
+              { icon: ShieldCheck, label: 'Secure, maintainable implementation' },
               { icon: Users, label: 'Cross-functional collaboration' },
-              { icon: BarChart3, label: 'Metrics-driven delivery' },
-              { icon: Accessibility, label: 'WCAG / ADA compliance' },
-              { icon: Code2, label: 'Long-term maintainability' },
+              { icon: Accessibility, label: 'Accessible interface engineering' },
+              { icon: Code2, label: 'Full-stack product delivery' },
             ].map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Icon className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
@@ -164,22 +177,28 @@ export default function HomeClient() {
           </ul>
           <div className="flex flex-col sm:flex-row gap-3">
             <Button asChild>
-              <Link href="/case-studies">
-                See case studies
+              <Link href="/contact?intent=hire">
+                Discuss a role
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/custom-software">Business challenges</Link>
+              <Link href="/case-studies">Read case studies</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="/about">More about me</Link>
+              <Link href="/about">View background</Link>
             </Button>
           </div>
-        </ScrollReveal>
+        </div>
       </section>
 
-      <SmartCta />
-    </VisitorPathProvider>
+      <section className="border-t border-border/60 bg-muted/25">
+        <div className="container mx-auto max-w-4xl px-4 py-10 text-center">
+          <p className="text-sm text-muted-foreground">
+            Looking for project-based help instead? <Link href="/custom-software" className="font-medium text-primary underline underline-offset-4">See custom software services</Link>.
+          </p>
+        </div>
+      </section>
+    </>
   );
 }

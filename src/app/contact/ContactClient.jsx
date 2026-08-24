@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Send, Mail, MapPin, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,8 +9,11 @@ import Link from 'next/link';
 export default function ContactClient() {
   const reduce = useReducedMotion();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [website, setWebsite] = useState('');
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const fieldRefs = useRef({});
 
   const fade = {
     initial: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 },
@@ -20,6 +23,17 @@ export default function ContactClient() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const nextErrors = {};
+    if (formData.name.trim().length < 2) nextErrors.name = 'Enter your name (at least 2 characters).';
+    if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) nextErrors.email = 'Enter a valid email address.';
+    if (formData.message.trim().length < 10) nextErrors.message = 'Tell me a little more (at least 10 characters).';
+
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) {
+      fieldRefs.current[Object.keys(nextErrors)[0]]?.focus();
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -27,12 +41,13 @@ export default function ContactClient() {
       const response = await fetch('/api/email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website }),
       });
 
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        setWebsite('');
       } else {
         setSubmitStatus('error');
       }
@@ -123,14 +138,21 @@ export default function ContactClient() {
             </label>
             <input
               id="contact-name"
+              ref={(node) => { fieldRefs.current.name = node; }}
               type="text"
               name="name"
               autoComplete="name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, name: e.target.value });
+                if (errors.name) setErrors({ ...errors, name: undefined });
+              }}
               className="field-input"
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? 'contact-name-error' : undefined}
               required
             />
+            {errors.name && <p id="contact-name-error" role="alert" className="mt-1.5 text-sm text-destructive">{errors.name}</p>}
           </div>
           <div>
             <label htmlFor="contact-email" className="block text-sm font-medium mb-1.5">
@@ -138,14 +160,21 @@ export default function ContactClient() {
             </label>
             <input
               id="contact-email"
+              ref={(node) => { fieldRefs.current.email = node; }}
               type="email"
               name="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, email: e.target.value });
+                if (errors.email) setErrors({ ...errors, email: undefined });
+              }}
               className="field-input"
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? 'contact-email-error' : undefined}
               required
             />
+            {errors.email && <p id="contact-email-error" role="alert" className="mt-1.5 text-sm text-destructive">{errors.email}</p>}
           </div>
           <div>
             <label htmlFor="contact-message" className="block text-sm font-medium mb-1.5">
@@ -153,13 +182,24 @@ export default function ContactClient() {
             </label>
             <textarea
               id="contact-message"
+              ref={(node) => { fieldRefs.current.message = node; }}
               name="message"
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, message: e.target.value });
+                if (errors.message) setErrors({ ...errors, message: undefined });
+              }}
               rows={5}
               className="field-input resize-y min-h-[140px]"
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'contact-message-error' : undefined}
               required
             />
+            {errors.message && <p id="contact-message-error" role="alert" className="mt-1.5 text-sm text-destructive">{errors.message}</p>}
+          </div>
+          <div className="hidden" aria-hidden="true">
+            <label htmlFor="contact-website">Website</label>
+            <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
           </div>
           <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto" size="lg">
             {isSubmitting ? (

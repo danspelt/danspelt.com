@@ -20,11 +20,11 @@ const fraunces = Fraunces({
 export const metadata = {
   metadataBase: new URL("https://danspelt.com"),
   title: {
-    default: "Dan Spelt — Senior Full-Stack Engineer & Accessibility Specialist",
+    default: "Dan Spelt — Senior Full-Stack Engineer",
     template: "%s | Dan Spelt",
   },
   description:
-    "Senior Full-Stack Engineer based in Victoria, BC. 18+ years building secure, scalable, accessibility-first web platforms. Open to remote senior roles and practical custom software projects worldwide.",
+    "Senior full-stack engineer based in Victoria, BC with 18+ years building accessible applications, analytics tools, assistive technology, and production web platforms. Open to full-time roles.",
   keywords: [
     "Senior Full Stack Engineer",
     "Accessibility Engineer",
@@ -44,24 +44,24 @@ export const metadata = {
     locale: "en_CA",
     url: "https://danspelt.com",
     siteName: "Dan Spelt",
-    title: "Dan Spelt — Senior Full-Stack Engineer & Accessibility Specialist",
+    title: "Dan Spelt — Senior Full-Stack Engineer",
     description:
-      "Accessible web systems, lived WCAG expertise, and practical custom software from Victoria, BC.",
+      "18+ years building accessible applications, analytics tools, assistive technology, and production web platforms.",
     images: [
       {
-        url: "/images/dan.jpeg",
-        width: 2048,
-        height: 2560,
-        alt: "Dan Spelt",
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Dan Spelt — Senior Full-Stack Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dan Spelt — Senior Full-Stack Engineer & Accessibility Specialist",
+    title: "Dan Spelt — Senior Full-Stack Engineer",
     description:
-      "Accessible web systems, lived WCAG expertise, and practical custom software from Victoria, BC.",
-    images: ["/images/dan.jpeg"],
+      "18+ years building accessible applications, analytics tools, assistive technology, and production web platforms.",
+    images: ["/og.png"],
   },
   alternates: {
     canonical: "https://danspelt.com",
@@ -111,22 +111,22 @@ export default function RootLayout({ children }) {
                   className="flex items-center gap-4 flex-wrap justify-center"
                 >
                   <Link
-                    href="/custom-software"
+                    href="/case-studies"
                     className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
-                    Have a Business Challenge?
+                    Case Studies
                   </Link>
                   <Link
-                    href="/ai-chat"
+                    href="/skillstools"
                     className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
-                    AI Chat
+                    Skills
                   </Link>
                   <Link
-                    href="/faq"
+                    href="/contact?intent=hire"
                     className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
-                    FAQ
+                    Discuss a Role
                   </Link>
                   <a
                     href="https://github.com/danspelt"

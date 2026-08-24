@@ -3,10 +3,10 @@ import { PROFESSIONAL_PROFILE } from '@/data/professional-profile';
 
 export const metadata = {
   title: {
-    absolute: 'Dan Spelt — Senior Full-Stack Engineer in Victoria, BC',
+    absolute: 'Dan Spelt — Senior Full-Stack Engineer',
   },
   description:
-    'I build practical web software around real workflows. 18+ years of full-stack experience across SaaS, accessibility, community platforms, and operational tools.',
+    'Senior full-stack engineer with 18+ years building accessible applications, analytics tools, assistive technology, and production web platforms. Open to full-time roles.',
   alternates: {
     canonical: 'https://danspelt.com',
   },

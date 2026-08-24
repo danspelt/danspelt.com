@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { consumeRateLimit, getClientKey } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 
@@ -9,7 +10,18 @@ const emailSchema = z.object({
   name: z.string().min(2).max(100),
   email: z.string().email(),
   message: z.string().min(10).max(5000),
+  website: z.string().max(200).optional().default(''),
 });
+
+function escapeHtml(value) {
+  return value.replace(/[&<>'"]/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;',
+  })[character]);
+}
 
 export async function POST(req) {
   try {
@@ -17,7 +29,21 @@ export async function POST(req) {
     
     // Validate input
     const validatedData = emailSchema.parse(data);
-    const { name, email, message } = validatedData;
+    const { name, email, message, website } = validatedData;
+    if (website) {
+      return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
+    }
+
+    const limit = consumeRateLimit(`contact:${getClientKey(req)}`, { max: 5, windowMs: 60 * 60 * 1000 });
+    if (limit.limited) {
+      return NextResponse.json(
+        { error: 'Too many messages. Please wait and try again.' },
+        { status: 429, headers: { 'Retry-After': String(limit.retryAfterSeconds) } }
+      );
+    }
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message);
 
     const apiKey = (process.env.RESEND_API_KEY || process.env['\uFEFFRESEND_API_KEY'] || '').trim();
     const from = (process.env.RESEND_FROM || process.env.RESEND_FROM_EMAIL || '').trim();
@@ -46,9 +72,9 @@ export async function POST(req) {
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">New Message from Website</h2>
-          <p><strong>From:</strong> ${name} (${email})</p>
+          <p><strong>From:</strong> ${safeName} (${safeEmail})</p>
           <div style="background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <p style="white-space: pre-wrap;">${message}</p>
+            <p style="white-space: pre-wrap;">${safeMessage}</p>
           </div>
         </div>
       `,
@@ -66,37 +92,15 @@ export async function POST(req) {
   } catch (error) {
     console.error('Email error:', error);
 
-    const presentEnvKeys = Object.keys(process.env)
-      .filter((k) => k.toUpperCase().includes('RESEND') || k.toUpperCase().includes('CONTACT_TO_EMAIL'))
-      .sort();
-
-    const resendApiKeyTrimmedLength = (process.env.RESEND_API_KEY || '').trim().length;
-    const resendApiKeyBomTrimmedLength = (process.env['\uFEFFRESEND_API_KEY'] || '').trim().length;
-
-    const configStatus = {
-      hasResendApiKey: !!(process.env.RESEND_API_KEY || '').trim(),
-      hasResendApiKeyBom: !!(process.env['\uFEFFRESEND_API_KEY'] || '').trim(),
-      hasResendFrom: !!(process.env.RESEND_FROM || '').trim(),
-      hasResendFromEmail: !!(process.env.RESEND_FROM_EMAIL || '').trim(),
-      hasContactToEmail: !!(process.env.CONTACT_TO_EMAIL || '').trim(),
-      resendApiKeyTrimmedLength,
-      resendApiKeyBomTrimmedLength,
-      presentEnvKeys,
-    };
-
-    console.error('Email configStatus:', configStatus);
-
-    const details = error instanceof Error ? error.message : 'Unknown error';
-    
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid input data', details: error.errors },
+        { error: 'Please check the form fields and try again.' },
         { status: 400 }
       );
     }
 
     return NextResponse.json(
-      { error: 'Failed to send email', details, configStatus },
+      { error: 'Unable to send your message right now. Please try again later.' },
       { status: 500 }
     );
   }
