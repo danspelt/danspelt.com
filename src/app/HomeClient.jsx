@@ -132,6 +132,15 @@ export default function HomeClient() {
 
       <ProjectProofExplorer />
 
+      <section aria-label="All portfolio work" className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-4xl px-4 py-8 text-center">
+          <Link href="/work" className="inline-flex items-center rounded-md px-4 py-3 font-medium text-primary hover:bg-primary/10 focus-ring">
+            Browse all projects, case studies, and technical writing
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
       {/* About Dan */}
       <section className="container mx-auto max-w-5xl px-4 py-20">
         <div className="mb-10 max-w-2xl">

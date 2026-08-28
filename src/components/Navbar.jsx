@@ -9,8 +9,8 @@ import { ModeToggle } from "./mode-toggle";
 import { ZoomToggle } from "./zoom-toggle";
 
 const navItems = [
+  { href: "/work", label: "All Work" },
   { href: "/case-studies", label: "Case Studies" },
-  { href: "/projects", label: "Projects" },
   { href: "/skillstools", label: "Skills" },
   { href: "/about", label: "About" },
 ];
