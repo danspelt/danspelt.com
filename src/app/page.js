@@ -6,7 +6,7 @@ export const metadata = {
     absolute: 'Dan Spelt — Senior Full-Stack Engineer',
   },
   description:
-    'Senior full-stack engineer with 18+ years building accessible applications, analytics tools, assistive technology, and production web platforms. Open to full-time roles.',
+    'Senior full-stack engineer with 18+ years of shipped work. Flagship project: Community Hive, a live platform for property managers and residents. Open to roles and product demos.',
   alternates: {
     canonical: 'https://danspelt.com',
   },

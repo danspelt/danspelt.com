@@ -61,8 +61,8 @@ export function Navbar() {
         <div className="ml-auto flex items-center gap-2">
           <ZoomToggle />
           <ModeToggle />
-          <Link href="/contact?intent=hire" className="hidden sm:inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus-ring">
-            Discuss a role
+          <Link href="/contact" className="hidden sm:inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus-ring">
+            Contact
           </Link>
           <button
             type="button"
@@ -94,8 +94,8 @@ export function Navbar() {
                   : "text-foreground hover:bg-muted"
               )}>{item.label}</Link>
             ))}
-            <Link href="/contact?intent=hire" className="rounded-md bg-primary px-3 py-3 text-center text-base font-medium text-primary-foreground focus-ring">
-              Discuss a role
+            <Link href="/contact" className="rounded-md bg-primary px-3 py-3 text-center text-base font-medium text-primary-foreground focus-ring">
+              Contact
             </Link>
             <Link href="/custom-software" className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted focus-ring">
               Custom software services

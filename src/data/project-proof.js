@@ -73,7 +73,7 @@ export const COMMUNITY_HIVE_ROLES = [
     onScreen:
       'A building overview with open issues, recent announcements, and the requests that still need a response.',
     result: 'Less repetitive email and a clearer operational record of what was asked and what was done.',
-    image: null,
+    image: '/images/community-hive/screenshots/pm-dashboard.png',
     imageAlt:
       'Property manager dashboard showing a building overview with open maintenance requests and recent announcements',
   },
@@ -85,7 +85,7 @@ export const COMMUNITY_HIVE_ROLES = [
     onScreen:
       'Governing documents, meeting minutes, polls, and a history of decisions with the access each member is permitted.',
     result: 'Faster decisions with a traceable record instead of a search through inboxes.',
-    image: null,
+    image: '/images/community-hive/screenshots/resident-council-dashboard.png',
     imageAlt:
       'Council view showing governing documents, meeting minutes, and a poll with decision history',
   },
@@ -97,7 +97,7 @@ export const COMMUNITY_HIVE_ROLES = [
     onScreen:
       'Current notices, the status of your own requests, community updates, and the documents you are allowed to read.',
     result: 'One calm place to know what is happening in your building.',
-    image: null,
+    image: '/images/community-hive/screenshots/resident-member-dashboard.png',
     imageAlt:
       'Resident view showing current notices, the status of a submitted maintenance request, and community updates',
   },
@@ -362,10 +362,12 @@ export function getProjectProof(slug) {
 }
 
 export function getProjectsForAudience(audience) {
-  if (!audience) return PROJECT_PROOF;
+  const hive = PROJECT_PROOF.filter((p) => p.slug === 'community-hive');
+  const rest = PROJECT_PROOF.filter((p) => p.slug !== 'community-hive');
+  if (!audience) return [...hive, ...rest];
   const ordered = [
-    ...PROJECT_PROOF.filter((p) => p.audience.includes(audience)),
-    ...PROJECT_PROOF.filter((p) => !p.audience.includes(audience)),
+    ...rest.filter((p) => p.audience.includes(audience)),
+    ...rest.filter((p) => !p.audience.includes(audience)),
   ];
-  return ordered;
+  return [...hive, ...ordered];
 }

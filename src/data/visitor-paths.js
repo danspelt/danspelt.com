@@ -1,29 +1,29 @@
-// The three visitor paths that shape the homepage.
+// The visitor paths that shape the homepage.
 //
 // Selecting a path never hides content. It reorders the recommended next
-// action and highlights the most relevant proof.
+// action and highlights the most relevant proof. Community Hive stays first.
 
 export const VISITOR_PATHS = [
   {
+    id: 'community-hive',
+    label: 'Show me Community Hive',
+    description: 'A live platform I built for property managers, councils, and residents.',
+    target: '#community-hive',
+    cta: { label: 'Request a Community Hive demo', href: '/contact?intent=community-hive' },
+  },
+  {
     id: 'hire',
     label: 'I may hire Dan',
-    description: 'See how I adapt to teams, stacks, and timelines — then start a conversation.',
-    target: '#proof',
-    cta: { label: 'Contact Dan about a role', href: '/contact?intent=role' },
+    description: 'See the experience and shipped work, then start a conversation about a role.',
+    target: '#career-proof-heading',
+    cta: { label: 'Contact Dan about a role', href: '/contact?intent=hire' },
   },
   {
     id: 'business',
     label: 'I have a business problem',
-    description: 'Describe your workflow friction and I will show you what a custom solution could look like.',
-    target: '#challenge-finder',
-    cta: { label: 'Explore a software idea', href: '#challenge-finder' },
-  },
-  {
-    id: 'community-hive',
-    label: 'Show me Community Hive',
-    description: 'A real platform I built from scratch, with live screens by user role.',
-    target: '#community-hive',
-    cta: { label: 'Request a Community Hive demo', href: '/contact?intent=community-hive' },
+    description: 'If you need custom software rather than Community Hive itself, say so in the contact form.',
+    target: '#contact',
+    cta: { label: 'Contact Dan', href: '/contact' },
   },
 ];
 

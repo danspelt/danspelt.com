@@ -1,13 +1,41 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Send, Mail, MapPin, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+const INTENT_COPY = {
+  hire: {
+    heading: 'Discuss a role',
+    intro:
+      'I am open to full-time senior engineering roles — remote, hybrid, or Greater Victoria. Tell me about the team and I will reply as soon as I can.',
+    placeholder:
+      'The role, the stack, and anything you want me to know about the team.',
+  },
+  role: {
+    heading: 'Discuss a role',
+    intro:
+      'I am open to full-time senior engineering roles — remote, hybrid, or Greater Victoria. Tell me about the team and I will reply as soon as I can.',
+    placeholder:
+      'The role, the stack, and anything you want me to know about the team.',
+  },
+  'community-hive': {
+    heading: 'Request a Community Hive demo',
+    intro:
+      'Community Hive is a live communication platform for property managers, councils, and residents. Tell me about your buildings and I will follow up with a walkthrough.',
+    placeholder:
+      'Your company, how many buildings or units you manage, and what you want to see in a demo.',
+  },
+};
+
 export default function ContactClient() {
   const reduce = useReducedMotion();
+  const searchParams = useSearchParams();
+  const intent = searchParams.get('intent') || '';
+  const intentCopy = INTENT_COPY[intent];
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [website, setWebsite] = useState('');
   const [errors, setErrors] = useState({});
@@ -60,10 +88,12 @@ export default function ContactClient() {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-20">
       <motion.div className="mb-12 max-w-2xl" {...fade}>
-        <h1 className="text-4xl sm:text-5xl font-semibold mb-3">Let&apos;s connect</h1>
+        <h1 className="text-4xl sm:text-5xl font-semibold mb-3">
+          {intentCopy?.heading || 'Let\u2019s connect'}
+        </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Roles, accessibility projects, or a business challenge that needs practical software —
-          send a note and I&apos;ll reply as soon as I can.
+          {intentCopy?.intro ||
+            'Roles, a Community Hive demo, or a business challenge that needs practical software — send a note and I\u2019ll reply as soon as I can.'}
         </p>
       </motion.div>
 
@@ -191,6 +221,7 @@ export default function ContactClient() {
               }}
               rows={5}
               className="field-input resize-y min-h-[140px]"
+              placeholder={intentCopy?.placeholder}
               aria-invalid={Boolean(errors.message)}
               aria-describedby={errors.message ? 'contact-message-error' : undefined}
               required
