@@ -12,6 +12,10 @@ import {
 import { Button } from '@/components/ui/button';
 import HeroImage from '@/components/HeroImage';
 import ProjectProofExplorer from '@/components/home/ProjectProofExplorer';
+import CommunityHiveSpotlight from '@/components/home/CommunityHiveSpotlight';
+import AudiencePathChooser from '@/components/home/AudiencePathChooser';
+import { VisitorPathProvider } from '@/components/home/VisitorPathProvider';
+import SmartCta from '@/components/home/SmartCta';
 import { PROFESSIONAL_PROFILE } from '@/data/professional-profile';
 
 const strengths = [
@@ -39,28 +43,25 @@ const strengths = [
 
 export default function HomeClient() {
   return (
-    <>
+    <VisitorPathProvider>
       {/* Hero */}
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
-        <div className="container mx-auto max-w-6xl px-4 py-14 sm:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="container mx-auto max-w-6xl px-4 py-10 sm:py-14">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
             <div>
-              <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-4">
+              <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-3">
                 Senior full-stack engineer · Victoria, BC
               </p>
-              <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl font-semibold leading-[0.98] mb-5">
-                I build dependable software for complex, human problems
+              <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl font-semibold leading-[0.98] mb-4">
+                I built Community Hive. I can join your team, or help you ship yours.
               </h1>
-              <p className="hero-rise hero-rise-delay-2 text-xl sm:text-2xl text-secondary-foreground/90 leading-relaxed mb-4 text-balance">
-                Eighteen-plus years delivering full-stack applications, accessible technology, analytics tools, and production web platforms.
+              <p className="hero-rise hero-rise-delay-2 text-lg sm:text-xl text-secondary-foreground/90 leading-relaxed mb-6 text-balance">
+                Eighteen-plus years delivering full-stack applications. The flagship proof is Community Hive — a live platform for property managers, councils, and residents.
               </p>
-              <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/70 max-w-xl mb-8 leading-relaxed">
-                I bring senior engineering judgment, clear collaboration, and lived accessibility expertise to teams using React, Next.js, Node.js, and modern web platforms.
-              </p>
-              <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
+              <div className="hero-rise hero-rise-delay-3 flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg" className="btn-3d text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link href="/contact?intent=hire">
-                    Discuss a role with me
+                  <Link href="#community-hive">
+                    See Community Hive
                     <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                   </Link>
                 </Button>
@@ -93,6 +94,12 @@ export default function HomeClient() {
                   <BriefcaseBusiness className="inline w-3.5 h-3.5 mr-1" aria-hidden="true" />
                   Review engineering proof
                 </Link>
+                <Link
+                  href="/contact"
+                  className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
+                >
+                  Contact Dan
+                </Link>
               </p>
             </div>
 
@@ -100,6 +107,10 @@ export default function HomeClient() {
           </div>
         </div>
       </section>
+
+      <AudiencePathChooser />
+
+      <CommunityHiveSpotlight />
 
       <section aria-labelledby="career-proof-heading" className="border-b border-border/60 bg-background">
         <div className="container mx-auto max-w-6xl px-4 py-12 sm:py-16">
@@ -140,8 +151,16 @@ export default function HomeClient() {
 
       <ProjectProofExplorer />
 
-      {/* About Dan */}
-      <section className="container mx-auto max-w-5xl px-4 py-20">
+      <section aria-label="All portfolio work" className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-4xl px-4 py-8 text-center">
+          <Link href="/work" className="inline-flex items-center rounded-md px-4 py-3 font-medium text-primary hover:bg-primary/10 focus-ring">
+            Browse supporting projects, case studies, and technical writing
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <section className="container mx-auto max-w-5xl px-4 py-16">
         <div className="mb-10 max-w-2xl">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-3">
             About Dan
@@ -163,12 +182,11 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* Why hire */}
-      <section className="container mx-auto max-w-4xl px-4 pb-24">
+      <section id="contact" className="container mx-auto max-w-4xl px-4 pb-24">
         <div className="rounded-2xl border border-border/80 glass px-6 py-10 sm:px-10 sm:py-12">
-          <h2 className="text-3xl font-semibold mb-4">Looking for a senior engineer?</h2>
+          <h2 className="text-3xl font-semibold mb-4">Get in touch</h2>
           <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
-            I can join an established team, learn its systems, and contribute across product discovery, implementation, accessibility, testing, and technical documentation. If that matches the role you are hiring for, I would like to hear about it.
+            Two tracks, one inbox. Roles go through the portfolio. Community Hive demos go through the live product. Either way, I reply personally.
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             {[
@@ -185,13 +203,13 @@ export default function HomeClient() {
           </ul>
           <div className="flex flex-col sm:flex-row gap-3">
             <Button asChild>
-              <Link href="/contact?intent=hire">
-                Discuss a role
+              <Link href="/contact?intent=community-hive">
+                Request a Community Hive demo
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/case-studies">Read case studies</Link>
+              <Link href="/contact?intent=hire">Discuss a role</Link>
             </Button>
             <Button asChild variant="ghost">
               <Link href="/about">View background</Link>
@@ -220,6 +238,8 @@ export default function HomeClient() {
           </div>
         </div>
       </section>
-    </>
+
+      <SmartCta />
+    </VisitorPathProvider>
   );
 }

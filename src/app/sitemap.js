@@ -3,6 +3,7 @@ export default function sitemap() {
   const routes = [
     '',
     '/about',
+    '/work',
     '/case-studies',
     '/accessibility',
     '/projects',

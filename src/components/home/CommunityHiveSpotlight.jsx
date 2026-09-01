@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 import {
   COMMUNITY_HIVE_DEMO_URL,
-  COMMUNITY_HIVE_FALLBACK_IMAGE,
   COMMUNITY_HIVE_ROLES,
   COMMUNITY_HIVE_SCREENSHOTS,
   PROJECT_STATUS,
@@ -50,8 +49,6 @@ export default function CommunityHiveSpotlight() {
   );
 
   const active = COMMUNITY_HIVE_ROLES[activeIndex];
-  const image = active.image ?? COMMUNITY_HIVE_FALLBACK_IMAGE;
-  const imageAlt = active.image ? active.imageAlt : project.imageAlt;
 
   return (
     <section
@@ -144,6 +141,28 @@ export default function CommunityHiveSpotlight() {
 
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
               <Button asChild size="lg" className="btn-3d bg-accent text-accent-foreground hover:bg-accent/90">
+                <Link
+                  href="/contact?intent=community-hive"
+                  onClick={() =>
+                    trackEvent('contact_started', { source: 'community_hive_spotlight', path: 'community-hive' })
+                  }
+                >
+                  <MessageSquare className="mr-2 w-4 h-4" aria-hidden="true" />
+                  Request a demo
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="btn-3d">
+                <Link
+                  href="/contact?intent=hire"
+                  onClick={() =>
+                    trackEvent('contact_started', { source: 'community_hive_spotlight', path: 'hire' })
+                  }
+                >
+                  Discuss a role
+                  <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="btn-3d">
                 <a
                   href={COMMUNITY_HIVE_DEMO_URL}
                   target="_blank"
@@ -159,23 +178,6 @@ export default function CommunityHiveSpotlight() {
                   <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
                   <span className="sr-only">(opens communityhive.ca in a new tab)</span>
                 </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="btn-3d">
-                <Link href={project.caseStudyUrl}>
-                  Read the case study
-                  <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="ghost" className="btn-3d">
-                <Link
-                  href="/contact?intent=community-hive"
-                  onClick={() =>
-                    trackEvent('contact_started', { source: 'community_hive_spotlight', path: 'community-hive' })
-                  }
-                >
-                  <MessageSquare className="mr-2 w-4 h-4" aria-hidden="true" />
-                  Ask about a similar system
-                </Link>
               </Button>
             </div>
 

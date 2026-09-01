@@ -111,10 +111,10 @@ export default function RootLayout({ children }) {
                   className="flex items-center gap-4 flex-wrap justify-center"
                 >
                   <Link
-                    href="/case-studies"
+                    href="/work"
                     className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
-                    Case Studies
+                    All Work
                   </Link>
                   <Link
                     href="/skillstools"
