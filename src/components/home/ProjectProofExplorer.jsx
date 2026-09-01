@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useCallback, useId, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
@@ -8,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 import {
+  COMMUNITY_HIVE_SCREENSHOTS,
   PROJECT_PROOF,
   PROJECT_PROOF_TABS,
   PROJECT_STATUS,
@@ -169,6 +171,24 @@ export default function ProjectProofExplorer() {
             tabIndex={0}
             className="proof-panel focus-ring rounded-lg"
           >
+            {project.slug === 'community-hive' && (
+              <figure className="mb-6 rounded-xl overflow-hidden ring-1 ring-border/60 bg-card shadow-lg">
+                <div className="relative aspect-[16/10] w-full">
+                  <Image
+                    src={COMMUNITY_HIVE_SCREENSHOTS[0].src}
+                    alt={COMMUNITY_HIVE_SCREENSHOTS[0].alt}
+                    fill
+                    sizes="(min-width: 1024px) 1100px, 100vw"
+                    className="object-cover object-top"
+                    priority
+                  />
+                </div>
+                <figcaption className="px-4 py-2.5 text-xs text-muted-foreground bg-muted/30 border-t border-border/60">
+                  {COMMUNITY_HIVE_SCREENSHOTS[0].caption} — see the live demo for more views.
+                </figcaption>
+              </figure>
+            )}
+
             {activeTab === 'problem' && (
               <p className="leading-relaxed text-muted-foreground">{project.problem}</p>
             )}

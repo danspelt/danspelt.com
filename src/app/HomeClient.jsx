@@ -7,6 +7,7 @@ import {
   Users,
   Brain,
   BriefcaseBusiness,
+  Handshake,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import HeroImage from '@/components/HeroImage';
@@ -69,21 +70,28 @@ export default function HomeClient() {
                   variant="outline"
                   className="btn-3d text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
                 >
-                  <Link href="#proof">
-                    <BriefcaseBusiness className="mr-2 w-4 h-4" aria-hidden="true" />
-                    Review engineering proof
+                  <Link href="/custom-software">
+                    <Handshake className="mr-2 w-4 h-4" aria-hidden="true" />
+                    Need custom software?
                   </Link>
                 </Button>
               </div>
               <p className="hero-rise hero-rise-delay-4 mt-5 text-sm text-secondary-foreground/75">
                 Open to full-time roles · Remote, hybrid, or Greater Victoria
               </p>
-              <p className="hero-rise hero-rise-delay-4 mt-2">
+              <p className="hero-rise hero-rise-delay-4 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
                 <Link
                   href="/skillstools"
                   className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
                 >
                   See skills and technical experience
+                </Link>
+                <Link
+                  href="#proof"
+                  className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
+                >
+                  <BriefcaseBusiness className="inline w-3.5 h-3.5 mr-1" aria-hidden="true" />
+                  Review engineering proof
                 </Link>
               </p>
             </div>
@@ -193,10 +201,23 @@ export default function HomeClient() {
       </section>
 
       <section className="border-t border-border/60 bg-muted/25">
-        <div className="container mx-auto max-w-4xl px-4 py-10 text-center">
-          <p className="text-sm text-muted-foreground">
-            Looking for project-based help instead? <Link href="/custom-software" className="font-medium text-primary underline underline-offset-4">See custom software services</Link>.
-          </p>
+        <div className="container mx-auto max-w-4xl px-4 py-12 sm:py-16">
+          <div className="rounded-2xl border border-border/80 bg-card glass px-6 py-8 sm:px-10 sm:py-10 text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+              <div className="max-w-xl">
+                <h2 className="text-2xl sm:text-3xl font-semibold mb-2">Need custom software?</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  I also work with businesses and organizations to turn operational problems into focused, maintainable software. Start with a short conversation about your workflow.
+                </p>
+              </div>
+              <Button asChild size="lg" className="btn-3d shrink-0 bg-accent text-accent-foreground hover:bg-accent/90">
+                <Link href="/custom-software">
+                  Explore custom software
+                  <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </>

@@ -107,7 +107,7 @@ export const PROJECT_PROOF = [
   {
     slug: 'community-hive',
     title: 'Community Hive',
-    tagline: 'Multi-tenant communication platform for strata and HOA communities',
+    tagline: 'Centralizes announcements, maintenance reporting, documents, voting and community communication for strata and HOA communities',
     status: 'pilot',
     audience: ['hire', 'business', 'product'],
     role: 'Founder and sole developer',
@@ -198,7 +198,7 @@ export const PROJECT_PROOF = [
   {
     slug: 'accesslens',
     title: 'AccessLens',
-    tagline: 'Accessibility intelligence platform for cities',
+    tagline: 'Helps people with disabilities assess whether places will work for them before they travel',
     status: 'active',
     audience: ['hire', 'product'],
     role: 'Founder and developer',
@@ -279,7 +279,7 @@ export const PROJECT_PROOF = [
   {
     slug: 'windows-helper-suite',
     title: 'WindowsHelperSuite',
-    tagline: 'Modular Windows writing, hotkey, speech, and device-assistance tools',
+    tagline: 'Coordinates writing assistance, global hotkeys, speech input, and device controls in one modular Windows suite',
     status: 'active',
     audience: ['hire'],
     role: 'Creator and developer',

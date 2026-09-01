@@ -15,14 +15,13 @@ This is my personal website built with Next.js, React, and Tailwind CSS. It show
 
 ## Tech Stack
 
-- **Framework**: Next.js 15.1.3
-- **Language**: JavaScript/TypeScript 5.6.3
-- **Runtime**: React 18.3.1
-- **Styling**: Tailwind CSS 3.4.17
-- **UI Components**: Radix UI, shadcn/ui
+- **Framework**: Next.js 16.2.11
+- **Language**: JavaScript and TypeScript 5.9.3
+- **Runtime**: React 19.2.4
+- **Styling**: Tailwind CSS 4.1.18
+- **UI Components**: Radix UI
 - **Animations**: Framer Motion
-- **3D Graphics**: React Three Fiber, Three.js
-- **Deployment**: Vercel
+- **Deployment**: Vercel or Docker
 - **Version Control**: Git/GitHub
 
 ## Development
