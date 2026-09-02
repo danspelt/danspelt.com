@@ -1,13 +1,13 @@
 import CustomSoftwareClient from "./CustomSoftwareClient";
 
 export const metadata = {
-  title: "Custom Software Solutions for Business | Dan Spelt",
+  title: "Custom Software That Fits Your Business | Dan Spelt",
   description:
-    "Explore practical custom software, workflow automation, customer portals, and communication tools designed around your business challenges.",
+    "What if the problems holding your business back are pointing the way forward? Practical custom software designed around your workflow, not the other way around.",
   openGraph: {
-    title: "Turn Business Challenges Into Practical Software",
+    title: "What If the Problems Holding Your Business Back Are Pointing the Way Forward?",
     description:
-      "Explore practical custom software, workflow automation, customer portals, and communication tools designed around your business challenges.",
+      "Practical custom software designed around your workflow, not the other way around. Start with the problem, not the product.",
     type: "website",
     url: "https://danspelt.com/custom-software",
   },

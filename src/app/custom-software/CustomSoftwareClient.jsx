@@ -2,215 +2,21 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 import {
-  ClipboardList,
-  FolderSearch,
-  MessagesSquare,
-  Lightbulb,
-  MessageCircle,
-  Search,
-  Hammer,
-  Clock,
-  Users,
-  Wrench,
-  FileText,
-  HeartHandshake,
-  Store,
+  ArrowRight,
   Check,
-  X,
-  Send,
   ExternalLink,
   Mail,
+  Send,
+  X,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
 
 const COMMUNITY_HIVE_URL = 'https://communityhive.ca/';
-
-/* ── Content ────────────────────────────────────────────────────────── */
-
-const problemCards = [
-  {
-    icon: ClipboardList,
-    title: 'Repetitive Administration',
-    description:
-      'Hours spent every week copying information between spreadsheets, emails, and documents that could flow automatically.',
-  },
-  {
-    icon: FolderSearch,
-    title: 'Hard-to-Track Information',
-    description:
-      'Important records scattered across inboxes, folders, and sticky notes — hard to find when you actually need them.',
-  },
-  {
-    icon: MessagesSquare,
-    title: 'Customer Communication Gaps',
-    description:
-      'Messages that slip through the cracks, missed follow-ups, and customers left wondering what happens next.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'New Service Ideas',
-    description:
-      'An idea for a better way to serve your customers — you just haven\u2019t had a way to build it.',
-  },
-];
-
-const processSteps = [
-  {
-    icon: MessageCircle,
-    step: '1',
-    title: 'Explain the Challenge',
-    description:
-      'Tell me about the problem in your own words. No technical knowledge needed — if you can describe what frustrates you, that\u2019s enough.',
-  },
-  {
-    icon: Search,
-    step: '2',
-    title: 'Explore the Opportunity',
-    description:
-      'Together we look at how your process works today and where practical software could genuinely save time or reduce friction.',
-  },
-  {
-    icon: Hammer,
-    step: '3',
-    title: 'Build and Improve',
-    description:
-      'I build a working solution, you try it in the real world, and we refine it together until it fits the way you actually work.',
-  },
-];
-
-const discoveryQuestions = [
-  'What takes too much time?',
-  'What frustrates staff or customers?',
-  'What process could work better?',
-  'What idea have you wanted to pursue but did not know how to build?',
-];
-
-const caseStudyOutcomes = [
-  {
-    icon: Clock,
-    title: 'Reduced Admin Work',
-    description: 'Notices, requests, and updates handled in one place instead of scattered email chains and paper.',
-  },
-  {
-    icon: MessagesSquare,
-    title: 'Better Communication',
-    description: 'Property managers, councils, and residents share one clear, structured channel.',
-  },
-  {
-    icon: Wrench,
-    title: 'Earlier Maintenance Reporting',
-    description: 'Residents report issues the moment they notice them, before small problems become expensive ones.',
-  },
-  {
-    icon: FileText,
-    title: 'Clearer Records',
-    description: 'Decisions, documents, and history stay organized and easy to find for everyone who needs them.',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Stronger Engagement',
-    description: 'Communities that communicate well see more participation and fewer misunderstandings.',
-  },
-  {
-    icon: Store,
-    title: 'Local Partnership Revenue',
-    description: 'Built-in local business partnerships create new value for communities and neighbourhood businesses.',
-  },
-];
-
-const offTheShelfPoints = [
-  'Built for average workflows — not yours',
-  'Packed with features you\u2019ll never use',
-  'Limited flexibility when your needs change',
-];
-
-const customPoints = [
-  'Designed around your process, from day one',
-  'Focused on your goals and the people who use it',
-  'Grows and adapts with your future plans',
-];
-
-/* ── Animation helpers ──────────────────────────────────────────────── */
-
-const useFade = () => {
-  const reduce = useReducedMotion();
-  return {
-    initial: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: '-80px' },
-    transition: { duration: 0.5 },
-  };
-};
-
-/* ── Reusable pieces ────────────────────────────────────────────────── */
-
-const FeatureCard = ({ icon: Icon, title, description }) => (
-  <Card className="h-full">
-    <CardContent className="pt-6 space-y-3">
-      <div className="w-11 h-11 rounded-lg border border-primary/20 flex items-center justify-center">
-        <Icon className="w-5 h-5 text-primary" aria-hidden="true" />
-      </div>
-      <h3 className="font-semibold text-lg">{title}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-    </CardContent>
-  </Card>
-);
-
-const ProcessStep = ({ icon: Icon, step, title, description }) => (
-  <Card className="h-full">
-    <CardContent className="pt-6 space-y-3">
-      <div className="flex items-center gap-3">
-        <span
-          className="w-9 h-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold"
-          aria-hidden="true"
-        >
-          {step}
-        </span>
-        <Icon className="w-5 h-5 text-primary" aria-hidden="true" />
-      </div>
-      <h3 className="font-semibold text-lg">{title}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-    </CardContent>
-  </Card>
-);
-
-const OutcomeCard = ({ icon: Icon, title, description }) => (
-  <Card className="h-full">
-    <CardContent className="pt-6 space-y-2">
-      <div className="flex items-center gap-3">
-        <Icon className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
-        <h3 className="font-semibold">{title}</h3>
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-    </CardContent>
-  </Card>
-);
-
-const ComparisonColumn = ({ title, points, positive }) => (
-  <Card className={positive ? 'border-primary/40' : undefined}>
-    <CardContent className="pt-6 space-y-4">
-      <h3 className="font-semibold text-xl">{title}</h3>
-      <ul className="space-y-3">
-        {points.map((point) => (
-          <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
-            {positive ? (
-              <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
-            ) : (
-              <X className="w-5 h-5 text-muted-foreground/60 shrink-0 mt-0.5" aria-hidden="true" />
-            )}
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-    </CardContent>
-  </Card>
-);
-
-/* ── Contact form ───────────────────────────────────────────────────── */
+const COMMUNITY_HIVE_SCREENSHOT = '/images/community-hive/screenshots/pm-dashboard.png';
 
 const initialForm = {
   name: '',
@@ -473,132 +279,228 @@ const InquiryForm = () => {
   );
 };
 
-/* ── Page ───────────────────────────────────────────────────────────── */
+function Section({ children, className = '' }) {
+  return (
+    <section className={`py-16 sm:py-20 ${className}`}>
+      <div className="container mx-auto max-w-3xl px-4">
+        <div className="prose prose-lg max-w-none dark:prose-invert">
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function H2({ children }) {
+  return (
+    <h2 className="text-2xl sm:text-3xl font-semibold mt-16 mb-6 text-foreground leading-tight">
+      {children}
+    </h2>
+  );
+}
+
+function Paragraph({ children }) {
+  return <p className="text-lg text-muted-foreground leading-relaxed mb-5">{children}</p>;
+}
 
 export default function CustomSoftwareClient() {
-  const fade = useFade();
-
   useEffect(() => {
     trackEvent('custom_software_view', { path: '/custom-software' });
   }, []);
 
-  const scrollToContact = () => {
-    trackEvent('custom_software_cta_click', { cta_id: 'lets_talk', placement: 'hero' });
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    document.getElementById('cs-name')?.focus({ preventScroll: true });
-  };
-
   return (
-    <div className="container mx-auto max-w-5xl px-4 py-12 space-y-24">
-      {/* ── Hero ── */}
-      <motion.section aria-labelledby="hero-heading" className="text-center pt-8" {...fade}>
-        <p className="text-sm font-medium tracking-[0.16em] uppercase text-accent mb-4">
-          Custom software
-        </p>
-        <h1
-          id="hero-heading"
-          className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 text-foreground leading-tight text-balance"
-        >
-          Have a business challenge software could solve?
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-          Repetitive admin, scattered records, missed follow-ups, or an idea you never had a way
-          to build — practical software can fix the friction. You bring the challenge; I help
-          explore the solution.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" onClick={scrollToContact}>
-            Let&apos;s Talk About Your Idea
-          </Button>
-          <Button size="lg" variant="outline" asChild>
-            <a
-              href={COMMUNITY_HIVE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent('custom_software_cta_click', {
-                  cta_id: 'community_hive',
-                  placement: 'hero',
-                })
-              }
-            >
-              See Community Hive
-              <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
-            </a>
-          </Button>
+    <article className="bg-background">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
+        <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-24 text-center">
+          <p className="text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-5">
+            Custom software development
+          </p>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.98] mb-6">
+            What If the Problems Holding Your Business Back Are Actually Pointing the Way Forward?
+          </h1>
+          <p className="text-lg sm:text-xl text-secondary-foreground/90 leading-relaxed max-w-2xl mx-auto mb-8">
+            The frustrations that have become part of your process may be showing you exactly where software could make the biggest difference.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button asChild size="lg" className="btn-3d bg-accent text-accent-foreground hover:bg-accent/90">
+              <Link href="#contact">
+                Discuss Your Project
+                <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="btn-3d border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground">
+              <a
+                href={COMMUNITY_HIVE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEvent('custom_software_cta_click', {
+                    cta_id: 'community_hive',
+                    placement: 'hero',
+                  })
+                }
+              >
+                See Community Hive
+                <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
+              </a>
+            </Button>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* ── Problem recognition ── */}
-      <motion.section aria-labelledby="problems-heading" {...fade}>
-        <h2 id="problems-heading" className="text-3xl font-bold text-center mb-4">
-          Every Business Has Processes That Could Be Easier
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10">
-          If any of these sound familiar, there&apos;s a good chance software could help.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {problemCards.map((card) => (
-            <FeatureCard key={card.title} {...card} />
-          ))}
-        </div>
-      </motion.section>
+      {/* Intro */}
+      <Section className="border-b border-border/60">
+        <Paragraph>
+          Every business has them.
+        </Paragraph>
+        <Paragraph>
+          The process that takes far too many steps. The information that has to be entered twice. The spreadsheet that has become indispensable even though everyone knows it isn&apos;t really the right tool. The customer follow-up that depends on someone remembering to make it. The report that always seems to need a little more work before it is useful.
+        </Paragraph>
+        <Paragraph>
+          Most of these problems aren&apos;t serious enough to stop a business. That&apos;s why they can be so difficult to notice. They become part of the way things are done. Someone develops a workaround. Another person learns the workaround. Eventually, the extra steps become part of the process, and nobody questions them anymore.
+        </Paragraph>
+        <Paragraph>
+          But what if those frustrations are telling you something? What if the places where work becomes slow, repetitive, confusing or unnecessarily complicated are actually showing you where your business has the greatest opportunity to improve?
+        </Paragraph>
+      </Section>
 
-      {/* ── How it works ── */}
-      <motion.section aria-labelledby="process-heading" {...fade}>
-        <h2 id="process-heading" className="text-3xl font-bold text-center mb-4">
-          Turn Your Ideas Into Practical Solutions
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10">
-          A simple, collaborative process. You never need technical knowledge — describing the
-          problem is your only job.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {processSteps.map((step) => (
-            <ProcessStep key={step.step} {...step} />
-          ))}
-        </div>
-      </motion.section>
+      {/* The off-the-shelf compromise */}
+      <Section className="border-b border-border/60 bg-muted/20">
+        <H2>Consider what happens when you try to solve one of these problems with software</H2>
+        <Paragraph>
+          You find a system that appears to do what you need. Perhaps it does most of it. It may even offer dozens of additional features that sound impressive. So you begin adapting your processes to fit the system.
+        </Paragraph>
+        <Paragraph>
+          At first, that seems reasonable. After all, the software is supposed to make things easier. Then the compromises begin.
+        </Paragraph>
+        <Paragraph>
+          Information has to be entered in another place. A report needs to be adjusted. A task requires an extra step because the system works differently from the way you do. Someone has to learn another procedure. An update changes something that was working perfectly well before.
+        </Paragraph>
+        <Paragraph>
+          The software has solved part of the problem, but it has also created work of its own. And eventually a question emerges:
+        </Paragraph>
+        <blockquote className="border-l-4 border-primary pl-6 italic text-xl text-foreground my-8">
+          Why are we adapting the way we work to accommodate the software?
+        </blockquote>
+        <Paragraph>
+          For many years, there was a good reason for this compromise. Software designed specifically around the needs of a smaller organization was often too expensive to develop, while off-the-shelf software was affordable precisely because it was designed to serve a broad market. So businesses adapted.
+        </Paragraph>
+        <Paragraph>
+          But that calculation is beginning to change. Modern software development and AI are making it increasingly practical to consider something that many businesses previously dismissed as unrealistic:
+        </Paragraph>
+        <blockquote className="border-l-4 border-primary pl-6 italic text-xl text-foreground my-8">
+          What if the technology could be designed around the way the business actually works?
+        </blockquote>
+        <Paragraph>
+          That question is where things get interesting. Because once you stop looking for software that almost fits, you can start looking at the problems themselves — and asking whether those problems might actually contain the blueprint for a better solution.
+        </Paragraph>
+      </Section>
 
-      {/* ── Discovery questions ── */}
-      <motion.section aria-labelledby="questions-heading" {...fade}>
-        <h2 id="questions-heading" className="text-3xl font-bold text-center mb-10">
-          Start With a Simple Question
-        </h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 list-none">
-          {discoveryQuestions.map((question) => (
-            <li key={question}>
-              <Card className="h-full">
-                <CardContent className="pt-6">
-                  <p className="text-xl md:text-2xl font-semibold leading-snug text-center">
-                    {question}
-                  </p>
-                </CardContent>
-              </Card>
+      {/* Stop accepting the process */}
+      <Section className="border-b border-border/60">
+        <H2>What happens when you stop accepting the process as it is?</H2>
+        <Paragraph>
+          Imagine taking one of those processes that has always seemed unnecessarily complicated and looking at it without the assumption that it has to remain that way.
+        </Paragraph>
+        <Paragraph>
+          Maybe information is being entered more than once because different people need it in different places. Maybe employees spend part of every day checking whether someone has followed up on something. Maybe customers have to repeat information because the person helping them can&apos;t easily see what has already happened. Perhaps a manager needs to know the status of several things but has to piece it together from emails, spreadsheets, notes and conversations.
+        </Paragraph>
+        <Paragraph>
+          The usual response is to find a better way to manage the process. Sometimes that means buying another software package. Sometimes it means creating a more elaborate spreadsheet. Sometimes it means developing another procedure and asking employees to follow it.
+        </Paragraph>
+        <Paragraph>
+          But there is another possibility. Instead of asking how to manage the process more efficiently, ask whether the process itself needs to exist in its current form.
+        </Paragraph>
+        <ul className="space-y-3 my-8 list-none">
+          {[
+            'If information is being entered twice, perhaps it only needs to be entered once.',
+            'If someone has to remember to follow up, perhaps the system can remember.',
+            'If information is scattered across several places, perhaps it can be brought together.',
+            'If a task requires ten steps simply because that is how the existing system works, perhaps it can become three.',
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-3 text-lg text-muted-foreground leading-relaxed">
+              <Check className="w-5 h-5 text-primary shrink-0 mt-1" aria-hidden="true" />
+              <span>{item}</span>
             </li>
           ))}
         </ul>
-      </motion.section>
+        <Paragraph>
+          The objective isn&apos;t to remove people from the process. It is to make better use of the time and judgment that people bring to it. People should be spending their time doing the things that require people. The rest deserves to be questioned.
+        </Paragraph>
+        <Paragraph>
+          That way of thinking changes the conversation around technology. Instead of starting with a catalogue of available features and trying to find somewhere to use them, you start with the work itself. Where is the friction? Where does information get lost? Where does duplication occur? Where do errors happen? Where are people spending time on tasks that add little value?
+        </Paragraph>
+        <Paragraph>
+          And perhaps most importantly, what would this process look like if you were free to design it around what you actually need?
+        </Paragraph>
+        <Paragraph>
+          That is the question behind a software project called Community Hive.
+        </Paragraph>
+      </Section>
 
-      {/* ── Community Hive case study ── */}
-      <motion.section aria-labelledby="case-study-heading" {...fade}>
-        <h2 id="case-study-heading" className="text-3xl font-bold text-center mb-4">
-          Real Solutions for Real Business Problems
-        </h2>
-        <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-10 leading-relaxed">
-          <strong className="text-foreground">Community Hive</strong> is a communication and
-          management platform I built for property managers and residential communities. It
-          replaced scattered email chains, paper notices, and social media groups with one
-          organized, easy-to-use system — and it started exactly the way your project would:
-          with a real business challenge.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {caseStudyOutcomes.map((outcome) => (
-            <OutcomeCard key={outcome.title} {...outcome} />
+      {/* Community Hive example */}
+      <Section className="border-b border-border/60 bg-muted/20">
+        <H2>An example: solving the problem instead of managing it</H2>
+        <Paragraph>
+          Community Hive was developed to address a collection of communication and administrative problems within residential communities. But the reason it is worth examining here isn&apos;t simply what the platform does for property management. It is an example of a different approach to software development: <strong className="text-foreground">start with the problem, understand how people actually work, then build the technology around that reality.</strong>
+        </Paragraph>
+
+        <figure className="my-10 rounded-xl overflow-hidden ring-1 ring-border/60 bg-card shadow-lg">
+          <div className="relative aspect-[16/10] w-full">
+            <Image
+              src={COMMUNITY_HIVE_SCREENSHOT}
+              alt="Property manager dashboard showing building overview, open issues, announcements, and requests"
+              fill
+              sizes="(min-width: 1024px) 1100px, 100vw"
+              className="object-cover object-top"
+            />
+          </div>
+          <figcaption className="px-4 py-3 text-sm text-muted-foreground bg-muted/30 border-t border-border/60">
+            Community Hive dashboard: a single place for announcements, maintenance requests, documents, and community communication.
+          </figcaption>
+        </figure>
+
+        <Paragraph>
+          Consider a maintenance issue in a residential community. A resident notices a problem and reports it — perhaps a leaking pipe, a broken light, a damaged door or water collecting where it shouldn&apos;t. The report reaches the property manager, who has to determine what needs to happen next. Someone needs to be contacted, the work needs to be followed up, and the resident may want to know what is happening.
+        </Paragraph>
+        <Paragraph>
+          None of this is particularly complicated. But it can become complicated very quickly when there are hundreds of residents, dozens of requests and many other responsibilities competing for attention. A message arrives by email. Another resident calls. A contractor responds to someone else. A property manager makes a note to follow up later. The resident sends another message asking for an update.
+        </Paragraph>
+        <Paragraph>
+          The work itself may take an hour. Managing everything around the work can take considerably longer. This is where the thinking behind Community Hive becomes useful.
+        </Paragraph>
+        <Paragraph>
+          Instead of asking how to give the property manager a better way to keep track of all those emails, messages and notes, the process can be reconsidered from the beginning.
+        </Paragraph>
+        <ul className="space-y-3 my-8 list-none">
+          {[
+            'What if the resident reports the issue once, and that report automatically becomes part of a trackable process?',
+            'What if the appropriate person is notified without someone having to forward the message?',
+            'What if the status of the issue is visible to the people who need to know?',
+            'What if follow-up doesn\'t depend entirely on someone\'s memory?',
+            'What if, when the problem is resolved, the completion is recorded as part of the property\'s history?',
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-3 text-lg text-muted-foreground leading-relaxed">
+              <span className="w-2 h-2 rounded-full bg-primary mt-2.5 shrink-0" aria-hidden="true" />
+              <span>{item}</span>
+            </li>
           ))}
-        </div>
-        <div className="text-center">
-          <Button size="lg" variant="outline" asChild>
+        </ul>
+        <Paragraph>
+          Suddenly, the objective isn&apos;t to give the property manager another place to manage information. It is to remove some of the managing. That distinction is easy to miss. We often think of software as a better way of organizing work that already exists. But sometimes the bigger opportunity is to ask whether the software can take responsibility for some of the coordination itself.
+        </Paragraph>
+        <Paragraph>
+          The property manager still makes the decisions that require experience and judgment. The contractor still does the repair. The resident still identifies the problem. The software simply takes more responsibility for the things that don&apos;t need to occupy someone&apos;s attention.
+        </Paragraph>
+        <Paragraph>
+          And once that possibility is recognized in one process, it becomes natural to look at others. A community facility needs to be booked. Why should that require someone to manually coordinate availability, requests and confirmations? A council needs to collect a vote. Why should someone have to compile responses and maintain the record manually? Residents need information. Why should every communication have to be sent individually when only certain people need to receive it? An issue needs to be documented. Why should the record depend on someone remembering where to put it?
+        </Paragraph>
+        <Paragraph>
+          These aren&apos;t revolutionary problems. What is potentially revolutionary is being able to design a practical, affordable system around them rather than simply finding another way to work around them.
+        </Paragraph>
+        <div className="mt-8">
+          <Button asChild variant="outline">
             <a
               href={COMMUNITY_HIVE_URL}
               target="_blank"
@@ -615,92 +517,102 @@ export default function CustomSoftwareClient() {
             </a>
           </Button>
         </div>
-      </motion.section>
+      </Section>
 
-      {/* ── Custom vs off-the-shelf ── */}
-      <motion.section aria-labelledby="comparison-heading" {...fade}>
-        <h2 id="comparison-heading" className="text-3xl font-bold text-center mb-4">
-          Your Business Is Unique. Your Software Should Be Too.
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10">
-          Off-the-shelf tools can be a fine starting point — but when they force you to work
-          their way, a custom solution pays for itself.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ComparisonColumn title="Off-the-Shelf Software" points={offTheShelfPoints} />
-          <ComparisonColumn title="A Custom Solution" points={customPoints} positive />
-        </div>
-      </motion.section>
+      {/* The same question applies anywhere */}
+      <Section className="border-b border-border/60">
+        <H2>The same question applies almost anywhere</H2>
+        <Paragraph>
+          The details change from one business to another, but the underlying problems are surprisingly familiar. A landscaping company may spend too much time moving information between estimates, schedules, crews and invoices. A professional practice may have client information scattered between emails, forms and spreadsheets. A nonprofit may spend hours tracking inquiries, follow-ups and services. A small manufacturer may repeatedly enter the same information into different systems simply because that&apos;s how its software has been designed.
+        </Paragraph>
+        <Paragraph>
+          The industries are different. The frustrations are not. And that is why the first question shouldn&apos;t necessarily be, &ldquo;What software do we need?&rdquo; It might be:
+        </Paragraph>
+        <blockquote className="border-l-4 border-primary pl-6 italic text-xl text-foreground my-8">
+          Where are we making work harder than it needs to be?
+        </blockquote>
+        <Paragraph>
+          That question can reveal things that a software search often doesn&apos;t. Perhaps employees are spending an hour every afternoon doing something that could be reduced to ten minutes. Perhaps customers are repeatedly providing information the business already has. Perhaps a manager is spending valuable time checking whether tasks have been completed rather than dealing with the issues that actually require their attention. Perhaps a process works reasonably well when the business is small but becomes increasingly difficult as the organization grows.
+        </Paragraph>
+        <Paragraph>
+          Or perhaps there is an idea that would improve the business considerably, but it has always been dismissed because building the technology seemed too expensive. These are not necessarily signs that a business needs a large technology project. They are reasons to ask a better question.
+        </Paragraph>
+      </Section>
 
-      {/* ── Selected work ── */}
-      <motion.section aria-labelledby="proof-heading" {...fade}>
-        <h2 id="proof-heading" className="text-3xl font-bold text-center mb-4">
-          Selected Work
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10">
-          Detailed case studies and live first-party projects I have delivered and continue to operate.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="h-full">
-            <CardContent className="pt-6 space-y-3">
-              <h3 className="font-semibold">Case Studies</h3>
-              <p className="text-sm text-muted-foreground">
-                In-depth write-ups of accessibility, full-stack, and compliance work.
-              </p>
-              <Button variant="outline" size="sm" asChild className="w-full">
-                <Link href="/case-studies">Read case studies</Link>
-              </Button>
-            </CardContent>
-          </Card>
-          <Card className="h-full">
-            <CardContent className="pt-6 space-y-3">
-              <h3 className="font-semibold">Community Hive</h3>
-              <p className="text-sm text-muted-foreground">
-                A live platform for residential community communication and management.
-              </p>
-              <Button variant="outline" size="sm" asChild className="w-full">
-                <a href={COMMUNITY_HIVE_URL} target="_blank" rel="noopener noreferrer">
-                  Visit Community Hive
-                  <ExternalLink className="ml-2 w-3 h-3" aria-hidden="true" />
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-          <Card className="h-full">
-            <CardContent className="pt-6 space-y-3">
-              <h3 className="font-semibold">danspelt.com Ecosystem</h3>
-              <p className="text-sm text-muted-foreground">
-                Portfolio, audit, resume, faith services, and CRM tools deployed through Coolify.
-              </p>
-              <Button variant="outline" size="sm" asChild className="w-full">
-                <Link href="/projects">Explore projects</Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </motion.section>
+      {/* What has changed */}
+      <Section className="border-b border-border/60 bg-muted/20">
+        <H2>What has changed?</H2>
+        <Paragraph>
+          For a long time, the cost of developing customized software meant that most businesses had little choice but to work within the systems available to them. That is still true in many cases. Off-the-shelf software remains the right answer for countless businesses, particularly when an existing product does the job well.
+        </Paragraph>
+        <Paragraph>
+          But the boundary is shifting. Modern development tools and AI can reduce some of the time and cost involved in designing, building and modifying software. That doesn&apos;t eliminate the need for good developers, careful planning or an understanding of the business. In fact, understanding the business may be more important than ever.
+        </Paragraph>
+        <Paragraph>
+          The difference is that customization is becoming a more realistic conversation. A business can potentially say: <em>Here is the problem. Here is how we currently deal with it. Here is where time is being wasted. Here is what we wish happened automatically.</em>
+        </Paragraph>
+        <Paragraph>
+          And instead of immediately asking which existing software product comes closest, someone can ask: &ldquo;What would it take to build this the way you actually need it?&rdquo;
+        </Paragraph>
+        <Paragraph>
+          That doesn&apos;t mean the answer will always be custom software. Sometimes the answer will be an existing product. Sometimes a process change will solve the problem. Sometimes a simple automation will be enough. But occasionally, the problem is important enough — and the existing solutions are poor enough — that building something specifically for the business makes sense. The important change is that it may now be affordable enough to find out.
+        </Paragraph>
+      </Section>
 
-      {/* ── Final CTA + contact form ── */}
-      <motion.section id="contact" aria-labelledby="contact-heading" className="scroll-mt-24" {...fade}>
-        <h2 id="contact-heading" className="text-3xl font-bold text-center mb-4">
-          You Bring the Challenge. Together, We Can Explore the Solution.
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10">
-          No budget, specification, or technical description required — just tell me what
-          you&apos;d like to improve. Prefer email? Reach me directly at{' '}
-          <a
-            href="mailto:danspelt24@gmail.com"
-            className="text-primary underline underline-offset-4 inline-flex items-center gap-1"
-          >
-            <Mail className="w-4 h-4" aria-hidden="true" />
-            danspelt24@gmail.com
-          </a>
-          .
-        </p>
-        <div className="max-w-2xl mx-auto">
-          <InquiryForm />
+      {/* What have you learned to live with */}
+      <Section className="border-b border-border/60">
+        <H2>What have you learned to live with?</H2>
+        <Paragraph>
+          Most businesses can answer that question. There is usually something that everyone knows could work better, but it has become part of the landscape. Perhaps it is an inefficient administrative process, a communication problem, repetitive data entry, a reporting task, or simply a system that requires people to do things in ways that don&apos;t make much sense anymore.
+        </Paragraph>
+        <Paragraph>
+          The difficulty has often been knowing what to do about it. The problem may not be large enough to justify a major technology project, but it may be costing the business far more than anyone has stopped to calculate. And if the available software doesn&apos;t fit the way the business operates, buying another system may simply create another set of compromises.
+        </Paragraph>
+        <Paragraph>
+          That is the opportunity worth exploring. Start with the frustration. Understand what is actually happening. Then ask whether there is a better way.
+        </Paragraph>
+        <Paragraph>
+          Sometimes the answer will be surprisingly simple. Sometimes an existing software product will already provide it. And sometimes the right answer may be a customized solution designed specifically around the business.
+        </Paragraph>
+        <Paragraph>
+          That is the approach behind the work of Dan Spelt. Rather than beginning with a software product and looking for businesses that can use it, the goal is to begin with the business itself: how it operates, where time is being lost, where information gets stuck, what employees have to do repeatedly, and what the organization would like to accomplish but has never found a practical way to implement.
+        </Paragraph>
+        <Paragraph>
+          Community Hive is one example of what can come from that approach. It began with a particular set of problems in property management and became an opportunity to rethink how communication, administration and follow-up could work.
+        </Paragraph>
+        <Paragraph>
+          The next project may have nothing to do with property management. It may be a process in a completely different industry that has been frustrating someone for years. And that is really the point. The software is not the starting point. The problem is.
+        </Paragraph>
+      </Section>
+
+      {/* Final CTA + form */}
+      <section id="contact" className="scroll-mt-24 py-16 sm:py-24 bg-muted/20">
+        <div className="container mx-auto max-w-4xl px-4">
+          <div className="max-w-2xl mx-auto text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
+              Have a process that has always seemed unnecessarily complicated?
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              If you have a task that consumes more time than it should, or an idea you abandoned because you assumed the technology would be too expensive, it may be worth asking the question again. <strong className="text-foreground">What if the problem itself is pointing you toward the solution?</strong>
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <p className="text-center text-muted-foreground mb-6">
+              Prefer email? Reach me directly at{' '}
+              <a
+                href="mailto:danspelt24@gmail.com"
+                className="text-primary underline underline-offset-4 inline-flex items-center gap-1"
+              >
+                <Mail className="w-4 h-4" aria-hidden="true" />
+                danspelt24@gmail.com
+              </a>
+              .
+            </p>
+            <InquiryForm />
+          </div>
         </div>
-      </motion.section>
-    </div>
+      </section>
+    </article>
   );
 }
