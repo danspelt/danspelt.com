@@ -3,7 +3,6 @@
 import { useCallback, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink, MessageSquare } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
@@ -11,13 +10,11 @@ import {
   COMMUNITY_HIVE_DEMO_URL,
   COMMUNITY_HIVE_ROLES,
   COMMUNITY_HIVE_SCREENSHOTS,
-  PROJECT_STATUS,
   getProjectProof,
 } from '@/data/project-proof';
 import CommunityHiveSlideshow from '@/components/community-hive/CommunityHiveSlideshow';
 
 const project = getProjectProof('community-hive');
-const status = PROJECT_STATUS[project.status];
 
 export default function CommunityHiveSpotlight() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -58,18 +55,14 @@ export default function CommunityHiveSpotlight() {
     >
       <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
         <div className="max-w-3xl mb-10">
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 hover:bg-emerald-500/10">
-              {status.label}
-            </Badge>
-            <Badge variant="outline">Multi-tenant SaaS</Badge>
-            <Badge variant="outline">Built solo</Badge>
-          </div>
+          <p className="text-sm font-medium text-primary uppercase tracking-[0.18em] mb-3">
+            A real example
+          </p>
           <h2 id="community-hive-heading" className="text-3xl sm:text-4xl font-semibold mb-3">
             Community Hive
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            One example of how I adapt software to a real business. Built for property managers, shaped by residents and councils.
+            A practical example of turning an operational problem into software.
           </p>
         </div>
 
@@ -142,27 +135,16 @@ export default function CommunityHiveSpotlight() {
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
               <Button asChild size="lg" className="btn-3d bg-accent text-accent-foreground hover:bg-accent/90">
                 <Link
-                  href="/contact?intent=community-hive"
+                  href="/contact?intent=project"
                   onClick={() =>
-                    trackEvent('contact_started', { source: 'community_hive_spotlight', path: 'community-hive' })
+                    trackEvent('contact_started', { source: 'community_hive_spotlight', path: 'project' })
                   }
                 >
                   <MessageSquare className="mr-2 w-4 h-4" aria-hidden="true" />
-                  Request a demo
+                  Discuss a similar project
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="btn-3d">
-                <Link
-                  href="/contact?intent=hire"
-                  onClick={() =>
-                    trackEvent('contact_started', { source: 'community_hive_spotlight', path: 'hire' })
-                  }
-                >
-                  Discuss a role
-                  <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="ghost" className="btn-3d">
                 <a
                   href={COMMUNITY_HIVE_DEMO_URL}
                   target="_blank"
@@ -178,6 +160,12 @@ export default function CommunityHiveSpotlight() {
                   <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
                   <span className="sr-only">(opens communityhive.ca in a new tab)</span>
                 </a>
+              </Button>
+              <Button asChild size="lg" variant="ghost" className="btn-3d">
+                <Link href={project.caseStudyUrl}>
+                  Read the case study
+                  <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+                </Link>
               </Button>
             </div>
 

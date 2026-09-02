@@ -1,67 +1,101 @@
 import Link from 'next/link';
 import {
   ArrowRight,
+  Building2,
   Code2,
-  Accessibility,
-  ShieldCheck,
-  Users,
-  Brain,
-  BriefcaseBusiness,
-  Handshake,
+  Database,
+  Globe,
+  Layers,
+  RefreshCw,
+  Search,
+  Settings,
+  Sparkles,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import HeroImage from '@/components/HeroImage';
 import ProjectProofExplorer from '@/components/home/ProjectProofExplorer';
 import CommunityHiveSpotlight from '@/components/home/CommunityHiveSpotlight';
-import AudiencePathChooser from '@/components/home/AudiencePathChooser';
-import { VisitorPathProvider } from '@/components/home/VisitorPathProvider';
-import SmartCta from '@/components/home/SmartCta';
-import { PROFESSIONAL_PROFILE } from '@/data/professional-profile';
 
-const strengths = [
+const steps = [
   {
-    icon: Users,
-    title: 'Team player',
-    body: 'I communicate clearly, collaborate well, and follow through — without needing to be the loudest voice in the room.',
+    number: '1',
+    title: 'Understand the problem',
+    body: 'Identify where time, information or communication is being lost.',
   },
   {
-    icon: Brain,
-    title: 'AI-assisted delivery',
-    body: 'I type more slowly than most. AI is my equalizer — I direct, prompt, and verify so quality ships on time.',
+    number: '2',
+    title: 'Design the solution',
+    body: 'Determine what can realistically be improved with software.',
   },
   {
-    icon: Accessibility,
-    title: 'Lived accessibility',
-    body: 'Born with cerebral palsy, I understand assistive technology from the inside — not only from a checklist.',
+    number: '3',
+    title: 'Build the right system',
+    body: 'Develop a focused, maintainable solution around the organization\'s needs.',
   },
   {
-    icon: Code2,
-    title: 'Stack-agnostic',
-    body: 'I learn the tools you already use, or I bring the right ones. Either way, the system is built around your goals.',
+    number: '4',
+    title: 'Improve over time',
+    body: 'Test, learn from users and refine the system as requirements become clearer.',
+  },
+];
+
+const capabilities = [
+  {
+    icon: Building2,
+    title: 'Custom business software',
+    body: 'Focused applications built around your workflow rather than forcing your workflow into an off-the-shelf tool.',
+  },
+  {
+    icon: Globe,
+    title: 'Web applications',
+    body: 'Modern browser-based systems your team can access from anywhere without installation or manual updates.',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Workflow automation',
+    body: 'Reduce repetitive manual steps by connecting data, notifications and approvals into coherent processes.',
+  },
+  {
+    icon: Database,
+    title: 'Data and reporting systems',
+    body: 'Organize scattered information so it is accurate, searchable, and useful for decisions.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Accessible interfaces',
+    body: 'Usable design from the start, including accessibility for people with diverse abilities and assistive technology.',
+  },
+  {
+    icon: Settings,
+    title: 'Software modernization',
+    body: 'Update aging systems, replace spreadsheets, and connect disconnected tools without a risky big-bang rewrite.',
   },
 ];
 
 export default function HomeClient() {
   return (
-    <VisitorPathProvider>
+    <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
-        <div className="container mx-auto max-w-6xl px-4 py-10 sm:py-14">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+        <div className="container mx-auto max-w-6xl px-4 py-12 sm:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
-              <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-3">
-                Senior full-stack engineer · Victoria, BC
+              <p className="hero-rise text-sm font-medium tracking-[0.18em] uppercase text-secondary-foreground/75 mb-4">
+                Custom software development · Based in Victoria, BC
               </p>
-              <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl font-semibold leading-[0.98] mb-4">
-                I built Community Hive. I can join your team, or help you ship yours.
+              <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.98] mb-5">
+                Custom Software for Real-World Business Problems
               </h1>
-              <p className="hero-rise hero-rise-delay-2 text-lg sm:text-xl text-secondary-foreground/90 leading-relaxed mb-6 text-balance">
-                Eighteen-plus years delivering full-stack applications. The flagship proof is Community Hive — a live platform for property managers, councils, and residents.
+              <p className="hero-rise hero-rise-delay-2 text-lg sm:text-xl text-secondary-foreground/90 leading-relaxed mb-4 text-balance">
+                I design and build practical software that helps businesses and organizations reduce administrative work, improve efficiency, and manage information more effectively.
               </p>
-              <div className="hero-rise hero-rise-delay-3 flex flex-col sm:flex-row gap-3">
+              <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/70 max-w-xl mb-8 leading-relaxed">
+                18+ years of software development experience across web applications, business systems, accessibility tools, and specialized software.
+              </p>
+              <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg" className="btn-3d text-base px-8 bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link href="#community-hive">
-                    See Community Hive
+                  <Link href="/contact?intent=project">
+                    Discuss Your Project
                     <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                   </Link>
                 </Button>
@@ -71,35 +105,14 @@ export default function HomeClient() {
                   variant="outline"
                   className="btn-3d text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
                 >
-                  <Link href="/custom-software">
-                    <Handshake className="mr-2 w-4 h-4" aria-hidden="true" />
-                    Need custom software?
+                  <Link href="#case-study">
+                    <Layers className="mr-2 w-4 h-4" aria-hidden="true" />
+                    See What I've Built
                   </Link>
                 </Button>
               </div>
               <p className="hero-rise hero-rise-delay-4 mt-5 text-sm text-secondary-foreground/75">
-                Open to full-time roles · Remote, hybrid, or Greater Victoria
-              </p>
-              <p className="hero-rise hero-rise-delay-4 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
-                <Link
-                  href="/skillstools"
-                  className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
-                >
-                  See skills and technical experience
-                </Link>
-                <Link
-                  href="#proof"
-                  className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
-                >
-                  <BriefcaseBusiness className="inline w-3.5 h-3.5 mr-1" aria-hidden="true" />
-                  Review engineering proof
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-sm font-medium text-secondary-foreground/80 underline underline-offset-4 hover:text-secondary-foreground focus-ring rounded"
-                >
-                  Contact Dan
-                </Link>
+                Based in Victoria, BC · Working remotely with businesses and organizations
               </p>
             </div>
 
@@ -108,129 +121,156 @@ export default function HomeClient() {
         </div>
       </section>
 
-      <AudiencePathChooser />
-
-      <CommunityHiveSpotlight />
-
-      <section aria-labelledby="career-proof-heading" className="border-b border-border/60 bg-background">
-        <div className="container mx-auto max-w-6xl px-4 py-12 sm:py-16">
-          <div className="max-w-3xl mb-8">
-            <h2 id="career-proof-heading" className="text-3xl sm:text-4xl font-semibold mb-3">
-              Experience grounded in shipped work
+      {/* Problem / Opportunity */}
+      <section className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-20">
+          <div className="max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl font-semibold mb-5">
+              Your business may not need more staff. It may need a better system.
             </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              Businesses and organizations often lose time because important processes depend on email, spreadsheets, paper forms, disconnected applications and manual follow-up.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              The result is duplicated work, missed information, slow responses and frustrated staff.
+            </p>
+            <p className="text-xl text-foreground leading-relaxed mb-6">
+              Custom software can change that.
+            </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I have worked across assistive technology, analytics, community platforms, and public-facing websites—turning user needs into maintainable systems with documentation and testing.
+              I work with organizations to identify inefficient processes and develop focused software solutions that make those processes simpler, faster and easier to manage. From a single workflow to a complete business platform, I build software around the way your organization actually works.
             </p>
           </div>
-          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-            <div className="rounded-xl border border-border bg-card p-5">
-              <dt className="text-sm text-muted-foreground">Professional experience</dt>
-              <dd className="mt-1 text-3xl font-display font-semibold">18+ years</dd>
-            </div>
-            <div className="rounded-xl border border-border bg-card p-5">
-              <dt className="text-sm text-muted-foreground">Longest engineering tenure</dt>
-              <dd className="mt-1 text-lg font-semibold">CanAssist, University of Victoria</dd>
-            </div>
-            <div className="rounded-xl border border-border bg-card p-5">
-              <dt className="text-sm text-muted-foreground">Work arrangements</dt>
-              <dd className="mt-1 text-lg font-semibold">Remote, hybrid, or Greater Victoria</dd>
-            </div>
-          </dl>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {PROFESSIONAL_PROFILE.experience.slice(0, 3).map((job) => (
-              <article key={`${job.company}-${job.role}`} className="rounded-xl border border-border/70 bg-card p-5">
-                <p className="text-sm text-primary font-medium mb-1">{job.dates}</p>
-                <h3 className="text-xl font-semibold">{job.role}</h3>
-                <p className="text-sm text-muted-foreground mt-1 mb-4">{job.company}</p>
-                <p className="text-sm leading-relaxed text-muted-foreground">{job.highlights[1]}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
+      {/* How I Help */}
+      <section className="border-b border-border/60 bg-muted/20">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="max-w-2xl mb-10">
+            <h2 className="text-3xl sm:text-4xl font-semibold mb-3">
+              From inefficient workflow to working software
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              A practical process that keeps the real problem in focus from first conversation to first release and beyond.
+            </p>
+          </div>
+
+          <ol className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {steps.map(({ number, title, body }) => (
+              <li key={number} className="flex gap-4">
+                <span
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-display font-semibold"
+                  aria-hidden="true"
+                >
+                  {number}
+                </span>
+                <div>
+                  <h3 className="text-xl font-semibold mb-1">{title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Case Study */}
+      <CommunityHiveSpotlight />
+
+      {/* Other Work */}
       <ProjectProofExplorer />
 
-      <section aria-label="All portfolio work" className="border-b border-border/60 bg-background">
-        <div className="container mx-auto max-w-4xl px-4 py-8 text-center">
-          <Link href="/work" className="inline-flex items-center rounded-md px-4 py-3 font-medium text-primary hover:bg-primary/10 focus-ring">
-            Browse supporting projects, case studies, and technical writing
-            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
+      {/* Capabilities */}
+      <section id="capabilities" className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="max-w-2xl mb-10">
+            <h2 className="text-3xl sm:text-4xl font-semibold mb-3">Capabilities</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              A short list of what I can help with. The technical stack is chosen to fit the problem, not the other way around.
+            </p>
+          </div>
 
-      <section className="container mx-auto max-w-5xl px-4 py-16">
-        <div className="mb-10 max-w-2xl">
-          <h2 className="text-3xl sm:text-4xl font-semibold mb-3">
-            About Dan
-          </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
-            A senior engineer who communicates clearly, works across disciplines, and understands accessibility from the inside.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {strengths.map(({ icon: Icon, title, body }) => (
-            <div key={title}>
-              <div className="depth-card h-full p-5 rounded-2xl bg-card/60 border border-border/60">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+            {capabilities.map(({ icon: Icon, title, body }) => (
+              <div key={title} className="depth-card h-full p-5 rounded-2xl bg-card/60 border border-border/60">
                 <Icon className="w-6 h-6 text-primary mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-semibold mb-2">{title}</h3>
                 <p className="text-muted-foreground leading-relaxed text-sm">{body}</p>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="contact" className="container mx-auto max-w-4xl px-4 pb-24">
-        <div className="rounded-2xl border border-border/80 glass px-6 py-10 sm:px-10 sm:py-12">
-          <h2 className="text-3xl font-semibold mb-4">Get in touch</h2>
-          <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
-            Two tracks, one inbox. Roles go through the portfolio. Community Hive demos go through the live product. Either way, I reply personally.
-          </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-            {[
-              { icon: ShieldCheck, label: 'Secure, maintainable implementation' },
-              { icon: Users, label: 'Cross-functional collaboration' },
-              { icon: Accessibility, label: 'Accessible interface engineering' },
-              { icon: Code2, label: 'Full-stack product delivery' },
-            ].map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Icon className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
-                {label}
-              </li>
             ))}
-          </ul>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button asChild>
-              <Link href="/contact?intent=community-hive">
-                Request a Community Hive demo
-                <ArrowRight className="ml-2 w-4 h-4" />
+          </div>
+
+          <div className="rounded-xl border border-border/70 bg-muted/30 p-5">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+              Typical stack
+            </h3>
+            <p className="text-muted-foreground leading-relaxed text-sm">
+              React, Next.js, TypeScript, Node.js, MongoDB, PostgreSQL, Tailwind CSS, shadcn/ui, Docker, Coolify, .NET, C#, and cloud platforms. If your organization already has preferred tools, I work with those too.
+            </p>
+            <p className="mt-3">
+              <Link
+                href="/skillstools"
+                className="text-sm font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-ring rounded"
+              >
+                See full skills and technical background
               </Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href="/contact?intent=hire">Discuss a role</Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/about">View background</Link>
-            </Button>
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-border/60 bg-muted/25">
-        <div className="container mx-auto max-w-4xl px-4 py-12 sm:py-16">
-          <div className="rounded-2xl border border-border/80 bg-card glass px-6 py-8 sm:px-10 sm:py-10 text-center sm:text-left">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+      {/* About */}
+      <section className="container mx-auto max-w-5xl px-4 py-16 sm:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
+              An experienced developer who starts with the problem—not the technology
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-5">
+              18+ years developing software for universities, nonprofits, businesses and specialized technology projects.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-5">
+              I bring accessibility, usability, maintainability and practical business requirements into the process from the beginning, not as afterthoughts. My background includes assistive technology, analytics platforms, community software, and production web systems.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              If you want to know more about my professional background, case studies, or previous work, those details are available on the site.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button asChild variant="outline">
+                <Link href="/about">View background</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/case-studies">Read case studies</Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8 glass">
+            <blockquote className="text-lg leading-relaxed text-foreground mb-4">
+              “I don't sell programming. I help organizations improve operations, with programming as the means of delivering it.”
+            </blockquote>
+            <p className="text-sm text-muted-foreground">— Dan Spelt</p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section id="contact" className="border-t border-border/60 bg-muted/25">
+        <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-20">
+          <div className="rounded-2xl border border-border/80 bg-card glass px-6 py-10 sm:px-10 sm:py-12 text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
               <div className="max-w-xl">
-                <h2 className="text-2xl sm:text-3xl font-semibold mb-2">Need custom software?</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  I also work with businesses and organizations to turn operational problems into focused, maintainable software. Start with a short conversation about your workflow.
+                <h2 className="text-3xl sm:text-4xl font-semibold mb-3">
+                  Have a process that isn't working as well as it should?
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Let's talk about what could be improved. No pitch deck required—just a short conversation about your workflow.
                 </p>
               </div>
               <Button asChild size="lg" className="btn-3d shrink-0 bg-accent text-accent-foreground hover:bg-accent/90">
-                <Link href="/custom-software">
-                  Explore custom software
+                <Link href="/contact?intent=project">
+                  Discuss Your Project
                   <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                 </Link>
               </Button>
@@ -238,8 +278,6 @@ export default function HomeClient() {
           </div>
         </div>
       </section>
-
-      <SmartCta />
-    </VisitorPathProvider>
+    </>
   );
 }

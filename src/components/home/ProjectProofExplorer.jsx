@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useId, useMemo, useRef, useState } from 'react';
+import { useCallback, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -13,23 +13,13 @@ import {
   PROJECT_PROOF,
   PROJECT_PROOF_TABS,
   PROJECT_STATUS,
-  getProjectsForAudience,
 } from '@/data/project-proof';
-import { useVisitorPath } from './VisitorPathProvider';
-
-/** Map a visitor path to the audience tag used in the proof content. */
-const PATH_TO_AUDIENCE = {
-  hire: 'hire',
-  business: 'business',
-  'community-hive': 'product',
-};
 
 export default function ProjectProofExplorer() {
-  const { path } = useVisitorPath();
   const baseId = useId();
 
-  // All projects always remain visible; only the order and default change.
-  const ordered = useMemo(() => getProjectsForAudience(PATH_TO_AUDIENCE[path]), [path]);
+  // Keep the project order stable and predictable for business visitors.
+  const ordered = PROJECT_PROOF;
 
   const [activeSlug, setActiveSlug] = useState(null);
   const [activeTab, setActiveTab] = useState('problem');
@@ -80,11 +70,10 @@ export default function ProjectProofExplorer() {
       <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
         <div className="max-w-2xl mb-8">
           <h2 id="proof-heading" className="text-3xl sm:text-4xl font-semibold mb-3">
-            Engineering proof
+            Other projects that solve real problems
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Every project started as someone else's messy problem. Pick one and see how I shape
-            ideas into working systems — across any stack, market, or workflow.
+            Each one started as an operational or human problem and became a focused, working system. Pick one to see the problem, the approach, and the result.
           </p>
         </div>
 

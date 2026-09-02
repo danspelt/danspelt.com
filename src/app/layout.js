@@ -20,18 +20,20 @@ const fraunces = Fraunces({
 export const metadata = {
   metadataBase: new URL("https://danspelt.com"),
   title: {
-    default: "Dan Spelt — Senior Full-Stack Engineer",
+    default: "Dan Spelt — Custom Software Developer",
     template: "%s | Dan Spelt",
   },
   description:
-    "Senior full-stack engineer based in Victoria, BC with 18+ years building accessible applications, analytics tools, assistive technology, and production web platforms. Open to full-time roles.",
+    "Custom software developer based in Victoria, BC with 18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
   keywords: [
-    "Senior Full Stack Engineer",
+    "Custom Software Developer",
+    "Business Software",
+    "Workflow Automation",
+    "Web Application Development",
     "Accessibility Engineer",
     "WCAG Compliance",
     "ADA Compliance",
     "Custom Software",
-    "Remote Senior Developer",
     "React",
     "Next.js",
     "Node.js",
@@ -44,23 +46,23 @@ export const metadata = {
     locale: "en_CA",
     url: "https://danspelt.com",
     siteName: "Dan Spelt",
-    title: "Dan Spelt — Senior Full-Stack Engineer",
+    title: "Dan Spelt — Custom Software Developer",
     description:
-      "18+ years building accessible applications, analytics tools, assistive technology, and production web platforms.",
+      "18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Dan Spelt — Senior Full-Stack Engineer",
+        alt: "Dan Spelt — Custom Software Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dan Spelt — Senior Full-Stack Engineer",
+    title: "Dan Spelt — Custom Software Developer",
     description:
-      "18+ years building accessible applications, analytics tools, assistive technology, and production web platforms.",
+      "18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
     images: ["/og.png"],
   },
   alternates: {
@@ -123,10 +125,10 @@ export default function RootLayout({ children }) {
                     Skills
                   </Link>
                   <Link
-                    href="/contact?intent=hire"
+                    href="/contact?intent=project"
                     className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
-                    Discuss a Role
+                    Discuss a Project
                   </Link>
                   <a
                     href="https://github.com/danspelt"
