@@ -9,7 +9,6 @@ import {
   ExternalLink,
   Mail,
   Send,
-  X,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -352,10 +351,7 @@ export default function CustomSoftwareClient() {
       {/* Intro */}
       <Section className="border-b border-border/60">
         <Paragraph>
-          Every business has them.
-        </Paragraph>
-        <Paragraph>
-          The process that takes far too many steps. The information that has to be entered twice. The spreadsheet that has become indispensable even though everyone knows it isn&apos;t really the right tool. The customer follow-up that depends on someone remembering to make it. The report that always seems to need a little more work before it is useful.
+          Every business has them: the process that takes far too many steps, the information that has to be entered twice, the spreadsheet that has become indispensable even though everyone knows it isn&apos;t really the right tool, the customer follow-up that depends on someone remembering to make it, or the report that always seems to need a little more work before it is useful.
         </Paragraph>
         <Paragraph>
           Most of these problems aren&apos;t serious enough to stop a business. That&apos;s why they can be so difficult to notice. They become part of the way things are done. Someone develops a workaround. Another person learns the workaround. Eventually, the extra steps become part of the process, and nobody questions them anymore.
@@ -365,20 +361,17 @@ export default function CustomSoftwareClient() {
         </Paragraph>
       </Section>
 
-      {/* The off-the-shelf compromise */}
+      {/* When the software doesn't quite fit */}
       <Section className="border-b border-border/60 bg-muted/20">
-        <H2>Consider what happens when you try to solve one of these problems with software</H2>
+        <H2>When the software doesn&apos;t quite fit</H2>
         <Paragraph>
-          You find a system that appears to do what you need. Perhaps it does most of it. It may even offer dozens of additional features that sound impressive. So you begin adapting your processes to fit the system.
+          Consider what happens when you try to solve one of these problems with software. You find a system that appears to do what you need. Perhaps it does most of it. It may even offer dozens of additional features that sound impressive. So you begin adapting your processes to fit the system.
         </Paragraph>
         <Paragraph>
-          At first, that seems reasonable. After all, the software is supposed to make things easier. Then the compromises begin.
+          At first, that seems reasonable. After all, the software is supposed to make things easier. Then the compromises begin. Information has to be entered in another place. A report needs to be adjusted. A task requires an extra step because the system works differently from the way you do. Someone has to learn another procedure. An update changes something that was working perfectly well before.
         </Paragraph>
         <Paragraph>
-          Information has to be entered in another place. A report needs to be adjusted. A task requires an extra step because the system works differently from the way you do. Someone has to learn another procedure. An update changes something that was working perfectly well before.
-        </Paragraph>
-        <Paragraph>
-          The software has solved part of the problem, but it has also created work of its own. And eventually a question emerges:
+          The software has solved part of the problem, but it has also created work of its own. Eventually a question emerges:
         </Paragraph>
         <blockquote className="border-l-4 border-primary pl-6 italic text-xl text-foreground my-8">
           Why are we adapting the way we work to accommodate the software?
@@ -387,37 +380,27 @@ export default function CustomSoftwareClient() {
           For many years, there was a good reason for this compromise. Software designed specifically around the needs of a smaller organization was often too expensive to develop, while off-the-shelf software was affordable precisely because it was designed to serve a broad market. So businesses adapted.
         </Paragraph>
         <Paragraph>
-          But that calculation is beginning to change. Modern software development and AI are making it increasingly practical to consider something that many businesses previously dismissed as unrealistic:
+          But that calculation is beginning to change. Modern software development and AI are making it increasingly practical to consider something that many businesses previously dismissed as unrealistic: What if the technology could be designed around the way the business actually works?
         </Paragraph>
-        <blockquote className="border-l-4 border-primary pl-6 italic text-xl text-foreground my-8">
-          What if the technology could be designed around the way the business actually works?
-        </blockquote>
         <Paragraph>
-          That question is where things get interesting. Because once you stop looking for software that almost fits, you can start looking at the problems themselves — and asking whether those problems might actually contain the blueprint for a better solution.
+          That doesn&apos;t mean every business needs custom software. But it does mean that businesses have more options than they once did, and that makes some of those everyday frustrations worth looking at differently.
         </Paragraph>
       </Section>
 
-      {/* Stop accepting the process */}
+      {/* A quick check for your own business */}
       <Section className="border-b border-border/60">
-        <H2>What happens when you stop accepting the process as it is?</H2>
+        <H2>A quick check for your own business</H2>
         <Paragraph>
-          Imagine taking one of those processes that has always seemed unnecessarily complicated and looking at it without the assumption that it has to remain that way.
+          Before looking for a new system, it may be worth looking more closely at the systems and processes you already have. As you do, consider a few questions.
         </Paragraph>
-        <Paragraph>
-          Maybe information is being entered more than once because different people need it in different places. Maybe employees spend part of every day checking whether someone has followed up on something. Maybe customers have to repeat information because the person helping them can&apos;t easily see what has already happened. Perhaps a manager needs to know the status of several things but has to piece it together from emails, spreadsheets, notes and conversations.
-        </Paragraph>
-        <Paragraph>
-          The usual response is to find a better way to manage the process. Sometimes that means buying another software package. Sometimes it means creating a more elaborate spreadsheet. Sometimes it means developing another procedure and asking employees to follow it.
-        </Paragraph>
-        <Paragraph>
-          But there is another possibility. Instead of asking how to manage the process more efficiently, ask whether the process itself needs to exist in its current form.
-        </Paragraph>
-        <ul className="space-y-3 my-8 list-none">
+        <ul className="space-y-4 my-8 list-none">
           {[
-            'If information is being entered twice, perhaps it only needs to be entered once.',
-            'If someone has to remember to follow up, perhaps the system can remember.',
-            'If information is scattered across several places, perhaps it can be brought together.',
-            'If a task requires ten steps simply because that is how the existing system works, perhaps it can become three.',
+            'Where is time being spent moving, entering, re-entering or formatting information — whether in emails, forms, spreadsheets, databases, reports or other systems?',
+            'Where does work depend on people remembering, checking, forwarding, following up or asking for information that could potentially move through the process automatically?',
+            'Where do employees, customers or managers have to work around the systems you have — using separate spreadsheets, notes, emails or manual procedures to accomplish something the existing software doesn\'t quite handle?',
+            'Where are routine processes taking more steps, handoffs or communication than they should, particularly when the same type of work happens repeatedly?',
+            'Where is information difficult to track, find, update or turn into something useful, even though the business already has the information?',
+            'What could your business do — or do better — if a process were designed around what you actually need rather than what your current software allows?',
           ].map((item) => (
             <li key={item} className="flex items-start gap-3 text-lg text-muted-foreground leading-relaxed">
               <Check className="w-5 h-5 text-primary shrink-0 mt-1" aria-hidden="true" />
@@ -426,24 +409,18 @@ export default function CustomSoftwareClient() {
           ))}
         </ul>
         <Paragraph>
-          The objective isn&apos;t to remove people from the process. It is to make better use of the time and judgment that people bring to it. People should be spending their time doing the things that require people. The rest deserves to be questioned.
-        </Paragraph>
-        <Paragraph>
-          That way of thinking changes the conversation around technology. Instead of starting with a catalogue of available features and trying to find somewhere to use them, you start with the work itself. Where is the friction? Where does information get lost? Where does duplication occur? Where do errors happen? Where are people spending time on tasks that add little value?
-        </Paragraph>
-        <Paragraph>
-          And perhaps most importantly, what would this process look like if you were free to design it around what you actually need?
-        </Paragraph>
-        <Paragraph>
-          That is the question behind a software project called Community Hive.
+          You don&apos;t need to answer yes to all of these. Even a few answers may point to an opportunity worth investigating.
         </Paragraph>
       </Section>
 
-      {/* Community Hive example */}
+      {/* Seeing the idea in practice */}
       <Section className="border-b border-border/60 bg-muted/20">
-        <H2>An example: solving the problem instead of managing it</H2>
+        <H2>Seeing the idea in practice</H2>
         <Paragraph>
-          Community Hive was developed to address a collection of communication and administrative problems within residential communities. But the reason it is worth examining here isn&apos;t simply what the platform does for property management. It is an example of a different approach to software development: <strong className="text-foreground">start with the problem, understand how people actually work, then build the technology around that reality.</strong>
+          This is the kind of thinking behind the work of Dan Spelt, a senior full-stack software developer. The people running a business know their processes, their frustrations and what they would like to do better. Dan brings the software development expertise to turn that understanding into a practical, customized system.
+        </Paragraph>
+        <Paragraph>
+          One example is Community Hive, a software platform developed for property management and community organizations.
         </Paragraph>
 
         <figure className="my-10 rounded-xl overflow-hidden ring-1 ring-border/60 bg-card shadow-lg">
@@ -462,42 +439,16 @@ export default function CustomSoftwareClient() {
         </figure>
 
         <Paragraph>
-          Consider a maintenance issue in a residential community. A resident notices a problem and reports it — perhaps a leaking pipe, a broken light, a damaged door or water collecting where it shouldn&apos;t. The report reaches the property manager, who has to determine what needs to happen next. Someone needs to be contacted, the work needs to be followed up, and the resident may want to know what is happening.
+          Consider something as ordinary as a maintenance problem. A resident reports an issue. Someone has to receive the information, determine who should deal with it, pass it along, keep track of what happens next, communicate with the resident, and eventually confirm that the problem has been resolved.
         </Paragraph>
         <Paragraph>
-          None of this is particularly complicated. But it can become complicated very quickly when there are hundreds of residents, dozens of requests and many other responsibilities competing for attention. A message arrives by email. Another resident calls. A contractor responds to someone else. A property manager makes a note to follow up later. The resident sends another message asking for an update.
+          None of those individual tasks is particularly difficult. The difficulty comes from everything that has to happen around the actual repair.
         </Paragraph>
         <Paragraph>
-          The work itself may take an hour. Managing everything around the work can take considerably longer. This is where the thinking behind Community Hive becomes useful.
+          Community Hive brings those steps into a connected process. A report can become a trackable issue, the appropriate people can be notified, its status can be followed, communication can be recorded, and the resolution can be documented. The point isn&apos;t that property managers need another place to enter information. It is that the process can be designed so that information follows the work instead of people having to continually move the information around themselves.
         </Paragraph>
         <Paragraph>
-          Instead of asking how to give the property manager a better way to keep track of all those emails, messages and notes, the process can be reconsidered from the beginning.
-        </Paragraph>
-        <ul className="space-y-3 my-8 list-none">
-          {[
-            'What if the resident reports the issue once, and that report automatically becomes part of a trackable process?',
-            'What if the appropriate person is notified without someone having to forward the message?',
-            'What if the status of the issue is visible to the people who need to know?',
-            'What if follow-up doesn\'t depend entirely on someone\'s memory?',
-            'What if, when the problem is resolved, the completion is recorded as part of the property\'s history?',
-          ].map((item) => (
-            <li key={item} className="flex items-start gap-3 text-lg text-muted-foreground leading-relaxed">
-              <span className="w-2 h-2 rounded-full bg-primary mt-2.5 shrink-0" aria-hidden="true" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-        <Paragraph>
-          Suddenly, the objective isn&apos;t to give the property manager another place to manage information. It is to remove some of the managing. That distinction is easy to miss. We often think of software as a better way of organizing work that already exists. But sometimes the bigger opportunity is to ask whether the software can take responsibility for some of the coordination itself.
-        </Paragraph>
-        <Paragraph>
-          The property manager still makes the decisions that require experience and judgment. The contractor still does the repair. The resident still identifies the problem. The software simply takes more responsibility for the things that don&apos;t need to occupy someone&apos;s attention.
-        </Paragraph>
-        <Paragraph>
-          And once that possibility is recognized in one process, it becomes natural to look at others. A community facility needs to be booked. Why should that require someone to manually coordinate availability, requests and confirmations? A council needs to collect a vote. Why should someone have to compile responses and maintain the record manually? Residents need information. Why should every communication have to be sent individually when only certain people need to receive it? An issue needs to be documented. Why should the record depend on someone remembering where to put it?
-        </Paragraph>
-        <Paragraph>
-          These aren&apos;t revolutionary problems. What is potentially revolutionary is being able to design a practical, affordable system around them rather than simply finding another way to work around them.
+          The same thinking can apply to other parts of property management. Booking a shared facility, organizing community votes, communicating with residents, documenting issues or maintaining an audit trail can all involve surprisingly large amounts of coordination when handled through disconnected systems. Community Hive is one example of what happens when those processes are considered as a whole rather than as a collection of separate administrative tasks.
         </Paragraph>
         <div className="mt-8">
           <Button asChild variant="outline">
@@ -519,69 +470,31 @@ export default function CustomSoftwareClient() {
         </div>
       </Section>
 
-      {/* The same question applies anywhere */}
+      {/* And it doesn't have to be property management */}
       <Section className="border-b border-border/60">
-        <H2>The same question applies almost anywhere</H2>
+        <H2>And it doesn&apos;t have to be property management</H2>
         <Paragraph>
-          The details change from one business to another, but the underlying problems are surprisingly familiar. A landscaping company may spend too much time moving information between estimates, schedules, crews and invoices. A professional practice may have client information scattered between emails, forms and spreadsheets. A nonprofit may spend hours tracking inquiries, follow-ups and services. A small manufacturer may repeatedly enter the same information into different systems simply because that&apos;s how its software has been designed.
+          The underlying question has very little to do with property management. A manufacturer might spend hours transferring information between orders, production schedules and reports. A professional service firm might have people repeatedly preparing information that already exists somewhere else. A retailer might be managing customer follow-ups, inventory information or supplier communication through a mixture of software, spreadsheets and email. A service business might know exactly what needs to happen after a customer makes an inquiry, yet still rely on someone remembering each step.
         </Paragraph>
         <Paragraph>
-          The industries are different. The frustrations are not. And that is why the first question shouldn&apos;t necessarily be, &ldquo;What software do we need?&rdquo; It might be:
-        </Paragraph>
-        <blockquote className="border-l-4 border-primary pl-6 italic text-xl text-foreground my-8">
-          Where are we making work harder than it needs to be?
-        </blockquote>
-        <Paragraph>
-          That question can reveal things that a software search often doesn&apos;t. Perhaps employees are spending an hour every afternoon doing something that could be reduced to ten minutes. Perhaps customers are repeatedly providing information the business already has. Perhaps a manager is spending valuable time checking whether tasks have been completed rather than dealing with the issues that actually require their attention. Perhaps a process works reasonably well when the business is small but becomes increasingly difficult as the organization grows.
+          In each case, the issue isn&apos;t necessarily a lack of software. It may be that the available software was never designed around that particular way of working.
         </Paragraph>
         <Paragraph>
-          Or perhaps there is an idea that would improve the business considerably, but it has always been dismissed because building the technology seemed too expensive. These are not necessarily signs that a business needs a large technology project. They are reasons to ask a better question.
+          And that is where the change becomes interesting. The question is no longer simply, &ldquo;What software can we buy?&rdquo; It can also be, &ldquo;What would make this process work better, and what is now possible that wasn&apos;t practical before?&rdquo;
+        </Paragraph>
+        <Paragraph>
+          Sometimes the answer may be surprisingly simple. And sometimes it may lead to software built specifically around the problem. That possibility is much more accessible than it once was.
         </Paragraph>
       </Section>
 
-      {/* What has changed */}
+      {/* Start with the problem */}
       <Section className="border-b border-border/60 bg-muted/20">
-        <H2>What has changed?</H2>
+        <H2>Start with the problem</H2>
         <Paragraph>
-          For a long time, the cost of developing customized software meant that most businesses had little choice but to work within the systems available to them. That is still true in many cases. Off-the-shelf software remains the right answer for countless businesses, particularly when an existing product does the job well.
+          The most useful place to begin isn&apos;t with a software package or a list of features. It is with the work itself. What takes too long? What gets repeated? What falls through the cracks? What requires unnecessary coordination? What information is already available but isn&apos;t being used effectively?
         </Paragraph>
         <Paragraph>
-          But the boundary is shifting. Modern development tools and AI can reduce some of the time and cost involved in designing, building and modifying software. That doesn&apos;t eliminate the need for good developers, careful planning or an understanding of the business. In fact, understanding the business may be more important than ever.
-        </Paragraph>
-        <Paragraph>
-          The difference is that customization is becoming a more realistic conversation. A business can potentially say: <em>Here is the problem. Here is how we currently deal with it. Here is where time is being wasted. Here is what we wish happened automatically.</em>
-        </Paragraph>
-        <Paragraph>
-          And instead of immediately asking which existing software product comes closest, someone can ask: &ldquo;What would it take to build this the way you actually need it?&rdquo;
-        </Paragraph>
-        <Paragraph>
-          That doesn&apos;t mean the answer will always be custom software. Sometimes the answer will be an existing product. Sometimes a process change will solve the problem. Sometimes a simple automation will be enough. But occasionally, the problem is important enough — and the existing solutions are poor enough — that building something specifically for the business makes sense. The important change is that it may now be affordable enough to find out.
-        </Paragraph>
-      </Section>
-
-      {/* What have you learned to live with */}
-      <Section className="border-b border-border/60">
-        <H2>What have you learned to live with?</H2>
-        <Paragraph>
-          Most businesses can answer that question. There is usually something that everyone knows could work better, but it has become part of the landscape. Perhaps it is an inefficient administrative process, a communication problem, repetitive data entry, a reporting task, or simply a system that requires people to do things in ways that don&apos;t make much sense anymore.
-        </Paragraph>
-        <Paragraph>
-          The difficulty has often been knowing what to do about it. The problem may not be large enough to justify a major technology project, but it may be costing the business far more than anyone has stopped to calculate. And if the available software doesn&apos;t fit the way the business operates, buying another system may simply create another set of compromises.
-        </Paragraph>
-        <Paragraph>
-          That is the opportunity worth exploring. Start with the frustration. Understand what is actually happening. Then ask whether there is a better way.
-        </Paragraph>
-        <Paragraph>
-          Sometimes the answer will be surprisingly simple. Sometimes an existing software product will already provide it. And sometimes the right answer may be a customized solution designed specifically around the business.
-        </Paragraph>
-        <Paragraph>
-          That is the approach behind the work of Dan Spelt. Rather than beginning with a software product and looking for businesses that can use it, the goal is to begin with the business itself: how it operates, where time is being lost, where information gets stuck, what employees have to do repeatedly, and what the organization would like to accomplish but has never found a practical way to implement.
-        </Paragraph>
-        <Paragraph>
-          Community Hive is one example of what can come from that approach. It began with a particular set of problems in property management and became an opportunity to rethink how communication, administration and follow-up could work.
-        </Paragraph>
-        <Paragraph>
-          The next project may have nothing to do with property management. It may be a process in a completely different industry that has been frustrating someone for years. And that is really the point. The software is not the starting point. The problem is.
+          Those aren&apos;t merely annoyances to be tolerated. They may be telling you where the next improvement is hiding.
         </Paragraph>
       </Section>
 
