@@ -5,25 +5,18 @@
 
 export const VISITOR_PATHS = [
   {
-    id: 'community-hive',
-    label: 'Show me Community Hive',
-    description: 'A live platform I built for property managers, councils, and residents.',
-    target: '#community-hive',
-    cta: { label: 'Request a Community Hive demo', href: '/contact?intent=community-hive' },
+    id: 'business',
+    label: 'Discuss Your Project',
+    description: 'Tell me about the workflow or process you would like to improve and we will explore what custom software could do.',
+    target: '#contact',
+    cta: { label: 'Discuss Your Project', href: '/contact?intent=project' },
   },
   {
     id: 'hire',
-    label: 'I may hire Dan',
-    description: 'See the experience and shipped work, then start a conversation about a role.',
+    label: 'Looking for a Senior Developer?',
+    description: 'See my background, case studies, and shipped work, then start a conversation about a role.',
     target: '#career-proof-heading',
     cta: { label: 'Contact Dan about a role', href: '/contact?intent=hire' },
-  },
-  {
-    id: 'business',
-    label: 'I have a business problem',
-    description: 'If you need custom software rather than Community Hive itself, say so in the contact form.',
-    target: '#contact',
-    cta: { label: 'Contact Dan', href: '/contact' },
   },
 ];
 

@@ -2,14 +2,15 @@ import Link from 'next/link';
 import {
   ArrowRight,
   Building2,
-  Code2,
+  Brain,
   Database,
+  ExternalLink,
+  FileText,
   Globe,
-  Layers,
   RefreshCw,
-  Search,
   Settings,
   Sparkles,
+  Users,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import HeroImage from '@/components/HeroImage';
@@ -63,12 +64,17 @@ const capabilities = [
   {
     icon: Sparkles,
     title: 'Accessible interfaces',
-    body: 'Usable design from the start, including accessibility for people with diverse abilities and assistive technology.',
+    body: 'Built around real users from the start, including people with diverse abilities and those who rely on assistive technology.',
   },
   {
     icon: Settings,
     title: 'Software modernization',
     body: 'Update aging systems, replace spreadsheets, and connect disconnected tools without a risky big-bang rewrite.',
+  },
+  {
+    icon: Brain,
+    title: 'AI-assisted development',
+    body: 'Modern AI tools used deliberately for research, coding, testing, documentation, architecture, security review, and quality oversight.',
   },
 ];
 
@@ -105,9 +111,9 @@ export default function HomeClient() {
                   variant="outline"
                   className="btn-3d text-base px-8 border-secondary-foreground/35 bg-secondary-foreground/10 text-secondary-foreground hover:bg-secondary-foreground/18 hover:text-secondary-foreground"
                 >
-                  <Link href="#case-study">
-                    <Layers className="mr-2 w-4 h-4" aria-hidden="true" />
-                    See What I've Built
+                  <Link href="/about">
+                    <Users className="mr-2 w-4 h-4" aria-hidden="true" />
+                    Looking for a Senior Developer?
                   </Link>
                 </Button>
               </div>
@@ -220,6 +226,34 @@ export default function HomeClient() {
         </div>
       </section>
 
+      {/* Featured article */}
+      <section className="border-b border-border/60 bg-muted/20">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8 glass">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-5">
+              <div className="p-3 rounded-xl bg-primary/10 shrink-0 self-start">
+                <FileText className="w-6 h-6 text-primary" aria-hidden="true" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-muted-foreground mb-2">Insight</p>
+                <h2 className="text-2xl sm:text-3xl font-semibold mb-3">
+                  What If the Problems Holding Your Business Back Are Actually Pointing the Way Forward?
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-5 max-w-3xl">
+                  The frustrations that have become part of your process may be showing you exactly where software could make the biggest difference. A short read on spotting workflow opportunities and building practical software around real business problems.
+                </p>
+                <Button asChild variant="outline">
+                  <Link href="/insights">
+                    Read the article
+                    <ExternalLink className="ml-2 w-4 h-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About */}
       <section className="container mx-auto max-w-5xl px-4 py-16 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
@@ -231,14 +265,14 @@ export default function HomeClient() {
               18+ years developing software for universities, nonprofits, businesses and specialized technology projects.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-5">
-              I bring accessibility, usability, maintainability and practical business requirements into the process from the beginning, not as afterthoughts. My background includes assistive technology, analytics platforms, community software, and production web systems.
+              I build accessible software around real users, including people who rely on assistive technology. Accessibility is part of the design from the beginning, not an afterthought.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              If you want to know more about my professional background, case studies, or previous work, those details are available on the site.
+              I also use modern AI tools as a deliberate professional capability — for research, coding, testing, documentation, architecture, security review, and quality oversight. The result is thorough, well-built software delivered efficiently.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button asChild variant="outline">
-                <Link href="/about">View background</Link>
+                <Link href="/about">View professional background</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href="/case-studies">Read case studies</Link>

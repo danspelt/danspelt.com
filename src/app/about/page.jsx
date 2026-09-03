@@ -19,7 +19,7 @@ const highlights = [
   {
     icon: Brain,
     title: "AI-Assisted Development",
-    text: "I use AI tools every day to work faster and smarter. Because I type more slowly than most developers, AI helps me stay competitive — and I've become genuinely skilled at prompting, directing, and verifying AI output.",
+    text: "I use AI tools deliberately as a professional development capability — for research, coding, testing, documentation, architecture, security review, and quality oversight. This means faster exploration, thorough review, and well-built software.",
   },
   {
     icon: Users,
@@ -62,14 +62,15 @@ const About = () => {
             problems.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            I was born with cerebral palsy, which means I type more slowly than most developers.
-            I won&apos;t pretend otherwise. But I use AI tools every day — not as a shortcut, but
-            as an equalizer. They help me move at a pace that works, and they have made me a better,
-            more deliberate engineer in the process.
+            I use modern AI tools deliberately as part of my development practice — for research,
+            coding, testing, documentation, architecture, security review, and quality oversight.
+            That combination helps me explore ideas quickly while keeping the work thorough and clean.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            I will get the job done. It might take me a bit longer than average. But the work will
-            be thorough, the code will be clean, and I will not stop until it is right.
+            I was born with cerebral palsy and have used assistive technology my whole life, so
+            accessibility is something I understand from experience, not just from guidelines. When I
+            build for accessibility, it is not a checkbox — it is a genuine part of how I think
+            about software and the people who use it.
           </p>
           <p className="text-sm text-muted-foreground border-l-2 border-primary/40 pl-4 italic">
             Open to remote roles — full-time, part-time, or contract. Let&apos;s talk.

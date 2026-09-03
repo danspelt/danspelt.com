@@ -119,6 +119,12 @@ export default function RootLayout({ children }) {
                     All Work
                   </Link>
                   <Link
+                    href="/insights"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
+                  >
+                    Insights
+                  </Link>
+                  <Link
                     href="/skillstools"
                     className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
