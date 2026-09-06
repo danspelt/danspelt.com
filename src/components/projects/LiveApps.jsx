@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -30,7 +30,7 @@ function AppCard({ app }) {
       </CardHeader>
       <CardContent className="flex flex-1 flex-col justify-between gap-4">
         <p className="text-sm leading-relaxed text-muted-foreground">{app.description}</p>
-        {(app.url || app.caseStudyUrl) && (
+        {(app.url || app.githubUrl || app.caseStudyUrl) && (
           <div className="flex flex-wrap gap-2">
             {app.url && (
               <Button asChild size="sm" className="flex items-center gap-2">
@@ -39,6 +39,15 @@ function AppCard({ app }) {
                   {app.cta || 'Visit live site'}
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
                   <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </Button>
+            )}
+            {app.githubUrl && (
+              <Button asChild size="sm" variant="outline">
+                <a href={app.githubUrl} target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-4 w-4" aria-hidden="true" />
+                  View source
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </Button>
             )}

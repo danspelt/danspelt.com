@@ -3,12 +3,16 @@ import {
   ArrowRight,
   Building2,
   Brain,
+  Camera,
+  ClipboardCheck,
   Database,
   ExternalLink,
   FileText,
+  Github,
   Globe,
   RefreshCw,
   Settings,
+  ShieldCheck,
   Sparkles,
   Users,
 } from 'lucide-react';
@@ -150,8 +154,76 @@ export default function HomeClient() {
         </div>
       </section>
 
+      {/* Featured project */}
+      <section aria-labelledby="careboard-heading" className="border-b border-border/60 bg-muted/20">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-lg">
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="relative flex min-h-72 items-center justify-center overflow-hidden bg-gradient-to-br from-cyan-700 via-blue-700 to-indigo-900 p-10 text-white sm:min-h-96">
+                <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-2xl" aria-hidden="true" />
+                <div className="absolute -bottom-20 -right-12 h-64 w-64 rounded-full bg-cyan-300/20 blur-3xl" aria-hidden="true" />
+                <div className="relative text-center">
+                  <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-3xl border border-white/30 bg-white/15 shadow-2xl backdrop-blur-sm">
+                    <span className="font-display text-4xl font-semibold tracking-tight" aria-hidden="true">CB</span>
+                    <span className="sr-only">CareBoard logo</span>
+                  </div>
+                  <p className="font-display text-3xl font-semibold tracking-tight">CareBoard</p>
+                  <p className="mt-2 text-sm text-blue-100">Private household care coordination</p>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-10 lg:p-12">
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Featured project</p>
+                <h2 id="careboard-heading" className="mb-4 text-3xl font-semibold sm:text-4xl">
+                  Clear tasks and accountability for care teams
+                </h2>
+                <p className="mb-7 text-lg leading-relaxed text-muted-foreground">
+                  CareBoard gives household managers and approved workers private, role-specific dashboards for planning recurring work, documenting completion, and keeping a reliable record of care.
+                </p>
+
+                <ul className="mb-8 grid gap-4 sm:grid-cols-2" aria-label="CareBoard features">
+                  <li className="flex gap-3">
+                    <RefreshCw className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                    <span className="text-sm leading-relaxed">Task scheduling and recurrence</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <Camera className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                    <span className="text-sm leading-relaxed">Proof photos for completed work</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                    <span className="text-sm leading-relaxed">Manager-approved, role-scoped access</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <ClipboardCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                    <span className="text-sm leading-relaxed">Reports, audit history, and PWA support</span>
+                  </li>
+                </ul>
+
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Button asChild>
+                    <a href="https://care.danspelt.com/" target="_blank" rel="noopener noreferrer">
+                      Visit CareBoard
+                      <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <a href="https://github.com/danspelt/careboard" target="_blank" rel="noopener noreferrer">
+                      <Github className="mr-2 h-4 w-4" aria-hidden="true" />
+                      View source
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How I Help */}
-      <section className="border-b border-border/60 bg-muted/20">
+      <section className="border-b border-border/60 bg-background">
         <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
           <div className="max-w-2xl mb-10">
             <h2 className="text-3xl sm:text-4xl font-semibold mb-3">

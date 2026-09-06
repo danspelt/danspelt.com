@@ -15,6 +15,18 @@ export const APP_STATUS = {
 
 export const LIVE_APPS = [
   {
+    slug: 'careboard',
+    name: 'CareBoard',
+    url: 'https://care.danspelt.com/',
+    githubUrl: 'https://github.com/danspelt/careboard',
+    caseStudyUrl: null,
+    status: 'live',
+    tags: ['Care coordination', 'PWA'],
+    description:
+      'Private household care coordination with manager and worker dashboards, task scheduling and recurrence, proof photos, role-scoped access, reports, audit history, and PWA support.',
+    cta: 'Visit CareBoard',
+  },
+  {
     slug: 'community-hive',
     name: 'Community Hive',
     url: 'https://communityhive.ca',
