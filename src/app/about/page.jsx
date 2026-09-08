@@ -132,6 +132,12 @@ const About = () => {
             that values quality, reliability, and someone who genuinely cares about the work.
             If that sounds like a fit, let&apos;s talk.
           </p>
+          <p className="text-muted-foreground leading-relaxed mt-4 border-l-2 border-primary/40 pl-4 italic">
+            Being open to roles does not change my commitment to any client I work with. If I take
+            on your project, I finish what we agreed on, document the work thoroughly, and plan for
+            a clean handoff. You will never be left with unfinished code or a system nobody
+            understands.
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-6">
             <Link href="/case-studies">
               <Button>

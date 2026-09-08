@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Check,
   ExternalLink,
+  HeartHandshake,
   Mail,
   Send,
 } from 'lucide-react';
@@ -495,6 +496,23 @@ export default function CustomSoftwareClient() {
         </Paragraph>
         <Paragraph>
           Those aren&apos;t merely annoyances to be tolerated. They may be telling you where the next improvement is hiding.
+        </Paragraph>
+      </Section>
+
+      {/* A promise about continuity */}
+      <Section className="border-b border-border/60 bg-muted/20">
+        <div className="flex items-start gap-4 mb-2">
+          <HeartHandshake className="w-8 h-8 text-primary shrink-0 mt-1" aria-hidden="true" />
+          <H2>A promise: I won&apos;t leave your software behind</H2>
+        </div>
+        <Paragraph>
+          One concern business owners often have when hiring a solo developer is what happens if that developer takes a full-time job and moves on. It is a reasonable worry, and I want to address it directly.
+        </Paragraph>
+        <Paragraph>
+          If you hire me to build custom software, I will not abandon your system. Every project is written with clean, maintainable code, clear documentation, and a handoff plan in mind. If my circumstances change, I will give you advance notice, transition the work responsibly, and make sure you have everything you need to keep your software running.
+        </Paragraph>
+        <Paragraph>
+          You will never be left with unfinished code, unanswered questions, or a system nobody understands.
         </Paragraph>
       </Section>
 

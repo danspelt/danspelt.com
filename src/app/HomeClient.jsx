@@ -10,6 +10,7 @@ import {
   FileText,
   Github,
   Globe,
+  HeartHandshake,
   RefreshCw,
   Settings,
   ShieldCheck,
@@ -357,6 +358,30 @@ export default function HomeClient() {
               “I don't sell programming. I help organizations improve operations, with programming as the means of delivering it.”
             </blockquote>
             <p className="text-sm text-muted-foreground">— Dan Spelt</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Promise */}
+      <section className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-20">
+          <div className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8 glass">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-5">
+              <div className="p-3 rounded-xl bg-primary/10 shrink-0 self-start">
+                <HeartHandshake className="w-6 h-6 text-primary" aria-hidden="true" />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl sm:text-3xl font-semibold mb-3">
+                  A promise: I won&apos;t leave your software behind
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Hiring a solo developer can feel risky: what if they land a full-time job and disappear? That won&apos;t happen here. Every system I build is documented, maintainable, and designed for a clean handoff.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  If my circumstances change, you get advance notice, transition time, and a clear plan to keep your software running. No ghosting, no orphaned code, no unfinished business.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
