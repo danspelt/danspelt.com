@@ -1,5 +1,5 @@
-// Live apps and tools that are deployed and publicly reachable, plus the ones still in
-// progress. Rendered by the "Live Apps & Tools" section on /projects.
+// Live apps and tools that are deployed and publicly reachable.
+// Rendered by the "Live Apps & Tools" section on /projects and by All Work.
 //
 // Content integrity rules for this file, matching project-proof.js:
 //  - `url` must be a domain that is actually serving the app over HTTPS.
@@ -13,6 +13,7 @@ export const APP_STATUS = {
   building: { label: 'Building', description: 'In development, not yet deployed.' },
 };
 
+/** Public portfolio catalog. Only list apps that are employer-ready demos. */
 export const LIVE_APPS = [
   {
     slug: 'careboard',
@@ -71,6 +72,25 @@ export const LIVE_APPS = [
     cta: 'Get an audit',
   },
   {
+    slug: 'christian-web-help',
+    name: 'Christian Web Help',
+    url: 'https://faith.danspelt.com',
+    caseStudyUrl: null,
+    status: 'live',
+    tags: ['Services', 'Non-profit'],
+    description:
+      'Website help for churches, ministries, and faith-led teams. Accessible sites, simpler donation pages, event registration, and ongoing support with plain-language pricing.',
+    cta: 'Get website help',
+  },
+];
+
+/**
+ * Parked apps — not employer-ready. Domains may still be live, but do not render
+ * these on the public portfolio until the demo is impressive enough to keep.
+ * Move an entry back into LIVE_APPS when that bar is met.
+ */
+export const UNLISTED_APPS = [
+  {
     slug: 'ai-receptionist',
     name: 'AI Receptionist',
     url: 'https://receptionist.danspelt.com',
@@ -91,17 +111,6 @@ export const LIVE_APPS = [
     description:
       'Resume optimisation with AI review. Parses an uploaded PDF, DOCX, or plain text resume, suggests stronger achievement-focused bullet points, matches keywords to a target job description, and exports to DOCX.',
     cta: 'Fix a resume',
-  },
-  {
-    slug: 'christian-web-help',
-    name: 'Christian Web Help',
-    url: 'https://faith.danspelt.com',
-    caseStudyUrl: null,
-    status: 'live',
-    tags: ['Services', 'Non-profit'],
-    description:
-      'Website help for churches, ministries, and faith-led teams. Accessible sites, simpler donation pages, event registration, and ongoing support with plain-language pricing.',
-    cta: 'Get website help',
   },
   {
     slug: 'ai-content-writer',
