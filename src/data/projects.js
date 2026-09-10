@@ -46,7 +46,7 @@ export const LIVE_APPS = [
     status: 'live',
     tags: ['Accessibility', 'Civic tech'],
     description:
-      'Accessibility intelligence for cities. Places are scored across ten criteria and shown as colour-coded markers on an OpenStreetMap map, so somewhere can be assessed before travelling to it.',
+      'Accessibility intelligence for cities. Places are scored across ten criteria and shown as colour-coded markers on an OpenStreetMap map, so a place can be assessed before travelling to it.',
     cta: 'Visit live site',
   },
   {
