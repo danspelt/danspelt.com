@@ -9,7 +9,7 @@ export default function HeroImage() {
       >
         <Image
           src="/images/dan.jpeg"
-          alt="Dan Spelt"
+          alt="Dan Spelt, full-stack custom software developer in Victoria, BC"
           fill
           priority
           sizes="(max-width: 640px) 80vw, (max-width: 1024px) 384px, 448px"

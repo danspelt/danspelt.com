@@ -20,11 +20,14 @@ const fraunces = Fraunces({
 export const metadata = {
   metadataBase: new URL("https://danspelt.com"),
   title: {
-    default: "Dan Spelt — Custom Software Developer",
+    default: "Dan Spelt | Custom Software Developer in Victoria, BC",
     template: "%s | Dan Spelt",
   },
   description:
-    "Custom software developer based in Victoria, BC with 18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
+    "Victoria, BC custom software developer with 18+ years of experience building full-stack web applications, workflow automation, and accessible business software.",
+  authors: [{ name: "Dan Spelt", url: "https://danspelt.com" }],
+  creator: "Dan Spelt",
+  publisher: "Dan Spelt",
   keywords: [
     "Custom Software Developer",
     "Business Software",
@@ -46,27 +49,38 @@ export const metadata = {
     locale: "en_CA",
     url: "https://danspelt.com",
     siteName: "Dan Spelt",
-    title: "Dan Spelt — Custom Software Developer",
+    title: "Dan Spelt | Custom Software Developer in Victoria, BC",
     description:
-      "18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
+      "Full-stack web applications, workflow automation, and accessible custom software built around real business problems.",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Dan Spelt — Custom Software Developer",
+        alt: "Dan Spelt, custom software developer in Victoria, British Columbia",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dan Spelt — Custom Software Developer",
+    title: "Dan Spelt | Custom Software Developer in Victoria, BC",
     description:
-      "18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
+      "Full-stack web applications, workflow automation, and accessible custom software built around real business problems.",
     images: ["/og.png"],
   },
   alternates: {
     canonical: "https://danspelt.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

@@ -15,9 +15,19 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Accessibility Engineering & Public Sector Experience',
+  title: 'Web Accessibility Engineer & WCAG Specialist',
   description:
-    'WCAG 2.0/2.1 compliance implementation, ADA alignment, screen reader engineering, and public-sector web development experience. Available for government contracts and senior accessibility roles.',
+    'Victoria, BC web accessibility engineer with WCAG implementation, screen reader testing, accessible full-stack development, and public-sector experience.',
+  alternates: {
+    canonical: 'https://danspelt.com/accessibility',
+  },
+  openGraph: {
+    title: 'Web Accessibility Engineer & WCAG Specialist | Dan Spelt',
+    description:
+      'WCAG implementation, screen reader engineering, and accessible full-stack development backed by 18+ years of experience.',
+    url: 'https://danspelt.com/accessibility',
+    images: ['/og.png'],
+  },
 };
 
 const complianceAreas = [

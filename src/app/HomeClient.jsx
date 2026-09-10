@@ -45,13 +45,13 @@ export default function HomeClient() {
                 Custom software development · Based in Victoria, BC
               </p>
               <h1 className="hero-rise hero-rise-delay-1 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[0.98] mb-5">
-                Software that solves business problems
+                Custom software that solves real business problems
               </h1>
               <p className="hero-rise hero-rise-delay-2 text-lg sm:text-xl text-secondary-foreground/90 leading-relaxed mb-4 text-balance">
                 Is your business spending too much time, money or effort working around an inefficient process?
               </p>
               <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/80 max-w-xl mb-6 leading-relaxed">
-                Dan Spelt helps businesses identify where technology can improve efficiency, reduce costs and create better ways of working — then designs and builds the software to make it happen.
+                Dan Spelt is a Victoria, BC full-stack developer who helps businesses improve inefficient workflows, reduce administrative work and manage information more effectively — then designs and builds the custom software to make it happen.
               </p>
               <p className="hero-rise hero-rise-delay-4 text-lg font-medium text-secondary-foreground mb-8">
                 You bring the problem. Dan finds the opportunity.

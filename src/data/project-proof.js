@@ -107,7 +107,7 @@ export const PROJECT_PROOF = [
   {
     slug: 'community-hive',
     title: 'Community Hive',
-    tagline: 'Centralizes announcements, maintenance reporting, documents, voting and community communication for strata and HOA communities',
+    tagline: 'A shared communication and operations hub for property managers, strata councils, and residents. Communities stop losing announcements and maintenance requests in email chains, and everyone has a clear record of what was decided.',
     status: 'pilot',
     audience: ['hire', 'business', 'product'],
     role: 'Founder and sole developer',
@@ -198,7 +198,7 @@ export const PROJECT_PROOF = [
   {
     slug: 'accesslens',
     title: 'AccessLens',
-    tagline: 'Helps people with disabilities assess whether places will work for them before they travel',
+    tagline: 'Built for people with disabilities, caregivers, and accessibility advocates who need reliable accessibility information before visiting a new place. Civic organizations and businesses gain visibility into where accessibility is working and where it needs to improve.',
     status: 'active',
     audience: ['hire', 'product'],
     role: 'Founder and developer',
@@ -279,7 +279,7 @@ export const PROJECT_PROOF = [
   {
     slug: 'windows-helper-suite',
     title: 'WindowsHelperSuite',
-    tagline: 'Coordinates writing assistance, global hotkeys, speech input, and device controls in one modular Windows suite',
+    tagline: 'A modular Windows suite for people with disabilities and power users who need writing assistance, global hotkeys, speech input, and device controls in one coordinated system. Users spend less energy switching tools, and maintainers gain a single codebase to extend and support.',
     status: 'active',
     audience: ['hire'],
     role: 'Creator and developer',

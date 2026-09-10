@@ -24,7 +24,7 @@ export const LIVE_APPS = [
     status: 'live',
     tags: ['Care coordination', 'PWA'],
     description:
-      'Private household care coordination with manager and worker dashboards, task scheduling and recurrence, proof photos, role-scoped access, reports, audit history, and PWA support.',
+      'Built for household managers and approved care workers who coordinate daily tasks for a loved one or client. Families benefit from clearer schedules, proof of completion, and a shared record that reduces miscommunication. The result is less stress for caregivers and more accountability for the people they support.',
     cta: 'Visit CareBoard',
   },
   {
@@ -35,7 +35,7 @@ export const LIVE_APPS = [
     status: 'pilot',
     tags: ['SaaS', 'Multi-tenant'],
     description:
-      'Communication platform for strata and HOA communities. Announcements, maintenance requests, documents, events, and polls in one record, with role-scoped dashboards for managers, councils, and residents.',
+      'For property managers, strata councils, and residents who are tired of missed announcements and maintenance requests disappearing into email chains. Communities benefit from one shared place for announcements, requests, documents, and decisions. The impact is fewer repeated questions, faster maintenance resolution, and a clear record of what was communicated.',
     cta: 'Visit live site',
   },
   {
@@ -46,7 +46,7 @@ export const LIVE_APPS = [
     status: 'live',
     tags: ['Accessibility', 'Civic tech'],
     description:
-      'Accessibility intelligence for cities. Places are scored across ten criteria and shown as colour-coded markers on an OpenStreetMap map, so a place can be assessed before travelling to it.',
+      'For people with disabilities, caregivers, and accessibility advocates who need to know whether a restaurant, clinic, park, or transit stop will work for them before they travel. Municipalities and businesses benefit from crowdsourced accessibility data that shows where improvements are needed. The impact is safer, more confident trips and better public awareness of accessibility gaps.',
     cta: 'Visit live site',
   },
   {
@@ -57,7 +57,7 @@ export const LIVE_APPS = [
     status: 'live',
     tags: ['Accessibility', 'WCAG'],
     description:
-      'Automated first-pass accessibility audit. Runs WCAG-oriented axe-core checks and returns affected elements, failure details, and impact-based priorities instead of raw scanner output.',
+      'For website owners, developers, and accessibility teams who need a quick, actionable first look at accessibility barriers. Small businesses and non-profits benefit from prioritized fixes instead of overwhelming scanner reports. The impact is faster remediation and a site that works for more visitors, including people using screen readers or keyboards.',
     cta: 'Run a scan',
   },
   {
@@ -68,7 +68,7 @@ export const LIVE_APPS = [
     status: 'live',
     tags: ['AI', 'Conversion'],
     description:
-      'AI website audit focused on conversion rather than compliance. Reviews a site against conversion practices and returns a score, prioritised fixes, headline and call-to-action suggestions, and SEO quick wins.',
+      'For business owners, marketers, and web teams who want to turn more visitors into leads or customers. Small businesses benefit from practical fixes to headlines, calls to action, and page structure without hiring a full conversion agency. The impact is clearer messaging, better user flow, and more revenue from the same traffic.',
     cta: 'Get an audit',
   },
   {
@@ -79,7 +79,7 @@ export const LIVE_APPS = [
     status: 'live',
     tags: ['Services', 'Non-profit'],
     description:
-      'Website help for churches, ministries, and faith-led teams. Accessible sites, simpler donation pages, event registration, and ongoing support with plain-language pricing.',
+      'For churches, ministries, and faith-led teams that need a website visitors can actually use, including people with disabilities or older members. Congregations and visitors benefit from clear event information, simple donation flows, and accessible content. The impact is stronger community connection and fewer people left out because a site is hard to navigate.',
     cta: 'Get website help',
   },
 ];

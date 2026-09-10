@@ -12,6 +12,7 @@ export default function sitemap() {
     '/custom-software',
     '/contact',
     '/faq',
+    '/insights',
     '/ai-chat',
     '/build-for-us',
     '/case-studies/community-hive',
@@ -21,7 +22,7 @@ export default function sitemap() {
 
   return routes.map((route) => ({
     url: `${base}${route}`,
-    lastModified: new Date(),
+    lastModified: new Date('2026-09-10'),
     changeFrequency: route === '' || route === '/custom-software' ? 'weekly' : 'monthly',
     priority: route === '' ? 1 : route === '/custom-software' || route === '/case-studies' ? 0.9 : 0.7,
   }));

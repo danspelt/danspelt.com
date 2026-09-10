@@ -5,9 +5,19 @@ import { Accessibility, Award, Users, ArrowRight, FileText, Brain } from "lucide
 import IntroVideo from "@/components/IntroVideo";
 
 export const metadata = {
-  title: "About",
+  title: "Full-Stack Developer & Accessibility Specialist",
   description:
-    "Dan Spelt — Full-Stack Developer and Accessibility Specialist based in Victoria, BC, Canada. 18+ years of experience working remotely with teams worldwide.",
+    "Meet Dan Spelt, a Victoria, BC full-stack developer and accessibility specialist with 18+ years of experience building web applications and accessible software.",
+  alternates: {
+    canonical: "https://danspelt.com/about",
+  },
+  openGraph: {
+    title: "Dan Spelt | Full-Stack Developer & Accessibility Specialist",
+    description:
+      "18+ years building full-stack web applications and accessible software from Victoria, BC.",
+    url: "https://danspelt.com/about",
+    images: ["/og.png"],
+  },
 };
 
 const highlights = [
