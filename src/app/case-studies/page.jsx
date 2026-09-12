@@ -3,7 +3,7 @@ import CaseStudyIndexClient from '@/components/project-case-study/CaseStudyIndex
 export const metadata = {
   title: 'Project Case Studies | Dan Spelt',
   description:
-    'Evidence-led case studies for Community Hive, AccessLens, and WindowsHelperSuite, covering the problem, implementation, testing, constraints, and technical tradeoffs.',
+    'Evidence-led case studies for Community Hive and AccessLens, covering the problem, implementation, testing, constraints, and technical tradeoffs.',
 };
 
 export default function CaseStudiesPage() {
@@ -13,9 +13,9 @@ export default function CaseStudiesPage() {
         <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Selected work</p>
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl mb-4">Case studies</h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Three systems with different constraints: multi-tenant community software, civic
-          accessibility data, and Windows-native assistance tools. Claims below are grounded in
-          each project&apos;s implementation, tests, and technical documentation.
+          Two web platforms with different constraints: multi-tenant community software and civic
+          accessibility data. Claims below are grounded in each project&apos;s implementation, tests,
+          and technical documentation.
         </p>
       </header>
 

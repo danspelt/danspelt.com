@@ -8,14 +8,13 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { PROJECT_PROOF, PROJECT_STATUS } from '@/data/project-proof';
 
-const featuredSlugs = ['community-hive', 'accesslens', 'windows-helper-suite'];
+const featuredSlugs = ['community-hive', 'accesslens'];
 const projects = featuredSlugs.map((slug) => PROJECT_PROOF.find((project) => project.slug === slug));
 
 const filters = [
   { id: 'all', label: 'All projects', slugs: featuredSlugs },
   { id: 'web', label: 'Web platforms', slugs: ['community-hive', 'accesslens'] },
-  { id: 'accessibility', label: 'Accessibility', slugs: ['accesslens', 'windows-helper-suite'] },
-  { id: 'desktop', label: 'Desktop tools', slugs: ['windows-helper-suite'] },
+  { id: 'accessibility', label: 'Accessibility', slugs: ['accesslens'] },
 ];
 
 export default function CaseStudyIndexClient() {
