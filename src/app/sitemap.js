@@ -17,7 +17,6 @@ export default function sitemap() {
     '/build-for-us',
     '/case-studies/community-hive',
     '/case-studies/accesslens',
-    '/case-studies/windows-helper-suite',
   ];
 
   return routes.map((route) => ({
