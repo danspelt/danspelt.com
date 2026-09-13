@@ -21,21 +21,22 @@ export const metadata = {
     "React developer",
     "remote software developer Canada",
   ],
+  alternates: {
+    canonical: "https://danspelt.com/about",
+  },
   openGraph: {
     title: "About Dan Spelt | Full-Stack Developer & Accessibility Engineer | Victoria BC",
     description:
       "18+ years as a full-stack developer and accessibility engineer building business software, SaaS platforms, and accessible web applications.",
     url: "https://danspelt.com/about",
     type: "profile",
+    images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "About Dan Spelt | Full-Stack Developer & Accessibility Engineer | Victoria BC",
     description:
       "18+ years as a full-stack developer and accessibility engineer in Victoria, BC.",
-  },
-  alternates: {
-    canonical: "https://danspelt.com/about",
   },
 };
 

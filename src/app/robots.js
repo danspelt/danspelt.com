@@ -6,5 +6,6 @@ export default function robots() {
       disallow: ['/api/'],
     },
     sitemap: 'https://danspelt.com/sitemap.xml',
+    host: 'https://danspelt.com',
   };
 }

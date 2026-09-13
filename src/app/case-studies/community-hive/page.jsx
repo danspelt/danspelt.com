@@ -19,7 +19,7 @@ import { COMMUNITY_HIVE_SCREENSHOTS } from '@/data/project-proof';
 import CommunityHiveSlideshow from '@/components/community-hive/CommunityHiveSlideshow';
 
 export const metadata = {
-  title: 'Community Hive Case Study | Custom Business Software by Dan Spelt',
+  title: 'Community Hive Custom Software Case Study',
   description:
     'See how Dan Spelt designed and developed Community Hive, a custom platform for communication, maintenance tracking, community engagement, and property management.',
   keywords: [

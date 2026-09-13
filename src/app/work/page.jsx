@@ -1,13 +1,15 @@
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, BookOpen, BriefcaseBusiness, Presentation } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BriefcaseBusiness } from 'lucide-react';
 import { ALL_WORK, WORK_COUNTS } from '@/data/all-work';
 import { APP_STATUS } from '@/data/projects';
 import { PROJECT_STATUS } from '@/data/project-proof';
 
 export const metadata = {
-  title: 'Dan Spelt Portfolio | Projects, Case Studies & Software Development Work',
+  title: {
+    absolute: 'Portfolio & Software Development Work | Dan Spelt',
+  },
   description:
-    'Browse Dan Spelt’s portfolio of custom software projects, engineering case studies, technical writing, and full-stack development work in Victoria, BC, Canada.',
+    'Browse Dan Spelt’s portfolio of completed software projects, engineering case studies, and full-stack development work in Victoria, BC, Canada.',
   keywords: [
     'Dan Spelt portfolio',
     'custom software projects',
@@ -20,14 +22,15 @@ export const metadata = {
   ],
   alternates: { canonical: 'https://danspelt.com/work' },
   openGraph: {
-    title: 'Dan Spelt Portfolio | Projects, Case Studies & Software Development Work',
-    description: 'Custom software projects, engineering case studies, and full-stack development work by Dan Spelt in Victoria, BC.',
+    title: 'Portfolio & Software Development Work | Dan Spelt',
+    description: 'Completed software projects, engineering case studies, and full-stack development work by Dan Spelt in Victoria, BC.',
     url: 'https://danspelt.com/work',
+    images: ['/og.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dan Spelt Portfolio | Projects, Case Studies & Software Development Work',
-    description: 'Custom software projects, engineering case studies, and full-stack development work by Dan Spelt.',
+    title: 'Portfolio & Software Development Work | Dan Spelt',
+    description: 'Completed software projects, engineering case studies, and full-stack development work by Dan Spelt.',
   },
 };
 
@@ -52,7 +55,6 @@ export default function WorkDirectoryPage() {
   const sectionLinks = [
     ['#apps', `Apps & tools (${WORK_COUNTS.apps})`],
     ['#case-studies', `Case studies (${WORK_COUNTS.caseStudies})`],
-    ['#writing', `Writing (${WORK_COUNTS.writing})`],
     ['#experience', `Experience (${WORK_COUNTS.professional})`],
   ];
 
@@ -62,7 +64,7 @@ export default function WorkDirectoryPage() {
         <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Portfolio directory</p>
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-5">All work</h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl">
-          Live products, evidence-led case studies, technical guides, and the professional experience behind them—all in one place.
+          Live products, evidence-led case studies, and the professional experience behind them—all in one place.
         </p>
         <nav aria-label="All work sections" className="mt-8 flex flex-wrap gap-2">
           {sectionLinks.map(([href, label]) => (
@@ -74,7 +76,7 @@ export default function WorkDirectoryPage() {
       </header>
 
       <section id="apps" aria-labelledby="apps-heading" className="scroll-mt-24 border-t border-border/70 py-12 sm:py-16">
-        <SectionHeader id="apps-heading" eyebrow="Products" title="Apps and tools" count={WORK_COUNTS.apps} description="Public applications and current builds already listed in the portfolio. Live products open on their own domains." />
+        <SectionHeader id="apps-heading" eyebrow="Products" title="Apps and tools" count={WORK_COUNTS.apps} description="Live products that open on their own domains. Each one started as a real problem worth solving." />
         <p className="-mt-3 mb-7">
           <Link href="/projects" className="inline-flex items-center text-sm font-medium text-primary hover:underline underline-offset-4">
             Open the detailed projects page <ArrowRight className="ml-1.5 h-4 w-4" aria-hidden="true" />
@@ -125,22 +127,6 @@ export default function WorkDirectoryPage() {
         </div>
       </section>
 
-      <section id="writing" aria-labelledby="writing-heading" className="scroll-mt-24 border-t border-border/70 py-12 sm:py-16">
-        <SectionHeader id="writing-heading" eyebrow="Documentation" title="Technical writing and guides" count={WORK_COUNTS.writing} description="Public planning and implementation documents from the portfolio repository. These are working technical guides, not marketing articles." />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {ALL_WORK.writing.map((item) => (
-            <article key={item.title} className="rounded-xl border border-border/70 bg-card p-5">
-              <BookOpen className="h-5 w-5 text-primary mb-3" aria-hidden="true" />
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-              <a href={item.href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-sm font-medium text-primary hover:underline underline-offset-4">
-                Read on GitHub <ArrowUpRight className="ml-1.5 h-4 w-4" aria-hidden="true" /><ExternalLabel />
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="experience" aria-labelledby="experience-heading" className="scroll-mt-24 border-t border-border/70 py-12 sm:py-16">
         <SectionHeader id="experience-heading" eyebrow="Background" title="Professional experience" count={WORK_COUNTS.professional} description="Supporting context for hiring managers who want to understand technical breadth, accessibility work, and career history." />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -153,12 +139,6 @@ export default function WorkDirectoryPage() {
           ))}
         </div>
       </section>
-
-      <aside aria-labelledby="talks-heading" className="rounded-2xl border border-border/70 bg-muted/30 p-6 sm:p-8">
-        <Presentation className="h-6 w-6 text-primary mb-3" aria-hidden="true" />
-        <h2 id="talks-heading" className="text-2xl font-semibold">Talks and presentations</h2>
-        <p className="mt-2 text-muted-foreground leading-relaxed">No public talks or presentation recordings are currently listed in this portfolio.</p>
-      </aside>
 
       <footer className="mt-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl bg-secondary px-6 py-8 text-secondary-foreground">
         <div>

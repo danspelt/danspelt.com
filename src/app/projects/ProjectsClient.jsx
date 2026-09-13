@@ -132,11 +132,11 @@ const Projects = () => {
     <div className="container mx-auto py-8 px-4 max-w-5xl">
       <div className="mb-12 max-w-2xl">
         <h1 className="text-4xl sm:text-5xl font-semibold mb-3">
-          Projects
+          Full-stack software development projects
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Every app I run, plus deep dives into the two largest products — accessibility mapping and
-          multi-tenant community communication.
+          Custom web applications, accessible software, dashboards, and tools — including deep dives
+          into accessibility mapping and multi-tenant community communication platforms.
         </p>
       </div>
 

@@ -20,11 +20,14 @@ const fraunces = Fraunces({
 export const metadata = {
   metadataBase: new URL("https://danspelt.com"),
   title: {
-    default: "Dan Spelt — Custom Software Developer & Accessibility Engineer | Victoria BC",
+    default: "Dan Spelt | Custom Software Developer & Accessibility Engineer in Victoria, BC",
     template: "%s | Dan Spelt",
   },
   description:
-    "Dan Spelt is a custom software developer and full-stack engineer in Victoria, BC, Canada. 18+ years building business software, workflow automation, accessible web applications, and SaaS platforms for organizations across North America.",
+    "Victoria, BC custom software developer and accessibility engineer with 18+ years of experience building full-stack web applications, workflow automation, accessible business software, and SaaS platforms.",
+  authors: [{ name: "Dan Spelt", url: "https://danspelt.com" }],
+  creator: "Dan Spelt",
+  publisher: "Dan Spelt",
   keywords: [
     "Dan Spelt",
     "Custom Software Developer",
@@ -55,27 +58,38 @@ export const metadata = {
     locale: "en_CA",
     url: "https://danspelt.com",
     siteName: "Dan Spelt",
-    title: "Dan Spelt — Custom Software Developer & Accessibility Engineer | Victoria BC",
+    title: "Dan Spelt | Custom Software Developer & Accessibility Engineer in Victoria, BC",
     description:
-      "Custom software development, workflow automation, and accessible web applications from a senior full-stack developer in Victoria, BC.",
+      "Full-stack web applications, workflow automation, and accessible custom software built around real business problems.",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Dan Spelt — Custom Software Developer & Accessibility Engineer in Victoria BC",
+        alt: "Dan Spelt, custom software developer and accessibility engineer in Victoria, British Columbia",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dan Spelt — Custom Software Developer & Accessibility Engineer | Victoria BC",
+    title: "Dan Spelt | Custom Software Developer & Accessibility Engineer in Victoria, BC",
     description:
-      "Custom software development, workflow automation, and accessible web applications from a senior full-stack developer in Victoria, BC.",
+      "Full-stack web applications, workflow automation, and accessible custom software built around real business problems.",
     images: ["/og.png"],
   },
   alternates: {
     canonical: "https://danspelt.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

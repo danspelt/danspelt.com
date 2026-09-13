@@ -14,21 +14,22 @@ export const metadata = {
     'remote software engineer Canada',
     'Next.js developer hire',
   ],
+  alternates: {
+    canonical: 'https://danspelt.com/contact',
+  },
   openGraph: {
     title: 'Contact Dan Spelt | Custom Software Developer & Engineer | Victoria BC',
     description:
       'Get in touch with Dan Spelt about custom software, engineering roles, or accessibility consulting. Remote worldwide from Victoria, BC.',
     url: 'https://danspelt.com/contact',
     type: 'website',
+    images: ['/og.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Contact Dan Spelt | Custom Software Developer & Engineer | Victoria BC',
     description:
       'Contact Dan Spelt about custom software, engineering roles, or accessibility consulting.',
-  },
-  alternates: {
-    canonical: 'https://danspelt.com/contact',
   },
 };
 
