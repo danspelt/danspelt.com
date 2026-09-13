@@ -1,8 +1,10 @@
-import { LIVE_APPS } from '@/data/projects';
+import { getLiveApps } from '@/data/projects';
 import { PROJECT_PROOF } from '@/data/project-proof';
 
 export const ALL_WORK = {
-  apps: LIVE_APPS.map((app) => ({
+  apps: getLiveApps()
+    .filter((app) => app.caseStudyUrl)
+    .map((app) => ({
     title: app.name,
     description: app.description,
     href: app.url ?? '/projects',
