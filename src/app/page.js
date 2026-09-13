@@ -3,10 +3,36 @@ import { PROFESSIONAL_PROFILE } from '@/data/professional-profile';
 
 export const metadata = {
   title: {
-    absolute: 'Dan Spelt — Custom Software for Real-World Business Problems',
+    absolute:
+      'Dan Spelt — Custom Software Developer & Business Problem Solver | Victoria BC',
   },
   description:
-    'Custom software development for businesses and organizations. 18+ years building practical software that reduces administrative work, improves efficiency, and manages information more effectively.',
+    'Hire Dan Spelt, a custom software developer and full-stack engineer in Victoria, BC. 18+ years building business software, workflow automation, accessible web apps, and SaaS platforms for organizations across Canada and the US.',
+  keywords: [
+    'custom software developer Victoria BC',
+    'business software developer',
+    'full stack developer Victoria BC',
+    'software consultant Victoria BC',
+    'workflow automation developer',
+    'SaaS developer Canada',
+    'accessible web applications',
+    'Next.js developer',
+    'React developer',
+    'business process software',
+  ],
+  openGraph: {
+    title: 'Dan Spelt — Custom Software Developer & Business Problem Solver | Victoria BC',
+    description:
+      'Custom software development, workflow automation, and accessible web applications from a senior full-stack developer in Victoria, BC.',
+    url: 'https://danspelt.com',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dan Spelt — Custom Software Developer & Business Problem Solver | Victoria BC',
+    description:
+      'Custom software development, workflow automation, and accessible web applications from a senior full-stack developer in Victoria, BC.',
+  },
   alternates: {
     canonical: 'https://danspelt.com',
   },
@@ -31,7 +57,22 @@ const personSchema = {
     addressRegion: 'BC',
     addressCountry: 'CA',
   },
-  knowsAbout: PROFESSIONAL_PROFILE.skills,
+  knowsAbout: [
+    'Custom Software Development',
+    'Full-Stack Web Development',
+    'Workflow Automation',
+    'Business Process Improvement',
+    'SaaS Platform Development',
+    'Accessibility Engineering',
+    'WCAG Compliance',
+    'Assistive Technology',
+    'React',
+    'Next.js',
+    'Node.js',
+    'MongoDB',
+    'TypeScript',
+    ...PROFESSIONAL_PROFILE.skills,
+  ],
   alumniOf: PROFESSIONAL_PROFILE.education.map((edu) => ({
     '@type': 'EducationalOrganization',
     name: edu.institution,

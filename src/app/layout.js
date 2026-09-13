@@ -20,49 +20,58 @@ const fraunces = Fraunces({
 export const metadata = {
   metadataBase: new URL("https://danspelt.com"),
   title: {
-    default: "Dan Spelt — Custom Software Developer",
+    default: "Dan Spelt — Custom Software Developer & Accessibility Engineer | Victoria BC",
     template: "%s | Dan Spelt",
   },
   description:
-    "Custom software developer based in Victoria, BC with 18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
+    "Dan Spelt is a custom software developer and full-stack engineer in Victoria, BC, Canada. 18+ years building business software, workflow automation, accessible web applications, and SaaS platforms for organizations across North America.",
   keywords: [
+    "Dan Spelt",
     "Custom Software Developer",
-    "Business Software",
-    "Workflow Automation",
+    "Custom Software Development Victoria BC",
+    "Full Stack Developer Victoria BC",
+    "Full-Stack Software Engineer",
+    "Business Software Developer",
+    "Workflow Automation Consultant",
     "Web Application Development",
+    "SaaS Developer",
     "Accessibility Engineer",
-    "WCAG Compliance",
-    "ADA Compliance",
-    "Custom Software",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Web Accessibility",
-    "Victoria BC Canada",
+    "Accessibility Specialist",
+    "WCAG Compliance Consultant",
+    "ADA Compliance Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Node.js Developer",
+    "MongoDB Developer",
+    "Software Consultant Victoria BC",
     "Public Sector Web Development",
+    "Assistive Technology Developer",
+    "Custom Business Software",
+    "Victoria BC Canada",
+    "Remote Software Developer Canada",
   ],
   openGraph: {
     type: "website",
     locale: "en_CA",
     url: "https://danspelt.com",
     siteName: "Dan Spelt",
-    title: "Dan Spelt — Custom Software Developer",
+    title: "Dan Spelt — Custom Software Developer & Accessibility Engineer | Victoria BC",
     description:
-      "18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
+      "Custom software development, workflow automation, and accessible web applications from a senior full-stack developer in Victoria, BC.",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Dan Spelt — Custom Software Developer",
+        alt: "Dan Spelt — Custom Software Developer & Accessibility Engineer in Victoria BC",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dan Spelt — Custom Software Developer",
+    title: "Dan Spelt — Custom Software Developer & Accessibility Engineer | Victoria BC",
     description:
-      "18+ years helping businesses and organizations reduce administrative work, improve efficiency, and turn messy processes into focused software.",
+      "Custom software development, workflow automation, and accessible web applications from a senior full-stack developer in Victoria, BC.",
     images: ["/og.png"],
   },
   alternates: {
@@ -123,6 +132,12 @@ export default function RootLayout({ children }) {
                     className="rounded-sm hover:text-foreground transition-colors focus-ring"
                   >
                     Insights
+                  </Link>
+                  <Link
+                    href="/documentation"
+                    className="rounded-sm hover:text-foreground transition-colors focus-ring"
+                  >
+                    Documentation
                   </Link>
                   <Link
                     href="/skillstools"

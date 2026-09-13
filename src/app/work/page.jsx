@@ -5,18 +5,29 @@ import { APP_STATUS } from '@/data/projects';
 import { PROJECT_STATUS } from '@/data/project-proof';
 
 export const metadata = {
-  title: 'All Work',
+  title: 'Dan Spelt Portfolio | Projects, Case Studies & Software Development Work',
   description:
-    'Browse Dan Spelt’s live applications, project case studies, technical writing, and professional engineering experience in one directory.',
+    'Browse Dan Spelt’s portfolio of custom software projects, engineering case studies, technical writing, and full-stack development work in Victoria, BC, Canada.',
+  keywords: [
+    'Dan Spelt portfolio',
+    'custom software projects',
+    'full stack developer portfolio',
+    'software development case studies',
+    'Next.js projects',
+    'React projects',
+    'web application development portfolio',
+    'Victoria BC software developer',
+  ],
   alternates: { canonical: 'https://danspelt.com/work' },
   openGraph: {
-    title: 'All Work | Dan Spelt',
-    description: 'Live applications, engineering case studies, technical guides, and professional experience in one directory.',
+    title: 'Dan Spelt Portfolio | Projects, Case Studies & Software Development Work',
+    description: 'Custom software projects, engineering case studies, and full-stack development work by Dan Spelt in Victoria, BC.',
     url: 'https://danspelt.com/work',
   },
   twitter: {
-    title: 'All Work | Dan Spelt',
-    description: 'Live applications, engineering case studies, technical guides, and professional experience in one directory.',
+    card: 'summary_large_image',
+    title: 'Dan Spelt Portfolio | Projects, Case Studies & Software Development Work',
+    description: 'Custom software projects, engineering case studies, and full-stack development work by Dan Spelt.',
   },
 };
 

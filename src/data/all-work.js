@@ -1,10 +1,12 @@
-import { LIVE_APPS } from '@/data/projects';
+import { getLiveApps } from '@/data/projects';
 import { PROJECT_PROOF } from '@/data/project-proof';
 
 const repositoryBase = 'https://github.com/danspelt/danspelt.com/blob/main';
 
 export const ALL_WORK = {
-  apps: LIVE_APPS.map((app) => ({
+  apps: getLiveApps()
+    .filter((app) => app.caseStudyUrl)
+    .map((app) => ({
     title: app.name,
     description: app.description,
     href: app.url ?? '/projects',
@@ -72,6 +74,11 @@ export const ALL_WORK = {
       title: 'Career timeline',
       description: 'Education, roles, project milestones, and professional history.',
       href: '/timeline',
+    },
+    {
+      title: 'Site documentation',
+      description: 'Architecture, content rules, verification, deployment, and repository documentation.',
+      href: '/documentation',
     },
     {
       title: 'About Dan',

@@ -3,11 +3,40 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accessibility, Award, Users, ArrowRight, FileText, Brain } from "lucide-react";
 import IntroVideo from "@/components/IntroVideo";
+import { PROFESSIONAL_PROFILE } from "@/data/professional-profile";
 
 export const metadata = {
-  title: "About",
+  title: "About Dan Spelt | Full-Stack Developer & Accessibility Engineer | Victoria BC",
   description:
-    "Dan Spelt — Full-Stack Developer and Accessibility Specialist based in Victoria, BC, Canada. 18+ years of experience working remotely with teams worldwide.",
+    "Dan Spelt is a senior full-stack developer and accessibility engineer in Victoria, BC, Canada. 18+ years building accessible web applications, business software, and SaaS platforms for non-profits, universities, and SaaS teams.",
+  keywords: [
+    "Dan Spelt",
+    "full stack developer Victoria BC",
+    "accessibility engineer Victoria BC",
+    "senior software developer Canada",
+    "custom software developer",
+    "accessibility specialist",
+    "assistive technology developer",
+    "Next.js developer",
+    "React developer",
+    "remote software developer Canada",
+  ],
+  openGraph: {
+    title: "About Dan Spelt | Full-Stack Developer & Accessibility Engineer | Victoria BC",
+    description:
+      "18+ years as a full-stack developer and accessibility engineer building business software, SaaS platforms, and accessible web applications.",
+    url: "https://danspelt.com/about",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Dan Spelt | Full-Stack Developer & Accessibility Engineer | Victoria BC",
+    description:
+      "18+ years as a full-stack developer and accessibility engineer in Victoria, BC.",
+  },
+  alternates: {
+    canonical: "https://danspelt.com/about",
+  },
 };
 
 const highlights = [
@@ -33,9 +62,44 @@ const highlights = [
   },
 ];
 
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: PROFESSIONAL_PROFILE.name,
+  jobTitle: PROFESSIONAL_PROFILE.title,
+  description: PROFESSIONAL_PROFILE.headline,
+  url: PROFESSIONAL_PROFILE.contact.website,
+  email: `mailto:${PROFESSIONAL_PROFILE.contact.email}`,
+  sameAs: [PROFESSIONAL_PROFILE.contact.linkedin],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Victoria',
+    addressRegion: 'BC',
+    addressCountry: 'CA',
+  },
+  knowsAbout: [
+    'Full-Stack Web Development',
+    'Custom Software Development',
+    'Accessibility Engineering',
+    'WCAG Compliance',
+    'Assistive Technology',
+    'React',
+    'Next.js',
+    'Node.js',
+    'MongoDB',
+    'Workflow Automation',
+    ...PROFESSIONAL_PROFILE.skills,
+  ],
+};
+
 const About = () => {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <div className="container mx-auto max-w-4xl px-4 py-12">
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-2 bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
@@ -96,6 +160,23 @@ const About = () => {
           </Card>
         ))}
       </div>
+
+      {/* Career history link */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <div className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8">
+          <h2 className="text-2xl font-semibold mb-3">Career history</h2>
+          <p className="text-muted-foreground leading-relaxed mb-5">
+            18+ years across CanAssist, Youneeq, Neil Squire Society, and independent work. Full role descriptions,
+            responsibilities, and highlights are on the employment page.
+          </p>
+          <Link href="/employment">
+            <Button variant="outline">
+              View employment history
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
 
       {/* Detailed Sections */}
       <div className="space-y-8 max-w-3xl mx-auto">
@@ -158,6 +239,7 @@ const About = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,73 +1,108 @@
 # Project Status — danspelt.com
 
-**Last updated:** July 22, 2026
-**Status:** ✅ Stable / Feature-complete for now — paused until new features are planned
+**Last updated:** September 13, 2026  
+**Status:** Stable / paused for now  
+**Latest remote commit:** `952499d` — `fix: limit work page to completed projects`
+
+For a session handoff and important Git notes, see [User Note](USER_NOTE.md).
 
 ---
 
 ## Where We Are
 
-danspelt.com is a personal portfolio and services site built with **Next.js 16 (Turbopack)**, **React 19**, and **Tailwind CSS 4**. It is deployed via **Coolify** (Dockerfile build pack, standalone output) to production at:
+danspelt.com is a personal portfolio and services site built with **Next.js 16**, **React 19**, and **Tailwind CSS 4**. Production deployment is handled through **Coolify** using the Dockerfile build pack and Next.js standalone output.
+
+Primary domains:
 
 - https://danspelt.com / https://www.danspelt.com
 - https://danspelt.ca / https://www.danspelt.ca
 
-The latest deployment (commit `de0e67e`) is live and verified. All pages return 200 and the production build passes cleanly.
+The `/work` page now limits its **Apps and tools** section to completed, case-study-backed projects:
 
-## What Is Done
+- Community Hive
+- AccessLens
 
-### Pages
-- **Home** (`/`) — landing page with services and project cards
+Other deployed or in-progress products remain on `/projects`, but do not appear as completed work on `/work`.
+
+## Current Pages
+
+- **Home** (`/`) — services, positioning, and project paths
 - **About** (`/about`)
-- **Projects** (`/projects`) — 5 unique tools, consolidated 3-column grid
+- **Projects** (`/projects`) — deployed apps plus in-development tools
+- **Work** (`/work`) — completed portfolio work, case studies, and experience
 - **Case Studies** (`/case-studies`)
-- **Timeline** (`/timeline`) — server-rendered
+- **Documentation** (`/documentation`) — public architecture, content-model, API, quality, and operations overview
+- **Timeline** (`/timeline`)
 - **Skills & Tools** (`/skillstools`)
 - **FAQ** (`/faq`)
 - **Contact** (`/contact`)
 - **Accessibility** (`/accessibility`)
-- **Custom Software** (`/custom-software`) — NEW: services pitch page with inquiry form, linked from navbar and footer ("Have a Business Challenge?")
+- **Custom Software** (`/custom-software`)
+- **Insights** (`/insights`)
+- **Build for Us** (`/build-for-us`)
 
-### API Routes
-- `/api/custom-software-inquiry` — NEW: handles inquiry form submissions
-- `/api/email` — email sending via **Resend** (migrated off SendGrid)
-- `/api/github` and `/api/github-test` — GitHub data integration
-- `/api/projects` — project data
+Pending local-only page:
 
-### Recent Milestones (latest first)
-1. Custom software services page + inquiry API + analytics lib (`src/lib/analytics.js`) + CRM developer guide
-2. Faith-Based Web Help launched at faith.danspelt.com; only live services shown
-3. SendGrid → Resend migration; build passes cleanly
-4. TypeScript build fixes (excluded dead AI lib files and `scripts/`)
-5. Rebrand to AI Services; DS monogram site icons; navigation cleanup
+- **Employment** (`/employment`) — exists in the working tree but is not committed or pushed yet
 
-### Infrastructure
-- Docker multi-stage build (node:22-slim, non-root `nextjs` user, standalone output)
-- Coolify auto-deploy from `main` branch
-- Turbopack root configured in `next.config.mjs`
-- Sibling services deployed: crm.danspelt.com, audit.danspelt.com, resume.danspelt.com, faith.danspelt.com
+## API Routes
 
-## What Looks Good
+- `/api/health`
+- `/api/projects`
+- `/api/github` and `/api/github-test`
+- `/api/email`
+- `/api/custom-software-inquiry`
+- `/api/business-challenge`
+- `/api/ai-chat` and `/api/ai-chat/email`
 
-- **Build health** — clean production build, TypeScript passes, 19 routes generated
-- **Deployment pipeline** — push-to-deploy via Coolify works reliably (one transient failure resolved by redeploy)
-- **Static-first architecture** — most pages are prerendered static; only APIs and timeline are dynamic
-- **Lead capture** — the custom software inquiry funnel is live end-to-end (page → form → API → email)
+## Recent Milestones
+
+1. `/work` now shows only completed, case-study-backed apps: Community Hive and AccessLens.
+2. A public `/documentation` page now documents the content model, project register, architecture, APIs, verification, and repository documentation.
+3. Commit `952499d` was pushed to `origin/main` from a clean temporary worktree.
+3. WindowsHelperSuite was removed from the remote portfolio history in commit `1563b7a`.
+4. Remote `main` includes newer portfolio content and business documentation updates that local `main` has not synced yet.
+5. Local working tree contains an uncommitted SEO and employment-history update set.
+
+## Local Work Needing Review
+
+The following local changes are not pushed:
+
+- New `/employment` page
+- About, contact, homepage, global, and work metadata improvements
+- Person schema additions
+- Sitemap entry for `/employment`
+- `/work` completed-project filter
+- Public `/documentation` page, footer link, sitemap entry, and work-directory documentation link
+
+Local `main` is currently **1 ahead and 6 behind** `origin/main`. Review and reconcile before committing more work.
+
+## Verification
+
+Latest local verification:
+
+- `npm run lint` passes
+- `/work` returns HTTP 200
+- `/work` app count is 2
+- Community Hive and AccessLens render
+- CareBoard and Clarity Audit do not render
 
 ## Known Issues / Tech Debt
 
-- **26 Dependabot vulnerabilities** on the repo (11 high, 12 moderate, 3 low) — https://github.com/danspelt/danspelt.com/security/dependabot
-- Coolify app health check shows `running:unknown` — no health check endpoint configured
-- Dead AI lib files and `scripts/` are excluded from the TS build rather than removed
+- Local branch is diverged from `origin/main` and has unrelated uncommitted edits.
+- GitHub reported **9 Dependabot vulnerabilities** on the default branch at push time: https://github.com/danspelt/danspelt.com/security/dependabot
+- Coolify health reporting may remain limited unless a dedicated health-check endpoint is configured.
+- Local `node_modules` required reinstalling during the last session.
 
-## What We Should Do Next (when resuming)
+## Resume Checklist
 
-1. **Security:** Triage and fix the Dependabot vulnerabilities (`npm audit fix`, targeted upgrades)
-2. **Health checks:** Add a `/api/health` endpoint and enable Coolify health checks for proper status reporting
-3. **Cleanup:** Delete (not just exclude) dead AI lib files and unused scripts
-4. **Analytics:** Verify `src/lib/analytics.js` events are firing and decide on a dashboard
-5. **Content:** Add real case studies / testimonials to the custom software page as leads come in
+1. Review `docs/USER_NOTE.md`.
+2. Preserve the uncommitted local edits.
+3. Sync local `main` with `origin/main`.
+4. Decide whether to commit the `/employment` and SEO updates.
+5. Run `npm run lint` and `npm run build`.
+6. Confirm the next Coolify deployment.
 
 ## Decision
 
-**The project is done for now.** No further work planned until new features are needed. The site is stable, deployed, and capturing leads.
+**The project is done for now.** The requested `/work` behavior is implemented and pushed. Remaining work is Git cleanup and review of the uncommitted SEO/employment updates.
