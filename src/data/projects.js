@@ -60,28 +60,6 @@ export const LIVE_APPS = [
       'For website owners, developers, and accessibility teams who need a quick, actionable first look at accessibility barriers. Small businesses and non-profits benefit from prioritized fixes instead of overwhelming scanner reports. The impact is faster remediation and a site that works for more visitors, including people using screen readers or keyboards.',
     cta: 'Run a scan',
   },
-  {
-    slug: 'auditspark',
-    name: 'AuditSpark',
-    url: 'https://auditspark.danspelt.com',
-    caseStudyUrl: null,
-    status: 'live',
-    tags: ['AI', 'Conversion'],
-    description:
-      'For business owners, marketers, and web teams who want to turn more visitors into leads or customers. Small businesses benefit from practical fixes to headlines, calls to action, and page structure without hiring a full conversion agency. The impact is clearer messaging, better user flow, and more revenue from the same traffic.',
-    cta: 'Get an audit',
-  },
-  {
-    slug: 'christian-web-help',
-    name: 'Christian Web Help',
-    url: 'https://faith.danspelt.com',
-    caseStudyUrl: null,
-    status: 'live',
-    tags: ['Services', 'Non-profit'],
-    description:
-      'For churches, ministries, and faith-led teams that need a website visitors can actually use, including people with disabilities or older members. Congregations and visitors benefit from clear event information, simple donation flows, and accessible content. The impact is stronger community connection and fewer people left out because a site is hard to navigate.',
-    cta: 'Get website help',
-  },
 ];
 
 /**
