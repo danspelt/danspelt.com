@@ -12,16 +12,9 @@ const inquirySchema = z.object({
     .string()
     .min(10, 'Please tell me a little more about what you would like to improve')
     .max(5000),
-  contactMethod: z.enum(['email', 'phone', 'video']),
   // Honeypot field — real users never fill this in.
   website: z.string().max(0).optional().or(z.literal('')),
 });
-
-const CONTACT_LABELS = {
-  email: 'Email',
-  phone: 'Phone call',
-  video: 'Video call',
-};
 
 const escapeHtml = (str = '') =>
   str
@@ -45,7 +38,7 @@ export async function POST(req) {
       );
     }
 
-    const { name, email, business, challenge, contactMethod, website } = parsed.data;
+    const { name, email, business, challenge, website } = parsed.data;
 
     // Honeypot triggered — pretend success without sending anything.
     if (website) {
@@ -79,7 +72,6 @@ export async function POST(req) {
         `Name: ${name}`,
         `Email: ${email}`,
         `Business/Organization: ${business || '(not provided)'}`,
-        `Preferred way to connect: ${CONTACT_LABELS[contactMethod]}`,
         '',
         'What they would like to improve:',
         challenge,
@@ -89,7 +81,6 @@ export async function POST(req) {
           <h2 style="color: #333;">New Custom Software Inquiry</h2>
           <p><strong>From:</strong> ${escapeHtml(name)} (${escapeHtml(email)})</p>
           <p><strong>Business/Organization:</strong> ${escapeHtml(business || '(not provided)')}</p>
-          <p><strong>Preferred way to connect:</strong> ${CONTACT_LABELS[contactMethod]}</p>
           <div style="background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
             <p style="white-space: pre-wrap;">${escapeHtml(challenge)}</p>
           </div>

@@ -23,7 +23,6 @@ const initialForm = {
   email: '',
   business: '',
   challenge: '',
-  contactMethod: 'email',
   website: '', // honeypot
 };
 
@@ -214,29 +213,10 @@ const InquiryForm = () => {
             )}
           </div>
 
-          <fieldset>
-            <legend className={labelClasses}>Preferred way to connect</legend>
-            <div className="flex flex-wrap gap-4">
-              {[
-                { value: 'email', label: 'Email' },
-                { value: 'phone', label: 'Phone' },
-                { value: 'video', label: 'Video call' },
-              ].map((option) => (
-                <label key={option.value} className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="contactMethod"
-                    value={option.value}
-                    checked={form.contactMethod === option.value}
-                    onChange={handleChange('contactMethod')}
-                    className="w-4 h-4 accent-[hsl(var(--primary))] focus-visible:outline-2 focus-visible:outline-offset-2"
-                    disabled={status === 'submitting'}
-                  />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
+          <p className="text-sm text-muted-foreground">
+            I reply to every inquiry by email first. If a call would help, we&apos;ll
+            schedule a time together.
+          </p>
 
           {/* Honeypot — hidden from real users and screen readers */}
           <div className="hidden" aria-hidden="true">
