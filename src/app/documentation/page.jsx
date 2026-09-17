@@ -199,12 +199,11 @@ const repositoryDocs = [
 ];
 
 const developerGuides = [
-  'AI Website Audit Tool',
-  'AI Quote and Proposal Generator',
-  'AI Resume and Cover Letter Fixer',
-  'Local Business Content Generator',
-  'AI Rental Concierge',
-  'Dan Income CRM',
+  'Community Hive',
+  'Community Hive Sales Worker',
+  'CareBoard',
+  'AccessLens',
+  'Clarity Audit',
 ];
 
 const qualityChecks = [

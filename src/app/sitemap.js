@@ -23,7 +23,7 @@ export default function sitemap() {
 
   return routes.map((route) => ({
     url: `${base}${route}`,
-    lastModified: new Date('2026-09-10'),
+    lastModified: new Date('2026-09-17'),
     changeFrequency: route === '' || route === '/custom-software' ? 'weekly' : 'monthly',
     priority: route === '' ? 1 : route === '/custom-software' || route === '/case-studies' ? 0.9 : 0.7,
   }));

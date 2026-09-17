@@ -6,6 +6,15 @@
 
 export const RECENT_WORK = [
   {
+    date: '2026-09-17',
+    project: 'danspelt.com',
+    change:
+      'Consolidated the product lineup to the four working apps and added a live-products strip on the homepage linking to each one.',
+    whyItMatters:
+      'Every product a visitor sees now resolves to software that is actually running.',
+    url: '/',
+  },
+  {
     date: '2026-08-06',
     project: 'danspelt.com',
     change:

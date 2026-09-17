@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Lightbulb } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import HeroImage from '@/components/HeroImage';
 import { trackEvent } from '@/lib/analytics';
+import { APP_STATUS, getLiveApps } from '@/data/projects';
 
 const steps = [
   {
@@ -184,6 +186,52 @@ export default function HomeClient() {
               </Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Live products */}
+      <section aria-labelledby="live-products-heading" className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+            <div className="max-w-2xl">
+              <p className="text-sm font-medium text-primary uppercase tracking-[0.18em] mb-3">
+                Working products
+              </p>
+              <h2 id="live-products-heading" className="text-3xl sm:text-4xl font-semibold">
+                Built by Dan. Live right now.
+              </h2>
+            </div>
+            <Link
+              href="/projects"
+              className="inline-flex items-center text-base font-medium text-primary hover:text-primary/80 focus-ring rounded shrink-0"
+              onClick={() => trackEvent('projects_link_click', { source: 'homepage_live_products' })}
+            >
+              All projects
+              <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {getLiveApps().map((app) => (
+              <li key={app.slug}>
+                <a
+                  href={app.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex h-full flex-col rounded-2xl border border-border/70 bg-card p-5 glass transition-colors hover:border-primary/50 focus-ring"
+                  onClick={() => trackEvent('live_app_click', { source: 'homepage', project: app.slug })}
+                >
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <Badge variant="outline">{APP_STATUS[app.status].label}</Badge>
+                    <ArrowUpRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold mb-1">{app.name}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{app.summary}</p>
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
