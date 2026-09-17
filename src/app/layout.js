@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Figtree, Fraunces } from "next/font/google";
 import Link from "next/link";
+import Script from "next/script";
 import { ClientWrapper } from "@/components/client-wrapper";
 import { Providers } from "@/components/providers";
 
@@ -198,6 +199,12 @@ export default function RootLayout({ children }) {
             </div>
           </footer>
         </Providers>
+        {/* Self-hosted Umami analytics — cookieless, no personal data. */}
+        <Script
+          src="https://stats.danspelt.com/script.js"
+          data-website-id="0e51aa23-37e4-449c-ae20-53784ef4156b"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

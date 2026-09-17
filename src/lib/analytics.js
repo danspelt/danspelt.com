@@ -56,6 +56,8 @@ export function trackEvent(eventName, metadata = {}) {
       window.dataLayer.push({ event: eventName, ...props });
     } else if (typeof window.plausible === "function") {
       window.plausible(eventName, { props });
+    } else if (window.umami && typeof window.umami.track === "function") {
+      window.umami.track(eventName, props);
     }
   } catch {
     // Analytics must never break the page.
