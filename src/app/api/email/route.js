@@ -7,9 +7,9 @@ export const runtime = 'nodejs';
 
 // Input validation schema
 const emailSchema = z.object({
-  name: z.string().min(2).max(100),
-  email: z.string().email(),
-  message: z.string().min(10).max(5000),
+  name: z.string().trim().min(2).max(100),
+  email: z.string().trim().email().max(254),
+  message: z.string().trim().min(10).max(5000),
   website: z.string().max(200).optional().default(''),
 });
 
@@ -24,9 +24,13 @@ function escapeHtml(value) {
 }
 
 export async function POST(req) {
+  let data;
   try {
-    const data = await req.json();
-    
+    data = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Please send a valid JSON message.' }, { status: 400 });
+  }
+  try {
     // Validate input
     const validatedData = emailSchema.parse(data);
     const { name, email, message, website } = validatedData;

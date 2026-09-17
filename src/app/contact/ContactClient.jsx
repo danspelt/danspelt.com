@@ -41,6 +41,7 @@ export default function ContactClient() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [submitError, setSubmitError] = useState('');
   const fieldRefs = useRef({});
 
   const fade = {
@@ -64,12 +65,18 @@ export default function ContactClient() {
 
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setSubmitError('');
 
     try {
       const response = await fetch('/api/email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, website }),
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+          website,
+        }),
       });
 
       if (response.ok) {
@@ -77,6 +84,8 @@ export default function ContactClient() {
         setFormData({ name: '', email: '', message: '' });
         setWebsite('');
       } else {
+        const body = await response.json().catch(() => null);
+        setSubmitError(typeof body?.error === 'string' ? body.error : 'Unable to send your message right now.');
         setSubmitStatus('error');
       }
     } catch {
@@ -161,6 +170,7 @@ export default function ContactClient() {
           className="md:col-span-3 space-y-5"
           {...fade}
           noValidate
+          aria-busy={isSubmitting}
         >
           <div>
             <label htmlFor="contact-name" className="block text-sm font-medium mb-1.5">
@@ -172,6 +182,7 @@ export default function ContactClient() {
               type="text"
               name="name"
               autoComplete="name"
+              maxLength={100}
               value={formData.name}
               onChange={(e) => {
                 setFormData({ ...formData, name: e.target.value });
@@ -194,6 +205,7 @@ export default function ContactClient() {
               type="email"
               name="email"
               autoComplete="email"
+              maxLength={254}
               value={formData.email}
               onChange={(e) => {
                 setFormData({ ...formData, email: e.target.value });
@@ -220,6 +232,7 @@ export default function ContactClient() {
                 if (errors.message) setErrors({ ...errors, message: undefined });
               }}
               rows={5}
+              maxLength={5000}
               className="field-input resize-y min-h-[140px]"
               placeholder={intentCopy?.placeholder}
               aria-invalid={Boolean(errors.message)}
@@ -254,7 +267,9 @@ export default function ContactClient() {
             )}
             {submitStatus === 'error' && (
               <p className="text-sm font-medium text-destructive">
-                Something went wrong. Please try again or email me directly.
+                {submitError || 'Unable to send your message right now.'}{' '}
+                Your message is still here. Try again or{' '}
+                <a href="mailto:danspelt24@gmail.com" className="underline underline-offset-4 focus-ring rounded-sm">email me directly</a>.
               </p>
             )}
           </div>

@@ -1,36 +1,17 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
+// Never disclose credentials or authenticated account data in diagnostics.
 export async function GET() {
-  try {
-    const token = process.env.GITHUB_TOKEN;
-    const envInfo = {
-      hasToken: !!token,
-      tokenPrefix: token ? token.substring(0, 4) : 'none',
-      nodeEnv: process.env.NODE_ENV,
-    };
-
-    // Test GitHub API
-    const response = await fetch('https://api.github.com/user', {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github.v3+json',
-      }
+  if (process.env.NODE_ENV !== 'development') {
+    return NextResponse.json({ error: 'Not found' }, {
+      status: 404,
+      headers: { 'Cache-Control': 'no-store' },
     });
-
-    const data = await response.json();
-    
-    return NextResponse.json({
-      env: envInfo,
-      githubResponse: {
-        status: response.status,
-        headers: Object.fromEntries(response.headers.entries()),
-        data: data
-      }
-    });
-  } catch (error) {
-    return NextResponse.json({
-      error: error.message,
-      stack: error.stack
-    }, { status: 500 });
   }
+
+  return NextResponse.json({ hasToken: Boolean(process.env.GITHUB_TOKEN) }, {
+    headers: { 'Cache-Control': 'no-store' },
+  });
 }
