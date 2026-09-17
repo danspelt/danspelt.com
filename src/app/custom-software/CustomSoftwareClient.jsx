@@ -496,37 +496,52 @@ export default function CustomSoftwareClient() {
         </Paragraph>
       </Section>
 
-      {/* How pricing works */}
-      <section aria-labelledby="pricing-heading" className="border-b border-border/60 bg-background">
+      {/* How we work */}
+      <section aria-labelledby="how-we-work-heading" className="border-b border-border/60 bg-background">
         <div className="container mx-auto max-w-5xl px-4 py-16 sm:py-20">
           <div className="max-w-3xl mb-10">
             <p className="text-sm font-medium text-primary uppercase tracking-[0.18em] mb-3">
               Working together
             </p>
-            <h2 id="pricing-heading" className="text-3xl sm:text-4xl font-semibold mb-4">
-              Straightforward pricing, no surprises
+            <h2 id="how-we-work-heading" className="text-3xl sm:text-4xl font-semibold mb-4">
+              How we work — no surprises
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              It starts with a conversation about the problem — not a quote for software you may not need.
+              A straightforward process: you always know what you are paying for, and you never pay for work you did not approve.
             </p>
           </div>
 
-          <ol className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+          <ol className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               {
                 step: '1',
-                title: 'Free evaluation',
-                body: 'A no-obligation working session — up to two hours — to understand how your process works today and whether software can deliver a worthwhile return.',
+                title: "Let's talk — no charge",
+                body: 'Up to two hours of conversation, by email or in writing, to understand your business, the problem you are solving, and what you want the software to accomplish.',
               },
               {
                 step: '2',
-                title: 'Paid consultation — $50/hour',
-                body: 'Deeper analysis, process mapping, and a written recommendation. If you go ahead with a project, every dollar of consultation fees is deducted from the final cost.',
+                title: 'Define the solution — $75/hour',
+                body: 'Detailed discovery and planning: requirements, functionality, technical considerations, scope, and a development plan.',
               },
               {
                 step: '3',
-                title: 'Fixed proposal',
-                body: 'A clear scope and price before any development begins, so you always know what you are getting and what it will cost.',
+                title: 'Discovery is credited back',
+                body: 'If you proceed, 100% of approved discovery and planning fees are credited toward the development cost. You never pay twice.',
+              },
+              {
+                step: '4',
+                title: 'Fixed price before we build',
+                body: 'A written proposal sets the scope, deliverables, timeline, milestones, and total price before development begins — payments tied to milestones, not one lump sum.',
+              },
+              {
+                step: '5',
+                title: 'Changes discussed first',
+                body: 'Want something outside the agreed scope? The additional work and cost are identified before proceeding — no chargeable work without your approval.',
+              },
+              {
+                step: '6',
+                title: 'After launch — you own it',
+                body: 'You own the finished software outright. Defects in the agreed scope are covered under warranty; new features and support are available at $75/hour or by separate quote.',
               },
             ].map(({ step, title, body }) => (
               <li key={step} className="rounded-2xl border border-border/70 bg-card p-6 glass">
@@ -541,35 +556,6 @@ export default function CustomSoftwareClient() {
               </li>
             ))}
           </ol>
-
-          <div className="max-w-3xl mb-6">
-            <h3 className="text-2xl font-semibold">Typical project ranges</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                range: '$2,000 – $5,000',
-                title: 'Small custom tools',
-                body: 'A focused tool that removes one painful process — an internal form, a report generator, an automation.',
-              },
-              {
-                range: '$5,000 – $15,000',
-                title: 'Larger customizations',
-                body: 'Multiple connected workflows, integrations with systems you already use, or extending existing software.',
-              },
-              {
-                range: 'From $15,000',
-                title: 'New software',
-                body: 'A complete application designed and built around the way your business actually works.',
-              },
-            ].map(({ range, title, body }) => (
-              <div key={title} className="rounded-2xl border border-border/70 bg-muted/20 p-6">
-                <p className="font-display text-2xl font-semibold text-primary mb-2">{range}</p>
-                <h4 className="font-semibold mb-2">{title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
