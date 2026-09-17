@@ -202,7 +202,7 @@ export default function RootLayout({ children }) {
         {/* Self-hosted Umami analytics — cookieless, no personal data. */}
         <Script
           src="https://stats.danspelt.com/script.js"
-          data-website-id="0e51aa23-37e4-449c-ae20-53784ef4156b"
+          data-website-id="6b08e867-33fb-4480-87e0-021817cd39d9"
           strategy="afterInteractive"
         />
       </body>
