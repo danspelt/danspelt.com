@@ -1,0 +1,60 @@
+name: Site health
+
+# Daily check that every live product is reachable and every Coolify
+# resource reports healthy. A failed run emails the repo owner.
+
+on:
+  schedule:
+    - cron: '0 14 * * *' # 07:00 Pacific, daily
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check public sites
+        run: |
+          failed=0
+          for url in \
+            https://danspelt.com \
+            https://www.danspelt.ca \
+            https://communityhive.ca \
+            https://crm.danspelt.com \
+            https://care.danspelt.com \
+            https://accesslens.ca \
+            https://www.accesslens.ca; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -m 30 -L "$url" || echo 000)
+            if [ "$code" = "200" ]; then
+              echo "PASS $url ($code)"
+            else
+              echo "FAIL $url ($code)"
+              failed=1
+            fi
+          done
+          [ "$failed" -eq 0 ]
+
+      - name: Check portfolio API health
+        run: |
+          body=$(curl -s -m 30 https://danspelt.com/api/health)
+          echo "$body"
+          echo "$body" | grep -q '"status":"ok"'
+
+      - name: Check Coolify resources
+        env:
+          COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
+          COOLIFY_URL: http://5.78.134.154:8000
+        run: |
+          failed=0
+          for ep in applications services databases; do
+            echo "== $ep =="
+            statuses=$(curl -s -m 30 -H "Authorization: Bearer $COOLIFY_TOKEN" \
+              "$COOLIFY_URL/api/v1/$ep" \
+              | python3 -c "import json,sys
+            for x in json.load(sys.stdin):
+                print(x.get('name','?'), '|', x.get('status','?'))")
+            echo "$statuses"
+            if echo "$statuses" | grep -qv "| running"; then
+              failed=1
+            fi
+          done
+          [ "$failed" -eq 0 ]
