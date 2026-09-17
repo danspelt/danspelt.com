@@ -193,13 +193,6 @@ I am particularly interested in helping organizations improve inefficient proces
       ],
     },
     {
-      name: 'Clarity Audit',
-      status: 'Live',
-      description:
-        'A website accessibility audit tool for website owners, developers, and accessibility teams who need a quick, actionable first look at accessibility barriers, with prioritized fixes instead of overwhelming scanner reports. Live at audit.danspelt.com.',
-      technologies: ['Next.js', 'React', 'WCAG accessibility auditing', 'Docker', 'Coolify'],
-    },
-    {
       name: 'danspelt.com',
       description:
         'My professional portfolio and services website. It presents my development experience, projects, case studies, business services, and custom-software capabilities.',

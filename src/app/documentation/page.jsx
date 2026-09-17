@@ -203,7 +203,6 @@ const developerGuides = [
   'Community Hive Sales Worker',
   'CareBoard',
   'AccessLens',
-  'Clarity Audit',
 ];
 
 const qualityChecks = [

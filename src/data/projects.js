@@ -52,18 +52,6 @@ export const LIVE_APPS = [
       'For people with disabilities, caregivers, and accessibility advocates who need to know whether a restaurant, clinic, park, or transit stop will work for them before they travel. Municipalities and businesses benefit from crowdsourced accessibility data that shows where improvements are needed. The impact is safer, more confident trips and better public awareness of accessibility gaps.',
     cta: 'Visit live site',
   },
-  {
-    slug: 'clarity-audit',
-    name: 'Clarity Audit',
-    url: 'https://audit.danspelt.com',
-    caseStudyUrl: null,
-    status: 'live',
-    tags: ['Accessibility', 'WCAG'],
-    summary: 'A fast, prioritized first pass on website accessibility barriers.',
-    description:
-      'For website owners, developers, and accessibility teams who need a quick, actionable first look at accessibility barriers. Small businesses and non-profits benefit from prioritized fixes instead of overwhelming scanner reports. The impact is faster remediation and a site that works for more visitors, including people using screen readers or keyboards.',
-    cta: 'Run a scan',
-  },
 ];
 
 /** Only the apps that are actually deployed and reachable. */
