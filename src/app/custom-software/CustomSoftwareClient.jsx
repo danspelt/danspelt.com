@@ -496,6 +496,83 @@ export default function CustomSoftwareClient() {
         </Paragraph>
       </Section>
 
+      {/* How pricing works */}
+      <section aria-labelledby="pricing-heading" className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-5xl px-4 py-16 sm:py-20">
+          <div className="max-w-3xl mb-10">
+            <p className="text-sm font-medium text-primary uppercase tracking-[0.18em] mb-3">
+              Working together
+            </p>
+            <h2 id="pricing-heading" className="text-3xl sm:text-4xl font-semibold mb-4">
+              Straightforward pricing, no surprises
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              It starts with a conversation about the problem — not a quote for software you may not need.
+            </p>
+          </div>
+
+          <ol className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+            {[
+              {
+                step: '1',
+                title: 'Free evaluation',
+                body: 'A no-obligation working session — up to two hours — to understand how your process works today and whether software can deliver a worthwhile return.',
+              },
+              {
+                step: '2',
+                title: 'Paid consultation — $50/hour',
+                body: 'Deeper analysis, process mapping, and a written recommendation. If you go ahead with a project, every dollar of consultation fees is deducted from the final cost.',
+              },
+              {
+                step: '3',
+                title: 'Fixed proposal',
+                body: 'A clear scope and price before any development begins, so you always know what you are getting and what it will cost.',
+              },
+            ].map(({ step, title, body }) => (
+              <li key={step} className="rounded-2xl border border-border/70 bg-card p-6 glass">
+                <span
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground font-display font-semibold mb-4"
+                  aria-hidden="true"
+                >
+                  {step}
+                </span>
+                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{body}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="max-w-3xl mb-6">
+            <h3 className="text-2xl font-semibold">Typical project ranges</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              {
+                range: '$2,000 – $5,000',
+                title: 'Small custom tools',
+                body: 'A focused tool that removes one painful process — an internal form, a report generator, an automation.',
+              },
+              {
+                range: '$5,000 – $15,000',
+                title: 'Larger customizations',
+                body: 'Multiple connected workflows, integrations with systems you already use, or extending existing software.',
+              },
+              {
+                range: 'From $15,000',
+                title: 'New software',
+                body: 'A complete application designed and built around the way your business actually works.',
+              },
+            ].map(({ range, title, body }) => (
+              <div key={title} className="rounded-2xl border border-border/70 bg-muted/20 p-6">
+                <p className="font-display text-2xl font-semibold text-primary mb-2">{range}</p>
+                <h4 className="font-semibold mb-2">{title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA + form */}
       <section id="contact" className="scroll-mt-24 py-16 sm:py-24 bg-muted/20">
         <div className="container mx-auto max-w-4xl px-4">
