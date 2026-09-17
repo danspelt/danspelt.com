@@ -9,7 +9,7 @@ export const RECENT_WORK = [
     date: '2026-09-17',
     project: 'danspelt.com',
     change:
-      'Consolidated the product lineup to the four working apps and added a live-products strip on the homepage linking to each one.',
+      'Consolidated the product lineup to the four working apps, added a live-products strip on the homepage linking to each one, and synced the professional profile so CareBoard, AccessLens, and Clarity Audit are represented everywhere.',
     whyItMatters:
       'Every product a visitor sees now resolves to software that is actually running.',
     url: '/',

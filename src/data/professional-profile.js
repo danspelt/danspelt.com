@@ -158,10 +158,52 @@ I am particularly interested in helping organizations improve inefficient proces
       ],
     },
     {
+      name: 'CareBoard',
+      status: 'Live',
+      description:
+        'A care-coordination app for household managers and approved care workers who coordinate daily tasks for a loved one or client. It provides clearer schedules, proof of completion, and a shared record that reduces miscommunication. Live at care.danspelt.com.',
+      technologies: [
+        'Next.js',
+        'React',
+        'TypeScript',
+        'Tailwind CSS',
+        'PostgreSQL',
+        'Drizzle ORM',
+        'Auth.js (NextAuth v5)',
+        'Docker',
+        'Coolify',
+      ],
+    },
+    {
+      name: 'AccessLens',
+      status: 'Live',
+      description:
+        'A crowdsourced accessibility platform for people with disabilities, caregivers, and accessibility advocates who need to know whether a restaurant, clinic, park, or transit stop will work for them before they travel. Places are scored across ten accessibility criteria and shown on an OpenStreetMap map. Live at accesslens.ca.',
+      technologies: [
+        'Next.js',
+        'React',
+        'TypeScript',
+        'Tailwind CSS',
+        'MongoDB',
+        'Auth.js (NextAuth v5)',
+        'Zod',
+        'Leaflet + OpenStreetMap',
+        'Docker',
+        'Coolify',
+      ],
+    },
+    {
+      name: 'Clarity Audit',
+      status: 'Live',
+      description:
+        'A website accessibility audit tool for website owners, developers, and accessibility teams who need a quick, actionable first look at accessibility barriers, with prioritized fixes instead of overwhelming scanner reports. Live at audit.danspelt.com.',
+      technologies: ['Next.js', 'React', 'WCAG accessibility auditing', 'Docker', 'Coolify'],
+    },
+    {
       name: 'danspelt.com',
       description:
         'My professional portfolio and services website. It presents my development experience, projects, case studies, business services, and custom-software capabilities.',
-      technologies: ['Next.js', 'React', 'Tailwind CSS', 'Resend', 'Vercel'],
+      technologies: ['Next.js', 'React', 'Tailwind CSS', 'Resend', 'Coolify'],
     },
   ],
   contact: {
