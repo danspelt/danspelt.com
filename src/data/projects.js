@@ -2,6 +2,9 @@
 // Rendered by the "Live Apps & Tools" section on /projects and by All Work.
 //
 // Content integrity rules for this file, matching project-proof.js:
+//  - A project earns a link here only when it is ready for customers:
+//    deployed and publicly reachable over HTTPS AND its full verification
+//    suite (tests, lint, build) passes in its own repo.
 //  - `url` must be a domain that is actually serving the app over HTTPS.
 //  - Describe what the app does. Never repeat an app's own marketing statistics here.
 //  - `status` must be one of: 'live', 'pilot', 'building'.
