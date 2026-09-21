@@ -192,6 +192,35 @@ export default function RootLayout({ children }) {
                   </a>
                 </nav>
               </div>
+              <nav
+                aria-label="Legal"
+                className="flex items-center justify-center gap-4 flex-wrap text-xs text-muted-foreground border-t pt-4"
+              >
+                <Link
+                  href="/privacy-policy"
+                  className="rounded-sm hover:text-foreground transition-colors focus-ring"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/terms-of-use"
+                  className="rounded-sm hover:text-foreground transition-colors focus-ring"
+                >
+                  Terms of Use
+                </Link>
+                <Link
+                  href="/cookie-policy"
+                  className="rounded-sm hover:text-foreground transition-colors focus-ring"
+                >
+                  Cookie Policy
+                </Link>
+                <Link
+                  href="/accessibility-statement"
+                  className="rounded-sm hover:text-foreground transition-colors focus-ring"
+                >
+                  Accessibility Statement
+                </Link>
+              </nav>
               <p className="text-center text-xs text-muted-foreground">
                 &copy; {new Date().getFullYear()} Dan Spelt. Victoria, BC —
                 remote worldwide.
