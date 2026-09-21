@@ -8,12 +8,12 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { PROJECT_PROOF, PROJECT_STATUS } from '@/data/project-proof';
 
-const featuredSlugs = ['community-hive', 'accesslens'];
+const featuredSlugs = ['community-hive', 'careboard', 'accesslens'];
 const projects = featuredSlugs.map((slug) => PROJECT_PROOF.find((project) => project.slug === slug));
 
 const filters = [
   { id: 'all', label: 'All projects', slugs: featuredSlugs },
-  { id: 'web', label: 'Web platforms', slugs: ['community-hive', 'accesslens'] },
+  { id: 'web', label: 'Web platforms', slugs: ['community-hive', 'careboard', 'accesslens'] },
   { id: 'accessibility', label: 'Accessibility', slugs: ['accesslens'] },
 ];
 

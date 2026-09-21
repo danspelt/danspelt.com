@@ -196,6 +196,102 @@ export const PROJECT_PROOF = [
     imageAlt: 'Community Hive dashboard showing announcements and maintenance activity for a building',
   },
   {
+    slug: 'careboard',
+    title: 'CareBoard',
+    tagline:
+      'A private care-coordination platform for household employers and approved care workers. Managers assign and track work; workers see only their own tasks; schedules, proof photos, handoffs, and an audit log keep everyone accountable.',
+    status: 'active',
+    audience: ['hire', 'product'],
+    role: 'Founder and sole developer',
+    problem:
+      'In British Columbia, people who self-manage their care — including CSIL household employers — are legally the employer. They are responsible for scheduling, task assignment, timesheets, and employment records, while their care workers need predictable shifts, clear instructions, and safe ways to report concerns. Most of that coordination still happens through group chats, paper notes, and memory.',
+    approach:
+      'A private household task board with strict role separation. A manager creates, assigns, and completes work and maintains employer records; each worker sees only their own tasks and open work they can claim. Shifts follow a two-week A/B cycle, and proof photos, end-of-shift handoffs, safety reports, and an append-only audit log make accountability routine rather than extra effort.',
+    outcomes: [
+      {
+        label: 'Manager and worker dashboards covering task assignment, claiming, completion, and proof photos',
+        evidence: 'Verifiable in the live product at care.danspelt.com',
+      },
+      {
+        label: 'Two-week rotating schedules with day-off requests and shift-coverage acceptance',
+        evidence: 'Documented in the repository README',
+      },
+      {
+        label: 'Timesheet, payroll, and monthly CSV exports built around BC employment-standards and CSIL record-keeping duties',
+        evidence: 'Requirements matrix documented in docs/csil-compliance.md',
+      },
+      {
+        label: 'Care-team wellbeing signals and safety incident reporting grounded in published WHO and OECD research',
+        evidence: 'Design rationale documented in docs/care-worker-needs.md',
+      },
+      {
+        label: 'Designed so workers see only their own work and data, never other workers\'',
+      },
+    ],
+    proof: [
+      {
+        label: 'Security and role isolation',
+        detail:
+          'Workers cannot see other workers\' profiles, tasks, reports, or audit data. Disabled workers are blocked on every request, so an existing session cannot retain access. Photos are served only through authenticated, ownership-checked routes.',
+      },
+      {
+        label: 'Privacy by default',
+        detail:
+          'Profile and task proof photos are retained for a fixed 90-day period and are never exposed as static files.',
+      },
+      {
+        label: 'Testing',
+        detail:
+          'The repository defines a required verification suite of Node.js tests, lint, and a production build, run before any change is considered complete.',
+      },
+      {
+        label: 'Known constraint',
+        detail:
+          'Runs on SQLite in a single container, sized for one household per deployment. Payroll CSVs provide hours, rate, and gross amounts — deductions and net pay remain payroll-software scope, documented in the CSIL readiness matrix.',
+      },
+    ],
+    decisions: [
+      {
+        choice: 'SQLite via better-sqlite3 with Drizzle ORM migrations',
+        reason:
+          'A self-contained container keeps a small household deployment simple and cheap to run.',
+        tradeoff:
+          'Single-node storage — moving to multi-instance hosting would require a networked database.',
+      },
+      {
+        choice: 'Wellbeing signals derived only from schedule and task data',
+        reason:
+          'Flags long shift runs, short turnarounds, and heavy loads without inferring health or fatigue.',
+        tradeoff:
+          'The signals are workload indicators rather than predictions, and the product copy says so.',
+      },
+      {
+        choice: 'Append-only audit log for task history',
+        reason:
+          'Accountability needs a record that cannot be quietly rewritten after the fact.',
+        tradeoff:
+          'Corrections are new entries, so the log grows rather than being edited in place.',
+      },
+    ],
+    stack: [
+      'Next.js 16 (App Router)',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS 4',
+      'shadcn/ui',
+      'SQLite (better-sqlite3)',
+      'Drizzle ORM',
+      'Auth.js (NextAuth v5)',
+      'PWA (manifest + service worker)',
+      'Docker',
+      'Coolify',
+    ],
+    liveUrl: 'https://care.danspelt.com/',
+    caseStudyUrl: '/case-studies/careboard',
+    image: null,
+    imageAlt: 'CareBoard manager dashboard showing assigned tasks and worker schedules',
+  },
+  {
     slug: 'accesslens',
     title: 'AccessLens',
     tagline: 'Built for people with disabilities, caregivers, and accessibility advocates who need reliable accessibility information before visiting a new place. Civic organizations and businesses gain visibility into where accessibility is working and where it needs to improve.',

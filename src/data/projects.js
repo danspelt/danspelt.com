@@ -23,7 +23,7 @@ export const LIVE_APPS = [
     name: 'CareBoard',
     url: 'https://care.danspelt.com/',
     githubUrl: 'https://github.com/danspelt/careboard',
-    caseStudyUrl: null,
+    caseStudyUrl: '/case-studies/careboard',
     status: 'live',
     tags: ['Care coordination', 'PWA'],
     summary: 'Shared task coordination for families and approved care workers.',

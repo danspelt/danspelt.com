@@ -18,6 +18,7 @@ export default function sitemap() {
     '/ai-chat',
     '/build-for-us',
     '/case-studies/community-hive',
+    '/case-studies/careboard',
     '/case-studies/accesslens',
     '/privacy-policy',
     '/terms-of-use',

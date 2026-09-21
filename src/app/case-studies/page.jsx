@@ -3,7 +3,7 @@ import CaseStudyIndexClient from '@/components/project-case-study/CaseStudyIndex
 export const metadata = {
   title: 'Custom Software Development Case Studies',
   description:
-    'Evidence-led case studies for Community Hive and AccessLens, covering the problem, implementation, testing, constraints, and technical tradeoffs.',
+    'Evidence-led case studies for Community Hive, CareBoard, and AccessLens, covering the problem, implementation, testing, constraints, and technical tradeoffs.',
   alternates: {
     canonical: 'https://danspelt.com/case-studies',
   },
