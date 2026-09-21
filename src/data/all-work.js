@@ -3,7 +3,8 @@ import { PROJECT_PROOF } from '@/data/project-proof';
 
 export const ALL_WORK = {
   apps: getLiveApps()
-    .filter((app) => app.caseStudyUrl)
+    // Community Hive stays the flagship entry; the rest keep catalog order.
+    .sort((a, b) => Number(b.slug === 'community-hive') - Number(a.slug === 'community-hive'))
     .map((app) => ({
       title: app.name,
       description: app.description,

@@ -6,6 +6,15 @@
 
 export const RECENT_WORK = [
   {
+    date: '2026-09-21',
+    project: 'danspelt.com',
+    change:
+      'Added CareBoard to the All Work directory so every live product appears in the work listing, with Community Hive remaining the featured entry.',
+    whyItMatters:
+      'The work directory now covers all three live products instead of only the ones with case studies.',
+    url: '/work',
+  },
+  {
     date: '2026-09-17',
     project: 'danspelt.com',
     change:
