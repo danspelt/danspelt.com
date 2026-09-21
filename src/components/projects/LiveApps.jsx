@@ -29,7 +29,14 @@ function AppCard({ app }) {
         <CardTitle className="text-xl">{app.name}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col justify-between gap-4">
-        <p className="text-sm leading-relaxed text-muted-foreground">{app.description}</p>
+        <div className="space-y-3">
+          <p className="text-sm leading-relaxed text-muted-foreground">{app.description}</p>
+          {app.origin && (
+            <p className="text-xs leading-relaxed text-muted-foreground border-l-2 border-primary/30 pl-3">
+              <span className="font-medium text-foreground">Why it exists:</span> {app.origin}
+            </p>
+          )}
+        </div>
         {(app.url || app.githubUrl || app.caseStudyUrl) && (
           <div className="flex flex-wrap gap-2">
             {app.url && (

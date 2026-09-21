@@ -8,7 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import {
   ExternalLink, Shield, Users, BarChart3, Wrench,
   Building2, MessageSquare, FileText, ChevronDown, ChevronUp,
-  Layers, Database, Globe, Monitor, Container, Brain, MapPin
+  Layers, Database, Globe, Monitor, Container, Brain, MapPin,
+  CalendarDays, Camera, HeartPulse
 } from 'lucide-react';
 import LiveApps from '@/components/projects/LiveApps';
 
@@ -48,6 +49,45 @@ const accessLensFeatures = [
     icon: FileText,
     title: "WCAG 2.1 AA Compliance",
     description: "Built in alignment with the Accessible Canada Act and BC Accessibility Act. Semantic HTML, ARIA labels, keyboard navigation, and screen reader compatibility throughout.",
+  },
+];
+
+const careboardTechStack = {
+  frontend: ["Next.js 16 (App Router)", "React 19", "TypeScript", "Tailwind CSS 4", "shadcn/ui"],
+  backend: ["Next.js API Routes", "SQLite (better-sqlite3)", "Drizzle ORM migrations", "Auth.js (NextAuth v5)"],
+  infrastructure: ["Docker", "Coolify (Self-hosted PaaS)", "PWA manifest + service worker"],
+};
+
+const careboardFeatures = [
+  {
+    icon: Users,
+    title: "Manager & Worker Dashboards",
+    description: "Managers create, assign, edit, and complete household tasks and manage workers. Workers claim open tasks, start assigned work, and complete in-progress tasks — each seeing only their own work.",
+  },
+  {
+    icon: Camera,
+    title: "Proof & Shift Handoffs",
+    description: "Proof photos on task completion, end-of-shift handoffs covering completed care and outstanding work, and an append-only audit log recording who handled each task and when.",
+  },
+  {
+    icon: CalendarDays,
+    title: "Two-Week Schedule",
+    description: "Shifts repeat weekly or alternate across a two-week A/B cycle. The schedule view spans 14 days and supports day-off requests and shift-coverage acceptance.",
+  },
+  {
+    icon: HeartPulse,
+    title: "Care-Team Wellbeing",
+    description: "Workload signals flag long shift runs, short turnarounds, and heavy task loads. Safety incident and near-miss reporting with manager triage — grounded in published WHO and OECD research on care-worker needs.",
+  },
+  {
+    icon: FileText,
+    title: "Employer Records",
+    description: "Employee records, per-worker timesheet CSVs, monthly reports, and payroll CSV exports built around BC employment-standards and CSIL household-employer record keeping.",
+  },
+  {
+    icon: Shield,
+    title: "Privacy by Default",
+    description: "Strict role isolation — workers cannot see other workers' profiles, tasks, or audit data. Photos are retained for a fixed 90-day period and served only through authenticated, ownership-checked routes.",
   },
 ];
 
@@ -186,6 +226,15 @@ const Projects = () => {
               buildings, unit hierarchies, and role-based dashboards, enabling controlled document
               access, structured issue tracking, automated announcements, and AI-enhanced
               communication workflows.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              <span className="font-medium text-foreground">Why I built it:</span>{' '}
+              A property-management organization was coordinating communication, maintenance,
+              bookings, voting, and reporting across disconnected tools — email chains, paper
+              notices, spreadsheets, and social media groups. Announcements were missed, requests
+              disappeared, and there was no reliable record of what was decided. Community Hive
+              gives each building one scoped, audit-friendly system where every role sees exactly
+              what it is permitted to see.
             </p>
           </CardContent>
         </Card>
@@ -341,6 +390,118 @@ const Projects = () => {
 
       <hr className="border-border mb-20" />
 
+      {/* ── CareBoard ── */}
+      <div className="space-y-8 mb-20">
+        <Card className="overflow-hidden">
+          <CardHeader className="pb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge className="bg-blue-500/10 text-blue-600 border-blue-500/20 hover:bg-blue-500/10">
+                    Live
+                  </Badge>
+                  <Badge variant="outline">Care Coordination</Badge>
+                  <Badge variant="outline">PWA</Badge>
+                </div>
+                <CardTitle className="text-3xl mb-2">CareBoard</CardTitle>
+                <p className="text-sm text-muted-foreground font-medium">Founder &amp; Developer &mdash; Sep 2026 &ndash; Present</p>
+                <p className="text-muted-foreground mt-1">
+                  Private care-coordination platform for household employers and care workers
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a href="https://care.danspelt.com/" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="flex items-center gap-2 w-full sm:w-auto">
+                    <ExternalLink className="w-4 h-4" />
+                    Visit Live Site
+                  </Button>
+                </a>
+                <a href="https://github.com/danspelt/careboard" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" variant="outline" className="flex items-center gap-2 w-full sm:w-auto">
+                    <ExternalLink className="w-4 h-4" />
+                    View Source
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground leading-relaxed">
+              CareBoard is a private household chore and care-coordination app for people who
+              employ or manage their own care workers. A manager creates and assigns tasks; each
+              worker sees only their own work and the open tasks they can claim. Schedules, proof
+              photos, shift handoffs, safety reporting, and an append-only audit log keep everyone
+              accountable without group-chat chaos.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              <span className="font-medium text-foreground">Why I built it:</span>{' '}
+              In British Columbia, people who self-manage their care — including CSIL
+              household employers — are legally the employer: responsible for scheduling, task
+              assignment, timesheets, and employment records. At the same time, care workers need
+              predictable shifts, clear instructions, and safe ways to report concerns. CareBoard
+              came out of that gap and out of my years building assistive technology — its
+              care-team features are grounded in published WHO and OECD research on what
+              long-term care workers actually need, not guesswork.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* CareBoard Tech Stack */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Monitor className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Frontend</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {careboardTechStack.frontend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Database className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Backend</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {careboardTechStack.backend.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center gap-2">
+                <Container className="w-4 h-4 text-primary" />
+                <CardTitle className="text-base">Infrastructure</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {careboardTechStack.infrastructure.map((t) => <TechBadge key={t}>{t}</TechBadge>)}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* CareBoard Features */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Core Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {careboardFeatures.map((feature) => (
+              <FeatureCard key={feature.title} {...feature} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <hr className="border-border mb-20" />
+
       {/* ── AccessLens ── */}
       <div className="space-y-8 mb-20">
         <Card className="overflow-hidden">
@@ -375,6 +536,14 @@ const Projects = () => {
               receives a calculated accessibility score across 10 criteria, visualized with colour-coded
               markers on an OpenStreetMap-powered map. Launched production-ready with 50+ verified places
               in Victoria, BC.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              <span className="font-medium text-foreground">Why I built it:</span>{' '}
+              I have spent my career building assistive technology, and I live the problem AccessLens
+              addresses: you often cannot tell whether a restaurant, clinic, park, or transit stop
+              will work for you until you arrive. Accessibility information is inconsistent or
+              missing entirely. AccessLens turns that lived knowledge into structured, crowdsourced
+              data so a trip can be planned with confidence.
             </p>
           </CardContent>
         </Card>

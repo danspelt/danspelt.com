@@ -167,7 +167,7 @@ I am particularly interested in helping organizations improve inefficient proces
         'React',
         'TypeScript',
         'Tailwind CSS',
-        'PostgreSQL',
+        'SQLite (better-sqlite3)',
         'Drizzle ORM',
         'Auth.js (NextAuth v5)',
         'Docker',

@@ -3,7 +3,7 @@ import ProjectsClient from './ProjectsClient';
 export const metadata = {
   title: 'Full-Stack Software Development Projects',
   description:
-    'Explore full-stack software projects by Dan Spelt, including AccessLens accessibility mapping and the Community Hive multi-tenant communication platform.',
+    'Explore full-stack software projects by Dan Spelt, including CareBoard care coordination, AccessLens accessibility mapping, and the Community Hive multi-tenant communication platform.',
   alternates: {
     canonical: 'https://danspelt.com/projects',
   },
