@@ -20,15 +20,17 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      lastUpdated="September 20, 2026"
+      lastUpdated="September 21, 2026"
       intro="This site is operated by Dan Spelt, an individual software developer based in Victoria, British Columbia, Canada, offering contract and freelance software services. This policy explains what personal information the site collects, why, and the choices you have."
     >
       <LegalSection title="The short version">
         <p>
           This site collects very little personal information. There are no accounts, no
-          newsletters, no advertising trackers, and no cookies. If you send a message through a
-          form, the details you enter are emailed to me so I can reply. If you use the AI chat,
-          what you type is sent to OpenAI to generate an answer. That is the extent of it.
+          newsletters, no advertising trackers, and no cookies set by this site’s application
+          code. If you send a message through a form, the details you enter are emailed to me so
+          I can reply. If you use the AI chat, what you type is sent to OpenAI to generate an
+          answer. The site also processes limited technical data for analytics and security,
+          described below.
         </p>
       </LegalSection>
 
@@ -49,8 +51,8 @@ export default function PrivacyPolicyPage() {
             'Contact and inquiry forms — your name, email address, optional organization, and message are sent to me by email so I can respond. They are not stored in a database on this site.',
             'Business challenge tool — the details you enter about a workflow problem, plus your name and email if you choose to share them, are emailed to me the same way.',
             '“Ask Dan” AI chat — the messages you type are sent to OpenAI to generate a reply. The site does not save your conversation. If you choose to send the transcript by email using the consent checkbox, it is emailed like any other form message.',
-            'Site analytics — a self-hosted Umami instance (stats.danspelt.com) records aggregate, cookieless page-view statistics and a small allowlist of non-personal events (for example, which call-to-action was clicked). It does not use cookies and does not collect names, emails, message content, or other personal details.',
-            'Technical logs — the hosting provider keeps standard server logs (such as IP address, browser type, and timestamps) for security and operations. A short-lived, in-memory rate limiter uses an IP-derived key to deter form abuse and is discarded when its window expires.',
+            'Site analytics — a self-hosted Umami instance (stats.danspelt.com) receives page-view requests and a small allowlist of event names and properties (for example, which call-to-action was clicked). The site does not intentionally send form content, names, or email addresses as analytics events. Request metadata such as IP address and browser information may be processed by the analytics server to operate the service, even though the analytics script does not use cookies.',
+            'Technical logs and abuse prevention — the site’s hosting infrastructure may record standard request data (such as IP address, browser information, and timestamps) for security and operations. A short-lived, in-memory rate limiter uses a client IP address as a key to deter form abuse; its entries expire after the configured window and are not saved in the site database.',
           ]}
         />
       </LegalSection>
@@ -77,10 +79,11 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="Retention">
         <p>
-          Message emails are kept only as long as needed to handle our correspondence and any
-          resulting work. Analytics data is aggregate and not tied to you. Server logs follow the
-          hosting provider&apos;s default retention. You can ask me to delete correspondence at
-          any time.
+          Message emails are kept as needed to handle our correspondence and any resulting work,
+          subject to legal, accounting, or dispute-related needs. Analytics reports are used to
+          understand site use, not to identify visitors. Hosting and analytics logs are retained
+          according to the relevant service configuration; I do not promise a fixed period here.
+          You can ask me to delete correspondence, subject to any information I must retain.
         </p>
       </LegalSection>
 

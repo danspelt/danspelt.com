@@ -22,7 +22,7 @@ The pages describe only what the code actually does, verified by inventory:
   Browser storage used: `localStorage` key `theme` (next-themes) and
   `sessionStorage` keys `danspelt:visitor-path`,
   `danspelt:smart-cta-dismissed`.
-- Rate limiting keeps IP-derived keys in memory only (`src/lib/rate-limit.js`).
+- Rate limiting keeps raw client IP keys in memory only (`src/lib/rate-limit.js`).
 - Intro video is self-hosted (`/videos/intro.mp4`) with captions/transcript —
   no third-party embeds.
 
@@ -38,6 +38,12 @@ The pages describe only what the code actually does, verified by inventory:
   organizations are public-sector bodies; this site is not prescribed):
   https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/105_2022
 - W3C WCAG 2.2: https://www.w3.org/TR/WCAG22/
+- W3C conformance guidance ("partial conformance" has narrow criteria and is
+  not used as a general label for an incomplete audit):
+  https://www.w3.org/WAI/WCAG22/Understanding/conformance
+- OPC Canada — how PIPEDA and BC PIPA apply to interprovincial/international
+  transactions:
+  https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/r_o_p/02_05_d_26/
 
 CASL was considered and is not engaged: the site sends no commercial electronic
 messages beyond direct replies to inquiries.

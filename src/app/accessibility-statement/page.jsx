@@ -20,7 +20,7 @@ export default function AccessibilityStatementPage() {
   return (
     <LegalPage
       title="Accessibility Statement"
-      lastUpdated="September 20, 2026"
+      lastUpdated="September 21, 2026"
       intro="Accessibility is central to my work — this site is both a portfolio and a demonstration of the accessible engineering practices I offer. I want everyone to be able to use it, and I treat barriers reported here as bugs to fix."
     >
       <LegalSection title="Conformance target">
@@ -35,9 +35,8 @@ export default function AccessibilityStatementPage() {
             WCAG 2.2 Level AA
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
-          . The site is considered <strong>partially conformant</strong>: the main pages are
-          built and reviewed against that target, but full conformance across every page has not
-          been independently verified and work continues.
+          . I am not making a WCAG conformance claim: an independent, page-by-page audit has not
+          been completed, and there may be barriers that have not yet been identified.
         </p>
       </LegalSection>
 
@@ -50,7 +49,7 @@ export default function AccessibilityStatementPage() {
             'A text-size toggle and light/dark themes for comfortable reading',
             'A captioned introduction video with a full text transcript alternative',
             'Form labels, validation messages, and error identification exposed to assistive technology',
-            'Automated accessibility linting in the build pipeline plus manual keyboard and screen-reader review',
+            'Accessibility-focused lint rules and manual keyboard review during development; these checks do not replace a full accessibility audit',
           ]}
         />
       </LegalSection>

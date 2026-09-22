@@ -3,13 +3,13 @@ import { LegalPage, LegalSection } from '@/components/legal-page';
 export const metadata = {
   title: 'Cookie Policy',
   description:
-    'danspelt.com does not set cookies. This page explains the small amount of browser storage the site uses instead.',
+    'The portfolio application does not set cookies. This page explains its browser storage and cookieless analytics.',
   alternates: {
     canonical: 'https://danspelt.com/cookie-policy',
   },
   openGraph: {
     title: 'Cookie Policy | Dan Spelt',
-    description: 'danspelt.com does not set cookies — details of the browser storage it uses instead.',
+    description: 'Browser storage and cookieless analytics used by danspelt.com.',
     url: 'https://danspelt.com/cookie-policy',
     images: ['/og.png'],
   },
@@ -40,16 +40,17 @@ export default function CookiePolicyPage() {
   return (
     <LegalPage
       title="Cookie Policy"
-      lastUpdated="September 20, 2026"
-      intro="This site does not set any cookies — no tracking cookies, no preference cookies, and no third-party cookies. A small amount of browser storage is used for features described below."
+      lastUpdated="September 21, 2026"
+      intro="The portfolio application does not set cookies. It uses a small amount of local and session storage for the features described below, and loads a self-hosted, cookieless analytics script."
     >
       <LegalSection title="No cookies">
         <p>
-          Nothing on danspelt.com writes to <code>document.cookie</code>. Because the site sets no
-          non-essential cookies, there is no cookie consent banner to manage — there is nothing
-          that would need your consent. The site&apos;s analytics (a self-hosted Umami instance)
-          is configured cookieless: it counts aggregate page views without identifying or
-          following individual visitors.
+          The portfolio application does not write to <code>document.cookie</code> or set a
+          cookie in its API responses. Its self-hosted Umami analytics script is intended to work
+          without cookies. The application currently has no non-essential cookie preference to
+          turn on or off, so it does not display a cookie banner. Analytics requests can still
+          carry technical metadata such as an IP address and browser information; see the{' '}
+          <a href="/privacy-policy" className="text-primary underline underline-offset-4 focus-ring">Privacy Policy</a>.
         </p>
       </LegalSection>
 
