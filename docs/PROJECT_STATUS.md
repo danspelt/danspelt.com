@@ -23,7 +23,8 @@ Home, About, Employment, Projects, Work, Case Studies, Documentation, Timeline, 
 
 ```bash
 npm run lint
-node scripts/health-check.mjs https://danspelt.com  # passes health + legal pages/footer links
+npm run test:health                              # scripts/health-check.mjs (defaults to localhost:3000)
+npm run test:health -- https://danspelt.com      # health + legal/footer smoke against production
 npm run build
 npm audit                                        # 0 reported vulnerabilities (2026-09-25)
 ```
