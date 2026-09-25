@@ -1,11 +1,11 @@
 # Project Status — danspelt.com
 
-**Last updated:** September 23, 2026  
-**Status:** Stable / live in production  
-**Live:** https://danspelt.com · https://www.danspelt.com · https://danspelt.ca · https://www.danspelt.ca (all four serve this app)  
-**Deploy:** Coolify → `main` branch, Dockerfile build pack (Next.js standalone output) — `running:healthy`  
-**Health:** `GET /api/health` → 200 `{"status":"ok","service":"danspelt.com"}` (verified 2026-09-23)  
-**Repo state:** `main` checked out, clean, synced with origin
+**Last updated:** September 25, 2026
+**Status:** Live and healthy; local verification passes
+**Live:** https://danspelt.com · https://www.danspelt.com · https://danspelt.ca · https://www.danspelt.ca
+**Deploy:** Coolify → `main` branch, Dockerfile build pack — `running:healthy`
+**Health:** `GET /api/health` → 200 (verified 2026-09-25)
+**Repo state:** `main`; existing local health-check improvements retained
 
 For a session handoff and operational notes, see [User Note](USER_NOTE.md).
 
@@ -13,72 +13,30 @@ For a session handoff and operational notes, see [User Note](USER_NOTE.md).
 
 ## Where We Are
 
-Personal portfolio and services site built with **Next.js 16**, **React 19**, **Tailwind CSS 4**, deployed via **Coolify** (Dockerfile → standalone output). `DEPLOYMENT.md` was updated 2026-09-23 to reflect Coolify — it previously documented Vercel.
-
-The `/work` page limits its **Apps and tools** section to completed, case-study-backed projects:
-
-- Community Hive
-- AccessLens
-
-Other deployed or in-progress products remain on `/projects`, but do not appear as completed work on `/work`.
+Personal portfolio and services site built with **Next.js 16**, **React 19**, **Tailwind CSS 4**, deployed via Coolify. The `/work` page shows only completed, case-study-backed apps: Community Hive and AccessLens. Other deployed or in-progress products stay on `/projects`.
 
 ## Current Pages
 
-- **Home** (`/`) — services, positioning, and project paths
-- **About** (`/about`)
-- **Employment** (`/employment`) — detailed career history and education
-- **Projects** (`/projects`) — deployed apps plus in-development tools
-- **Work** (`/work`) — completed portfolio work, case studies, and experience
-- **Case Studies** (`/case-studies`)
-- **Documentation** (`/documentation`) — public architecture, content-model, API, quality, and operations overview
-- **Timeline** (`/timeline`)
-- **Skills & Tools** (`/skillstools`)
-- **FAQ** (`/faq`)
-- **Contact** (`/contact`)
-- **Accessibility** (`/accessibility`)
-- **Custom Software** (`/custom-software`) — includes pricing model + "How we work" section
-- **Insights** (`/insights`)
-- **Build for Us** (`/build-for-us`)
-
-## API Routes
-
-- `/api/health`
-- `/api/projects`
-- `/api/github` and `/api/github-test`
-- `/api/email`
-- `/api/custom-software-inquiry`
-- `/api/business-challenge`
-- `/api/ai-chat` and `/api/ai-chat/email`
-
-## Recent Milestones
-
-1. Self-hosted **Umami analytics** added (site ID updated after service recreation).
-2. Custom-software page gained pricing model + "How we work" process section.
-3. Security headers added and API input handling tightened (2026-09-17).
-4. `/work` shows only completed, case-study-backed apps: Community Hive and AccessLens.
-5. Public `/documentation` and `/employment` pages shipped.
+Home, About, Employment, Projects, Work, Case Studies, Documentation, Timeline, Skills & Tools, FAQ, Contact, Accessibility, Custom Software, Insights, and Build for Us.
 
 ## Verification
 
 ```bash
 npm run lint
-npm run test:health   # scripts/health-check.mjs — hits the running server
+node scripts/health-check.mjs https://danspelt.com  # passes health + legal pages/footer links
 npm run build
+npm audit                                        # 0 reported vulnerabilities (2026-09-25)
 ```
 
 ## What Needs To Get Done
 
-- [ ] **Triage the 9 Dependabot vulnerabilities** on the default branch: https://github.com/danspelt/danspelt.com/security/dependabot
-- [ ] Confirm `/api/health` is wired into the Coolify app's health-check settings
-- [ ] Decide the fate of the 5 planned paid subdomains from `docs/hosting-and-deployment.md` (audit/quote/resume/content/concierge.danspelt.com) — the corresponding repos are archived, not deployed
-- [ ] Keep `/work` limited to proof-backed completed projects unless the content rule intentionally changes
+- [ ] Confirm the separate GitHub Dependabot alert page; the current local `npm audit` reports zero vulnerabilities, but it does not prove the GitHub alert page is clear
+- [ ] Confirm `/api/health` is configured as the Coolify health-check path
+- [x] Safe default: keep the five planned paid subdomains dormant and archived; do not provision DNS or deployments unless Dan explicitly asks to revive them
+- [ ] Keep `/work` limited to proof-backed completed projects unless the content policy intentionally changes
 
 ## Known Issues / Tech Debt
 
-- 9 Dependabot alerts outstanding
-- `docs/hosting-and-deployment.md` references repos that now live in `_archive/` — the money-apps plan is dormant
-- `DEPLOYMENT.md` corrected 2026-09-23 (was Vercel, actual deploy is Coolify)
-
-## Decision
-
-**The project is done for now.** Site is live, healthy, and serving all four domains. Outstanding work is maintenance (Dependabot triage) plus a strategic call on the archived money-apps plan.
+- `docs/hosting-and-deployment.md` references money-app repositories now in `_archive/`; the plan is dormant pending a decision
+- Current verified local dependency audit is clean; GitHub Dependabot status still needs confirmation
+- `DEPLOYMENT.md` now reflects the actual Coolify setup
