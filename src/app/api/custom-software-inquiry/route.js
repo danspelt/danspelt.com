@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { consumeRateLimit, getClientKey } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 
@@ -13,7 +14,7 @@ const inquirySchema = z.object({
     .min(10, 'Please tell me a little more about what you would like to improve')
     .max(5000),
   // Honeypot field — real users never fill this in.
-  website: z.string().max(0).optional().or(z.literal('')),
+  website: z.string().max(200).optional().default(''),
 });
 
 const escapeHtml = (str = '') =>
@@ -43,6 +44,17 @@ export async function POST(req) {
     // Honeypot triggered — pretend success without sending anything.
     if (website) {
       return NextResponse.json({ message: 'Received' }, { status: 200 });
+    }
+
+    const limit = consumeRateLimit(`custom-software-inquiry:${getClientKey(req)}`, {
+      max: 5,
+      windowMs: 60 * 60 * 1000,
+    });
+    if (limit.limited) {
+      return NextResponse.json(
+        { error: 'Too many messages. Please wait and try again.' },
+        { status: 429, headers: { 'Retry-After': String(limit.retryAfterSeconds) } }
+      );
     }
 
     const apiKey = (process.env.RESEND_API_KEY || process.env['\uFEFFRESEND_API_KEY'] || '').trim();

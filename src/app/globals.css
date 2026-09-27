@@ -73,7 +73,7 @@
   --secondary: 200 22% 16%;
   --secondary-foreground: 180 40% 98%;
 
-  --accent: 28 62% 46%;
+  --accent: 28 62% 40%;
   --accent-foreground: 36 80% 98%;
 
   --destructive: 0 72% 51%;
@@ -259,23 +259,8 @@
     display: none;
   }
 
-  .evidence-disclosure[open] > :not(summary) {
-    animation: disclosure-in 180ms ease-out both;
-  }
-
   .proof-panel {
     animation: proof-panel-in 180ms ease-out both;
-  }
-
-  @keyframes disclosure-in {
-    from {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @keyframes proof-panel-in {
@@ -501,10 +486,6 @@ html {
   .btn-3d {
     transition: none;
     transform: none;
-  }
-
-  .evidence-disclosure[open] > :not(summary) {
-    animation: none;
   }
 
   .proof-panel {

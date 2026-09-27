@@ -67,8 +67,8 @@ export function ChatWidget() {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen]);
 
-  const handleSend = useCallback(async () => {
-    const text = input.trim();
+  const handleSend = useCallback(async (prompt = input) => {
+    const text = prompt.trim();
     if (!text || text.length > MAX_INPUT_LENGTH || isLoading) return;
 
     const userMessage = { role: 'user', content: text, createdAt: Date.now() };
@@ -117,8 +117,7 @@ export function ChatWidget() {
   };
 
   const handleQuickQuestion = useCallback((query) => {
-    setInput(query);
-    setTimeout(() => handleSend(), 0);
+    handleSend(query);
   }, [handleSend]);
 
   // Hide on the full AI chat page — it already has the chat experience.
@@ -137,7 +136,7 @@ export function ChatWidget() {
             id="chat-widget-panel"
             role="dialog"
             aria-label="Chat with Dan's AI assistant"
-            className="w-[calc(100%-2.5rem)] max-w-[26rem] rounded-3xl border border-border/60 bg-card/95 shadow-2xl shadow-black/10 backdrop-blur-xl flex flex-col overflow-hidden ring-1 ring-black/5"
+            className="w-[min(26rem,calc(100vw-2.5rem))] rounded-3xl border border-border/60 bg-card/95 shadow-2xl shadow-black/10 backdrop-blur-xl flex flex-col overflow-hidden ring-1 ring-black/5"
           >
             <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 border-b border-border/60 bg-gradient-to-r from-muted/80 to-muted/40 backdrop-blur-md">
               <div className="flex items-center gap-2">
@@ -271,7 +270,7 @@ export function ChatWidget() {
               />
               <Button
                 type="button"
-                onClick={handleSend}
+                onClick={() => handleSend()}
                 disabled={!input.trim() || isLoading}
                 size="icon"
                 className="shrink-0"

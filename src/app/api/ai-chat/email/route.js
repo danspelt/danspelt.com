@@ -11,7 +11,7 @@ const emailSchema = z.object({
   needs: z.string().min(5).max(2000),
   consent: z.literal(true),
   transcript: z.string().min(10).max(15000),
-  website: z.string().max(0).optional().or(z.literal('')),
+  website: z.string().max(200).optional().default(''),
 });
 
 const MAX_EMAILS_PER_WINDOW = 5;

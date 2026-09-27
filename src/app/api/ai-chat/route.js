@@ -16,7 +16,7 @@ const requestSchema = z.object({
       content: z.string().min(1).max(4000),
     })
   ).max(50),
-  website: z.string().max(0).optional().or(z.literal('')),
+  website: z.string().max(200).optional().default(''),
 });
 
 const MAX_REQUESTS_PER_WINDOW = 10;
@@ -56,7 +56,7 @@ export async function POST(req) {
     if (!apiKey || apiKey === 'undefined') {
       console.error('AI chat: OPENAI_API_KEY is not configured');
       return NextResponse.json(
-        { error: 'AI chat is not configured. Please set OPENAI_API_KEY.' },
+        { error: 'The AI assistant is temporarily unavailable. Please try again later.' },
         { status: 503 }
       );
     }

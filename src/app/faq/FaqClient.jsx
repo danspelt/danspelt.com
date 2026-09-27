@@ -112,11 +112,11 @@ export default function FaqClient() {
 
       <p className="mt-10 text-sm text-muted-foreground">
         Still have a question?{' '}
-        <Link href="/contact" className="text-primary hover:underline underline-offset-4">
+        <Link href="/contact" className="text-primary underline underline-offset-4 focus-ring">
           Contact me
         </Link>{' '}
         or read more{' '}
-        <Link href="/about" className="text-primary hover:underline underline-offset-4">
+        <Link href="/about" className="text-primary underline underline-offset-4 focus-ring">
           about my background
         </Link>
         .
