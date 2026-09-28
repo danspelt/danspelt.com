@@ -63,6 +63,7 @@ export const metadata = {
       '18+ years of full-stack development experience across CanAssist, Youneeq, Neil Squire Society, and independent work in Victoria, BC.',
     url: 'https://danspelt.com/employment',
     type: 'profile',
+    images: ['/og.png'],
   },
   twitter: {
     card: 'summary_large_image',

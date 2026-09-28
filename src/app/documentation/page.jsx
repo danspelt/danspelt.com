@@ -40,6 +40,7 @@ export const metadata = {
       'How the portfolio is structured, built, documented, verified, deployed, and maintained.',
     url: 'https://danspelt.com/documentation',
     type: 'article',
+    images: ['/og.png'],
   },
   twitter: {
     card: 'summary_large_image',
