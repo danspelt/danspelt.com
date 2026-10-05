@@ -126,7 +126,7 @@ export default function CommunityHiveSpotlight() {
               </div>
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-1">
-                  The result
+                  Intended benefit
                 </h3>
                 <p className="leading-relaxed">{active.result}</p>
               </div>

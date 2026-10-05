@@ -173,7 +173,7 @@ export default function HomeClient() {
               A property-management organization was dealing with multiple processes for communication, maintenance, bookings, voting and reporting.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Dan developed a single platform to bring those functions together, reducing administrative work and creating a more efficient way to manage information and communication.
+              Dan developed a single platform to bring those functions together. The case study shows real product screens and implementation decisions; reduced administrative work is an intended benefit, with performance data still being collected.
             </p>
             <Button
               asChild
@@ -185,6 +185,19 @@ export default function HomeClient() {
                 <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="accessibility-example-heading" className="border-b border-border/60 bg-muted/25">
+        <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-20">
+          <p className="mb-3 text-sm font-medium uppercase tracking-[0.18em] text-primary">Accessibility in practice</p>
+          <h2 id="accessibility-example-heading" className="mb-5 text-3xl font-semibold sm:text-4xl">A score should make sense without colour</h2>
+          <div className="rounded-2xl border border-border/70 bg-card p-6 sm:p-8">
+            <p className="mb-4 text-lg leading-relaxed text-muted-foreground">A green, yellow, or red marker alone can leave people guessing. In AccessLens, Dan built place cards that pair colour with a numerical accessibility score and a written label, such as “Highly Accessible.” Missing scores say “Score unknown.”</p>
+            <p className="mb-4 leading-relaxed text-muted-foreground">The score includes an “Accessibility score” text prefix for screen readers. Keyboard focus is visible, and hover movement respects the system’s reduced-motion preference.</p>
+            <p className="mb-6 text-sm leading-relaxed text-muted-foreground"><span className="font-semibold text-foreground">Evidence: </span>The PlaceCard component implements these behaviours, and scoring unit tests cover the label and colour thresholds. This is a concrete implementation example; measured user impact and a formal accessibility audit are not available.</p>
+            <Link href="/case-studies/accesslens" className="focus-ring inline-flex items-center gap-2 rounded font-medium text-primary hover:underline">Explore the AccessLens case study<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>
         </div>
       </section>

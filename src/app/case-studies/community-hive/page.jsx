@@ -290,7 +290,10 @@ export default function CommunityHiveCaseStudy() {
       </section>
 
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold mb-6">Designed to Create Measurable Business Value</h2>
+        <h2 className="text-3xl font-semibold mb-3">Demonstrated product capabilities</h2>
+        <p className="max-w-3xl text-muted-foreground leading-relaxed mb-6">The captured screens above show role-specific dashboards, announcements, requests, messaging, and promotions. They demonstrate product interfaces, rather than measured savings or adoption.</p>
+        <h3 className="text-2xl font-semibold mb-3">Intended business benefits</h3>
+        <p className="max-w-3xl text-muted-foreground leading-relaxed mb-6">These are the goals behind the design. Time savings, earlier repairs, engagement, and revenue improvements have not been established by published measurements.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {businessValue.map(({ icon: Icon, title, description }) => (
             <Card key={title} className="h-full">
@@ -309,7 +312,7 @@ export default function CommunityHiveCaseStudy() {
           ))}
         </div>
         <p className="text-sm text-muted-foreground mt-6">
-          Exact performance data is being collected with early users. No statistics or financial claims are invented.
+          Performance data is still being collected with early users. Verified metrics and attributable user feedback are not available in this case study yet.
         </p>
       </section>
 
@@ -383,7 +386,7 @@ export default function CommunityHiveCaseStudy() {
             <Link href="/custom-software">Request a Software Consultation</Link>
           </Button>
           <Button asChild size="lg" variant="secondary" className="text-base px-8">
-            <a href="http://communityhive.ca" target="_blank" rel="noopener noreferrer">
+            <a href="https://communityhive.ca" target="_blank" rel="noopener noreferrer">
               Visit Live Site
               <ExternalLink className="ml-2 w-4 h-4" />
             </a>

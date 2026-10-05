@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, ArrowRight, ChevronDown, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -11,11 +12,11 @@ export default function EvidenceCaseStudy({ project }) {
     <main className="min-h-screen bg-background">
       <div className="container mx-auto max-w-5xl px-4 py-14 sm:py-20">
         <Link
-          href="/#proof"
+          href="/projects"
           className="mb-8 inline-flex items-center gap-2 rounded text-sm font-medium text-primary hover:underline focus-ring"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          Back to engineering proof
+          Back to projects
         </Link>
 
         <header className="max-w-3xl mb-12">
@@ -27,7 +28,25 @@ export default function EvidenceCaseStudy({ project }) {
             {project.title}
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">{project.tagline}</p>
+          {project.evidenceNote && <p className="mt-5 rounded-xl border border-border/70 bg-muted/30 p-4 text-sm leading-relaxed text-muted-foreground">{project.evidenceNote}</p>}
         </header>
+
+        {project.screenshots && (
+          <section className="mb-12" aria-labelledby="screens-heading">
+            <h2 id="screens-heading" className="mb-3 text-3xl font-semibold">Real product screens</h2>
+            <p className="mb-6 text-muted-foreground">Public screens from CareBoard. Private household dashboards are excluded to protect care and employment information.</p>
+            <div className="grid gap-6 sm:grid-cols-2">
+              {project.screenshots.map((screen) => (
+                <figure key={screen.src} className="overflow-hidden rounded-xl border border-border/70 bg-card">
+                  <a href={screen.src} className="focus-ring block" aria-label={`Open full-size image: ${screen.alt}`}>
+                    <Image src={screen.src} alt={screen.alt} width={1234} height={712} sizes="(max-width: 640px) 100vw, 50vw" className="h-auto w-full" />
+                  </a>
+                  <figcaption className="p-4 text-sm leading-relaxed text-muted-foreground">{screen.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
 
         <nav
           aria-label="Case study sections"
@@ -93,8 +112,9 @@ export default function EvidenceCaseStudy({ project }) {
 
         <section id="outcomes" className="scroll-mt-40 mb-12" aria-labelledby="outcomes-heading">
           <h2 id="outcomes-heading" className="text-3xl font-semibold mb-6">
-            Working outcomes
+            Implemented capabilities and intended benefits
           </h2>
+          {project.impactNote && <p className="mb-6 max-w-3xl leading-relaxed text-muted-foreground">{project.impactNote}</p>}
           <ul className="space-y-4">
             {project.outcomes.map((outcome) => (
               <li key={outcome.label} className="rounded-xl border border-border/70 bg-card p-5">
@@ -102,6 +122,7 @@ export default function EvidenceCaseStudy({ project }) {
                 {outcome.evidence && (
                   <p className="mt-1 text-sm text-muted-foreground">Evidence: {outcome.evidence}</p>
                 )}
+                {!outcome.evidence && <p className="mt-1 text-sm text-muted-foreground">Design intent; measured impact has not been established.</p>}
               </li>
             ))}
           </ul>

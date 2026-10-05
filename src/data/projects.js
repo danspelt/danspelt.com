@@ -28,7 +28,7 @@ export const LIVE_APPS = [
     tags: ['Care coordination', 'PWA'],
     summary: 'Shared task coordination for families and approved care workers.',
     description:
-      'Built for household managers and approved care workers who coordinate daily tasks for a loved one or client. Families benefit from clearer schedules, proof of completion, and a shared record that reduces miscommunication. The result is less stress for caregivers and more accountability for the people they support.',
+      'Built for household managers and approved care workers coordinating daily tasks. Combines schedules, proof of completion, and a shared record, with the aim of clearer coordination and accountability. Reduced stress and miscommunication have not been measured.',
     origin:
       'Self-managing care in BC means becoming a household employer — scheduling, assigning, and documenting work — while care workers need predictable shifts and clear instructions. CareBoard closes that gap.',
     cta: 'Visit CareBoard',
@@ -42,7 +42,7 @@ export const LIVE_APPS = [
     tags: ['SaaS', 'Multi-tenant'],
     summary: 'One hub for building announcements, requests, documents, and decisions.',
     description:
-      'For property managers, strata councils, and residents who are tired of missed announcements and maintenance requests disappearing into email chains. Communities benefit from one shared place for announcements, requests, documents, and decisions. The impact is fewer repeated questions, faster maintenance resolution, and a clear record of what was communicated.',
+      'For property managers, strata councils, and residents coordinating announcements, requests, documents, and decisions. One shared system is designed to reduce repeated questions and improve maintenance follow-up; those benefits are not yet supported by published measurements.',
     origin:
       'A property-management organization was juggling communication, maintenance, bookings, voting, and reporting across disconnected tools. Community Hive gives each building one scoped, audit-friendly system instead.',
     cta: 'Visit live site',
@@ -56,7 +56,7 @@ export const LIVE_APPS = [
     tags: ['Accessibility', 'Civic tech'],
     summary: 'Crowdsourced accessibility scores for places before you visit.',
     description:
-      'For people with disabilities, caregivers, and accessibility advocates who need to know whether a restaurant, clinic, park, or transit stop will work for them before they travel. Municipalities and businesses benefit from crowdsourced accessibility data that shows where improvements are needed. The impact is safer, more confident trips and better public awareness of accessibility gaps.',
+      'For people with disabilities, caregivers, and accessibility advocates checking a place before travelling. Structured checklists, labelled scores, photos, and reports make accessibility information available to inspect. Safer trips and improved awareness are intended benefits, not measured results.',
     origin:
       'People with disabilities often cannot tell whether a place will work for them until they arrive. AccessLens turns lived accessibility knowledge into structured, crowdsourced data.',
     cta: 'Visit live site',

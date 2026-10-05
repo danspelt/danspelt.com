@@ -72,7 +72,7 @@ export const COMMUNITY_HIVE_ROLES = [
       'The same questions arrive by email all week, and maintenance concerns come in through whatever channel the resident happened to use.',
     onScreen:
       'A building overview with open issues, recent announcements, and the requests that still need a response.',
-    result: 'Less repetitive email and a clearer operational record of what was asked and what was done.',
+    result: 'Designed to reduce repetitive email and keep a clearer record of what was asked and done.',
     image: '/images/community-hive/screenshots/pm-dashboard.png',
     imageAlt:
       'Property manager dashboard showing a building overview with open maintenance requests and recent announcements',
@@ -84,7 +84,7 @@ export const COMMUNITY_HIVE_ROLES = [
       'Decisions get made across email threads and meetings, so it is hard to reconstruct what was decided and why.',
     onScreen:
       'Governing documents, meeting minutes, polls, and a history of decisions with the access each member is permitted.',
-    result: 'Faster decisions with a traceable record instead of a search through inboxes.',
+    result: 'Designed to support decisions with a traceable record instead of scattered inboxes.',
     image: '/images/community-hive/screenshots/resident-council-dashboard.png',
     imageAlt:
       'Council view showing governing documents, meeting minutes, and a poll with decision history',
@@ -106,8 +106,9 @@ export const COMMUNITY_HIVE_ROLES = [
 export const PROJECT_PROOF = [
   {
     slug: 'community-hive',
+    cardEvidence: 'Six captured product screens; tenant and role separation documented in the repository.',
     title: 'Community Hive',
-    tagline: 'A shared communication and operations hub for property managers, strata councils, and residents. Communities stop losing announcements and maintenance requests in email chains, and everyone has a clear record of what was decided.',
+    tagline: 'A shared communication and operations hub for property managers, strata councils, and residents, designed to keep announcements, requests, and decisions together instead of scattered through email chains.',
     status: 'pilot',
     audience: ['hire', 'business', 'product'],
     role: 'Founder and sole developer',
@@ -197,6 +198,13 @@ export const PROJECT_PROOF = [
   },
   {
     slug: 'careboard',
+    cardEvidence: 'Public product and sign-in screens; role isolation and employer exports documented in the repository.',
+    evidenceNote: 'Active development. The public screens below were captured on October 4, 2026. Dashboard capabilities are described from repository evidence, not a production audit. Manager action queues, notification submission status and retry, handover acknowledgment and follow-up ownership, month-end evidence checklists, and an attendance correction are in progress and are not presented here as deployed.',
+    impactNote: 'No verified time savings, adoption figures, or user testimonials are available for this case study. Clearer coordination and less administrative work remain intended benefits.',
+    screenshots: [
+      { src: '/images/careboard/public-landing.png', alt: 'CareBoard public homepage with a clearly labelled example task board showing done, in-progress, and open tasks', caption: 'Public product homepage. The example board is part of the real site; it is illustrative, not a capture of a private household dashboard.' },
+      { src: '/images/careboard/sign-in.png', alt: 'CareBoard sign-in page with empty email and password fields and approved care-team access guidance', caption: 'Public sign-in screen. Manager-approved access is explained before sign-in. No private care data or credentials are shown.' },
+    ],
     title: 'CareBoard',
     tagline:
       'A private care-coordination platform for household employers and approved care workers. Managers assign and track work; workers see only their own tasks; schedules, proof photos, handoffs, and an audit log keep everyone accountable.',
@@ -204,20 +212,20 @@ export const PROJECT_PROOF = [
     audience: ['hire', 'product'],
     role: 'Founder and sole developer',
     problem:
-      'In British Columbia, people who self-manage their care — including CSIL household employers — are legally the employer. They are responsible for scheduling, task assignment, timesheets, and employment records, while their care workers need predictable shifts, clear instructions, and safe ways to report concerns. Most of that coordination still happens through group chats, paper notes, and memory.',
+      'A household manager needs to know who is working, what needs doing, what was completed, and what the next shift needs to know. When schedules, task notes, and employer records are spread across messages and paper, reconstructing the day becomes another job. Care workers need clear assignments and a way to share outstanding work without exposing other workers’ private records.',
     approach:
       'A private household task board with strict role separation. A manager creates, assigns, and completes work and maintains employer records; each worker sees only their own tasks and open work they can claim. Shifts follow a two-week A/B cycle, and proof photos, end-of-shift handoffs, safety reports, and an append-only audit log make accountability routine rather than extra effort.',
     outcomes: [
       {
         label: 'Manager and worker dashboards covering task assignment, claiming, completion, and proof photos',
-        evidence: 'Verifiable in the live product at care.danspelt.com',
+        evidence: 'Manager and worker workflows documented in the repository README; private dashboards are not shown in this case study.',
       },
       {
         label: 'Two-week rotating schedules with day-off requests and shift-coverage acceptance',
         evidence: 'Documented in the repository README',
       },
       {
-        label: 'Timesheet, payroll, and monthly CSV exports built around BC employment-standards and CSIL record-keeping duties',
+        label: 'Timesheet, payroll, and monthly CSV exports designed to support household employer record keeping',
         evidence: 'Requirements matrix documented in docs/csil-compliance.md',
       },
       {
@@ -288,11 +296,13 @@ export const PROJECT_PROOF = [
     ],
     liveUrl: 'https://care.danspelt.com/',
     caseStudyUrl: '/case-studies/careboard',
-    image: null,
-    imageAlt: 'CareBoard manager dashboard showing assigned tasks and worker schedules',
+    image: '/images/careboard/public-landing.png',
+    imageAlt: 'CareBoard public homepage with an illustrative example task board',
   },
   {
     slug: 'accesslens',
+    cardEvidence: 'Place cards pair colour with written score labels and screen-reader text; score boundaries have unit coverage.',
+    impactNote: 'The implementation demonstrates how accessibility information is presented. User impact, screen-reader behaviour across devices, and formal WCAG conformance have not been established by the evidence reviewed for this case study.',
     title: 'AccessLens',
     tagline: 'Built for people with disabilities, caregivers, and accessibility advocates who need reliable accessibility information before visiting a new place. Civic organizations and businesses gain visibility into where accessibility is working and where it needs to improve.',
     status: 'active',
@@ -321,6 +331,10 @@ export const PROJECT_PROOF = [
         label: 'Accessibility evidence',
         detail:
           'Accessibility is the product data model, not a decorative claim: places record entrance, door, elevator, washroom, parking, signage, transit, aisle, and service-animal information alongside photos and issue reports.',
+      },
+      {
+        label: 'Scores that do not rely on colour alone',
+        detail: 'PlaceCard pairs a numerical score with a written label and an “Accessibility score” screen-reader text prefix. Missing scores say “Score unknown.” Visible keyboard focus and motion-safe hover styles are implemented in the same component. Place.scoring.test.ts covers score calculation and the colour/label boundaries at 40 and 70; it does not test the rendered component or prove whole-site accessibility.',
       },
       {
         label: 'Security and validation',
