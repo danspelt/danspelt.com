@@ -12,6 +12,7 @@ export default function sitemap() {
     '/skillstools',
     '/timeline',
     '/custom-software',
+    '/estimate',
     '/contact',
     '/faq',
     '/insights',
@@ -29,7 +30,13 @@ export default function sitemap() {
   return routes.map((route) => ({
     url: `${base}${route}`,
     lastModified: new Date('2026-09-20'),
-    changeFrequency: route === '' || route === '/custom-software' ? 'weekly' : 'monthly',
-    priority: route === '' ? 1 : route === '/custom-software' || route === '/case-studies' ? 0.9 : 0.7,
+    changeFrequency:
+      route === '' || route === '/custom-software' || route === '/estimate' ? 'weekly' : 'monthly',
+    priority:
+      route === ''
+        ? 1
+        : route === '/custom-software' || route === '/case-studies' || route === '/estimate'
+          ? 0.9
+          : 0.7,
   }));
 }

@@ -583,6 +583,13 @@ export default function CustomSoftwareClient() {
               </a>
               .
             </p>
+            <p className="text-center text-muted-foreground mb-6">
+              Want a ballpark first?{' '}
+              <Link href="/estimate" className="text-primary underline underline-offset-4">
+                Try the project cost estimator
+              </Link>
+              .
+            </p>
             <InquiryForm />
           </div>
         </div>

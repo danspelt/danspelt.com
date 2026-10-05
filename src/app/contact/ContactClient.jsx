@@ -22,6 +22,13 @@ const INTENT_COPY = {
     placeholder:
       'The role, the stack, and anything you want me to know about the team.',
   },
+  estimate: {
+    heading: 'Talk through your estimate',
+    intro:
+      'The estimator gives a ballpark range from the options you picked. Tell me a little about the project and I will turn it into a scoped fixed price after a short conversation.',
+    placeholder:
+      'What are you building, who is it for, and when would you like it? Pasting your estimate summary here helps too.',
+  },
   'community-hive': {
     heading: 'Request a Community Hive demo',
     intro:

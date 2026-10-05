@@ -11,7 +11,8 @@
     "start:prod": "node .next/standalone/server.js",
     "lint": "eslint src",
     "test:health": "node scripts/health-check.mjs",
-    "test:challenge": "node scripts/smoke-business-challenge.mjs"
+    "test:challenge": "node scripts/smoke-business-challenge.mjs",
+    "test:estimate": "node scripts/smoke-project-estimate.mjs"
   },
   "dependencies": {
     "@radix-ui/react-navigation-menu": "^1.2.3",

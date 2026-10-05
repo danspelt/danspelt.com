@@ -71,6 +71,13 @@ export default function HomeClient() {
                   </Link>
                 </Button>
               </div>
+              <p className="hero-rise hero-rise-delay-4 mt-4 text-sm text-secondary-foreground/80">
+                Want a ballpark cost first?{' '}
+                <Link href="/estimate" className="underline underline-offset-4 hover:text-secondary-foreground">
+                  Try the project cost estimator
+                </Link>
+                .
+              </p>
               <p className="hero-rise hero-rise-delay-4 mt-5 text-sm text-secondary-foreground/75">
                 Based in Victoria, BC · Working remotely with businesses and organizations
               </p>
