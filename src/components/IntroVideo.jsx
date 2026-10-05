@@ -30,6 +30,7 @@ const IntroVideo = () => {
         onEnded={handleEnded}
       >
         <source src="/videos/intro.mp4" type="video/mp4" />
+        <track kind="captions" src="/videos/intro.en.vtt" srcLang="en" label="English" default />
         Your browser does not support the video tag.
       </video>
       <button
