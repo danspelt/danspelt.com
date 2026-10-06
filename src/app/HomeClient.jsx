@@ -55,8 +55,11 @@ export default function HomeClient() {
               <p className="hero-rise hero-rise-delay-3 text-base text-secondary-foreground/80 max-w-xl mb-6 leading-relaxed">
                 Dan Spelt is a Victoria, BC full-stack developer who helps businesses improve inefficient workflows, reduce administrative work and manage information more effectively — then designs and builds the custom software to make it happen.
               </p>
-              <p className="hero-rise hero-rise-delay-4 text-lg font-medium text-secondary-foreground mb-8">
+              <p className="hero-rise hero-rise-delay-4 text-lg font-medium text-secondary-foreground mb-3">
                 You bring the problem. Dan finds the opportunity.
+              </p>
+              <p className="hero-rise hero-rise-delay-4 text-sm font-medium text-secondary-foreground/85 mb-8">
+                Available for senior full-stack roles and select custom software projects.
               </p>
               <div className="hero-rise hero-rise-delay-4 flex flex-col sm:flex-row gap-3">
                 <Button
