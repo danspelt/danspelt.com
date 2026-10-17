@@ -4,8 +4,10 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, User, Bot, Loader2, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FormattedMessage } from '@/components/FormattedMessage';
+import { AI_CHAT_ENABLED, AI_CHAT_OFF_MESSAGE } from '@/lib/ai-chat-config';
 
 const MAX_INPUT_LENGTH = 4000;
 
@@ -148,7 +150,9 @@ export function ChatWidget() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold leading-tight">Dan's AI Assistant</p>
-                  <p className="text-[10px] text-muted-foreground">Usually replies in seconds</p>
+                  <p className="text-[10px] text-muted-foreground">
+                    {AI_CHAT_ENABLED ? 'Usually replies in seconds' : 'Currently switched off'}
+                  </p>
                 </div>
               </div>
               <Button
@@ -165,6 +169,17 @@ export function ChatWidget() {
               </Button>
             </div>
 
+            {!AI_CHAT_ENABLED ? (
+              <div className="p-4 space-y-3">
+                <p className="text-[13px] leading-relaxed text-muted-foreground">
+                  {AI_CHAT_OFF_MESSAGE}
+                </p>
+                <Button asChild className="w-full">
+                  <Link href="/contact">Contact Dan</Link>
+                </Button>
+              </div>
+            ) : (
+              <>
             <div
               className="flex-1 overflow-y-scroll overflow-x-hidden space-y-3 p-3.5 pr-2.5 h-[18rem] scroll-smooth custom-scrollbar"
               role="log"
@@ -287,6 +302,8 @@ export function ChatWidget() {
             <p id="chat-widget-help" className="sr-only">
               Press Enter to send, Shift + Enter for a new line.
             </p>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -301,7 +318,7 @@ export function ChatWidget() {
         aria-expanded={isOpen}
         aria-controls="chat-widget-panel"
       >
-        {!isOpen && (
+        {!isOpen && AI_CHAT_ENABLED && (
           <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-background animate-pulse motion-reduce:animate-none" aria-hidden="true" />
         )}
         {isOpen ? <X className="w-4 h-4" /> : <MessageCircle className="w-4 h-4" />}

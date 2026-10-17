@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { FormattedMessage } from '@/components/FormattedMessage';
 import { QUICK_PROMPTS } from '@/data/professional-profile';
 import { trackEvent } from '@/lib/analytics';
+import { AI_CHAT_ENABLED, AI_CHAT_OFF_MESSAGE } from '@/lib/ai-chat-config';
 
 const MAX_INPUT_LENGTH = 4000;
 
@@ -191,6 +192,36 @@ export default function AIChatClient() {
       setIsEmailing(false);
     }
   };
+
+  if (!AI_CHAT_ENABLED) {
+    return (
+      <div className="container mx-auto max-w-2xl px-4 py-16 sm:py-20">
+        <h1 className="text-4xl sm:text-5xl font-semibold mb-3 tracking-tight">Chat with Dan's AI</h1>
+        <p className="text-lg text-muted-foreground leading-relaxed mb-8">{AI_CHAT_OFF_MESSAGE}</p>
+        <section
+          aria-label="Other ways to find what you need"
+          className="rounded-2xl border border-border bg-card/70 shadow-sm p-6"
+        >
+          <h2 className="text-sm font-semibold mb-3">In the meantime</h2>
+          <ul className="space-y-2">
+            {FALLBACK_LINKS.map((link) => (
+              <li key={link.url}>
+                <Link href={link.url} className="text-primary underline underline-offset-4">
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <p className="mt-6 text-sm text-muted-foreground">
+          Or email me directly at{' '}
+          <a href="mailto:danspelt24@gmail.com" className="text-primary underline underline-offset-4">
+            danspelt24@gmail.com
+          </a>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto max-w-2xl px-4 py-16 sm:py-20">

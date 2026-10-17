@@ -27,6 +27,21 @@ const steps = [
   },
 ];
 
+const coreValues = [
+  {
+    title: 'The problem comes first',
+    body: 'Before any code is written, the question is where time or money is actually being lost — and whether software will pay for itself. If it will not, you get told so.',
+  },
+  {
+    title: 'Build around how the work really happens',
+    body: 'Software should fit the way your team already works. A tool that forces everyone to change their process to suit it tends to go unused.',
+  },
+  {
+    title: 'Accessible and maintainable by default',
+    body: 'Every system is built to be usable by as many people as possible, documented, and ready to hand over. Nothing depends on one person staying available forever.',
+  },
+];
+
 const reasons = [
   '18+ years of software development experience',
   'Full-stack expertise — from user interface to database and infrastructure.',
@@ -108,6 +123,29 @@ export default function HomeClient() {
               If it can, he develops a solution around your business — rather than asking your business to adapt to someone else&apos;s software.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Core values */}
+      <section aria-labelledby="core-values-heading" className="border-b border-border/60 bg-background">
+        <div className="container mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="max-w-2xl mb-10">
+            <h2 id="core-values-heading" className="text-3xl sm:text-4xl font-semibold mb-3">
+              How I work
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Three things that hold true on every project.
+            </p>
+          </div>
+
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {coreValues.map(({ title, body }) => (
+              <li key={title} className="rounded-2xl border border-border/70 bg-card p-6">
+                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{body}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

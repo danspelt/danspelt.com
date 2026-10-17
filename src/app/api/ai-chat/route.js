@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { OpenAI } from 'openai';
 import { buildSystemPrompt, selectSources } from '@/data/professional-profile';
 import { consumeRateLimit, getClientKey } from '@/lib/rate-limit';
+import { AI_CHAT_ENABLED, AI_CHAT_OFF_MESSAGE } from '@/lib/ai-chat-config';
 
 export const runtime = 'nodejs';
 
@@ -24,6 +25,12 @@ const WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
 export async function POST(req) {
   try {
+    // Checked before anything else: when the assistant is off the route must
+    // never look like a failure to the client.
+    if (!AI_CHAT_ENABLED) {
+      return NextResponse.json({ error: AI_CHAT_OFF_MESSAGE, disabled: true }, { status: 503 });
+    }
+
     const data = await req.json();
     const parsed = requestSchema.safeParse(data);
 
