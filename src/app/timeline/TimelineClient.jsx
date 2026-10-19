@@ -9,7 +9,7 @@ export default function TimelineClient() {
         <h1 className="text-4xl sm:text-5xl font-semibold mb-3">Professional journey</h1>
         <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
           Career progression across accessibility, AI products, and full-stack systems —
-          from CanAssist to AccessLens.
+          from CanAssist to freelance work.
         </p>
       </div>
       <Timeline2D />

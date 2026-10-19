@@ -109,25 +109,6 @@ const timelineElements = [
     tech: ["JavaScript", "React", "Next.js", "AWS", "Firebase", "HTML", "CSS", "Tailwind CSS"],
   },
   {
-    id: 7,
-    company: "AccessLens",
-    position: "Founder & Developer",
-    location: "Victoria, BC",
-    description: `AccessLens is a community-driven accessibility intelligence platform I designed and built to help people with disabilities navigate cities. The platform combines crowdsourced accessibility data, interactive mapping, and community reviews to create a comprehensive, searchable resource for real-world accessibility information.
-
-    I architected the full system independently — a Next.js 16 App Router application with TypeScript, MongoDB with 2dsphere geospatial indexing, and Auth.js providing three authentication methods: Google OAuth, email magic link, and traditional credentials. The platform calculates an accessibility score (0-100) for each place based on ten weighted criteria, with colour-coded map markers (green/yellow/red) rendered via Leaflet and OpenStreetMap — no paid API key required.
-
-    Key systems I built include the place submission and moderation pipeline, a role-based account model separating community reviewers from business accounts, a photo upload system with S3/MinIO-ready architecture, geocoding with Nominatim and TTL-cached results, and a structured reporting workflow for accessibility issues.
-
-    The platform launched production-ready with 50+ real verified places seeded across Victoria, BC, covering restaurants, government buildings, parks, transit stops, hospitals, and more. Deployed with Docker using a multi-stage build and standalone Next.js output, with a health check endpoint for container monitoring. Built in alignment with WCAG 2.1 AA, the Accessible Canada Act, and the BC Accessibility Act.`,
-    buttonText: "Details",
-    startDate: "May 2026",
-    endDate: "Present",
-    icon: "work",
-    color: "indigo",
-    tech: ["Next.js", "React", "TypeScript", "MongoDB", "Auth.js", "Leaflet", "Tailwind CSS", "Docker", "Zod"],
-  },
-  {
     id: 6,
     company: "Community Hive",
     position: "Founder & Developer",
