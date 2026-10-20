@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Full-Stack Developer Experience Timeline',
   description:
-    'Dan Spelt’s professional journey — AccessLens, Community Hive, Neil Squire Society, Youneeq AI, CanAssist, and earlier roles.',
+    'Dan Spelt’s professional journey — Community Hive, Neil Squire Society, Youneeq AI, CanAssist, and earlier roles.',
   alternates: {
     canonical: 'https://danspelt.com/timeline',
   },

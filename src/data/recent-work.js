@@ -18,7 +18,7 @@ export const RECENT_WORK = [
     date: '2026-09-17',
     project: 'danspelt.com',
     change:
-      'Consolidated the product lineup to the three working apps, added a live-products strip on the homepage linking to each one, and synced the professional profile so CareBoard and AccessLens are represented everywhere.',
+      'Consolidated the product lineup to the working apps, added a live-products strip on the homepage linking to each one, and synced the professional profile so CareBoard is represented everywhere.',
     whyItMatters:
       'Every product a visitor sees now resolves to software that is actually running.',
     url: '/',
@@ -40,14 +40,5 @@ export const RECENT_WORK = [
     whyItMatters:
       'Property managers evaluating the pilot can understand the product without a sales call.',
     url: '/case-studies/community-hive',
-  },
-  {
-    date: '2026-08-01',
-    project: 'AccessLens',
-    change:
-      'Expanded the seeded Victoria, BC dataset and refined the ten-criteria accessibility scoring shown on map markers.',
-    whyItMatters:
-      'Accessibility scores only help people if enough real places are covered to plan a trip around.',
-    url: '/projects',
   },
 ];

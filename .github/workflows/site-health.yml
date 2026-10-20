@@ -20,9 +20,7 @@ jobs:
             https://www.danspelt.ca \
             https://communityhive.ca \
             https://crm.danspelt.com \
-            https://care.danspelt.com \
-            https://accesslens.ca \
-            https://www.accesslens.ca; do
+            https://care.danspelt.com; do
             code=$(curl -s -o /dev/null -w "%{http_code}" -m 30 -L "$url" || echo 000)
             if [ "$code" = "200" ]; then
               echo "PASS $url ($code)"

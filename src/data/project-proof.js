@@ -334,7 +334,7 @@ export const PROJECT_PROOF = [
       },
       {
         label: 'Scores that do not rely on colour alone',
-        detail: 'PlaceCard pairs a numerical score with a written label and an “Accessibility score” screen-reader text prefix. Missing scores say “Score unknown.” Visible keyboard focus and motion-safe hover styles are implemented in the same component. Place.scoring.test.ts covers score calculation and the colour/label boundaries at 40 and 70; it does not test the rendered component or prove whole-site accessibility.',
+        detail: 'PlaceCard pairs a numerical score with a written label and an "Accessibility score" screen-reader text prefix. Missing scores say "Score unknown." Visible keyboard focus and motion-safe hover styles are implemented in the same component. Place.scoring.test.ts covers score calculation and the colour/label boundaries at 40 and 70; it does not test the rendered component or prove whole-site accessibility.',
       },
       {
         label: 'Security and validation',

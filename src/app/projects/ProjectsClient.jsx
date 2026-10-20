@@ -6,7 +6,6 @@ import { PROJECT_PROOF, PROJECT_STATUS } from '@/data/project-proof';
 const summaries = {
   'community-hive': 'Building communication scattered across inboxes. One tenant-scoped system for announcements, requests, documents, and decisions.',
   careboard: 'Household managers coordinating care through notes and messages. Private task assignment, rotating schedules, handoffs, and employer records.',
-  accesslens: 'Accessibility details missing before a visit. Structured place checklists, labelled scores, photos, and community reports.',
 };
 
 export default function Projects() {
@@ -14,7 +13,7 @@ export default function Projects() {
     <div className="container mx-auto max-w-5xl px-4 py-12 sm:py-16">
       <header className="mb-10 max-w-3xl">
         <h1 className="mb-4 text-4xl font-semibold sm:text-5xl">Software built around real problems</h1>
-        <p className="text-lg leading-relaxed text-muted-foreground">Explore three projects, then open a case study for product screens, implementation evidence, and the decisions behind the build.</p>
+        <p className="text-lg leading-relaxed text-muted-foreground">Explore the projects, then open a case study for product screens, implementation evidence, and the decisions behind the build.</p>
       </header>
       <ul className="grid gap-6 md:grid-cols-3">
         {PROJECT_PROOF.map((project) => (

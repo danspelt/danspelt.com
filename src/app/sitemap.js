@@ -20,7 +20,6 @@ export default function sitemap() {
     '/build-for-us',
     '/case-studies/community-hive',
     '/case-studies/careboard',
-    '/case-studies/accesslens',
     '/privacy-policy',
     '/terms-of-use',
     '/cookie-policy',

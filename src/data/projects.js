@@ -47,20 +47,6 @@ export const LIVE_APPS = [
       'A property-management organization was juggling communication, maintenance, bookings, voting, and reporting across disconnected tools. Community Hive gives each building one scoped, audit-friendly system instead.',
     cta: 'Visit live site',
   },
-  {
-    slug: 'accesslens',
-    name: 'AccessLens',
-    url: 'https://accesslens.ca',
-    caseStudyUrl: '/case-studies/accesslens',
-    status: 'live',
-    tags: ['Accessibility', 'Civic tech'],
-    summary: 'Crowdsourced accessibility scores for places before you visit.',
-    description:
-      'For people with disabilities, caregivers, and accessibility advocates checking a place before travelling. Structured checklists, labelled scores, photos, and reports make accessibility information available to inspect. Safer trips and improved awareness are intended benefits, not measured results.',
-    origin:
-      'People with disabilities often cannot tell whether a place will work for them until they arrive. AccessLens turns lived accessibility knowledge into structured, crowdsourced data.',
-    cta: 'Visit live site',
-  },
 ];
 
 /** Only the apps that are actually deployed and reachable. */
