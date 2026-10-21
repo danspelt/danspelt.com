@@ -1,0 +1,19 @@
+name: Deploy to Coolify
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Trigger Coolify redeploy of danspelt.com
+        env:
+          TOKEN: ${{ secrets.COOLIFY_TOKEN }}
+          BASE: http://5.78.134.154:8000
+        run: |
+          set -e
+          apps=$(curl -sS --max-time 30 -H "Authorization: Bearer $TOKEN" "$BASE/api/v1/applications")
+          uuid=$(echo "$apps" | jq -r '[.[] | select((.fqdn // "") | test("(^|,)https?://(www\\.)?danspelt\\.com"))][0].uuid')
+          echo "app uuid: $uuid"
+          [ -n "$uuid" ] && [ "$uuid" != "null" ] || { echo "danspelt.com app not found"; echo "$apps" | jq -r '.[] | "\(.name) \(.fqdn)"'; exit 1; }
+          curl -sS --fail --max-time 30 -H "Authorization: Bearer $TOKEN" "$BASE/api/v1/deploy?uuid=$uuid"
