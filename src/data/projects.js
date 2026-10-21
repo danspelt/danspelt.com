@@ -61,6 +61,19 @@ export const LIVE_APPS = [
       'People with disabilities often cannot tell whether a place will work for them until they arrive. AccessLens turns lived accessibility knowledge into structured, crowdsourced data.',
     cta: 'Visit live site',
   },
+  {
+    slug: 'digital-notices',
+    name: 'Digital Notices with Proof of Delivery',
+    caseStudyUrl: '/case-studies/digital-notices',
+    status: 'building',
+    tags: ['Property management', 'Compliance'],
+    summary: 'Send formal notices digitally with tracked delivery and resident consent.',
+    description:
+      'A demo app for BC property and strata managers. Sends formal notices to residents digitally, records resident consent (date and method such as the RTB-51 form), blocks residents who have not consented, and tracks delivery per recipient (sent, delivered, opened, acknowledged). Each notice gets a timestamped proof-of-delivery log with a SHA-256 content fingerprint and CSV/JSON audit export.',
+    origin:
+      'Property managers need a documented record of when residents received formal notices, along with proof that consent was obtained before digital delivery. Digital Notices provides that audit trail.',
+    cta: 'Demo available on request',
+  },
 ];
 
 /** Only the apps that are actually deployed and reachable. */
