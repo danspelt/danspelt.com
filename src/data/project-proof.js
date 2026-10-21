@@ -386,6 +386,113 @@ export const PROJECT_PROOF = [
     image: null,
     imageAlt: 'AccessLens map showing colour-coded accessibility scores for places in Victoria, BC',
   },
+  {
+    slug: 'digital-notices',
+    cardEvidence: 'Delivery tracking with sent, delivered, opened, and acknowledged states; SHA-256 content fingerprints; CSV/JSON audit export.',
+    evidenceNote: 'This is a demo application. Emails are simulated and delivery does not constitute legal service. Confirm service rules with the RTB or a lawyer.',
+    impactNote: 'Delivery tracking and consent recording are demonstrated in the app. Legal compliance and real-world effectiveness have not been verified.',
+    screenshots: [
+      { src: '/images/digital-notices/manager-dashboard.png', alt: 'Digital Notices manager dashboard showing total residents, consent rate, and recent notices', caption: 'Manager dashboard with delivery metrics and recent notices.' },
+      { src: '/images/digital-notices/notice-delivery-tracking.png', alt: 'Notice delivery log showing recipient status for sent, delivered, opened, and acknowledged states', caption: 'Per-recipient delivery log with timestamps and status tracking.' },
+      { src: '/images/digital-notices/resident-portal.png', alt: 'Resident portal showing received notices with acknowledge option', caption: 'Resident view with notice history and acknowledgement.' },
+    ],
+    title: 'Digital Notices with Proof of Delivery',
+    tagline: 'A demo app for BC property and strata managers that sends formal notices digitally, tracks resident consent, records delivery status, and produces audit-ready proof-of-delivery logs.',
+    status: 'pilot',
+    audience: ['hire', 'product'],
+    role: 'Founder and sole developer',
+    problem:
+      'Property and strata managers in BC need documented proof that residents received formal notices. Paper notices lack delivery confirmation, and digital delivery requires recorded consent. Without a clear audit trail, managers cannot demonstrate compliance when disputes arise.',
+    approach:
+      'A notice-delivery system that records resident consent (date and method, such as the RTB-51 form), blocks delivery to residents who have not consented, tracks each notice through sent, delivered, opened, and acknowledged states, and produces timestamped proof-of-delivery logs with SHA-256 content fingerprints.',
+    outcomes: [
+      {
+        label: 'Resident consent recording with date, method (e.g. RTB-51), and opt-out handling',
+        evidence: 'Demonstrated in the resident management interface.',
+      },
+      {
+        label: 'Per-recipient delivery tracking: sent, delivered, opened, acknowledged',
+        evidence: 'Visible in the notice delivery log with timestamps.',
+      },
+      {
+        label: 'SHA-256 content fingerprint for each notice, proving the content has not changed',
+        evidence: 'Hash displayed on each notice detail page.',
+      },
+      {
+        label: 'CSV and JSON audit export for proof-of-delivery logs',
+        evidence: 'Export button available on the notice detail page.',
+      },
+      {
+        label: 'Resident portal for viewing and acknowledging notices',
+        evidence: 'Demonstrated in the resident-facing interface.',
+      },
+      {
+        label: 'Designed to provide an audit trail for regulatory or dispute scenarios',
+      },
+    ],
+    proof: [
+      {
+        label: 'Consent enforcement',
+        detail:
+          'The system blocks digital delivery to residents who have not provided consent. Consent records include date and method (such as an RTB-51 form reference).',
+      },
+      {
+        label: 'Delivery tracking',
+        detail:
+          "Each recipient's delivery status is tracked independently: sent (email dispatched), delivered (received by mail server), opened (email opened), and acknowledged (resident confirmed receipt). Timestamps are recorded for each state.",
+      },
+      {
+        label: 'Content integrity',
+        detail:
+          'A SHA-256 hash of the notice content is computed and stored when the notice is created, providing proof that the content has not been modified after delivery.',
+      },
+      {
+        label: 'Audit export',
+        detail:
+          'Delivery logs can be exported as CSV or JSON, including recipient, status, timestamps, and content hash for use in compliance or dispute scenarios.',
+      },
+      {
+        label: 'Known constraint',
+        detail:
+          'This is a demo application. Emails are simulated and not actually sent. The system does not constitute legal service of notices. Confirm service rules with the Residential Tenancy Branch or a lawyer.',
+      },
+    ],
+    decisions: [
+      {
+        choice: 'SQLite for single-deployment simplicity',
+        reason:
+          'A self-contained database keeps the demo simple and portable without external dependencies.',
+        tradeoff:
+          'Single-node storage; scaling would require migration to a networked database.',
+      },
+      {
+        choice: 'SHA-256 content fingerprinting instead of blockchain',
+        reason:
+          'A cryptographic hash provides tamper evidence without the complexity or cost of blockchain infrastructure.',
+        tradeoff:
+          'The hash proves content integrity but does not provide third-party timestamping.',
+      },
+      {
+        choice: 'Simulated email delivery for the demo',
+        reason:
+          'Avoids sending real emails during demonstrations while showing the full delivery workflow.',
+        tradeoff:
+          'Actual email deliverability, bounce handling, and spam filtering are not tested.',
+      },
+    ],
+    stack: [
+      'Next.js (App Router)',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'SQLite',
+      'Vitest',
+    ],
+    liveUrl: null,
+    caseStudyUrl: '/case-studies/digital-notices',
+    image: '/images/digital-notices/manager-dashboard.png',
+    imageAlt: 'Digital Notices manager dashboard showing delivery metrics and recent notices',
+  },
 ];
 
 export const PROJECT_PROOF_TABS = [
