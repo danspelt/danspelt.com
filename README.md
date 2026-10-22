@@ -1,6 +1,6 @@
 # Dan Spelt's Personal Website
 
-This is my personal website built with Next.js, React, and Tailwind CSS. It showcases my professional experience, skills, and hobby projects.
+This is my personal website built with Next.js, React, and Tailwind CSS. It's my professional portfolio and services site. It covers my experience, my custom software services, and case studies of the products I build and run, including Community Hive, CareBoard and Digital Notices.
 
 ## Features
 
@@ -9,7 +9,7 @@ This is my personal website built with Next.js, React, and Tailwind CSS. It show
 - Fast page loads with Next.js
 - Interactive timeline of experience
 - Skills & Tools showcase
-- Hobby projects gallery with GitHub integration
+- Case studies (Community Hive, CareBoard, Digital Notices) and a projects page
 - Contact form
 - SEO optimized
 
@@ -21,7 +21,7 @@ This is my personal website built with Next.js, React, and Tailwind CSS. It show
 - **Styling**: Tailwind CSS 4.1.18
 - **UI Components**: Radix UI
 - **Animations**: Framer Motion
-- **Deployment**: Vercel or Docker
+- **Deployment**: Coolify (Dockerfile build, `main` branch)
 - **Version Control**: Git/GitHub
 
 ## Development
