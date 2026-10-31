@@ -134,13 +134,13 @@ const timelineElements = [
     location: "Victoria, BC",
     description: `Community Hive is a multi-tenant SaaS platform I designed and built from the ground up to centralize communication between property managers, strata councils, HOA boards, and residents. The project grew out of a clear gap I observed: community management was fragmented across email chains, paper notices, and social media groups, with no unified, secure, and structured solution designed specifically for the strata and HOA space.
 
-    I architected and developed the full platform independently — from the multi-tenant data model and role-based permission system to the AI-assisted communication workflows and self-hosted deployment infrastructure. The platform supports multiple buildings, unit hierarchies, and dynamic role-based dashboards, with each role — Property Manager, Council President, Council Member, and Resident — seeing scoped data and authorized actions only.
+    I architected the full platform and built it over 22 months, working with AI coding agents under my direction — from the multi-tenant data model and role-based permission system to the AI-assisted communication workflows and self-hosted deployment infrastructure. The platform supports multiple buildings, unit hierarchies, and dynamic role-based dashboards, with each role — Property Manager, Council President, Council Member, and Resident — seeing scoped data and authorized actions only.
 
     Key systems I built include a centralized announcement and messaging engine with multi-channel notifications, an automated weekly Building Brief digest using AI-assisted generation, a full maintenance and ticketing workflow with status tracking and audit history, secure document storage with governed access controls, and a resident engagement layer with polls, surveys, and quorum support tools.
 
     On the infrastructure side, I deployed the platform using Docker and Coolify as a self-hosted PaaS, with isolated staging and production environments and a reverse proxy configuration for secure multi-tenant routing. The architecture was designed to be white-label capable and scalable to regulated community environments.
 
-    Community Hive shipped in April 2026 after approximately twenty-two months of solo development, validating the architecture across the full stack and demonstrating my ability to take a complex SaaS product from concept to production independently.`,
+    Community Hive shipped in April 2026 after approximately twenty-two months of development — designed and built working with AI coding agents under my direction — validating the architecture across the full stack and demonstrating my ability to take a complex SaaS product from concept to production.`,
     buttonText: "Details",
     startDate: "Jun 2024",
     endDate: "Apr 2026",
