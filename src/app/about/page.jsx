@@ -199,7 +199,7 @@ const About = () => {
             I have designed and shipped several real systems: LipSync Connect (a Next.js
             accessibility platform for device interaction at Neil Squire Society); a full-stack
             data platform at CanAssist (University of Victoria); Community Hive (a multi-tenant
-            SaaS for strata and HOA communities, built solo over 22 months); and AccessLens
+            SaaS for strata and HOA communities, designed and built over 22 months, working with AI coding agents under my direction); and AccessLens
             (a civic accessibility mapping platform, currently in active development). Each project
             reflects how I actually work — methodically, carefully, and with attention to the things
             that matter long-term.
