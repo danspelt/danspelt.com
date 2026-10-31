@@ -14,7 +14,7 @@ I am particularly interested in helping organizations improve inefficient proces
     {
       role: 'Website Developer',
       company: 'Neil Squire / Makers Making Change',
-      dates: 'May 2021 – June 2024',
+      dates: 'June 2021 – June 2024',
       highlights: [
         'Maintained and updated WordPress websites.',
         'Led development of LipSync Connect, a Next.js application used to configure and calibrate the LipSync assistive device.',
