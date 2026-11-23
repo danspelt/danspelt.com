@@ -210,7 +210,7 @@ export const challengeSchema = z.object({
   organization: z.string().max(160).optional().or(z.literal('')),
   notes: z.string().max(2000).optional().or(z.literal('')),
   consentToContact: z.literal(true, {
-    errorMap: () => ({ message: 'Please confirm you would like Dan to reply.' }),
+    error: () => 'Please confirm you would like Dan to reply.',
   }),
   // Honeypot. Deliberately permissive so a filled value reaches the route and
   // can be answered with a silent success instead of a validation error that
